@@ -155,7 +155,7 @@
                         <label>Enter User Review Message</label>
                         <textarea name="message" id="message" cols="30" rows="2" class="form-control"></textarea>
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group">
                         <label>Upload User Image</label>
                         <input type="file" name="image" id="image" class="form-control">
                     </div>
@@ -186,7 +186,6 @@
             // $('#amount').val(amount);
             $('#message').val(message);
             $('#id').val(id);
-            $('#image').val(image);
             $('#updateForm').attr('action','{{route('admin.review.update','')}}' +'/'+id);
         });
     });

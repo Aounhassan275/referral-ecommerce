@@ -64,7 +64,7 @@
                         <div class="col-3 logo-container">
                             <a href="{{url('home')}}" class="header-logo">
                                 <div class="header-logo-image-container">
-                                    <img class="header-logo-image" src="{{asset('user_asset/{{App\Models\Setting::logo()}}.png')}}" alt="SB Revo" title="SB Revo">
+                                    <img class="header-logo-image" src="{{asset('user_asset/'.App\Models\Setting::logo().'.png')}}" alt="SB Revo" title="SB Revo">
                                 </div>
                             </a>
                         </div>
