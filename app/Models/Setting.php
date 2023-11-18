@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     protected $fillable = [
-        'name','value','image'
+        'name','value','image','description'
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveProductImage($value,'/uploaded_images/products/');
@@ -118,5 +118,23 @@ class Setting extends Model
     }
     public static function enableCategoryOnHome(){
         return (new static)::where('name','Enable Category on Home')->first()->value ?? '1';
+    }
+    public static function aboutUsImage(){
+        return (new static)::where('name','About Us Image')->first()->image ?? '';
+    }
+    public static function aboutUsContent(){
+        return (new static)::where('name','About Us Content')->first()->description ?? '';
+    }
+    public static function privacyPolicyContent(){
+        return (new static)::where('name','Privacy Policy Content')->first()->description ?? '';
+    }
+    public static function termAndConditionContent(){
+        return (new static)::where('name','Term And Condition Content')->first()->description ?? '';
+    }
+    public static function termAndConditionImage(){
+        return (new static)::where('name','Term And Condition Image')->first()->image ?? '';
+    }
+    public static function privacyPolicyImage(){
+        return (new static)::where('name','Privacy Policy Image')->first()->image ?? '';
     }
 }

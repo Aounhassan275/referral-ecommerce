@@ -316,7 +316,8 @@ Route::view('packages', 'front.package.index');
 Route::view('about_us', 'front.about.index'); 
 Route::view('videos', 'front.video.index'); 
 Route::view('withdraw', 'front.withdraw.index'); 
-Route::view('terms_&_condition', 'front.term.index'); 
+Route::view('terms_and_condition', 'front.term.index'); 
+Route::view('privacy_policy', 'front.privacy_policy.index'); 
 // Route::view('forget_password', 'user.auth.forget'); 
 
 /******************FUNCTIONALITY ROUTES****************/

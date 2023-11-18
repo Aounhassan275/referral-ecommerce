@@ -219,10 +219,10 @@
                                 </li>
                                 @else 
                                 <li class="navPages-item navPages-item-page">
-                                    <a class="navPages-action" href="{{App\Models\Setting::companyReferralLink()}}">Sign In</a>
+                                    <a class="navPages-action" href="{{App\Models\Setting::companyReferralLink()}}">Sign Up</a>
                                 </li>
                                 <li class="navPages-item navPages-item-page">
-                                    <a class="navPages-action" href="{{url('user/login')}}">Sign Up</a>
+                                    <a class="navPages-action" href="{{url('user/login')}}">Sign In</a>
                                 </li>
 
                                 @endif

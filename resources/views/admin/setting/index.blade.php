@@ -34,6 +34,10 @@
                             <label class="form-label">Setting Image</label>
                             <input type="file" name="image" class="form-control" placeholder="Enter Setting Value" >
                         </div>
+                        <div class="form-group col-12">
+                            <label class="form-label">Setting Description</label>
+                            <textarea name="description" class="form-control"></textarea>
+                        </div>
                     </div>    
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Create</button>
@@ -55,6 +59,7 @@
                     <th>Setting Image</th>
                     <th>Setting Name</th>
                     <th>Setting Value</th>
+                    <th>Setting Description</th>
                     <th>Action</th>
                     <th>Action</th>
                 </tr>
@@ -70,9 +75,10 @@
                     </td>
                     <td>{{$setting->name}}</td>
                     <td>{{@$setting->value}}</td>
+                    <td>{{@$setting->description}}</td>
                     <td>
                         <button data-toggle="modal" data-target="#edit_modal" name="{{$setting->name}}" value="{{$setting->value}}" 
-                                id="{{$setting->id}}" class="edit-btn btn btn-primary">Edit</button>
+                            description="{{$setting->description}}" id="{{$setting->id}}" class="edit-btn btn btn-primary">Edit</button>
                         </td>
                     <td>
                         <form action="{{route('admin.setting.destroy',$setting->id)}}" method="POST">
@@ -111,6 +117,10 @@
                         <label>Setting Image</label>
                         <input type="file" name="image" class="form-control">
                     </div>  
+                    <div class="form-group">
+                        <label class="form-label">Setting Description</label>
+                        <textarea name="description" id="description" class="form-control"></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
@@ -128,8 +138,10 @@
             let name = $(this).attr('name');
             let value = $(this).attr('value');
             let id = $(this).attr('id');
+            let description = $(this).attr('description');
             $('#name').val(name);
             $('#value').val(value);
+            $('#description').val(description);
             $('#id').val(id);
             $('#updateForm').attr('action','{{route('admin.setting.update','')}}' +'/'+id);
         });
