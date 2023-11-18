@@ -184,7 +184,7 @@
                         <nav class="navPages-horizontal">
                             <ul class="navPages-list">
                                 <li class="navPages-item navPages-item-page">
-                                    <a class="navPages-action" href="{{url('/')}}">Home</a>
+                                    <a class="navPages-action" href="{{url('home')}}">Home</a>
                                 </li>
                                 @if(App\Models\Setting::enablePostSection() == '1')
                                 <li class="navPages-item navPages-item-page">
