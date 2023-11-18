@@ -6,22 +6,57 @@
 @endsection
 
 @section('content')
-  <!--=======Banner-Section Starts Here=======-->
-  <section class="bg_img hero-section-2 left-bottom-lg-max" data-background="front/assets/images/about/hero-bg5.png">
-    <div class="container">
-        <div class="hero-content text-white">
-            <h1 class="title">Contact</h1>
-            <ul class="breadcrumb">
-                <li>
-                    <a href="{{url('/')}}">Home</a>
-                </li>
-                <li>
-                    Contact
-                </li>
-            </ul>
-        </div>
+<div class="sb-breadcrumbs breadcrumb-bg ">
+	<ul class="breadcrumb ">
+	   <li class="breadcrumb-item ">
+		  <i class="fa fa-home"></i>
+		  <a href="{{url('home')}}" class="breadcrumb-label">Home</a>
+	   </li>
+	   <li class="breadcrumb-item is-active">
+		  <a href="{{Request::URL()}}" class="breadcrumb-label">Contact Us</a>
+	   </li>
+	</ul>
+ </div>
+ 
+<div class="account account--fixed">
+    <div class="account-body">
+        <form action="{{route('admin.message.store')}}" method="post" class="form" enctype="multipart/form-data">
+            @csrf
+            <div class="form-row form-row--half">
+                <div class="form-field">
+                    <label class="form-label" for="FormField_1_input">
+                         Name
+                        <small>Required</small>
+                    </label>
+                    <input type="text" required  name="name" class="form-input"  />
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="FormField_1_input">
+                        Email Address
+                        <small>Required</small>
+                    </label>
+                    <input type="email" required data-label="Email Address" name="email" class="form-input" aria-required="true" data-field-type="EmailAddress" />
+                </div>
+            </div>
+            <div class="form-field">
+                <label class="form-label">
+                    Subject
+                    <small>Required</small>
+                </label>
+                <input type="text" required name="subject" class="form-input"  />
+            </div>
+            <div class="form-field" >
+                <label class="form-label">
+                    Message
+                    <small>Required</small>
+                </label>
+                <textarea name="message" id="message" rows="5" cols="50" required class="form-input"></textarea>
+            </div>
+            <br />
+            <div class="form-actions">
+                <input type="submit" class="button button--primary" value="Send Message" />
+            </div>
+        </form>
     </div>
-</section>
-<!--=======Banner-Section Ends Here=======-->
-
+</div>
 @endsection
