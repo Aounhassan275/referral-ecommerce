@@ -8,7 +8,8 @@ class Product extends Model
 {
     protected $fillable = [
         'name','category_id','brand_id','user_id','price','phone','description','city_id','country_id',
-        'display_order','like','dislike','stock','show_on_home','view'
+        'display_order','like','dislike','stock','show_on_home','view',
+        'facebook','instagram','whatsapp','youtube','linkedin','twitter','snack_video','tiktok',
     ];
     public function category()
     {

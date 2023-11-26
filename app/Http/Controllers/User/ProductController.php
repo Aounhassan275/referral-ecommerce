@@ -148,12 +148,15 @@ class ProductController extends Controller
                 }
             }
             $product = Product::create($request->all());
-            foreach($request->images as $image)
+            foreach($request->images as $key => $image)
             {
-                ProductImage::create([
-                    'image' => $image,
-                    'product_id' => $product->id
-                ]);
+                if($key < 10)
+                {
+                    ProductImage::create([
+                        'image' => $image,
+                        'product_id' => $product->id
+                    ]);
+                }
             }
             toastr()->success('Product is Created Successfully');
             return redirect()->back();

@@ -128,7 +128,7 @@
                                     @endif
                                     @if($product->user_id  && !@$product->user->hide_profile)
                                        <dt class="productView-info-name">Product Of</dt>
-                                       <dd class="productView-info-value"><a href="{{route('product.user',$product->user_id)}}" itemprop="url" style="color:green;"><span itemprop="name">{{@$product->user->name}}</span></a></dd>
+                                       <dd class="productView-info-value"><a href="{{route('product.user',$product->user_id)}}" itemprop="url" style="color:blue;"><span itemprop="name">{{@$product->user->name}}</span></a></dd>
                                        @if($product->user->address)
                                           <dt class="productView-info-name">Address :</dt>
                                           <dd class="productView-info-value"><a href="https://www.google.com.sa/maps/search/{{@$product->user->address}}?hl=en"  style="color:green;" target="_blank" itemprop="url"><span itemprop="name">{{@$product->user->address}}</span></a></dd>
@@ -201,6 +201,72 @@
                                        <a href="https://wa.me/?text=={{Request::url()}}&via=BUYEBAZAR.COM" target="_blank"><img class="img-fluid" src="{{asset('revo_template/social/w.png')}}"  alt="reasons 1"  /></a>
                                     </div>
                                  </div>
+                              </div>
+                           </div> 
+                        </section>
+                        
+                        <section class="productView-details productView-details--bottom">
+                           <div class="module sb-banner sb-banner--buyFromus ">
+                              <h5 class="block-title"> Social Links To :</h5>
+                              <div class="block-content clearfix d-flex flex-row">
+                                 @if($product->facebook)
+                                 <div class="banners"  >
+                                    <div class="banner-figure">
+                                       <a href="{{@$product->facebook}}" target="_blank"><img class="img-fluid" src="{{asset('revo_template/social/f.png')}}"  alt="reasons 1"  /></a>
+                                    </div>
+                                 </div>
+                                 @endif
+                                 @if($product->twitter)
+                                 <div class="banners"  >
+                                    <div class="banner-figure">
+                                       <a href="{{@$product->twitter}}" target="_blank"><img class="img-fluid" src="{{asset('revo_template/social/t.png')}}"  alt="reasons 1"  /></a>
+                                    </div>
+                                 </div>
+                                 @endif
+                                 @if($product->linkedin)
+                                 <div class="banners"  >
+                                    <div class="banner-figure">
+                                       <a href="{{@$product->linkedin}}" target="_blank"><img class="img-fluid" src="{{asset('revo_template/social/in.png')}}"  alt="reasons 1"  /></a>
+                                    </div>
+                                 </div>
+                                 @endif
+                                 @if($product->whatsapp)
+                                 <div class="banners"  >
+                                    <div class="banner-figure">
+                                       <a href="https://api.whatsapp.com/send?phone={{@$product->whatsapp}}" target="_blank"><img class="img-fluid" src="{{asset('revo_template/social/w.png')}}"  alt="reasons 1"  /></a>
+                                    </div>
+                                 </div>
+                                 @endif
+                              </div>
+                              <div class="block-content clearfix d-flex flex-row">
+                                 @if($product->youtube)
+                                 <div class="banners"  >
+                                    <div class="banner-figure">
+                                       <a href="{{@$product->youtube}}" target="_blank"><img class="img-fluid" src="{{asset('revo_template/social/y.png')}}"  alt="reasons 1"  /></a>
+                                    </div>
+                                 </div>
+                                 @endif
+                                 @if($product->instagram)
+                                 <div class="banners"  >
+                                    <div class="banner-figure">
+                                       <a href="{{@$product->instagram}}" target="_blank"><img class="img-fluid" src="{{asset('revo_template/social/i.png')}}"  alt="reasons 1"  /></a>
+                                    </div>
+                                 </div>
+                                 @endif
+                                 @if($product->tiktok)
+                                 <div class="banners"  >
+                                    <div class="banner-figure">
+                                       <a href="{{@$product->tiktok}}" target="_blank"><img class="img-fluid" src="{{asset('revo_template/social/tt.png')}}"  alt="reasons 1"  /></a>
+                                    </div>
+                                 </div>
+                                 @endif
+                                 @if($product->snack_video)
+                                 <div class="banners"  >
+                                    <div class="banner-figure">
+                                       <a href="{{@$product->snack_video}}" target="_blank"><img class="img-fluid" src="{{asset('revo_template/social/s.png')}}"  alt="reasons 1"  /></a>
+                                    </div>
+                                 </div>
+                                 @endif
                               </div>
                            </div> 
                         </section>
