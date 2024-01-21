@@ -9,6 +9,7 @@ class Post extends Model
     protected $fillable = [
         'name','post_category_id','post_brand_id','user_id','description',
         'city_id','country_id',
+        'facebook','instagram','whatsapp','youtube','linkedin','twitter','snack_video','tiktok',
     ];
     public function category()
     {

@@ -1,12 +1,12 @@
 @extends('user.layout.index')
 @section('title')
-VIEW TRANSCATIONS 
+VIEW Own Sale 
 @endsection
 @section('contents')
 
 <div class="card">
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">View Transcations</h5>
+        <h5 class="card-title">View Own Sale</h5>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -24,22 +24,16 @@ VIEW TRANSCATIONS
                 <th>Receiver Name</th>
                 <th>Amount</th>
                 <th>Detail</th>
-                <th></th>
             </tr> 
         </thead>
         <tbody>
-            @foreach ($transcations as $key => $transcation)
+            @foreach ($sales as $key => $sale)
                 <tr>
                     <td>{{$key+1}}</td>
-                    @if($transcation->sender)
-                    <td>{{$transcation->sender->name}}</td>
-                    @else 
-                    <td>Admin</td>
-                    @endif
-                    <td>{{$transcation->receiver->name}}</td>
-                    <td>{{$transcation->amount}}</td>
-                    <td>{{$transcation->detail}}</td>
-                    <td></td>
+                    <td>{{@$sale->user->name}}</td>
+                    <td>{{$sale->receiver->name}}</td>
+                    <td>{{$sale->amount}}</td>
+                    <td>{{$sale->detail}}</td>
                 </tr>
                 @endforeach
         </tbody>

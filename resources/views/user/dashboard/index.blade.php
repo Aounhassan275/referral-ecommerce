@@ -159,8 +159,8 @@ DASHBOARD
         <div class="card card-body bg-blue-400 has-bg-image">
             <div class="media">
                 <div class="media-body">
-                    <h3 class="mb-0">{{Auth::user()->refer_by_name(Auth::user()->referral)}}</h3>
-                    <span class="text-uppercase font-size-xs">Your Child</span>
+                    <h3 class="mb-0">$ {{App\Models\PostSale::where('receiver_id',Auth::user()->id)->sum('amount')}}</h3>
+                    <span class="text-uppercase font-size-xs">Total Purchase</span>
                 </div>
 
                 <div class="ml-3 align-self-center">
@@ -174,8 +174,8 @@ DASHBOARD
         <div class="card card-body bg-danger-400 has-bg-image">
             <div class="media">
                 <div class="media-body">
-                    <h3 class="mb-0">{{Auth::user()->refer_by_name(Auth::user()->refer_by)}}</h3>
-                    <span class="text-uppercase font-size-xs">Refer By</span>
+                    <h3 class="mb-0">$ {{Auth::user()->rewardIncome->sum('price')}}</h3>
+                    <span class="text-uppercase font-size-xs">Personal Reward</span>
                 </div>
 
                 <div class="ml-3 align-self-center">
@@ -193,8 +193,8 @@ DASHBOARD
                 </div>
 
                 <div class="media-body text-right">
-                    <h3 class="mb-0">{{Auth::user()->placement()}}</h3>
-                    <span class="text-uppercase font-size-xs">Your Placement</span>
+                    <h3 class="mb-0">$ {{Auth::user()->rankingIncome->sum('price')}}</h3>
+                    <span class="text-uppercase font-size-xs">Rank Income</span>
                 </div>
             </div>
         </div>
@@ -208,8 +208,8 @@ DASHBOARD
                 </div>
 
                 <div class="media-body text-right">
-                    <h3 class="mb-0">$ {{Auth::user()->total_referrals()}}</h3>
-                    <span class="text-uppercase font-size-xs">Referral Packages</span>
+                    <h3 class="mb-0">{{Auth::user()->refer_by_name(Auth::user()->refer_by)}}</h3>
+                    <span class="text-uppercase font-size-xs">Refer By</span>
                 </div>
             </div>
         </div>
@@ -221,7 +221,7 @@ DASHBOARD
             <div class="media">
                 <div class="media-body">
                     <h3 class="mb-0">{{Auth::user()->associatedUsers()->count()}}</h3>
-                    <span class="text-uppercase font-size-xs">Total Associated User</span>
+                    <span class="text-uppercase font-size-xs">Associated User</span>
                 </div>
 
                 <div class="ml-3 align-self-center">
@@ -232,25 +232,11 @@ DASHBOARD
     </div>
 
     <div class="col-sm-6 col-xl-3">
-        <div class="card card-body bg-orange-400 has-bg-image">
-            <div class="media">
-                <div class="media-body">
-                    <h3 class="mb-0">$ {{Auth::user()->associatedUsersIncome()}}</h3>
-                    <span class="text-uppercase font-size-xs">Associated Cash Wallet</span>
-                </div>
-
-                <div class="ml-3 align-self-center">
-                    <i class="icon-wallet icon-3x opacity-75"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6 col-xl-3">
         <div class="card card-body bg-brown-400 has-bg-image">
             <div class="media">
                 <div class="media-body">
                     <h3 class="mb-0">$ {{Auth::user()->associatedIncome->sum('price')}}</h3>
-                    <span class="text-uppercase font-size-xs">Total Associated Income</span>
+                    <span class="text-uppercase font-size-xs">Associated Income</span>
                 </div>
 
                 <div class="ml-3 align-self-center">
@@ -260,11 +246,33 @@ DASHBOARD
         </div>
     </div>
     <div class="col-sm-6 col-xl-3">
+        <div class="card card-body bg-orange-400 has-bg-image">
+            <div class="media">
+                <div class="media-body">
+                    <h3 class="mb-0">
+                        @if(Auth::user()->package)
+                        $ {{Auth::user()->package->price + Auth::user()->investment_amount}}
+                        @endif
+                    </h3>
+                    <span class="text-uppercase font-size-xs">Package Price</span>
+                </div>
+
+                <div class="ml-3 align-self-center">
+                    <i class="icon-wallet icon-3x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
         <div class="card card-body bg-pink-400 has-bg-image">
             <div class="media">
                 <div class="media-body">
-                    <h3 class="mb-0">$ {{Auth::user()->associatedUsersPackages()}}</h3>
-                    <span class="text-uppercase font-size-xs">Accoiated Package Price</span>
+                    <h3 class="mb-0">
+                        @if(Auth::user()->package)
+                        {{Auth::user()->package->name}}
+                        @endif
+                    </h3>
+                    <span class="text-uppercase font-size-xs">Package Name</span>
                 </div>
 
                 <div class="ml-3 align-self-center">
@@ -274,7 +282,7 @@ DASHBOARD
         </div>
     </div>
 </div>
-<div class="row">
+{{-- <div class="row">
     <div class="col-sm-6 col-xl-3">
         <div class="card card-body">
             <div class="media">
@@ -346,7 +354,7 @@ DASHBOARD
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div class="row">
     <div class="col-md-6">
         <p><b>Latest Products :</b></p>

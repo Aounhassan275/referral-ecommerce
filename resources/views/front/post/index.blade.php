@@ -53,7 +53,7 @@
 							<a href="{{route('post.show',str_replace(' ', '_',$post->name))}}">{{$post->name}}</a>
 						</h4>
 						<div class="price-section price-section--withoutTax ">
-							<span data-product-price-without-tax class="price price--withoutTax">{{$post->brand->name}}</span>
+							<span data-product-price-without-tax class="price price--withoutTax">{{@$post->brand->name}}</span>
 						</div>
 						<div class="description"> {!! substr( $post->name, 0, 50) !!}... </div>
 						<div class="product-colors" data-product-id="130"></div>

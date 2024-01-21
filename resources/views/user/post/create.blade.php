@@ -3,11 +3,35 @@
 Add Post
 @endsection
 @section('contents')
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-info border-0 alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+            It will charge you 1 USD for a single post.
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6 col-xl-6">
+        <div class="card card-body">
+            <div class="media">
+                <div class="mr-3 align-self-center">
+                    <i class="icon-pointer icon-3x text-success-400"></i>
+                </div>
 
+                <div class="media-body text-right">
+                    <h3 class="font-weight-semibold mb-0">
+                        {{Auth::user()->posts->count()}}
+                    </h3>
+                    <span class="text-uppercase font-size-sm text-muted">Total Posts</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-12">
         <div class="card">
-            @if(Auth::user()->package && Auth::user()->posts->count() == 0)
             <div class="card-header header-elements-inline">
                 <h5 class="card-title">Add Your Post</h5>
                 <div class="header-elements">
@@ -72,8 +96,43 @@ Add Post
                     </div>
                    <div class="row">
                         <div class="form-group col-md-12">
-                            <label class="form-label">Product Description</label>
+                            <label class="form-label">Post Description</label>
                             <textarea name="description" class="form-control" required id="" rows="2"></textarea>
+                        </div>
+                   </div>
+                   <p><strong>Social Links:</strong></p>
+                   <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Facebook</label>
+                            <input type="text" name="facebook" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Instagram</label>
+                            <input type="text" name="instagram" class="form-control" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Whatsapp</label>
+                            <input type="text" name="whatsapp" class="form-control" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Youtube</label>
+                            <input type="text" name="youtube" class="form-control"  >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Linkedin</label>
+                            <input type="text" name="linkedin" class="form-control" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Twitter</label>
+                            <input type="text" name="twitter" class="form-control" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Tiktok</label>
+                            <input type="text" name="tiktok" class="form-control" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Snack Video</label>
+                            <input type="text" name="snack_video" class="form-control"  >
                         </div>
                    </div>
                     <div class="text-right">
@@ -81,9 +140,6 @@ Add Post
                     </div>
                 </form>
             </div>
-            @else 
-            <p class="text-center">Buy Package to Enable Post or Post Limit is exceeded</p>
-            @endif
         </div>
     </div>
 </div>

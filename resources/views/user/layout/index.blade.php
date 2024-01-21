@@ -299,16 +299,25 @@
 							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('user/product*')?'display:block':''}}">
 								<li class="nav-item"><a href="{{route('user.product.create')}}" class="nav-link {{Request::is('user/product.create')?'active':''}}">Add Products</a></li>
 								<li class="nav-item"><a href="{{route('user.product.index')}}" class="nav-link {{Request::is('user/product')?'active':''}}">Manage</a></li>
+								@if(App\Models\Setting::enablepurchase() == 1)
 								<li class="nav-item"><a href="{{route('user.order.orders')}}" class="nav-link {{Request::is('user/orders')?'active':''}}">Your Orders</a></li>
+								@endif
+							</ul>
+						</li>	
+						@if(Auth::user()->type == 'Seller')
+						<li class="nav-item nav-item-submenu {{Request::is('user/post*') || Request::is('user/post_sale*') ?'nav-item-open':''}}">
+							<a href="#" class="nav-link"><i class="icon-stack3"></i> <span>Post</span></a>
+
+							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('user/product*')?'display:block':''}}">
+								<li class="nav-item"><a href="{{route('user.post.create')}}" class="nav-link {{Request::is('user/post/create')?'active':''}}">Add Posts</a></li>
+								<li class="nav-item"><a href="{{route('user.post.index')}}" class="nav-link {{Request::is('user/post')?'active':''}}">Manage</a></li>
+								<li class="nav-item"><a href="{{route('user.post_sale.create')}}" class="nav-link {{Request::is('user/post_sale/create')?'active':''}}">Create Sale</a></li>
+								<li class="nav-item"><a href="{{route('user.post_sale.index')}}" class="nav-link {{Request::is('user/post_sale')?'active':''}}">Own Sale</a></li>
+								<li class="nav-item"><a href="{{route('user.post_sale.received')}}" class="nav-link {{Request::is('user/post_sale/received')?'active':''}}">Received Sale</a></li>
 							</ul>
 						</li>
-						<li class="nav-item">
-							<a href="{{route('user.post.index')}}" class="nav-link {{Request::is('user/post')?'active':''}}">
-								<i class="icon-location3"></i>
-								<span>Post</span>
-							</a>
-						</li>
-						<li class="nav-item">
+						@endif
+						{{-- <li class="nav-item">
 							<a href="{{route('user.location.index')}}" class="nav-link {{Request::is('user/location')?'active':''}}">
 								<i class="icon-location3"></i>
 								<span>Location Requests</span>
@@ -325,7 +334,7 @@
 								<i class="icon-mail-read"></i>
 								<span>Chat with Admin</span>
 							</a>
-						</li>
+						</li> --}}
 						
 						<!-- /page kits -->
 

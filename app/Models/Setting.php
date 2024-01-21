@@ -17,6 +17,9 @@ class Setting extends Model
     public static function fundFee(){
         return (new static)::where('name','Fund Transfer Fee')->first()->value;
     }
+    public static function saleFee(){
+        return (new static)::where('name','Sale Fee')->first()->value ?? 10;
+    }
     public static function phone(){
         $value = (new static)::where('name','Phone')->first()->value ?? null;
         if($value)

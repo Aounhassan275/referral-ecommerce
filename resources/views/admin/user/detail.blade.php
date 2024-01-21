@@ -297,6 +297,7 @@
                                     <select name="type" class="form-control select2" required>
                                         <option selected disabled>Select</option>
                                         <option @if($user->type == 'Member') selected @endif value="Member">Member</option>
+                                        <option @if($user->type == 'Seller') selected @endif value="Seller">Seller</option>
                                         <option @if($user->type == 'Field Manager') selected @endif value="Field Manager">Field Manager</option>
                                         <option @if($user->type == 'Area Manager') selected @endif value="Area Manager">Area Manager</option>
                                         <option @if($user->type == 'Zonal Manager') selected @endif value="Zonal Manager">Zonal Manager</option>

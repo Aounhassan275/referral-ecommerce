@@ -228,7 +228,7 @@
                     <div class="col-lg-3 col-md-3 col-8 logo-container">
                         <a href="{{url('home')}}" class="header-logo">
                             <div class="header-logo-image-container">
-                                <img class="header-logo-image" src="{{asset('user_asset/{{App\Models\Setting::logo()}}.png')}}" alt="{{App\Models\Setting::siteName()}}" title="{{App\Models\Setting::siteName()}}">
+                                <img class="header-logo-image" src="{{asset('user_asset/'.App\Models\Setting::logo().'.png')}}" alt="{{App\Models\Setting::siteName()}}" title="{{App\Models\Setting::siteName()}}">
                             </div>
                         </a>
                     </div>

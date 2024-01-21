@@ -5,9 +5,6 @@
         <h5 class="card-title">View Your Posts</h5>
         <div class="header-elements">
             <div class="list-icons">
-                @if(Auth::user()->package && Auth::user()->posts->count() == 0)
-                <a href="{{route('user.post.create')}}" class="btn btn-success">Add New Post</a>
-                @endif
                 <a class="list-icons-item" data-action="collapse"></a>
                 <a class="list-icons-item" data-action="reload"></a>
                 <a class="list-icons-item" data-action="remove"></a>

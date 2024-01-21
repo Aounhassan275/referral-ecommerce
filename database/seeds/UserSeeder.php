@@ -257,6 +257,11 @@ class UserSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()],
             [ 
+            'name' => 'Sale Fee',
+            'value' => '10',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()],
+            [ 
             'name' => 'Site Name',
             'value' => 'Buy E Bazar',
             'created_at' => Carbon::now(),

@@ -255,6 +255,8 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
     Route::post('post/get_category_brand', 'PostController@getCategoryBrand')->name('post.brands');     
     Route::resource('post', 'PostController');  
     Route::resource('post_image', 'PostImageController');  
+    Route::get('post_sale/received', 'PostSaleController@receivedSale')->name('post_sale.received');  
+    Route::resource('post_sale', 'PostSaleController');  
 });
 
 

@@ -23,7 +23,9 @@ VIEW TRADE INCOME
         <thead>
             <tr>
                 <th>#</th>
+                <th>User</th>
                 <th>Due To</th>
+                <th>Due To Email</th>
                 <th>Created At</th>
                 <th>Amount</th>
 
@@ -33,15 +35,13 @@ VIEW TRADE INCOME
             @foreach (Auth::user()->tradeIncome as $key => $income)
                 <tr>
                     <td>{{$key+1}}</td>
+                    <td>{{$income->user->name}}</td>
                     <td>{{$income->user->refer_by_name($income->due_to)}}</td>
+                    <td>{{$income->user->refer_by_user($income->due_to) ? $income->user->refer_by_user($income->due_to)->email : ''}}</td>
                     <td>{{$income->created_at->format('d M,Y')}}</td>
                     <td>$ {{$income->price}}</td>
                 </tr>
                 @endforeach
-                <tr>
-                    <td colspan="3" class="text-center">Total Income : </td>
-                    <td>$ {{Auth::user()->tradeIncome->sum('price')}}</td>
-                </tr>
         </tbody>
     </table>
 </div>

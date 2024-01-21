@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\CompanyAccount;
 use App\Models\Post;
 use App\Models\PostBrand;
 use App\Models\PostCategory;
 use App\Models\PostImage;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
@@ -49,6 +51,19 @@ class PostController extends Controller
             if($validator->fails()){
                 toastr()->error('Post Name already exists');
                 return redirect()->back();
+            }   
+            if(Auth::user()->cash_wallet >= 1)
+            {
+                Auth::user()->update([
+                    'cash_wallet' => Auth::user()->cash_wallet - 1,
+                ]);
+                $company_account= CompanyAccount::find(1);
+                $company_account->update([
+                    'balance' => $company_account->balance + 1,
+                ]);
+            }else{
+                toastr()->error('Insufficent amount in Cash Wallet!');
+                return back();
             }
             $post = Post::create($request->all());
             foreach($request->images as $image)

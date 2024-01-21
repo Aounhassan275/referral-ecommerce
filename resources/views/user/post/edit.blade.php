@@ -70,6 +70,41 @@ Edit {{$post->name}} Post
                             <textarea name="description" class="form-control" required id="" rows="2">{{$post->description}}</textarea>
                         </div>
                    </div>
+                   <p><strong>Social Links:</strong></p>
+                   <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Facebook</label>
+                            <input type="text" name="facebook" class="form-control" value="{{@$post->facebook}}" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Instagram</label>
+                            <input type="text" name="instagram" class="form-control" value="{{@$post->instagram}}" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Whatsapp</label>
+                            <input type="text" name="whatsapp" class="form-control" value="{{@$post->whatsapp}}" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Youtube</label>
+                            <input type="text" name="youtube" class="form-control" value="{{@$post->youtube}}" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Linkedin</label>
+                            <input type="text" name="linkedin" class="form-control" value="{{@$post->linkedin}}" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Twitter</label>
+                            <input type="text" name="twitter" class="form-control" value="{{@$post->twitter}}" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Tiktok</label>
+                            <input type="text" name="tiktok" class="form-control" value="{{@$post->tiktok}}" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Snack Video</label>
+                            <input type="text" name="snack_video" class="form-control" value="{{@$post->snack_video}}" >
+                        </div>
+                   </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>

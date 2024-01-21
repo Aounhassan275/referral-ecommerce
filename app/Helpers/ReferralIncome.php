@@ -529,5 +529,44 @@ class ReferralIncome
         ReferralIncome::TradeIncome($price,$package,$user,$user);
         ReferralIncome::CompanyIncome($price,$package,$type = 'Community');
     } 
+    public static  function transferAmountToUpline($amount,$user)
+    {
+        $remaining_amount = $amount;
+        $per_person_amount = $amount/20;
+        info("Upline Income Amount Per Person : $per_person_amount"); 
+        $uplines = $user->uplineUserIncome();
+        foreach($uplines as $upline)
+        {
+            $response = $upline->CompareDownlineuser($upline,$user);
+            if($response)
+            {
+                $upline->update([
+                    'total_income' => $upline->total_income + $per_person_amount,
+                ]);
+                Earning::create([
+                    'price' => $per_person_amount,
+                    'user_id' => $upline->id,
+                    'due_to' => $user->id,
+                    'type' => 'reward_income'
+                ]);
+                info("Upline Income Amount Added to $upline->name : $per_person_amount"); 
+            }else{
+                $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                $flush_account->update([
+                    'balance' => $flush_account->balance + $per_person_amount,
+                ]);
+                info("Upline Income For $upline->name Amount $per_person_amount Added to flush company Account"); 
+            }
+            $remaining_amount = $remaining_amount - $per_person_amount;
+        }
+        if($remaining_amount > 0)
+        {
+            $flush_account = CompanyAccount::where('name','Flush Income')->first();
+            $flush_account->update([
+                'balance' => $flush_account->balance + $remaining_amount,
+            ]);
+        }
+
+    } 
     
 }

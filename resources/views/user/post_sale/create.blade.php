@@ -1,27 +1,25 @@
 @extends('user.layout.index')
 @section('title')
-Balance Transfer
+Sale
 @endsection
 @section('styles')
 
 @endsection
 @section('contents')
-@if(Auth::user()->type == 'Member' && Auth::user()->fund_fee_deduction)
 <div class="row">
     <div class="col-md-12">
         <div class="alert bg-info text-white alert-styled-right alert-dismissible">
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-            <span class="font-weight-semibold">Alert!</span>There is {{App\Models\Setting::fundFee()}}% on every Transcation of Balance Transfer.
+            <span class="font-weight-semibold">Alert! </span> There is {{App\Models\Setting::saleFee()}} % on every sale.
         </div>
     </div>
 </div>
-@endif
 <div class="row" >
     <div class="col-md-12">
         <!-- Basic layout-->
         <div class="card">
             <div class="card-header header-elements-inline bg-dark">
-                <h5 class="card-title">Add Balance Transfer Request</h5>
+                <h5 class="card-title">Add Sale</h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
@@ -31,21 +29,19 @@ Balance Transfer
             </div>
  
             <div class="card-body">
-                <form id="transcationsForm" action="{{route('user.transcation.store')}}"  method="post">
+                <form id="transcationsForm" action="{{route('user.post_sale.store')}}"  method="post">
                     @csrf
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label class="form-label">Transfer Payment</label>
+                            <label class="form-label">Amount</label>
                             <input type="number"    name="amount" id="amount" class="form-control"  required>                        
                             <input type="hidden"  name="sender_id" id="sender_id" class="form-control" value="{{Auth::user()->id}}">                        
                             <input type="hidden"  name="new_password" id="new_password" class="form-control" >                        
                         </div>
-                        @if(Auth::user()->fund_fee_deduction)
                         <div class="form-group col-md-4">
                             <label class="form-label">Amount To Charge</label>
-                            <input type="text" id="paying_amount" class="form-control"  readonly>                        
+                            <input type="text" id="amount_charged" name="amount_charged" class="form-control"  readonly>                        
                         </div>
-                        @endif
                         <div class="form-group col-md-4">
                             <label class="form-label">Members</label>
                             <select data-placeholder="Enter 'as'" name="receiver_id" id="receiver_id" class="form-control select-minimum " data-fouc>
@@ -61,7 +57,7 @@ Balance Transfer
                     </div>
                     <div class="row float-right" >
                         <a href="#transfer_modal" data-toggle="modal" data-target="#transfer_modal">
-                            <button type="button" class="btn btn-primary">Transfer Balance Now 
+                            <button type="button" class="btn btn-primary">Sale Now 
                                 <i class="icon-plus22 ml-2"></i>
                             </button>
                         </a>
@@ -107,19 +103,9 @@ Balance Transfer
     });
     $('#amount').on('change', function () {
         amount = $(this).val();
-        $.ajax({
-            url: "{{route('user.balance_transfer.amount')}}",
-            method: 'post',
-            data: {
-                amount: amount,
-            },
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            },
-            success: function(response){
-                $('#paying_amount').val(response.amount);
-            }
-        });
+        saleFee = "{{App\Models\Setting::saleFee()}}";
+        totalSaleFee = amount/100 * saleFee;
+        $('#amount_charged').val(totalSaleFee);
     });
 </script>
 @endsection
