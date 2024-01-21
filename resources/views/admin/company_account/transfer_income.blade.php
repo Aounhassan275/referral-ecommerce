@@ -41,11 +41,12 @@
                             <label class="form-label">To</label>
                             <select name="type" class="form-control select2" required>
                                 <option selected disabled>Select</option>
+                                <option value="Seller">Seller</option>
                                 <option value="Field Manager">Field Manager</option>
                                 <option value="Area Manager">Area Manager</option>
                                 <option value="Zonal Manager">Zonal Manager</option>
                                 <option value="Regional Manager">Regional Manager</option>
-                                <option value="Team Head">Team Head</option>
+                                <option value="Managing Director">Managing Director</option>
                             </select>                    
                         </div>
                     </div>      
