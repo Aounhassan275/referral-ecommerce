@@ -133,7 +133,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4 d-xxl-flex">
+    <div class="col-md-3 d-xxl-flex">
 
         <div class="card flex-fill">
 
@@ -164,7 +164,7 @@
         </div>
 
     </div>
-    <div class="col-md-4  d-xxl-flex">
+    <div class="col-md-3  d-xxl-flex">
 
         <div class="card flex-fill">
 
@@ -195,8 +195,39 @@
         </div>
 
     </div>
+    <div class="col-md-3  d-xxl-flex">
+
+        <div class="card flex-fill">
+
+            <div class="card-body py-4">
+
+                <div class="media">
+
+                    <div class="d-inline-block mt-2 mr-3">
+
+                        <i class="feather-lg text-danger" data-feather="dollar-sign"></i>
+
+                    </div>
+
+                    <div class="media-body">
+                        @php  
+                            $pool_account= App\Models\CompanyAccount::where('name','Pool Income')->first();
+                        @endphp
+                        <h3 class="mb-2">$ {{number_format(@$pool_account->balance, 2)}}</h3>
+
+                        <div class="mb-0">Pool Account Balance</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
     
-    <div class="col-md-4  d-xxl-flex">
+    <div class="col-md-3  d-xxl-flex">
 
         <div class="card flex-fill">
 

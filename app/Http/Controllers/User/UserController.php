@@ -250,6 +250,57 @@ class UserController extends Controller
             'message' => 'Amount Transferred Successfully!!'
         ]);
     }
+    public function transferPoolIncomeFunds(Request $request)
+    {
+        $user = Auth::user();
+        $amount = $request->cash_wallet + $request->direct_referral +  $request->fee;
+        if($amount > $user->pool_income)
+        {
+            return response()->json([
+                'status' => false,
+                'message' => 'Amount is greater than pool income'
+            ]);
+           
+        }
+        if($amount < 2)
+        {
+            return response()->json([
+                'status' => false,
+                'message' => 'Amount must be $ 2 or more'
+            ]);
+           
+        }
+        $user->update([
+            'cash_wallet' => $user->cash_wallet + $request->cash_wallet,
+            'pool_income' => $user->pool_income - $amount
+        ]);
+        $pool_account= CompanyAccount::where('name','Pool Income')->first();
+        $pool_account->update([
+            'balance' => $pool_account->balance + $request->fee,
+        ]);
+        $refer_by = User::find($user->refer_by);
+        if($refer_by)
+        {
+            $refer_by->update([
+                'cash_wallet' => $user->cash_wallet + $request->direct_referral,
+            ]);
+            Earning::create([
+                'price' => $request->direct_referral,
+                'user_id' => $refer_by->id,
+                'due_to' => $user->id,
+                'type' => 'direct_income'
+            ]);
+        }else{
+            $pool_account->update([
+                'balance' => $pool_account->balance + $request->direct_referral,
+            ]);
+        }
+        toastr()->success('Amount Transferred Successfully');
+        return response()->json([
+            'status' => true,
+            'message' => 'Amount Transferred Successfully!!'
+        ]);
+    }
     public function coins()
     {
         $currencies = [];

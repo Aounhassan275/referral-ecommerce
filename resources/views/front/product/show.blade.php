@@ -89,7 +89,7 @@
                                        <meta itemprop="priceCurrency" content="USD">
                                        <meta itemprop="valueAddedTaxIncluded" content="false">
                                     </div>
-                                    <span data-product-price-without-tax class="price price--withoutTax">PKR {{$product->price}}</span>
+                                    <span data-product-price-without-tax class="price price--withoutTax">$ {{$product->price}}</span>
                                     {{-- <span data-product-price-without-tax class="price price--noSaleWithoutTax">$340.00</span> --}}
                                  </div>
                               </div>

@@ -196,7 +196,9 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
     Route::get('resend/verification_email', 'UserController@emailVerification')->name('resend.email_verification');
     Route::get('refer', 'UserController@refer')->name('refer.index');
     Route::get('refer/tree','ReferralController@showTree')->name('tree.show');
+    Route::get('refer/super_pool','ReferralController@showSuperPool')->name('super_pool.show');
     Route::post('transfer_funds','UserController@transferFunds')->name('transfer_funds');
+    Route::post('transfer_pool_income_funds','UserController@transferPoolIncomeFunds')->name('transfer_pool_income_funds');
     /******************LOCATION ROUTES****************/
     Route::get('request_location/{id}', 'LocationController@requestLocation')->name('location.request');   
     Route::get('location_update', 'LocationController@location_update')->name('location.location_update');   
@@ -217,6 +219,7 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
        Route::get('earning/down_line_placement_income', 'EarningController@down_line_placement_income')->name('earning.down_line_placement_income');
        Route::get('report/overall_earning', 'EarningController@overall_earning')->name('report.overall_earning');
        Route::get('earning/ranking_income', 'EarningController@ranking_income')->name('earning.ranking_income');
+       Route::get('earning/pool_income', 'EarningController@pool_income')->name('earning.pool_income');
        Route::get('earning/reward_income', 'EarningController@reward_income')->name('earning.reward_income');
        Route::get('earning/associated_income', 'EarningController@associated_income')->name('earning.associated_income');
        Route::post('user_status/update', 'EarningController@userStatusUpdate')->name('user_status.update');

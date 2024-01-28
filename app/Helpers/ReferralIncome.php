@@ -60,13 +60,14 @@ class ReferralIncome
         if($transfer_amount > 0)
         {
             $user->update([
-                'total_income' => $user->total_income + $transfer_amount,
+                'for_pool' => $user->for_pool + 3,
             ]);
-            Earning::create([
-                'price' => $transfer_amount,
-                'user_id' => $user->id,
-                'due_to' => $user->id,
-                'type' => 'trade_income'
+            $pool_account= CompanyAccount::where('name','Pool Income')->first();
+            $pool_account->update([
+                'balance' => $pool_account->balance + $transfer_amount,
+            ]);
+            $pool_account->update([
+                'balance' => $pool_account->balance - 3,
             ]);
         }
         $user->update([

@@ -31,7 +31,8 @@ class User extends Authenticatable
         'facebook','instagram','whatsapp','youtube','linkedin','twitter','snack_video','tiktok',
         'description','country_id','city_id','hide_profile',
         'birth_place','favourite_place','favourite_uncle','fm_direct_income','salary_type',
-        'service_id','type_id','gender','monthly_income','sect','caste','dob','view','fund_fee_deduction'
+        'service_id','type_id','gender','monthly_income','sect','caste','dob','view','fund_fee_deduction',
+        'for_pool','pool_income'
     ];
 
     /**
@@ -152,6 +153,10 @@ class User extends Authenticatable
     public function rankingIncome()
     {
         return $this->hasMany(Earning::class)->where('type','ranking_income');
+    }
+    public function poolIncome()
+    {
+        return $this->hasMany(Earning::class)->where('type','pool_income');
     }
     public function rewardIncome()
     {
@@ -500,5 +505,15 @@ class User extends Authenticatable
     public function country()
     {
         return $this->belongsTo('App\Models\Country');
+    }
+    public function directReferral()
+    {
+        return $this->mrefers()->where('status','active');
+
+    }
+    public function totalDirectReferral()
+    {
+        return $this->mrefers()->where('status','active')->count();
+
     }
 }

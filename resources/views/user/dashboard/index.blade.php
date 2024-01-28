@@ -282,6 +282,66 @@ DASHBOARD
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-6 col-xl-3">
+        <div class="card card-body">
+            <div class="media mb-3">
+                <div class="media-body">
+                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->for_pool}}</h5>
+                    <span class="text-muted">For Pool</span>
+                </div>
+
+                <div class="ml-3 align-self-center">
+                    <i class="icon-coins icon-2x text-indigo-400 opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card card-body">
+            <div class="media mb-3">
+                <div class="media-body">
+                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->pool_income}}</h5>
+                    <span class="text-muted">Pool Income</span>
+                </div>
+
+                <div class="ml-3 align-self-center">
+                    <i class="icon-wallet icon-2x text-danger-400 opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>   
+    <div class="col-sm-6 col-xl-3">
+        <a href="#transfer_pool_income_modal" data-toggle="modal" data-target="#transfer_pool_income_modal">
+            <div class="card card-body">
+                <div class="media mb-3">
+                    <div class="media-body">
+                        <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->pool_income}}</h5>
+                        <span class="text-muted">Transfer</span>
+                    </div>
+
+                    <div class="ml-3 align-self-center">
+                        <i class="icon-coins icon-2x text-indigo-400 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card card-body">
+            <div class="media mb-3">
+                <div class="media-body">
+                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->pool_income}}</h5>
+                    <span class="text-muted">Pool Income</span>
+                </div>
+
+                <div class="ml-3 align-self-center">
+                    <i class="icon-wallet icon-2x text-danger-400 opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
 {{-- <div class="row">
     <div class="col-sm-6 col-xl-3">
         <div class="card card-body">
@@ -522,6 +582,38 @@ DASHBOARD
         </form>
     </div>
 </div>
+<div id="transfer_pool_income_modal" class="modal fade">
+    <div class="modal-dialog">
+        <form id="tansferPoolIncomeForm" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title mt-0" id="myModalLabel">Transfer Balance</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="title">For Cash Wallet</label>
+                        <input class="form-control" type="number" readonly name="cash_wallet" value="{{Auth::user()->pool_income/ 100  * 80}}">
+                    </div>                    
+                    <div class="form-group">
+                        <label for="title">To Direct Referral</label>
+                        <input class="form-control" type="number" readonly name="direct_referral" value="{{Auth::user()->pool_income/ 100 * 10}}">
+                    </div>               
+                    <div class="form-group">
+                        <label for="title">Fee</label>
+                        <input class="form-control" type="number" readonly name="fee" value="{{Auth::user()->pool_income/ 100 * 10}}">
+                    </div>
+                    <p id="errors-pool-income" style="color:red;"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
 @section('scripts')
     <script src="{{ url('chart/Chart.min.js') }}"></script>
@@ -543,7 +635,8 @@ DASHBOARD
                     "Trade({{Auth::user()->tradeIncome->sum('price')}})",
                     "Ranking({{Auth::user()->rankingIncome->sum('price')}})",
                     "Reward({{Auth::user()->rewardIncome->sum('price')}})",
-                    "Associated({{Auth::user()->associatedIncome->sum('price')}})"
+                    "Associated({{Auth::user()->associatedIncome->sum('price')}})",
+                    "Pool({{Auth::user()->poolIncome->sum('price')}})"
                     ],
                 datasets: [{
 
@@ -560,7 +653,8 @@ DASHBOARD
                         '{{Auth::user()->tradeIncome->sum('price')}}',
                         '{{Auth::user()->rankingIncome->sum('price')}}',
                         '{{Auth::user()->rewardIncome->sum('price')}}',
-                        '{{Auth::user()->associatedIncome->sum('price')}}'
+                        '{{Auth::user()->associatedIncome->sum('price')}}',
+                        '{{Auth::user()->poolIncome->sum('price')}}',
                     ],
 
                 }]
@@ -675,6 +769,34 @@ DASHBOARD
                         location.reload();
                     }else{
                         $('#errors').html(response.message);
+                    }
+                })
+                .fail(function (response) {
+                })
+                .always(function () {
+                    console.log("complete");
+                });
+        });
+        $(document).on('submit', '#tansferPoolIncomeForm', function (event) {
+            $('#errors').html("Please Wait!!");
+            $('.btn').attr("disabled",true);
+            event.preventDefault();
+            $.ajax({
+                url: '{{url("user/transfer_pool_income_funds")}}',
+                type: 'POST',
+                data: $('#tansferPoolIncomeForm').serialize(),
+            })
+                .done(function (response) {
+                    $('.btn').attr("disabled",false);
+                    if(response.status == true)
+                    {
+                        setTimeout(function() {
+                            $('#errors-pool-income').html(response.message);
+                            $('#transfer_pool_income_modal').modal("hide");
+                        }, 3000);
+                        location.reload();
+                    }else{
+                        $('#errors-pool-income').html(response.message);
                     }
                 })
                 .fail(function (response) {

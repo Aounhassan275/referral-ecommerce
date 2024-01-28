@@ -257,6 +257,7 @@
 								<li class="nav-item"><a href="{{route('user.earning.down_line_placement_income')}}" class="nav-link {{Request::is('user/earning/down_line_placement_income')?'active':''}}">Downline Placement</a></li>
 								<li class="nav-item"><a href="{{route('user.earning.trade_income')}}" class="nav-link {{Request::is('user/earning/trade_income')?'active':''}}">Trade</a></li>
 								<li class="nav-item"><a href="{{route('user.earning.ranking_income')}}" class="nav-link {{Request::is('user/earning/ranking_income')?'active':''}}">Ranking</a></li>
+								<li class="nav-item"><a href="{{route('user.earning.pool_income')}}" class="nav-link {{Request::is('user/earning/ranking_income')?'active':''}}">Pool</a></li>
 								<li class="nav-item"><a href="{{route('user.earning.reward_income')}}" class="nav-link {{Request::is('user/earning/reward_income')?'active':''}}">Reward</a></li>
 								<li class="nav-item"><a href="{{route('user.earning.associated_income')}}" class="nav-link {{Request::is('user/earning/associated_income')?'active':''}}">Associated</a></li>
 							</ul>
@@ -278,6 +279,7 @@
 
 							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('user/refer*')?'display:block':''}}">
 								<li class="nav-item"><a href="{{route('user.refer.index')}}" class="nav-link {{Request::is('user/refer')?'active':''}}">Direct Referral</a></li>
+								<li class="nav-item"><a href="{{route('user.super_pool.show')}}" class="nav-link {{Request::is('user/refer/super_pool')?'active':''}}">Super Pool</a></li>
 								<li class="nav-item"><a href="{{route('user.tree.show')}}" class="nav-link {{Request::is('user/refer/tree')?'active':''}}">Your Tree</a></li>
 							</ul>
 						</li>
