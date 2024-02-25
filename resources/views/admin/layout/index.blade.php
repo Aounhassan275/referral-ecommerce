@@ -75,6 +75,11 @@
 							<li class="sidebar-item {{Request::is('admin/company_account/transfer_income_to_user')?'active':''}}"><a class="sidebar-link" href="{{route('admin.company_account.transfer_income_to_user')}}">Trasnfer Income To User</a></li>
 						</ul>
 					</li>
+					<li class="sidebar-item {{Request::is('admin/super_pool')?'active':''}}">
+						<a class="sidebar-link" href="{{route('admin.super_pool.index')}}">
+							<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Super Pool</span>
+						</a>
+					</li>	
 					<li class="sidebar-item {{Request::is('admin.chat.index')?'active':''}}">
 						<a class="sidebar-link" href="{{route('admin.chat.index')}}">
 							<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Chat</span>

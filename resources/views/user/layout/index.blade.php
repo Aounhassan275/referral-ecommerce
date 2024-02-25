@@ -295,6 +295,12 @@
 								<span>Transcations</span>
 							</a>
 						</li>	
+						<li class="nav-item">
+							<a href="{{route('user.super_pool.index')}}" class="nav-link {{Request::is('user/super_pool')?'active':''}}">
+								<i class="icon-tab"></i>
+								<span>Super Pool</span>
+							</a>
+						</li>	
 						<li class="nav-item nav-item-submenu {{Request::is('user/product*')?'nav-item-open':''}}">
 							<a href="#" class="nav-link"><i class="icon-stack3"></i> <span>Product</span></a>
 

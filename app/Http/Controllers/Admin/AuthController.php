@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\AutoPoolForPackage;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use App\Helpers\UserHepler;
 use App\Models\CompanyAccount;
 use App\Models\Earning;
 use App\Models\Package;
+use App\Models\SuperPool;
 use Carbon\Carbon;
 
 class AuthController extends Controller
@@ -290,4 +292,34 @@ class AuthController extends Controller
         toastr()->success('Payment Distribution of Trade Income Done Successfully');
         return back();
 	}
+    
+    public function add_user_to_super_pool()
+    {
+        $superPools = SuperPool::all();
+        $main_user = User::find(1);
+        foreach($superPools as $superPool)
+        {
+            $users = User::whereNotNull('package_id')->where('for_pool','>','2')->where('id','!=',1)->where('super_pool_'.$superPool->id,0)->get();
+            if ($users->count() > 0) {
+                $total_users = $users->count();
+                info("Add Autopool For Super Pool ".$superPool->id." to User CRONJOB Total Users : $total_users");
+                foreach($users as $user)
+                {
+                    if($user->for_pool >= $superPool->price)
+                    {
+                        info("Add AutoPool For Super Pool ".$superPool->id." adding in tree for: $user->name");
+                        AutoPoolForPackage::addUserInTree($user,$main_user,$superPool);
+                    }else{
+                        info("Add AutoPool For Super Pool ".$superPool->id." CRONJOB: Not applicable. ");
+                    }
+                }
+            } else {
+                info("Add AutoPool For Super Pool ".$superPool->id." CRONJOB: Users not found. ");
+            }
+        }
+        
+		info("Add AutoPool For Package ".$superPool->id." CRONJOB END AT " . date("d-M-Y h:i a"));
+        toastr()->success('Auto Pool Package '.$superPool->id.' Cronjob Run Successfully');
+        return back();
+    }
 }

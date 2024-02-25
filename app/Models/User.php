@@ -32,7 +32,27 @@ class User extends Authenticatable
         'description','country_id','city_id','hide_profile',
         'birth_place','favourite_place','favourite_uncle','fm_direct_income','salary_type',
         'service_id','type_id','gender','monthly_income','sect','caste','dob','view','fund_fee_deduction',
-        'for_pool','pool_income'
+        'for_pool','pool_income',
+        'super_pool_1',
+        'super_pool_2',
+        'super_pool_3',
+        'super_pool_4',
+        'super_pool_5',
+        'super_pool_6',
+        'super_pool_7',
+        'super_pool_8',
+        'super_pool_9',
+        'super_pool_10',
+        'super_pool_11',
+        'super_pool_12',
+        'super_pool_13',
+        'super_pool_14',
+        'super_pool_15',
+        'super_pool_16',
+        'super_pool_17',
+        'super_pool_18',
+        'super_pool_19',
+        'super_pool_20',
     ];
 
     /**

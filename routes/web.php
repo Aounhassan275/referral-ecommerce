@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','namespace' => 'Admin'], funct
     Route::get('upgrade_package', 'AuthController@upgradePackage');
     Route::get('payment_distrubtion_for_associated_Users', 'AuthController@payment_distrubtionforassociatedUsers');
     Route::get('payment_distrubtion_of_trade_income', 'AuthController@paymentDistrubtionofTradeIncome');
+    Route::get('add_user_to_super_pool', 'AuthController@add_user_to_super_pool');
      /******************MESSAGE ROUTES****************/
      Route::resource('message', 'MessageController');
     Route::group(['middleware' => 'auth:admin'], function () { 
@@ -53,6 +54,8 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','namespace' => 'Admin'], funct
     Route::resource('video', 'VideoController'); 
     /******************Email ROUTES****************/
     Route::resource('email', 'EmailController');
+    /******************Super Pool ROUTES****************/
+    Route::resource('super_pool', 'SuperPoolController');
     /******************Setting ROUTES****************/
     Route::get('empty_database', 'SettingController@empty_database')->name('setting.empty_database');
     Route::resource('setting', 'SettingController');
@@ -199,6 +202,8 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
     Route::get('refer/super_pool','ReferralController@showSuperPool')->name('super_pool.show');
     Route::post('transfer_funds','UserController@transferFunds')->name('transfer_funds');
     Route::post('transfer_pool_income_funds','UserController@transferPoolIncomeFunds')->name('transfer_pool_income_funds');
+    /******************SUPER POOL ROUTES****************/
+    Route::get('super_pool','SuperPoolController@index')->name('super_pool.index');
     /******************LOCATION ROUTES****************/
     Route::get('request_location/{id}', 'LocationController@requestLocation')->name('location.request');   
     Route::get('location_update', 'LocationController@location_update')->name('location.location_update');   
