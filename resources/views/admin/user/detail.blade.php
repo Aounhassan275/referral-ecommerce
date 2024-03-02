@@ -293,6 +293,10 @@
                                     <input type="text" class="form-control" name="community_pool"  value="{{$user->community_pool}}" >
                                 </div> 
                                 <div class="form-group col-md-4">
+                                    <label for="inputEmail4">For Pool</label>
+                                    <input type="text" class="form-control" name="for_pool"  value="{{$user->for_pool}}" >
+                                </div> 
+                                <div class="form-group col-md-4">
                                     <label for="inputEmail4">User Type</label>
                                     <select name="type" class="form-control select2" required>
                                         <option selected disabled>Select</option>
