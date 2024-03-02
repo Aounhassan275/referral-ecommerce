@@ -27,6 +27,9 @@
                     <div class="col-4">
                         <a href="{{url('admin/payment_distrubtion_for_associated_Users')}}" class="btn btn-danger" style="margin-top:10px;">Payment Distrubtion For Associated Users</a>
                     </div>
+                    <div class="col-4">
+                        <a href="{{url('admin/add_user_to_super_pool')}}" class="btn btn-info" style="margin-top:10px;">Add User To Super Pool</a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
