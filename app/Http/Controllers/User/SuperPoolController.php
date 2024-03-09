@@ -30,15 +30,19 @@ class SuperPoolController extends Controller
             
             $left = null;
             $right = null;
+            $left_refferral = null;
+            $right_refferral = null;
             if($refferral && $refferral->left_refferral)
             {
                 $left = User::find($refferral->left_refferral);
+                $left_refferral = SuperPoolTree::where('super_pool_id',$request->super_pool_id)->where('user_id',$left->id)->first();
             }
             if($refferral && $refferral->right_refferral)
             {
                 $right = User::find($refferral->right_refferral);
+                $right_refferral = SuperPoolTree::where('super_pool_id',$request->super_pool_id)->where('user_id',$right->id)->first();
             }
-            $html = view('user.super_pool.partials.tree', compact('user','left','right'))->render();
+            $html = view('user.super_pool.partials.tree', compact('user','left','right','left_refferral','right_refferral'))->render();
             return response([
                 'html' => $html,
             ], 200);

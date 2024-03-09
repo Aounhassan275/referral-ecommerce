@@ -108,16 +108,16 @@
     @endif
 </div>
 <div class="row">
-    @if($left)
+    @if($left_refferral)
     <div class="col-md-3">
-        @if($left->left_refferral)
+        @if($left_refferral->left_refferral)
         
         <div class="card card-body">
             <div class="media">
 
                 <div class="media-body">
-                    <a href="javascript::void()" onclick="getTree('{{@$left->left_refferral}}')" > 
-                        <h6 class="mb-0">{{@$left->refer_by_name(@$left->left_refferral)}}</h6>
+                    <a href="javascript::void()" onclick="getTree('{{@$left_refferral->left_refferral}}')" > 
+                        <h6 class="mb-0">{{@$left->refer_by_name(@$left_refferral->left_refferral)}}</h6>
                     </a>
                 </div>
             </div>
@@ -125,13 +125,13 @@
         @endif
     </div>
     <div class="col-md-3">
-        @if($left->right_refferral) 
+        @if($left_refferral->right_refferral) 
         <div class="card card-body">
             <div class="media">
 
                 <div class="media-body">
-                    <a href="javascript::void()" onclick="getTree('{{@$left->right_refferral}}')" > 
-                        <h6 class="mb-0">{{@$left->refer_by_name(@$left->right_refferral)}}</h6>
+                    <a href="javascript::void()" onclick="getTree('{{@$left_refferral->right_refferral}}')" > 
+                        <h6 class="mb-0">{{@$left->refer_by_name(@$left_refferral->right_refferral)}}</h6>
                     </a>
                 </div>
             </div>
@@ -139,14 +139,14 @@
         @endif
     </div>
     @endif
-    @if($right)
+    @if($right_refferral)
     <div class="col-md-3">
-        @if($right->left_refferral)
+        @if($right_refferral->left_refferral)
         <div class="card card-body">
             <div class="media">
                 <div class="media-body">
-                    <a href="javascript::void()" onclick="getTree('{{@$right->left_refferral}}')" > 
-                        <h6 class="mb-0">{{@$left->refer_by_name(@$right->left_refferral)}}</h6>
+                    <a href="javascript::void()" onclick="getTree('{{@$right_refferral->left_refferral}}')" > 
+                        <h6 class="mb-0">{{@$right->refer_by_name(@$right_refferral->left_refferral)}}</h6>
                     </a>
                 </div>
             </div>
@@ -154,12 +154,12 @@
         @endif
     </div>
     <div class="col-md-3">
-        @if($right->right_refferral)
+        @if($right_refferral->right_refferral)
         <div class="card card-body">
             <div class="media">
                 <div class="media-body">
-                    <a href="javascript::void()" onclick="getTree('{{@$right->right_refferral}}')" > 
-                        <h6 class="mb-0">{{@$left->refer_by_name(@$right->right_refferral)}}</h6>
+                    <a href="javascript::void()" onclick="getTree('{{@$right_refferral->right_refferral}}')" > 
+                        <h6 class="mb-0">{{@$right->refer_by_name(@$right_refferral->right_refferral)}}</h6>
                     </a>
                 </div>
             </div>
