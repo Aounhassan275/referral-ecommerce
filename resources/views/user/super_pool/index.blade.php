@@ -3,7 +3,10 @@
 SUPER POOL
 @endsection
 @section('contents')
-
+<div id="user-tree"></div>
+<form >
+    <input type="hidden" id="super_pool_id" name="super_pool_id">
+</form>
 <div class="card">
     <div class="card-header header-elements-inline">
         <h5 class="card-title">View Super Pool</h5>
@@ -33,10 +36,10 @@ SUPER POOL
                     Next Pool
                 </th>
                 <th>
-                    Re-Birth
+                    Next Pool Income
                 </th>
                 <th>
-                    Pool Income
+                    Re-birth
                 </th>
                 <th>
                     Show Tree
@@ -53,10 +56,14 @@ SUPER POOL
                         {{App\Models\SuperPoolTree::where('user_id',Auth::user()->id)->where('super_pool_id',$super_pool['id'])->count()}}
                     </td>
                     <td>{{array_key_exists($key+1,$super_pools) ? $super_pools[$key+1]['price'] : ''}}</td>
-                    <td></td>
-                    <td></td>
                     <td>
-                        <a href="{{route('user.super_pool.detail',$super_pool['id'])}}" class="btn btn-success btn-sm">Go</a>
+                        {{App\Models\SuperPoolTree::where('user_id',Auth::user()->id)->where('super_pool_id',$super_pool['id'])->sum('next_pool_income')}}
+                    </td>
+                    <td>
+                        {{App\Models\SuperPoolTree::where('user_id',Auth::user()->id)->where('super_pool_id',$super_pool['id'])->sum('rebirth')}}
+                    </td>
+                    <td>
+                        <a href="javascript::void()" onclick="getSuperPool('{{@$super_pool['id']}}')" class="btn btn-success btn-sm">Go</a>
                     </td>
                 </tr>
             @endforeach
@@ -65,6 +72,32 @@ SUPER POOL
 </div>
 @endsection
 @section('scripts')
+<script>
+    var user_id = 1;
+    function getSuperPool(super_pool_id)
+    {  
+        $("#super_pool_id").val(super_pool_id);
+        getTree(1);
+    }
+    function getTree(user_id)
+    {  
+        var super_pool_id = $("#super_pool_id").val();
+        $.ajax({
+            url: "{{route('user.super_pool.get_tree')}}",
+            method: 'post',
+            data: {
+                id: user_id,
+                super_pool_id: super_pool_id,
+            },
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            success: function(response){
+                $('#user-tree').html(response.html)
+            }
+        });
+    }
+</script>
 <script type="text/javascript" src="{{asset('clipboard.js')}}"></script>
 <script type="text/javascript">
 	var clipboard = new Clipboard('.copy-button');

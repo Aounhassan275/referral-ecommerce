@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="flex-wrap:nowrap!important;">
     <div class="col-md-4"></div>
     <div class="col-md-4">
         <div class="card card-body">
@@ -39,7 +39,7 @@
     </div>
     <div class="col-md-4"></div>
 </div>
-<div class="row">
+<div class="row" style="flex-wrap:nowrap!important;">
     @if($left)
     <div class="col-md-3"></div>
     <div class="col-md-3">
@@ -107,7 +107,7 @@
     <div class="col-md-3"></div>
     @endif
 </div>
-<div class="row">
+<div class="row" style="flex-wrap:nowrap!important;">
     @if($left_refferral)
     <div class="col-md-3">
         @if($left_refferral->left_refferral)

@@ -3,8 +3,25 @@
 @section('title')
 SUPER POOL
 @endsection
+@section('styles')
+@include('user.super_pool.partials.tree_css')
+<style>
+    @media only screen and (max-width: 768px) {
+        .desktop-content {
+            display: none;
+        }
+    }
+
+/* Hide mobile content on desktop */
+@media only screen and (min-width: 769px) {
+    .mobile-content {
+        display: none;
+    }
+}
+</style>
+@endsection
 @section('contents')
-<div id="user-tree"></div>
+            <div id="user-tree"></div>
 @endsection
 @section('scripts')
 <script>
