@@ -27,15 +27,19 @@
                         </div>
                    </div>
                    <div class="row">
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             <label class="form-label">Total Direct Income</label>
                             <input type="number" class="form-control" name="direct_income"  placeholder="Total Direct Income" value="{{$package->direct_income}}">
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
+                            <label class="form-label">Direct Pool Income</label>
+                            <input type="number" class="form-control" name="direct_pool_income"  placeholder="Direct Pool Income" value="{{$package->direct_pool_income}}">
+                        </div>
+                        <div class="form-group col-3">
                             <label class="form-label">Direct Team Income</label>
                             <input type="number" class="form-control" name="direct_team_income"  placeholder="Direct Team Income" value="{{$package->direct_team_income}}">
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             <label class="form-label">Upline Income</label>
                             <input type="number" class="form-control" name="upline_income"  placeholder="Upline Income" value="{{$package->upline_income}}">
                         </div>

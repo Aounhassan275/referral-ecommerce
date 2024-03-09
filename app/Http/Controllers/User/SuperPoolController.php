@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\AutoPoolForPackage;
 use App\Http\Controllers\Controller;
 use App\Models\SuperPool;
+use App\Models\SuperPoolTree;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SuperPoolController extends Controller
@@ -12,5 +15,40 @@ class SuperPoolController extends Controller
     {
         $super_pools = SuperPool::orderBy('price','asc')->get()->toArray();
         return view('user.super_pool.index',compact('super_pools'));
+    }
+
+    public function show($id)
+    {
+        $super_pool = SuperPool::find($id);
+        $user = User::find(1);
+        $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel2($user,$super_pool))->get();
+        dd($old_users);
+        return view('user.super_pool.detail',compact('super_pool'));
+    }
+    public function getTree(Request $request)
+    {
+        try {
+            $user = User::find($request->id);
+            $refferral = SuperPoolTree::where('super_pool_id',$request->super_pool_id)->where('user_id',$user->id)->first();
+            
+            $left = null;
+            $right = null;
+            if($refferral && $refferral->left_refferral)
+            {
+                $left = User::find($refferral->left_refferral);
+            }
+            if($refferral && $refferral->right_refferral)
+            {
+                $right = User::find($refferral->right_refferral);
+            }
+            $html = view('user.super_pool.partials.tree', compact('user','left','right'))->render();
+            return response([
+                'html' => $html,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 }

@@ -162,7 +162,7 @@ class AutoPoolForPackage
                         'left_refferral' => $user->id, 
                     ]);
                     break;
-                }else{
+                }else if((!$refferral->right_refferral)){
                     $refferral->update([
                         'right_refferral' => $user->id, 
                     ]);

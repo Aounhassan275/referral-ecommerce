@@ -570,4 +570,19 @@ class ReferralIncome
 
     } 
     
+    public static  function directPoolIncome($price,$package,$user,$due_to)
+    {
+        $direct_income = $price / 100 * $package->direct_pool_income;
+        info("Direct Pool Income adding $direct_income $user->for_pool to $user->name");
+        $user->update([
+            'for_pool' => $user->for_pool + $direct_income
+        ]);
+        info("Direct Income Transfer Successfully to Total For Pool $user->for_pool");
+        Earning::create([
+            'price' => $direct_income,
+            'user_id' => $user->id,
+            'due_to' => $due_to->id,
+            'type' => 'pool_income'
+        ]);
+    } 
 }

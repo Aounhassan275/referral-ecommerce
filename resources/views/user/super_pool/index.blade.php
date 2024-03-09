@@ -56,7 +56,7 @@ SUPER POOL
                     <td></td>
                     <td></td>
                     <td>
-                        <a href="" class="btn btn-success btn-sm">Go</a>
+                        <a href="{{route('user.super_pool.detail',$super_pool['id'])}}" class="btn btn-success btn-sm">Go</a>
                     </td>
                 </tr>
             @endforeach

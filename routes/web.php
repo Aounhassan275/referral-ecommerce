@@ -203,6 +203,8 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
     Route::post('transfer_funds','UserController@transferFunds')->name('transfer_funds');
     Route::post('transfer_pool_income_funds','UserController@transferPoolIncomeFunds')->name('transfer_pool_income_funds');
     /******************SUPER POOL ROUTES****************/
+    Route::get('super_pool/detail/{id}','SuperPoolController@show')->name('super_pool.detail');
+    Route::post('super_pool/get_tree','SuperPoolController@getTree')->name('super_pool.get_tree');
     Route::get('super_pool','SuperPoolController@index')->name('super_pool.index');
     /******************LOCATION ROUTES****************/
     Route::get('request_location/{id}', 'LocationController@requestLocation')->name('location.request');   
@@ -336,6 +338,15 @@ Route::get('/cd', function() {
     Artisan::call('migrate:refresh');
     Artisan::call('db:seed', [ '--class' => DatabaseSeeder::class]);
     Artisan::call('view:clear');
+    return 'DONE';
+});Route::get('/fix', function() {
+    $users = App\Models\User::where('super_pool_1',1)->get();
+    foreach($users as $user)
+    {
+        $user->super_pool_1 = 0;
+        $user->save();
+    }
+    App\Models\SuperPoolTree::where('super_pool_id',1)->delete();
     return 'DONE';
 });
 Route::get('/migrate', function() {
