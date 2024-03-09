@@ -20,9 +20,6 @@ class SuperPoolController extends Controller
     public function show($id)
     {
         $super_pool = SuperPool::find($id);
-        $user = User::find(1);
-        $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel2($user,$super_pool))->get();
-        dd($old_users);
         return view('user.super_pool.detail',compact('super_pool'));
     }
     public function getTree(Request $request)
