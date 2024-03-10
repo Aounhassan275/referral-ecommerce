@@ -14,11 +14,11 @@ class AddColumnToSuperPoolTree extends Migration
     public function up()
     {
         Schema::table('super_pool_trees', function (Blueprint $table) {
-            $table->float('rebirth')->nullable()->after('super_pool_id');
-            $table->float('next_pool_income')->nullable()->after('super_pool_id');
-            $table->float('direct_pool_income')->nullable()->after('super_pool_id');
-            $table->float('revenue')->nullable()->after('super_pool_id');
-            $table->float('downline_income')->nullable()->after('super_pool_id');
+            $table->float('rebirth')->default(0)->nullable()->after('super_pool_id');
+            $table->float('next_pool_income')->default(0)->nullable()->after('super_pool_id');
+            $table->float('direct_pool_income')->default(0)->nullable()->after('super_pool_id');
+            $table->float('revenue')->default(0)->nullable()->after('super_pool_id');
+            $table->float('downline_income')->default(0)->nullable()->after('super_pool_id');
         });
     }
 

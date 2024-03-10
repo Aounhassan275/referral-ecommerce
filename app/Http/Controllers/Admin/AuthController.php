@@ -305,12 +305,17 @@ class AuthController extends Controller
                 info("Add Autopool For Super Pool ".$superPool->id." to User CRONJOB Total Users : $total_users");
                 foreach($users as $user)
                 {
-                    if($user->for_pool >= $superPool->price)
+                    if($user->package && $user->package->price > 2)
                     {
-                        info("Add AutoPool For Super Pool ".$superPool->id." adding in tree for: $user->name");
-                        AutoPoolForPackage::addUserInTree($user,$main_user,$superPool);
+                        if($user->for_pool >= $superPool->price)
+                        {
+                            info("Add AutoPool For Super Pool ".$superPool->id." adding in tree for: $user->name");
+                            AutoPoolForPackage::addUserInTree($user,$main_user,$superPool);
+                        }else{
+                            info("Add AutoPool For Super Pool ".$superPool->id." CRONJOB: Not applicable. ");
+                        }
                     }else{
-                        info("Add AutoPool For Super Pool ".$superPool->id." CRONJOB: Not applicable. ");
+                        info("Add AutoPool For Super Pool ".$superPool->id." CRONJOB: ".$user->name." package is not applicable.");
                     }
                 }
             } else {

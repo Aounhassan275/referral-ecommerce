@@ -126,6 +126,15 @@ class AutoPoolForPackage
     } 
     public static function addUserinLevel_1($user,$main_user,$super_pool)
     {
+        $total_price = $super_pool->price - $super_pool->price / 2;
+        $total = $total_price / 3;
+        $rebirth = $total/ 100 * 15;
+        $revenue = $total/ 100 * 70;
+        $pool_account= CompanyAccount::where('name','Pool Income')->first();
+        $company_fee = $total/ 100 * 10;
+        $direct_pool_income = $total/ 100 * 2;
+        $direct_income = $total/ 100 * 3;
+        $divideBytwo = $super_pool->price / 2;
         $refferral = SuperPoolTree::where('super_pool_id',$super_pool->id)->where('user_id',$main_user->id)->first();
         if($refferral)
         {
@@ -133,22 +142,130 @@ class AutoPoolForPackage
             {
                 $refferral->update([
                     'left_refferral' => $user->id, 
+                    'downline_income' => $refferral->downline_income + $divideBytwo, 
+                    'rebirth' => $refferral->rebirth + $rebirth, 
+                    'next_pool_income' => $refferral->next_pool_income + $total, 
                 ]);
+                $pool_account->update([
+                    'balance'=>$pool_account->balance + $divideBytwo
+                ]);
+                $refer_by = User::find($user->refer_by);
+                if($refer_by)
+                {
+                    if($refer_by->package && $refer_by->package->price > 2)
+                    {
+                        $refer_by->update([
+                            'for_pool' => $refer_by->for_pool + $direct_pool_income,
+                            'pool_income' => $refer_by->pool_income + $direct_income
+                        ]);
+                    }else{     
+                        $refer_by->update([
+                            'total_income' => $refer_by->total_income + $direct_pool_income + $direct_income,
+                        ]);
+                    }
+
+                    Earning::create([
+                        'price' => $direct_pool_income,
+                        'user_id' => $refer_by->id,
+                        'due_to' => $user->id,
+                        'type' => 'pool_income'
+                    ]);
+
+                }else{
+                    $pool_account->update([
+                        'balance'=>$pool_account->balance + $direct_pool_income + $direct_income
+                    ]);
+                }
             }else{
                 $refferral->update([
                     'right_refferral' => $user->id, 
+                    'downline_income' => $refferral->downline_income + $divideBytwo, 
+                    'rebirth' => $refferral->rebirth + $rebirth, 
+                    'next_pool_income' => $refferral->next_pool_income + $total, 
+                ]);  
+                $pool_account->update([
+                    'balance'=>$pool_account->balance + $divideBytwo
                 ]);
+                $refer_by = User::find($user->refer_by);
+                if($refer_by)
+                {
+                    if($refer_by->package && $refer_by->package->price > 2)
+                    {
+                        $refer_by->update([
+                            'for_pool' => $refer_by->for_pool + $direct_pool_income,
+                            'pool_income' => $refer_by->pool_income + $direct_income
+                        ]);
+                    }else{     
+                        $refer_by->update([
+                            'total_income' => $refer_by->total_income + $direct_pool_income + $direct_income,
+                        ]);
+                    }
+
+                    Earning::create([
+                        'price' => $direct_pool_income,
+                        'user_id' => $refer_by->id,
+                        'due_to' => $user->id,
+                        'type' => 'pool_income'
+                    ]);
+
+                }else{
+                    $pool_account->update([
+                        'balance'=>$pool_account->balance + $direct_pool_income + $direct_income
+                    ]);
+                }
             }
         }else{
             SuperPoolTree::create([
                 'super_pool_id' => $super_pool->id,
                 'user_id' => $main_user->id,
+                'downline_income' => $divideBytwo,
+                'rebirth' => $rebirth, 
+                'next_pool_income' => $total,  
                 'left_refferral' => $user->id,
             ]);
+            $pool_account->update([
+                'balance'=>$pool_account->balance + $divideBytwo
+            ]);
+            $refer_by = User::find($user->refer_by);
+            if($refer_by)
+            {
+                if($refer_by->package && $refer_by->package->price > 2)
+                {
+                    $refer_by->update([
+                        'for_pool' => $refer_by->for_pool + $direct_pool_income,
+                        'pool_income' => $refer_by->pool_income + $direct_income
+                    ]);
+                }else{     
+                    $refer_by->update([
+                        'total_income' => $refer_by->total_income + $direct_pool_income + $direct_income,
+                    ]);
+                }
+                Earning::create([
+                    'price' => $direct_pool_income,
+                    'user_id' => $refer_by->id,
+                    'due_to' => $user->id,
+                    'type' => 'pool_income'
+                ]);
+
+            }else{
+                $pool_account->update([
+                    'balance'=>$pool_account->balance + $direct_pool_income + $direct_income
+                ]);
+            }
         }
         $user->update([
             'super_pool_'.$super_pool->id => 1,
+            'pool_income' => $user->pool_income + $revenue,
             'for_pool' =>  $user->for_pool - $super_pool->price
+        ]);
+        Earning::create([
+            'price' => $revenue,
+            'user_id' => $user->id,
+            'due_to' => $user->id,
+            'type' => 'pool_income'
+        ]);
+        $pool_account->update([
+            'balance'=>$pool_account->balance + $company_fee
         ]);
     }
     public static function addUserinLevels($user,$old_users,$super_pool)
@@ -185,10 +302,18 @@ class AutoPoolForPackage
                     $refer_by = User::find($user->refer_by);
                     if($refer_by)
                     {
-                        $refer_by->update([
-                            'for_pool' => $refer_by->for_pool + $direct_pool_income,
-                            'pool_income' => $refer_by->pool_income + $direct_income
-                        ]);
+                        if($refer_by->package && $refer_by->package->price > 2)
+                        {
+                            $refer_by->update([
+                                'for_pool' => $refer_by->for_pool + $direct_pool_income,
+                                'pool_income' => $refer_by->pool_income + $direct_income
+                            ]);
+                        }else{     
+                            $refer_by->update([
+                                'total_income' => $refer_by->total_income + $direct_pool_income + $direct_income,
+                            ]);
+                        }
+
                         Earning::create([
                             'price' => $direct_pool_income,
                             'user_id' => $refer_by->id,
@@ -212,16 +337,23 @@ class AutoPoolForPackage
                     if($ownerRefferral)
                     {
                         $ownerRefferral->update([
-                            'downline_income' => $refferral->downline_income + $divideBytwo, 
+                            'downline_income' => $ownerRefferral->downline_income + $divideBytwo, 
                         ]);
                     }
                     $refer_by = User::find($user->refer_by);
                     if($refer_by)
                     {
-                        $refer_by->update([
-                            'for_pool' => $refer_by->for_pool + $direct_pool_income,
-                            'pool_income' => $refer_by->pool_income + $direct_income
-                        ]);
+                        if($refer_by->package && $refer_by->package->price > 2)
+                        {
+                            $refer_by->update([
+                                'for_pool' => $refer_by->for_pool + $direct_pool_income,
+                                'pool_income' => $refer_by->pool_income + $direct_income
+                            ]);
+                        }else{     
+                            $refer_by->update([
+                                'total_income' => $refer_by->total_income + $direct_pool_income + $direct_income,
+                            ]);
+                        }
                         Earning::create([
                             'price' => $direct_pool_income,
                             'user_id' => $refer_by->id,
@@ -240,24 +372,31 @@ class AutoPoolForPackage
                 SuperPoolTree::create([
                     'super_pool_id' => $super_pool->id,
                     'user_id' => $old_user->id,
-                    'downline_income' => $refferral->downline_income + $divideBytwo,
-                    'rebirth' => $refferral->rebirth + $rebirth, 
-                    'next_pool_income' => $refferral->next_pool_income + $total,  
+                    'downline_income' => $divideBytwo,
+                    'rebirth' => $rebirth, 
+                    'next_pool_income' => $total,  
                     'left_refferral' => $user->id,
                 ]);
                 if($ownerRefferral)
                 {
                     $ownerRefferral->update([
-                        'downline_income' => $refferral->downline_income + $divideBytwo, 
+                        'downline_income' => $ownerRefferral->downline_income + $divideBytwo, 
                     ]);
                 }
                 $refer_by = User::find($user->refer_by);
                 if($refer_by)
                 {
-                    $refer_by->update([
-                        'for_pool' => $refer_by->for_pool + $direct_pool_income,
-                        'pool_income' => $refer_by->pool_income + $direct_income
-                    ]);
+                    if($refer_by->package && $refer_by->package->price > 2)
+                    {
+                        $refer_by->update([
+                            'for_pool' => $refer_by->for_pool + $direct_pool_income,
+                            'pool_income' => $refer_by->pool_income + $direct_income
+                        ]);
+                    }else{     
+                        $refer_by->update([
+                            'total_income' => $refer_by->total_income + $direct_pool_income + $direct_income,
+                        ]);
+                    }
                     Earning::create([
                         'price' => $direct_pool_income,
                         'user_id' => $refer_by->id,

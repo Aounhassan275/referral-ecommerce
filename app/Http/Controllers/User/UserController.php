@@ -242,7 +242,14 @@ class UserController extends Controller
                 'investment_amount' =>  $user->investment_amount +$request->community_pool,
                 'total_income' => $user->total_income - $amount
             ]);
-            ReferralIncome::CommunityPoolIncome($user,$request->community_pool);
+            if($user->package->price == 2)
+            {
+                $user->update([
+                    'community_pool' =>  $user->community_pool +$request->community_pool
+                ]);
+            }else{
+                ReferralIncome::CommunityPoolIncome($user,$request->community_pool);
+            }
         }
         toastr()->success('Amount Transferred Successfully');
         return response()->json([
