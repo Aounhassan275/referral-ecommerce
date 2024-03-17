@@ -8,7 +8,7 @@ class Post extends Model
 {
     protected $fillable = [
         'name','post_category_id','post_brand_id','user_id','description',
-        'city_id','country_id',
+        'city_id','country_id','price','is_installment_allowed',
         'facebook','instagram','whatsapp','youtube','linkedin','twitter','snack_video','tiktok',
     ];
     public function category()

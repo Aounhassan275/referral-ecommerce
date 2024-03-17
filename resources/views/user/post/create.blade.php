@@ -95,6 +95,18 @@ Add Post
                         </div>
                     </div>
                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="form-label">Post Price <small id="conversionText"></small></label>
+                            <input type="number" name="price" class="form-control" required placeholder="Post Price">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="form-label">Post available on installment </small></label>
+                            <br>
+                            <input type="radio" class="" name="is_installment_allowed" value="1"> Yes
+                            <input type="radio" class="" name="is_installment_allowed" checked value="0"> No
+                        </div>
+                    </div>
+                   <div class="row">
                         <div class="form-group col-md-12">
                             <label class="form-label">Post Description</label>
                             <textarea name="description" class="form-control" required id="" rows="2"></textarea>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyAccount;
 use App\Models\Post;
-use App\Models\PostBrand;
+use App\Models\PostInstallement;
 use App\Models\PostCategory;
 use App\Models\PostImage;
 use Exception;
@@ -139,5 +139,11 @@ class PostController extends Controller
     {
         $brands = PostCategory::find($request->id)->brands;
         return response()->json($brands);
+    }
+    public function getPostInstallement($id)
+    {
+        $post = Post::find($id);
+        $installements = PostInstallement::where('post_id',$id)->get();
+        return view('user.post.installement',compact('installements','post'));
     }
 }

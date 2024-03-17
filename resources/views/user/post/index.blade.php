@@ -17,10 +17,12 @@
             <tr>
                 <th >Sr#</th>
                 <th >Post Name</th>
+                <th >Post Price</th>
                 <th >Post Category</th>
                 <th >Post Brand</th>
                 <th >Post Country</th>
                 <th >Post City</th>
+                <th >Installements</th>
                 <th >Action</th>
                 <th >Action</th>
             </tr> 
@@ -30,10 +32,16 @@
             <tr> 
                 <td>{{$key+1}}</td>
                 <td>{{$post->name}}</td>
+                <td>{{$post->price}}</td>
                 <td>{{@$post->category->name}}</td>
                 <td>{{@$post->brand->name}}</td>
                 <td>{{@$post->country->name}}</td>
                 <td>{{@$post->city->name}}</td>
+                <td class="text-center">
+                    @if($post->is_installment_allowed)
+                        <a href="{{route('user.post.installement',$post->id)}}"><i class="icon-eye"></i></a>
+                    @endif
+                </td>
                 <td class="text-center">
                     <a href="{{route('user.post.edit',$post->id)}}"><i class="icon-pencil7"></i></a>
                 </td>

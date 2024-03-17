@@ -263,8 +263,11 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
     Route::resource('chatmessage', 'ChatMessageController');
     /******************Post ROUTES****************/
     Route::post('post/get_category_brand', 'PostController@getCategoryBrand')->name('post.brands');     
+    Route::get('post/installement/{id}', 'PostController@getPostInstallement')->name('post.installement');     
     Route::resource('post', 'PostController');  
     Route::resource('post_image', 'PostImageController');  
+    /******************POST INSTALLEMENT ROUTES****************/
+    Route::resource('post_installement', 'PostInstallementController'); 
     Route::get('post_sale/received', 'PostSaleController@receivedSale')->name('post_sale.received');  
     Route::resource('post_sale', 'PostSaleController');  
 });

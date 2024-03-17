@@ -63,6 +63,16 @@ Edit {{$post->name}} Post
                                 <option selected value="{{@$post->city_id}}">{{@$post->city->name}}</option>
                             </select>                          
                         </div>
+                        <div class="form-group col-md-3">
+                            <label class="form-label">Post Price <small id="conversionText"></small></label>
+                            <input type="number" name="price" class="form-control" value="{{$post->price}}" required placeholder="Post Price">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="form-label">Post available on installment </small></label>
+                            <br>
+                            <input type="radio" class="" {{$post->is_installment_allowed ? 'checked' : ''}} name="is_installment_allowed" value="1"> Yes
+                            <input type="radio" class="" {{!$post->is_installment_allowed ? 'checked' : ''}} name="is_installment_allowed" value="0"> No
+                        </div>
                    </div>
                    <div class="row">
                         <div class="form-group col-md-12">
