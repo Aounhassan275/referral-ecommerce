@@ -46,7 +46,7 @@ class AuthController extends Controller
                 // ->whereDate('last_login',$payment_distrubtion_days)
                 ->where('total_income','>',10)
                 ->where('refer_by','!=',null)
-                ->where('type','!=','fake')
+                ->where('type','!=',['fake','rebirth'])
                 ->get();
 		if ($users) {
             $total_users = $users->count();
@@ -153,7 +153,7 @@ class AuthController extends Controller
     public function upgradePackage() {
 		info("Package Upgrade CRONJOB CALLED AT " . date("d-M-Y h:i a"));
         $users = User::where('investment_amount','>=',50)
-                    ->where('type','!=','fake')
+                    ->where('type','!=',['fake','rebirth'])
                     ->get();
 		if ($users) {
             $total_users = $users->count();
@@ -188,7 +188,7 @@ class AuthController extends Controller
         $users = User::where('associated_with','!=',null)
                 ->where('total_income','>',5)
                 ->where('refer_by','!=',null)
-                ->where('type','!=','fake')
+                ->where('type','!=',['fake','rebirth'])
                 ->get();
 		if ($users) {
             $total_users = $users->count();
@@ -260,7 +260,7 @@ class AuthController extends Controller
         $users = User::where('refer_by','!=',null)
                 ->whereDate('last_login','>=',$payment_distrubtion_days)
                 ->whereNotNull('package_id')
-                ->where('type','!=','fake')
+                ->where('type','!=',['fake','rebirth'])
                 ->get();
         $trade_income= CompanyAccount::where('name','Trade Income')->first();
 		if ($users) {

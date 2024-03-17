@@ -217,7 +217,7 @@ class User extends Authenticatable
     }
 	public function mrefers()
     {
-        return $this->where('refer_by',$this->id)->where('type','!=','fake')->get();
+        return $this->where('refer_by',$this->id)->where('type','!=',['fake','rebirth'])->get();
     }
 	public function total_referrals()
     {
@@ -257,7 +257,7 @@ class User extends Authenticatable
 
 	public function placement()
     {
-        $placement =   $this->where('referral',$this->id)->where('type','!=','fake')->first();
+        $placement =   $this->where('referral',$this->id)->where('type','!=',['fake','rebirth'])->first();
         if($placement)
             return $placement->name;
         return null;
@@ -269,7 +269,7 @@ class User extends Authenticatable
         $upper = $this;
         for($i = 0; $i < $minimum_limit;$i++)
         {
-            $upper = User::where('referral',$upper->id)->where('type','!=','fake')->first();
+            $upper = User::where('referral',$upper->id)->where('type','!=',['fake','rebirth'])->first();
             if(!$upper)
                 break;
             $upline[] = $upper;
@@ -282,7 +282,7 @@ class User extends Authenticatable
         $upper = $this;
         for($i = 0; $i < 20;$i++)
         {
-            $upper = User::where('referral',$upper->id)->where('type','!=','fake')->first();
+            $upper = User::where('referral',$upper->id)->where('type','!=',['fake','rebirth'])->first();
             if(!$upper)
                 break;
             $upline[] = $upper;
@@ -296,7 +296,7 @@ class User extends Authenticatable
         $down = $this;
         for($i = 0; $i < $maximum_limit;$i++)
         {
-            $down = User::where('id',$down->referral)->where('type','!=','fake')->first();
+            $down = User::where('id',$down->referral)->where('type','!=',['fake','rebirth'])->first();
             if(!$down)
                 break;
             $downline[] = $down;
@@ -319,7 +319,7 @@ class User extends Authenticatable
 	public function WithdrawLimits()
     {
         $withdraw_limit = $this->package->withdraw_limit;
-        $referral_count = User::where('refer_by',$this->id)->where('type','!=','fake')->count();
+        $referral_count = User::where('refer_by',$this->id)->where('type','!=',['fake','rebirth'])->count();
         if($referral_count >= $withdraw_limit)
         {
             return true;
@@ -329,7 +329,7 @@ class User extends Authenticatable
 	public function FundTransferLimits()
     {
         $fund_limit = $this->package->fund_limit;
-        $referral_count = User::where('refer_by',$this->id)->where('type','!=','fake')->count();
+        $referral_count = User::where('refer_by',$this->id)->where('type','!=',['fake','rebirth'])->count();
         if($referral_count >= $fund_limit)
         {
             return true;
@@ -389,7 +389,7 @@ class User extends Authenticatable
         $user = User::find($id);
         if($user)
         {
-            if($user->type != 'fake')
+            if($user->type != 'fake' && $user->type != 'rebirth')
                 return $user->name;
             else 
                 return '';

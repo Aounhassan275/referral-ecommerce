@@ -31,7 +31,7 @@ class TranscationController extends Controller
           toastr()->success('Your Package is Expire');
            return redirect(route('user.dashboard.index'));
         }
-        $users = User::where('id','!=',Auth::user()->id)->where('type','!=','fake')->orderBy('name')->get();
+        $users = User::where('id','!=',Auth::user()->id)->where('type','!=',['fake','rebirth'])->orderBy('name')->get();
         return view('user.balance_transfer.index')->with('users',$users);
     }
 

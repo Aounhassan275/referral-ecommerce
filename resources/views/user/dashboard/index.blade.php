@@ -526,7 +526,7 @@ DASHBOARD
                         </tr> 
                     </thead>
                     <tbody>
-                        @foreach (App\Models\User::where('refer_by',Auth::user()->id)->where('type','!=','fake')->orderBy('created_at','DESC')->get() as $key => $user)
+                        @foreach (App\Models\User::where('refer_by',Auth::user()->id)->where('type','!=',['fake','rebirth'])->orderBy('created_at','DESC')->get() as $key => $user)
                             <tr> 
                                 <td>{{$key + 1}}</td>
                                 <td><img src="{{asset($user->image)}}" width="50" height="50" alt=""></td>
