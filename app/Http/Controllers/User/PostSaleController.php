@@ -39,7 +39,7 @@ class PostSaleController extends Controller
      */
     public function create()
     {
-        $users = User::where('id','!=',Auth::user()->id)->where('type','!=',['fake','rebirth'])->orderBy('name')->get();
+        $users = User::where('id','!=',Auth::user()->id)->whereNotIn('type',['fake','rebirth'])->orderBy('name')->get();
         return view('user.post_sale.create')->with('users',$users);
     }
 

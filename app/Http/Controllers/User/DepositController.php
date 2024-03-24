@@ -14,9 +14,11 @@ use App\Models\CompanyAccount;
 use App\Models\PackageHistory;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DepositController extends Controller
 {
@@ -87,19 +89,34 @@ class DepositController extends Controller
         $package= Package::find($id);
         if($user->cash_wallet >= $package->price)
         {
-            $user->update([
-                'status' => 'active',
-                'a_date' => Carbon::today(),
-                'package_id' => $package->id,
-                'cash_wallet' => $user->cash_wallet -= $package->price,    
-            ]);
-            if($package->price > 5)
+            DB::beginTransaction();
+            try{
+                $user->update([
+                    'status' => 'active',
+                    'a_date' => Carbon::today(),
+                    'package_id' => $package->id,
+                    'cash_wallet' => $user->cash_wallet -= $package->price,    
+                ]);       
+                if($package->price > 5)
+                {
+                    $status = ReferralIncome::referral($user);
+                    if($status == false)
+                    {
+                        DB::rollBack();
+                        toastr()->error('Something Went Wrong!');
+                        return redirect()->back();
+                    }
+                }else
+                {
+                    $refer_by = User::find($user->refer_by);
+                    ReferralIncome::directIncome($package->price,$package,$refer_by,$user);
+                }
+                DB::commit();
+            }catch (Exception $e)
             {
-                ReferralIncome::referral($user);
-            }else
-            {
-                $refer_by = User::find($user->refer_by);
-                ReferralIncome::directIncome($package->price,$package,$refer_by,$user);
+                DB::rollBack();
+                toastr()->error($e->getMessage());
+                return redirect()->back();
             }
             toastr()->success('Your Package Active Successfully.');
             return redirect(route('user.dashboard.index'));

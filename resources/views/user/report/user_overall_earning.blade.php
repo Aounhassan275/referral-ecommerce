@@ -145,7 +145,7 @@ OVERALL EARNING REPORT
                         </tr> 
                     </thead>
                     <tbody>
-                        @foreach (App\Models\User::where('refer_by',$user->id)->where('type','!=',['fake','rebirth'])->orderBy('created_at','DESC')->get() as $key => $direct_user)
+                        @foreach (App\Models\User::where('refer_by',$user->id)->whereNotIn('type',['fake','rebirth'])->orderBy('created_at','DESC')->get() as $key => $direct_user)
                             <tr> 
                                 <td>{{$key + 1}}</td>
                                 <td><img src="{{asset($direct_user->image)}}" width="50" height="50" alt=""></td>

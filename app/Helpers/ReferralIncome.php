@@ -24,9 +24,14 @@ class ReferralIncome
             $fake_account = User::where('type','fake')->first();
             //Replacing Fake User with this user in tree or placement in Tree
             $referral_account = User::where('referral',$fake_account->id)->first();
-            $referral_account->update([
-                'referral' => $user->id
-            ]);
+            if($referral_account)
+            {
+                $referral_account->update([
+                    'referral' => $user->id
+                ]);
+            }else{
+                return false;
+            }
             ReferralIncome::FakeAccount($fake_account,$user);
         }
         //Give it Main Refer By and add money in Total Income of Refer By User
@@ -50,6 +55,7 @@ class ReferralIncome
             'package_id' => $package->id,
             'user_id' => $user->id
         ]);
+        return true;
     } 
     public static  function FakeAccount($fake_account,$user)
     {

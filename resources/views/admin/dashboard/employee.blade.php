@@ -98,7 +98,7 @@
                                 <div class="row d-flex align-items-center mb-4">
                                     <div class="col-8">
                                         <h2 class="d-flex align-items-center mb-0 font-weight-light">
-                                            {{App\Models\User::where('email_verified',0)->where('associated_with',null)->where('type','!=',['fake','rebirth'])->count()}}
+                                            {{App\Models\User::where('email_verified',0)->where('associated_with',null)->whereNotIn('type',['fake','rebirth'])->count()}}
                                         </h2>
                                     </div>
                                 </div>

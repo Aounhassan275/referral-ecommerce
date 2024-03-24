@@ -33,7 +33,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (App\Models\User::where('email_verified',0)->where('associated_with',null)->where('type','!=',['fake','rebirth'])->get() as $key => $user)
+                    @foreach (App\Models\User::where('email_verified',0)->where('associated_with',null)->whereNotIn('type',['fake','rebirth'])->get() as $key => $user)
                     <tr> 
                         <td>{{$key+1}}</td>
                         <td>{{$user->name}}</td>
