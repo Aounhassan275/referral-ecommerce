@@ -166,6 +166,10 @@ class AutoPoolForPackage
                     'rebirth' => $refferral->rebirth + $rebirth, 
                     'next_pool_income' => $refferral->next_pool_income + $total, 
                 ]);
+                
+                $user->update([
+                    'for_pool' =>  $user->for_pool + $rebirth
+                ]);
                 $pool_account->update([
                     'balance'=>$pool_account->balance + $divideBytwo
                 ]);
@@ -203,6 +207,10 @@ class AutoPoolForPackage
                     'rebirth' => $refferral->rebirth + $rebirth, 
                     'next_pool_income' => $refferral->next_pool_income + $total, 
                 ]);  
+                
+                $user->update([
+                    'for_pool' =>  $user->for_pool + $rebirth
+                ]);
                 $pool_account->update([
                     'balance'=>$pool_account->balance + $divideBytwo
                 ]);
@@ -243,6 +251,10 @@ class AutoPoolForPackage
                 'next_pool_income' => $total,  
                 'left_refferral' => $newUser->id,
             ]);
+            
+            $user->update([
+                'for_pool' =>  $user->for_pool + $rebirth
+            ]);
             $pool_account->update([
                 'balance'=>$pool_account->balance + $divideBytwo
             ]);
@@ -281,10 +293,11 @@ class AutoPoolForPackage
             $tree = SuperPoolTree::where('super_pool_id',$super_pool->id)->where('user_id',$user->id)->first();
             $user->update([
                 'pool_income' => $user->pool_income + $revenue,
+                'for_pool' =>  $user->for_pool - 3
             ]);
-            $tree->update([
-                'rebirth' => $tree->rebirth - 3,
-            ]);
+            // $tree->update([
+            //     'rebirth' => $tree->rebirth - 3,
+            // ]);
 
         }else{
             $user->update([
@@ -329,6 +342,9 @@ class AutoPoolForPackage
                         'rebirth' => $refferral->rebirth + $rebirth, 
                         'next_pool_income' => $refferral->next_pool_income + $total, 
                     ]);
+                    $user->update([
+                        'for_pool' =>  $user->for_pool + $rebirth
+                    ]);
                     if($ownerRefferral)
                     {
                         $ownerRefferral->update([
@@ -369,6 +385,9 @@ class AutoPoolForPackage
                         'downline_income' => $refferral->downline_income + $divideBytwo, 
                         'rebirth' => $refferral->rebirth + $rebirth, 
                         'next_pool_income' => $refferral->next_pool_income + $total, 
+                    ]);
+                    $user->update([
+                        'for_pool' =>  $user->for_pool + $rebirth
                     ]);
                     if($ownerRefferral)
                     {
@@ -413,6 +432,9 @@ class AutoPoolForPackage
                     'next_pool_income' => $total,  
                     'left_refferral' => $newUser->id,
                 ]);
+                $user->update([
+                    'for_pool' =>  $user->for_pool + $rebirth
+                ]);
                 if($ownerRefferral)
                 {
                     $ownerRefferral->update([
@@ -454,13 +476,14 @@ class AutoPoolForPackage
             $rebirthUser->update([
                 'super_pool_'.$super_pool->id => 1,
             ]);
-            $tree = SuperPoolTree::where('super_pool_id',$super_pool->id)->where('user_id',$user->id)->first();
+            // $tree = SuperPoolTree::where('super_pool_id',$super_pool->id)->where('user_id',$user->id)->first();
             $user->update([
-                'pool_income' => $user->pool_income + $revenue,
-            ]);
-            $tree->update([
-                'rebirth' => $tree->rebirth - 3,
-            ]);
+                'pool_income' => $user->pool_income + $revenue ,
+                'for_pool' =>  $user->for_pool - 3
+            ]); 
+            // $tree->update([
+            //     'rebirth' => $tree->rebirth - 3,
+            // ]);
 
         }else{   
             $user->update([

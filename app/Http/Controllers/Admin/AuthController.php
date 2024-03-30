@@ -339,7 +339,11 @@ class AuthController extends Controller
             foreach($trees as $tree)
             {
                 $user = $tree->user;
-                AutoPoolForPackage::createUserForRebirth($user,$main_user,$superPool);
+                $userCount = User::where('rebirth_id',Auth::user()->id)->count() * 3;       
+                if($tree->rebirth > $userCount) 
+                {
+                    AutoPoolForPackage::createUserForRebirth($user,$main_user,$superPool);
+                }
             }
         } else {
             info("Add AutoPool For Super Pool ".$superPool->id." CRONJOB: Users not found. ");

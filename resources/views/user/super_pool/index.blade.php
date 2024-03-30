@@ -53,7 +53,7 @@ SUPER POOL
                     <td>{{$super_pool['name']}}</td>
                     <td>{{App\Models\User::where('super_pool_'.$super_pool['id'],1)->count()}}</td>
                     <td>
-                        {{App\Models\SuperPoolTree::where('user_id',Auth::user()->id)->where('super_pool_id',$super_pool['id'])->count()}}
+                        {{App\Models\SuperPoolTree::where('user_id',Auth::user()->id)->where('super_pool_id',$super_pool['id'])->count()}} + {{App\Models\User::where('rebirth_id',Auth::user()->id)->count()}}
                     </td>
                     <td>{{array_key_exists($key+1,$super_pools) ? $super_pools[$key+1]['price'] : ''}}</td>
                     <td>
@@ -61,9 +61,9 @@ SUPER POOL
                     </td>
                     <td>
                         {{App\Models\SuperPoolTree::where('user_id',Auth::user()->id)->where('super_pool_id',$super_pool['id'])->sum('rebirth')}}
-                        @if($super_pool['id'] == 1)
+                        {{-- @if($super_pool['id'] == 1)
                             <span class="badge badge-success">{{App\Models\User::where('rebirth_id',Auth::user()->id)->count()}}</span>
-                        @endif
+                        @endif --}}
                     </td>
                     <td>
                         <a href="javascript::void()" onclick="getSuperPool('{{@$super_pool['id']}}')" class="btn btn-success btn-sm">Go</a>
