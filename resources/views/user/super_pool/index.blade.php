@@ -61,6 +61,9 @@ SUPER POOL
                     </td>
                     <td>
                         {{App\Models\SuperPoolTree::where('user_id',Auth::user()->id)->where('super_pool_id',$super_pool['id'])->sum('rebirth')}}
+                        @if($super_pool['id'] == 1)
+                            <span class="badge badge-success">{{App\Models\User::where('rebirth_id',Auth::user()->id)->count()}}</span>
+                        @endif
                     </td>
                     <td>
                         <a href="javascript::void()" onclick="getSuperPool('{{@$super_pool['id']}}')" class="btn btn-success btn-sm">Go</a>

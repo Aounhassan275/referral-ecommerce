@@ -7,110 +7,129 @@ use App\Models\SuperPoolTree;
 use App\Models\User;
 use App\Models\Earning;
 use App\Models\CompanyAccount;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Exception;
 
 class AutoPoolForPackage
 {
 
-    public static function addUserInTree($user,$main_user,$super_pool)
+    public static function createUserForRebirth($user,$main_user,$super_pool)
+    {
+        $totalCount = User::where('rebirth_id',$user->id)->count();
+        $rebirthUser = User::create([
+            'name' => $user->name.'r'.$totalCount+1,
+            'email' => $user->email.'r'.$totalCount+1,
+            'password' => Hash::make('1234'),
+            'temp_password' =>'1234',
+            'email_verified' => true,
+            'rebirth_id' => $user->id,
+            'status' => 'active',
+            'image' => '/profile/311639246735.jpg',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        AutoPoolForPackage::addUserInTree($user,$main_user,$super_pool,$rebirthUser);
+    } 
+    public static function addUserInTree($user,$main_user,$super_pool,$rebirth = null)
     {
         try{
             if(count(AutoPoolForPackage::autoPoolLevel1($main_user,$super_pool)) < config('services.levels.1'))
             {
-                AutoPoolForPackage::addUserinLevel_1($user,$main_user,$super_pool);
+                AutoPoolForPackage::addUserinLevel_1($user,$main_user,$super_pool,$rebirth);
             }else if(count(AutoPoolForPackage::autoPoolLevel2($main_user,$super_pool)) < config('services.levels.2'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel1($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
             }else if(count(AutoPoolForPackage::autoPoolLevel3($main_user,$super_pool)) < config('services.levels.3'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel2($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
     
             }else if(count(AutoPoolForPackage::autoPoolLevel4($main_user,$super_pool)) < config('services.levels.4'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel3($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
     
             }else if(count(AutoPoolForPackage::autoPoolLevel5($main_user,$super_pool)) < config('services.levels.5'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel4($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
     
             }else if(count(AutoPoolForPackage::autoPoolLevel6($main_user,$super_pool)) < config('services.levels.6'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel5($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
     
             }else if(count(AutoPoolForPackage::autoPoolLevel7($main_user,$super_pool)) < config('services.levels.7'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel6($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
     
             }else if(count(AutoPoolForPackage::autoPoolLevel8($main_user,$super_pool)) < config('services.levels.8'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel7($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }else if(count(AutoPoolForPackage::autoPoolLevel9($main_user,$super_pool)) < config('services.levels.9'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel8($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }else if(count(AutoPoolForPackage::autoPoolLevel10($main_user,$super_pool)) < config('services.levels.10'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel9($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }else if(count(AutoPoolForPackage::autoPoolLevel11($main_user,$super_pool)) < config('services.levels.11'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel10($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }else if(count(AutoPoolForPackage::autoPoolLevel12($main_user,$super_pool)) < config('services.levels.12'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel11($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }else if(count(AutoPoolForPackage::autoPoolLevel13($main_user,$super_pool)) < config('services.levels.13'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel12($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }else if(count(AutoPoolForPackage::autoPoolLevel14($main_user,$super_pool)) < config('services.levels.14'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel13($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }else if(count(AutoPoolForPackage::autoPoolLevel15($main_user,$super_pool)) < config('services.levels.15'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel14($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }else if(count(AutoPoolForPackage::autoPoolLevel16($main_user,$super_pool)) < config('services.levels.16'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel15($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }else if(count(AutoPoolForPackage::autoPoolLevel17($main_user,$super_pool)) < config('services.levels.17'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel16($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }else if(count(AutoPoolForPackage::autoPoolLevel18($main_user,$super_pool)) < config('services.levels.18'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel17($main_user,$super_pool))->get();
                 AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
                 
-            }else if(count(AutoPoolForPackage::autoPoolLevel19($main_user,$super_pool)) < config('services.levels.19'))
+            }else if(count(AutoPoolForPackage::autoPoolLevel19($main_user,$super_pool,$rebirth)) < config('services.levels.19'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel18($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }else if(count(AutoPoolForPackage::autoPoolLevel20($main_user,$super_pool)) < config('services.levels.20'))
             {
                 $old_users = User::whereIn('id',AutoPoolForPackage::autoPoolLevel19($main_user,$super_pool))->get();
-                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool);
+                AutoPoolForPackage::addUserinLevels($user,$old_users,$super_pool,$rebirth);
                 
             }
             else{
@@ -124,8 +143,9 @@ class AutoPoolForPackage
             return false;
         }
     } 
-    public static function addUserinLevel_1($user,$main_user,$super_pool)
+    public static function addUserinLevel_1($user,$main_user,$super_pool,$rebirthUser)
     {
+        $newUser = $rebirthUser ? $rebirthUser : $user;
         $total_price = $super_pool->price - $super_pool->price / 2;
         $total = $total_price / 3;
         $rebirth = $total/ 100 * 15;
@@ -141,7 +161,7 @@ class AutoPoolForPackage
             if(!$refferral->left_refferral)
             {
                 $refferral->update([
-                    'left_refferral' => $user->id, 
+                    'left_refferral' => $newUser->id, 
                     'downline_income' => $refferral->downline_income + $divideBytwo, 
                     'rebirth' => $refferral->rebirth + $rebirth, 
                     'next_pool_income' => $refferral->next_pool_income + $total, 
@@ -178,7 +198,7 @@ class AutoPoolForPackage
                 }
             }else{
                 $refferral->update([
-                    'right_refferral' => $user->id, 
+                    'right_refferral' => $newUser->id, 
                     'downline_income' => $refferral->downline_income + $divideBytwo, 
                     'rebirth' => $refferral->rebirth + $rebirth, 
                     'next_pool_income' => $refferral->next_pool_income + $total, 
@@ -221,7 +241,7 @@ class AutoPoolForPackage
                 'downline_income' => $divideBytwo,
                 'rebirth' => $rebirth, 
                 'next_pool_income' => $total,  
-                'left_refferral' => $user->id,
+                'left_refferral' => $newUser->id,
             ]);
             $pool_account->update([
                 'balance'=>$pool_account->balance + $divideBytwo
@@ -253,23 +273,39 @@ class AutoPoolForPackage
                 ]);
             }
         }
-        $user->update([
-            'super_pool_'.$super_pool->id => 1,
-            'pool_income' => $user->pool_income + $revenue,
-            'for_pool' =>  $user->for_pool - $super_pool->price
-        ]);
+        if($rebirthUser)
+        {
+            $rebirthUser->update([
+                'super_pool_'.$super_pool->id => 1,
+            ]);
+            $tree = SuperPoolTree::where('super_pool_id',$super_pool->id)->where('user_id',$user->id)->first();
+            $user->update([
+                'pool_income' => $user->pool_income + $revenue,
+            ]);
+            $tree->update([
+                'rebirth' => $tree->rebirth - 3,
+            ]);
+
+        }else{
+            $user->update([
+                'super_pool_'.$super_pool->id => 1,
+                'pool_income' => $user->pool_income + $revenue,
+                'for_pool' =>  $user->for_pool - $super_pool->price
+            ]);
+        }
         Earning::create([
             'price' => $revenue,
             'user_id' => $user->id,
-            'due_to' => $user->id,
+            'due_to' => $newUser->id,
             'type' => 'pool_income'
         ]);
         $pool_account->update([
             'balance'=>$pool_account->balance + $company_fee
         ]);
     }
-    public static function addUserinLevels($user,$old_users,$super_pool)
+    public static function addUserinLevels($user,$old_users,$super_pool,$rebirthUser)
     {
+        $newUser = $rebirthUser ? $rebirthUser : $user;
         $total_price = $super_pool->price - $super_pool->price / 2;
         $total = $total_price / 3;
         $rebirth = $total/ 100 * 15;
@@ -282,13 +318,13 @@ class AutoPoolForPackage
         foreach($old_users as $old_user)
         {
             $refferral = SuperPoolTree::where('super_pool_id',$super_pool->id)->where('user_id',$old_user->id)->first();
-            $ownerRefferral = SuperPoolTree::where('super_pool_id',$super_pool->id)->where('left_refferral',$old_user->id)->orWhere('right_refferral',$user->id)->first();
+            $ownerRefferral = SuperPoolTree::where('super_pool_id',$super_pool->id)->where('left_refferral',$old_user->id)->orWhere('right_refferral',$newUser->id)->first();
             if($refferral)
             {
                 if(!$refferral->left_refferral)
                 {
                     $refferral->update([
-                        'left_refferral' => $user->id, 
+                        'left_refferral' => $newUser->id, 
                         'downline_income' => $refferral->downline_income + $divideBytwo, 
                         'rebirth' => $refferral->rebirth + $rebirth, 
                         'next_pool_income' => $refferral->next_pool_income + $total, 
@@ -329,7 +365,7 @@ class AutoPoolForPackage
                     break;
                 }else if((!$refferral->right_refferral)){
                     $refferral->update([
-                        'right_refferral' => $user->id, 
+                        'right_refferral' => $newUser->id, 
                         'downline_income' => $refferral->downline_income + $divideBytwo, 
                         'rebirth' => $refferral->rebirth + $rebirth, 
                         'next_pool_income' => $refferral->next_pool_income + $total, 
@@ -375,7 +411,7 @@ class AutoPoolForPackage
                     'downline_income' => $divideBytwo,
                     'rebirth' => $rebirth, 
                     'next_pool_income' => $total,  
-                    'left_refferral' => $user->id,
+                    'left_refferral' => $newUser->id,
                 ]);
                 if($ownerRefferral)
                 {
@@ -413,15 +449,30 @@ class AutoPoolForPackage
             }
 
         }
-        $user->update([
-            'super_pool_'.$super_pool->id => 1,
-            'pool_income' => $user->pool_income + $revenue,
-            'for_pool' =>  $user->for_pool - $super_pool->price
-        ]);
+        if($rebirthUser)
+        {
+            $rebirthUser->update([
+                'super_pool_'.$super_pool->id => 1,
+            ]);
+            $tree = SuperPoolTree::where('super_pool_id',$super_pool->id)->where('user_id',$user->id)->first();
+            $user->update([
+                'pool_income' => $user->pool_income + $revenue,
+            ]);
+            $tree->update([
+                'rebirth' => $tree->rebirth - 3,
+            ]);
+
+        }else{   
+            $user->update([
+                'super_pool_'.$super_pool->id => 1,
+                'pool_income' => $user->pool_income + $revenue,
+                'for_pool' =>  $user->for_pool - $super_pool->price
+            ]);
+        }
         Earning::create([
             'price' => $revenue,
             'user_id' => $user->id,
-            'due_to' => $user->id,
+            'due_to' => $newUser->id,
             'type' => 'pool_income'
         ]);
         $pool_account->update([

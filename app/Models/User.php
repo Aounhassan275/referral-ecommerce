@@ -53,6 +53,7 @@ class User extends Authenticatable
         'super_pool_18',
         'super_pool_19',
         'super_pool_20',
+        'rebirth_id',
     ];
 
     /**

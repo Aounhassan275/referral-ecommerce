@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','namespace' => 'Admin'], funct
     Route::get('payment_distrubtion_for_associated_Users', 'AuthController@payment_distrubtionforassociatedUsers');
     Route::get('payment_distrubtion_of_trade_income', 'AuthController@paymentDistrubtionofTradeIncome');
     Route::get('add_user_to_super_pool', 'AuthController@add_user_to_super_pool');
+    Route::get('add_user_rebirth_to_super_pool', 'AuthController@add_user_rebirth_to_super_pool');
      /******************MESSAGE ROUTES****************/
      Route::resource('message', 'MessageController');
     Route::group(['middleware' => 'auth:admin'], function () { 
@@ -342,7 +343,8 @@ Route::get('/cd', function() {
     Artisan::call('db:seed', [ '--class' => DatabaseSeeder::class]);
     Artisan::call('view:clear');
     return 'DONE';
-});Route::get('/fix', function() {
+});
+Route::get('/fix', function() {
     $users = App\Models\User::where('super_pool_1',1)->get();
     foreach($users as $user)
     {

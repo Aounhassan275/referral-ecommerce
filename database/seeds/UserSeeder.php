@@ -249,6 +249,10 @@ class UserSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()],
             [ 
+            'name' => 'Salary Account',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()],
+            [ 
             'name' => 'Pool Income',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()],

@@ -13,6 +13,7 @@ use App\Models\CompanyAccount;
 use App\Models\Earning;
 use App\Models\Package;
 use App\Models\SuperPool;
+use App\Models\SuperPoolTree;
 use Carbon\Carbon;
 
 class AuthController extends Controller
@@ -323,6 +324,27 @@ class AuthController extends Controller
             }
         }
         
+		info("Add AutoPool For Package ".$superPool->id." CRONJOB END AT " . date("d-M-Y h:i a"));
+        toastr()->success('Auto Pool Package '.$superPool->id.' Cronjob Run Successfully');
+        return back();
+    }
+    public function add_user_rebirth_to_super_pool()
+    {
+        $superPool = SuperPool::first();
+        $main_user = User::find(1);
+        $trees = SuperPoolTree::where('super_pool_id',$superPool->id)->where('rebirth','>=',3)->get();
+        if ($trees->count() > 0) {
+            $totalTrees = $trees->count();
+            info("Add Autopool For Super Pool ".$superPool->id." to User CRONJOB Total Users : $totalTrees");
+            foreach($trees as $tree)
+            {
+                $user = $tree->user;
+                AutoPoolForPackage::createUserForRebirth($user,$main_user,$superPool);
+            }
+        } else {
+            info("Add AutoPool For Super Pool ".$superPool->id." CRONJOB: Users not found. ");
+        }
+    
 		info("Add AutoPool For Package ".$superPool->id." CRONJOB END AT " . date("d-M-Y h:i a"));
         toastr()->success('Auto Pool Package '.$superPool->id.' Cronjob Run Successfully');
         return back();
