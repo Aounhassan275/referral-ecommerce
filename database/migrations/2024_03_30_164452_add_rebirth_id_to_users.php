@@ -14,7 +14,7 @@ class AddRebirthIdToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('rebirth_id')->nullable()->after('user_id');
+            $table->integer('rebirth_id')->nullable()->after('refer_by');
         });
     }
 
