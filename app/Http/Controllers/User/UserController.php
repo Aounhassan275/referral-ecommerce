@@ -129,7 +129,87 @@ class UserController extends Controller
                 ]);
             }
             
-        }      
+        }     
+        if($request->main_image)
+        {
+            if($user->mainImage())
+            {
+                $main_image = $user->images->where('name','Main Image')->first();
+                $main_image->update([
+                    'image' => $request->main_image
+                ]);
+            }else{
+                UserImages::create([
+                    'name' => 'Main Image',
+                    'image' => $request->main_image,
+                    'user_id' => $user->id
+                ]);
+            } 
+        }   
+        if($request->main_image)
+        {
+            if($user->mainImage())
+            {
+                $main_image = $user->images->where('name','Main Image')->first();
+                $main_image->update([
+                    'image' => $request->main_image
+                ]);
+            }else{
+                UserImages::create([
+                    'name' => 'Main Image',
+                    'image' => $request->main_image,
+                    'user_id' => $user->id
+                ]);
+            } 
+        } 
+        if($request->passport)
+        {
+            if($user->passport())
+            {
+                $passport = $user->images->where('name','Passport')->first();
+                $passport->update([
+                    'image' => $request->passport
+                ]);
+            }else{
+                UserImages::create([
+                    'name' => 'Passport',
+                    'image' => $request->passport,
+                    'user_id' => $user->id
+                ]);
+            } 
+        }  
+        if($request->driving_license)
+        {
+            if($user->drivingLicense())
+            {
+                $driving_license = $user->images->where('name','Driving License')->first();
+                $driving_license->update([
+                    'image' => $request->driving_license
+                ]);
+            }else{
+                UserImages::create([
+                    'name' => 'Driving License',
+                    'image' => $request->driving_license,
+                    'user_id' => $user->id
+                ]);
+            } 
+        }    
+        if($request->utility_bill)
+        {
+            if($user->utilityBill())
+            {
+                $utility_bill = $user->images->where('name','Utility Bill')->first();
+                $utility_bill->update([
+                    'image' => $request->utility_bill
+                ]);
+            }else{
+                UserImages::create([
+                    'name' => 'Utility Bill',
+                    'image' => $request->utility_bill,
+                    'user_id' => $user->id
+                ]);
+            } 
+        }    
         if($request->password)
         {
             $user->update([

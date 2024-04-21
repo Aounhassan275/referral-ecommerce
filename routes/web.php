@@ -271,6 +271,10 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
     Route::resource('post_installement', 'PostInstallementController'); 
     Route::get('post_sale/received', 'PostSaleController@receivedSale')->name('post_sale.received');  
     Route::resource('post_sale', 'PostSaleController');  
+    /******************SPECIAL ROUTES****************/
+    Route::resource('special', 'SpecialController');  
+    /******************EVENT ROUTES****************/
+    Route::resource('event', 'EventController');  
 });
 
 

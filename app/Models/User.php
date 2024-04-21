@@ -54,6 +54,20 @@ class User extends Authenticatable
         'super_pool_19',
         'super_pool_20',
         'rebirth_id',
+        'account_holder_name',
+        'iban',
+        'bank_name',
+        'full_name',
+        'about_us_detail',
+        'video_link',
+        'opening_hour',
+        'reservation_email',
+        'reservation_phone',
+        'business_name',
+        'business_address',
+        'business_detail',
+        'is_validate',
+        'real_name',
     ];
 
     /**
@@ -478,6 +492,46 @@ class User extends Authenticatable
     public function images()
     {
         return $this->hasMany(UserImages::class);
+    }
+    public function mainImage()
+    {
+        $image =  $this->images->where('name','Main Image')->first();
+        if($image)
+        {
+            return $image->image;
+        }else{
+            return null;
+        }
+    }
+    public function passport()
+    {
+        $image =  $this->images->where('name','Passport')->first();
+        if($image)
+        {
+            return $image->image;
+        }else{
+            return null;
+        }
+    }
+    public function drivingLicense()
+    {
+        $image =  $this->images->where('name','Driving License')->first();
+        if($image)
+        {
+            return $image->image;
+        }else{
+            return null;
+        }
+    }
+    public function utilityBill()
+    {
+        $image =  $this->images->where('name','Utility Bill')->first();
+        if($image)
+        {
+            return $image->image;
+        }else{
+            return null;
+        }
     }
     public function cnicFront()
     {
