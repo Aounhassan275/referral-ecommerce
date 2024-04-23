@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>wlinkup profile</title>
+  <title>{{$user->name}} | W-LINKUP PROFILE</title>
   <meta content="wlinkup" name="description">
   <meta content="wlinkup" name="keywords">
 
@@ -34,7 +34,7 @@
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+      <a href="{{url('/')}}" class="logo d-flex align-items-center me-auto me-lg-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="{{asset('profile-theme-assets/assets/img/logo.png')}}" alt=""> -->
         <h1>W-Linkup<span>.</span></h1>
@@ -48,8 +48,9 @@
           <li><a class="nav-link scrollto" href="#specials">Specials</a></li>
           <li><a href="#events">Events</a></li>
           <li><a href="#team">Team</a></li>
-          <li><a href="#contact">TESTIMONIALS</a></li>
-          <li class="dropdown"><a href="#"><span>info</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li><a href="#contact">Reviews</a></li>
+          <li><a href="{{route('user.product.index')}}">Products</a></li>
+          {{-- <li class="dropdown"><a href="#"><span>info</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="#">Info</a></li>
               <li class="dropdown"><a href="#"><span>Information</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -74,11 +75,11 @@
                 </ul>
               </li>
             </ul>
-          </li>    
+          </li>     --}}
         </ul>
       </nav>
       <!-- .navbar -->
-      <a class="btn-book-a-table" href="#Dashboard">Dashboard</a>
+      <a class="btn-book-a-table" href="{{route('user.dashboard.index')}}">Dashboard</a>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
     </div>
@@ -90,14 +91,29 @@
     <div class="container">
       <div class="row justify-content-between gy-5">
         <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-          <h2 data-aos="fade-up">Enjoy Your Healthy<br>Delicious Food</h2>
-          <p data-aos="fade-up" data-aos-delay="100">Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+          <h2 data-aos="fade-up">{{$user->business_name}}</h2>
+          <p data-aos="fade-up" data-aos-delay="100">{{$user->business_detail}}</p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            @if($user->video_link)
+            <a href="{{$user->video_link}}" class="glightbox btn-watch-video d-flex align-items-center">
+              <i class="bi bi-play-circle"></i>
+              <span>Watch Video</span>
+            </a>
+            @else 
+            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center">
+              <i class="bi bi-play-circle"></i>
+              <span>Watch Video</span>
+            </a>
+
+            @endif
           </div>
         </div>
         <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+          @if($user->mainImage())      
+          <img src="{{asset($user->mainImage())}}" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">   
+          @else 
           <img src="{{asset('profile-theme-assets/assets/img/hero-img.png')}}" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
+          @endif
         </div>
       </div>
     </div>
@@ -110,30 +126,43 @@
 
         <div class="section-title">
           <h2>About</h2>
-          <p>Description Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>{{$user->about_us_detail}}</p>
         </div>
 
         <div class="row">
           <div class="col-lg-4" data-aos="fade-right">
+            @if($user->image)
+            <img src="{{asset($user->image)}}" class="img-fluid" alt="">
+            @else 
             <img src="{{asset('profile-theme-assets/assets/img/profile-img.jpg')}}" class="img-fluid" alt="">
+            @endif
           </div>
           <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-            <h3>UI/UX Designer &amp; Web Developer.</h3>
+            <h3>{{$user->full_name}}</h3>
             <div class="row">
               <div class="col-lg-6">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Name:</strong> <span>1 May 1995</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Country:</strong> <span>www.example.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>+123 456 7890</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Address:</strong> <span>New York, USA</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>{{$user->email}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Date of Birth:</strong> <span>{{$user->dob ? \Carbon\Carbon::parse($user->dob)->format('d M,Y') : '' }}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Gender:</strong> <span>{{$user->gender }}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Blood Group:</strong> <span>{{$user->blood_group }}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Martial Status:</strong> <span>{{$user->martial_status}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span><a href="tel:{{$user->phone}}">{{$user->phone}}</a></span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Country:</strong> <span>{{$user->country ? $user->country->name : '' }}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>{{$user->city ? $user->city->name : '' }}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Address:</strong> <span>{{$user->address}}</span></li>
                 </ul>
               </div>
               <div class="col-lg-6">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Education:</strong> <span>Master</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Profession:</strong> <span>email@example.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Profession:</strong> <span>{{$user->profession}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Education:</strong> <span>{{$user->education}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Religion:</strong> <span>{{$user->religion}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Sect.:</strong> <span>{{$user->sect}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Caste:</strong> <span>{{$user->caste}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Monthly Income:</strong> <span>{{$user->monthly_income}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Service:</strong> <span>{{$user->service ? $user->service->name : ''}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Service Type:</strong> <span>{{$user->serviceType ? $user->serviceType->name : ''}}</span></li>
                 </ul>
               </div>
             </div>
@@ -199,28 +228,28 @@
         <div class="row gy-4">
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="9876" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="{{$user->view}}" data-purecounter-duration="1" class="purecounter"></span>
               <p>visitors</p>
             </div>
           </div>
           <!-- End Stats Item -->
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="{{$user->products->count()}}" data-purecounter-duration="1" class="purecounter"></span>
               <p>Produsts</p>
             </div>
           </div>
           <!-- End Stats Item -->
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="{{$user->totalEarning()}}" data-purecounter-duration="1" class="purecounter"></span>
               <p>Reward</p>
             </div>
           </div>
           <!-- End Stats Item -->
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="{{$user->mrefers()->count()}}" data-purecounter-duration="1" class="purecounter"></span>
               <p>Team</p>
             </div>
           </div>
@@ -568,20 +597,23 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>gallery</h2>
-          <p>Check <span>Our Products</span></p>
+          <h2>Our Teams</h2>
+          <p>Check <span>Our Team Members</span></p>
         </div>
 
         <div class="gallery-slider swiper">
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="profile-theme-assets/assets/img/gallery/gallery-1.jpg"><img src="{{asset('profile-theme-assets/assets/img/gallery/gallery-1.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="profile-theme-assets/assets/img/gallery/gallery-2.jpg"><img src="{{asset('profile-theme-assets/assets/img/gallery/gallery-2.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="profile-theme-assets/assets/img/gallery/gallery-3.jpg"><img src="{{asset('profile-theme-assets/assets/img/gallery/gallery-3.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="profile-theme-assets/assets/img/gallery/gallery-4.jpg"><img src="{{asset('profile-theme-assets/assets/img/gallery/gallery-4.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="profile-theme-assets/assets/img/gallery/gallery-5.jpg"><img src="{{asset('profile-theme-assets/assets/img/gallery/gallery-5.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="profile-theme-assets/assets/img/gallery/gallery-6.jpg"><img src="{{asset('profile-theme-assets/assets/img/gallery/gallery-6.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="profile-theme-assets/assets/img/gallery/gallery-7.jpg"><img src="{{asset('profile-theme-assets/assets/img/gallery/gallery-7.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="profile-theme-assets/assets/img/gallery/gallery-8.jpg"><img src="{{asset('profile-theme-assets/assets/img/gallery/gallery-8.jpg')}}" class="img-fluid" alt=""></a></div>
+            @foreach($user->mrefers() as $refer)
+            <div class="swiper-slide">
+              <a class="glightbox" data-gallery="images-gallery" href="{{route('product.user',$refer->id)}}">
+                @if($refer->image)
+                <img src="{{asset($refer->image)}}" class="img-fluid" alt="">
+                @else
+                <img src="{{asset('profile-theme-assets/assets/img/gallery/gallery-1.jpg')}}" class="img-fluid" alt="">
+                @endif
+                {{$refer->name}}</a>
+            </div>
+            @endforeach
           </div>
           <div class="swiper-pagination"></div>
         </div>
@@ -602,85 +634,32 @@
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-3">
             <ul class="nav nav-tabs flex-column">
+              @foreach(App\Models\Special::where('user_id',$user->id)->get() as $index => $special)
               <li class="nav-item">
-                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Modi sit est</a>
+                <a class="nav-link {{$index == 0 ? 'active show'  : ''}}" data-bs-toggle="tab" href="#tab-{{$index}}">{{$special->title}}</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Unde praesentium sed</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Pariatur explicabo vel</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Nostrum qui quasi</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Iusto ut expedita aut</a>
-              </li>
+              @endforeach
             </ul>
           </div>
           <div class="col-lg-9 mt-4 mt-lg-0">
             <div class="tab-content">
-              <div class="tab-pane active show" id="tab-1">
+              @foreach(App\Models\Special::where('user_id',$user->id)->get() as $key => $specialUser)
+              <div class="tab-pane {{$key == 0 ? 'active show'  : ''}}" id="tab-{{$key}}">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Architecto ut aperiam autem id</h3>
-                    <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                    <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
+                    <h3>{{$specialUser->title}}</h3>
+                    <p class="fst-italic">{{$specialUser->description}}</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
+                    @if($specialUser->image)
+                    <img src="{{asset($specialUser->image)}}" alt="" class="img-fluid">
+                    @else 
                     <img src="{{asset('profile-theme-assets/assets/img/specials-1.png')}}" alt="" class="img-fluid">
+                    @endif
                   </div>
                 </div>
               </div>
-              <div class="tab-pane" id="tab-2">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Et blanditiis nemo veritatis excepturi</h3>
-                    <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                    <p>Ea ipsum voluptatem consequatur quis est. Illum error ullam omnis quia et reiciendis sunt sunt est. Non aliquid repellendus itaque accusamus eius et velit ipsa voluptates. Optio nesciunt eaque beatae accusamus lerode pakto madirna desera vafle de nideran pal</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="{{asset('profile-theme-assets/assets/img/specials-2.png')}}" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-3">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
-                    <p class="fst-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis aut</p>
-                    <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae sed laboriosam a iste odio. Earum odit nesciunt fugiat sit ullam. Soluta et harum voluptatem optio quae</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="{{asset('profile-theme-assets/assets/img/specials-3.png')}}" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-4">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
-                    <p class="fst-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
-                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="{{asset('profile-theme-assets/assets/img/specials-4.png')}}" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-5">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Est eveniet ipsam sindera pad rone matrelat sando reda</h3>
-                    <p class="fst-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro quia.</p>
-                    <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet. Occaecati sed est sint aut vitae molestiae voluptate vel</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="{{asset('profile-theme-assets/assets/img/specials-5.png')}}" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
@@ -694,95 +673,37 @@
 
         <div class="section-title">
           <h2>Events</h2>
-          <p>Organize Your Events in our Restaurant</p>
+          <p>Organize Your Events</p>
         </div>
 
         <div class="events-slider swiper" data-aos="fade-up" data-aos-delay="100">
           <div class="swiper-wrapper">
-
+            @foreach (App\Models\Event::where('user_id',$user->id)->get() as $key => $event)
             <div class="swiper-slide">
               <div class="row event-item">
                 <div class="col-lg-6">
-                  <img src="{{asset('profile-theme-assets/assets/img/event-birthday.jpg')}}" class="img-fluid" alt="">
+                  @if($event->image)
+                    <img src="{{asset($event->image)}}" class="img-fluid" alt="">
+                  @else
+                    <img src="{{asset('profile-theme-assets/assets/img/event-birthday.jpg')}}" class="img-fluid" alt="">
+                  @endif
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 content">
-                  <h3>Birthday Parties</h3>
+                  <h3>{{$event->title}}</h3>
                   <div class="price">
-                    <p><span>$189</span></p>
+                    <p><span>{{$event->price}}</span></p>
                   </div>
                   <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
+                    {{$event->description}}
                   </p>
-                  <ul>
-                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                    <li><i class="bi bi-check-circled"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  </ul>
-                  <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                    velit esse cillum dolore eu fugiat nulla pariatur
-                  </p>
+                  @if($event->link)
+                  <a href="{{$event->link}}" target="_blank" class="btn btn-primary">View</a>
+                  @endif
                 </div>
               </div>
             </div>
+            @endforeach
             
-          <!-- End testimonial item -->
-            <div class="swiper-slide">
-              <div class="row event-item">
-                <div class="col-lg-6">
-                  <img src="{{asset('profile-theme-assets/assets/img/event-private.jpg')}}" class="img-fluid" alt="">
-                </div>
-                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                  <h3>Private Parties</h3>
-                  <div class="price">
-                    <p><span>$290</span></p>
-                  </div>
-                  <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
-                  </p>
-                  <ul>
-                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                    <li><i class="bi bi-check-circled"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  </ul>
-                  <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                    velit esse cillum dolore eu fugiat nulla pariatur
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          <!-- End testimonial item -->
-            <div class="swiper-slide">
-              <div class="row event-item">
-                <div class="col-lg-6">
-                  <img src="{{asset('profile-theme-assets/assets/img/event-custom.jpg')}}" class="img-fluid" alt="">
-                </div>
-                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                  <h3>Custom Parties</h3>
-                  <div class="price">
-                    <p><span>$99</span></p>
-                  </div>
-                  <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
-                  </p>
-                  <ul>
-                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                    <li><i class="bi bi-check-circled"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                    <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  </ul>
-                  <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                    velit esse cillum dolore eu fugiat nulla pariatur
-                  </p>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-          </div>
           <div class="swiper-pagination"></div>
         </div>
       </div>
@@ -790,7 +711,7 @@
     <!-- End Events Section -->
 
     <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg">
+    {{-- <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
         <div class="section-header">
           <h2>Team</h2>
@@ -853,7 +774,7 @@
           </div><!-- End Chefs Member -->
         </div>
       </div>
-    </section>
+    </section> --}}
     <!-- End Team Section -->
 
    <!-- ======= Contact Section ======= -->
@@ -997,8 +918,7 @@
           <div>
             <h4>Address</h4>
             <p>
-              wlinkup FF.56  <br>
-              Rehman Plaza Sargodha<br>
+              {{$user->business_address}}
             </p>
           </div>
         </div>
@@ -1007,8 +927,8 @@
           <div>
             <h4>Reservations</h4>
             <p>
-              <strong>Phone:</strong> +9 2300 00400 08<br>
-              <strong>Email:</strong> wlinkup.com@gmail.com<br>
+              <strong>Phone:</strong> {{$user->reservation_phone}} <br>
+              <strong>Email:</strong> {{$user->reservation_email}}<br>
             </p>
           </div>
         </div>
@@ -1017,22 +937,21 @@
           <div>
             <h4>Opening Hours</h4>
             <p>
-              <strong>Mon-Sat: 11AM</strong> - 20PM<br>
-              Sunday: Closed
+              <strong>{{$user->opening_hour}}</strong>
             </p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 footer-links">
           <h4>Follow Us</h4>
           <div class="social-links d-flex">
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-            <a href="#" class="youtube"><i class="bi bi-youtube"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="tiktok"><i class="bi bi-tiktok"></i></a>
-            <a href="#" class="snack video"><i class="bi bi-camera-reels"></i></a>
+            <a href="{{$user->facebook}}" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="{{$user->whatsapp}}" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+            <a href="{{$user->twitter}}" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="{{$user->linkedin}}" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            <a href="{{$user->youtube}}" class="youtube"><i class="bi bi-youtube"></i></a>
+            <a href="{{$user->instagram}}" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="{{$user->tiktok}}" class="tiktok"><i class="bi bi-tiktok"></i></a>
+            <a href="{{$user->snack_video}}" class="snack video"><i class="bi bi-camera-reels"></i></a>
           </div>
           </div>
         </div>

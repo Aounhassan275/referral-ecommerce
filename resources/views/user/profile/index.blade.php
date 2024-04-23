@@ -700,7 +700,7 @@ UPDATE YOUR OWN PROFILE
             $('#event_price').val(price);
             $('#event_link').val(link);
             $('#event_description').html(description);
-            $('#updateForm').attr('action','{{route('user.event.update','')}}' +'/'+id);
+            $('#updateEventForm').attr('action','{{route('user.event.update','')}}' +'/'+id);
         });
     });
 </script>
