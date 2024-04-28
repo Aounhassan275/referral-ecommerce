@@ -86,7 +86,7 @@ class OrderController extends Controller
             'balance' => $trade_income->balance += $sale_reward_for_trade
         ]);
         $sale_reward_for_gift = $request->order_fee/100*10;
-        $gift= CompanyAccount::where('name','Gift')->first();
+        $gift= CompanyAccount::find(1);
         $gift->update([
             'balance' => $gift->balance += $sale_reward_for_gift
         ]);

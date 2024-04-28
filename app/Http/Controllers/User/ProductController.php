@@ -124,7 +124,7 @@ class ProductController extends Controller
                                 ]);
                             }else if($refer_by->salary_type == 3)
                             {
-                                $salary_account= CompanyAccount::where('name','Salary Account')->first();
+                                $salary_account= CompanyAccount::find(1);
                                 $salary_account->update([
                                     'balance' => $salary_account->balance + $direct_refferral,
                                 ]);

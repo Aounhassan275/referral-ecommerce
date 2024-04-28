@@ -125,7 +125,7 @@ class ReferralIncome
                     info("Direct Income Transfer Successfully to Cash Wallet $user->cash_wallet");
                 }elseif($user->salary_type == 2 || $user->salary_type == 3)
                 {
-                    $salary_account= CompanyAccount::where('name','Salary Account')->first();
+                    $salary_account= CompanyAccount::find(1);
                     $salary_account->update([
                         'balance' => $salary_account->balance + $direct_income,
                     ]);
@@ -153,7 +153,7 @@ class ReferralIncome
                     info("Direct Income Transfer Successfully to Cash Wallet $user->cash_wallet");
                 }elseif($user->salary_type == 2 || $user->salary_type == 3)
                 {
-                    $salary_account= CompanyAccount::where('name','Salary Account')->first();
+                    $salary_account= CompanyAccount::find(1);
                     $salary_account->update([
                         'balance' => $salary_account->balance + $direct_income,
                     ]);
@@ -192,7 +192,7 @@ class ReferralIncome
                     info("Direct Income Transfer Successfully to Cash Wallet $user->cash_wallet");
                 }elseif($user->salary_type == 2 || $user->salary_type == 3)
                 {
-                    $salary_account= CompanyAccount::where('name','Salary Account')->first();
+                    $salary_account= CompanyAccount::find(1);
                     $salary_account->update([
                         'balance' => $salary_account->balance + $direct_income,
                     ]);
@@ -221,7 +221,7 @@ class ReferralIncome
                     info("Direct Income To $user->name Refferal $tree_account->name : $user->cash_wallet");
                 }elseif($tree_account->salary_type == 2 || $tree_account->salary_type == 3)
                 {
-                    $salary_account= CompanyAccount::where('name','Salary Account')->first();
+                    $salary_account= CompanyAccount::find(1);
                     $salary_account->update([
                         'balance' => $salary_account->balance + $direct_income,
                     ]);
@@ -250,7 +250,7 @@ class ReferralIncome
                 ]);
                 if($direct_team->salary_type == 3)
                 {
-                    $salary_account= CompanyAccount::where('name','Salary Account')->first();
+                    $salary_account= CompanyAccount::find(1);
                     $salary_account->update([
                         'balance' => $salary_account->balance + $per_person_amount,
                     ]);
@@ -268,7 +268,7 @@ class ReferralIncome
         }
         if($direct_team_income > 0)
         {
-            $flush_account = CompanyAccount::where('name','Flush Income')->first();
+            $flush_account = CompanyAccount::find(1);
             $flush_account->update([
                 'balance' => $flush_account->balance + $direct_team_income,
             ]);
@@ -299,7 +299,7 @@ class ReferralIncome
                 info("Upline Income Amount Added to $upline->name : $per_person_amount"); 
                 $upline_income = $upline_income - $per_person_amount;
             }else{
-                $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                $flush_account = CompanyAccount::find(1);
                 $flush_account->update([
                     'balance' => $flush_account->balance + $per_person_amount,
                 ]);
@@ -332,7 +332,7 @@ class ReferralIncome
                 ]);
                 info("Downline Income Amount Added to $downline->name : $per_person_amount"); 
             }else{
-                $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                $flush_account = CompanyAccount::find(1);
                 $flush_account->update([
                     'balance' => $flush_account->balance + $per_person_amount,
                 ]);
@@ -368,7 +368,7 @@ class ReferralIncome
                     ]);
                     info("Upline Placement Income Amount Added to $refer_by->name : $per_person_amount"); 
                 }else{
-                    $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                    $flush_account = CompanyAccount::find(1);
                     $flush_account->update([
                         'balance' => $flush_account->balance + $per_person_amount,
                     ]);
@@ -376,7 +376,7 @@ class ReferralIncome
                 }
             }
             else{
-                $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                $flush_account = CompanyAccount::find(1);
                 $flush_account->update([
                     'balance' => $flush_account->balance + $per_person_amount,
                 ]);
@@ -412,14 +412,14 @@ class ReferralIncome
                     ]);
                     info("Downline Placement Income Amount Added to $refer_by->name : $per_person_amount"); 
                 }else{
-                    $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                    $flush_account = CompanyAccount::find(1);
                     $flush_account->update([
                         'balance' => $flush_account->balance + $per_person_amount,
                     ]);
                     info("Downline Placement Income For $downline->name Amount $per_person_amount Added to flush company Account"); 
                 }
             }else{
-                $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                $flush_account = CompanyAccount::find(1);
                 $flush_account->update([
                     'balance' => $flush_account->balance + $per_person_amount,
                 ]);
@@ -465,7 +465,7 @@ class ReferralIncome
                 info("Trade Income Amount Added to $user->name : $trade_income"); 
             }
             else{
-                $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                $flush_account = CompanyAccount::find(1);
                 $flush_account->update([
                     'balance' => $flush_account->balance + $trade_income,
                 ]);
@@ -478,38 +478,41 @@ class ReferralIncome
     {
         $company_income = $price / 100 * $package->company_income;
         info("Total Company Income Amount : $company_income");
-        $company_account= CompanyAccount::where('name','Income')->first();
-        $employees = Admin::employee();
-        foreach($employees as $employee)
-        {
-            if($type == 'Community')
-            {
-                $employee_income = $price / 100 * $employee->community_income;
-            }else{
-                $employee_income = $price / 100 * $employee->new_arrival_income;
-            }
-
-            $employee->update([
-                'balance' => $employee->balance + $employee_income,
-            ]);
-            info("Employee Income Amount : $employee_income added to  $employee->name");
-            $company_income = $company_income - $employee_income;
-        }
-        $gift= CompanyAccount::where('name','Gift')->first();
-        $gift->update([
-            'balance' => $gift->balance + $employee_income,
-        ]);
-        $company_income = $company_income - $employee_income;
-        info("Company Income Amount : $employee_income added to Gift Account");
-        $leader= CompanyAccount::where('name','Team Leader')->first();
-        $leader->update([
-            'balance' => $leader->balance + $employee_income,
-        ]);
-        $company_income = $company_income - $employee_income;
-        info("Company Income Amount : $employee_income added to Leader Account");
+        $company_account= CompanyAccount::find(1);
         $company_account->update([
             'balance' => $company_account->balance + $company_income,
         ]);
+        // $employees = Admin::employee();
+        // foreach($employees as $employee)
+        // {
+        //     if($type == 'Community')
+        //     {
+        //         $employee_income = $price / 100 * $employee->community_income;
+        //     }else{
+        //         $employee_income = $price / 100 * $employee->new_arrival_income;
+        //     }
+
+        //     $employee->update([
+        //         'balance' => $employee->balance + $employee_income,
+        //     ]);
+        //     info("Employee Income Amount : $employee_income added to  $employee->name");
+        //     $company_income = $company_income - $employee_income;
+        // }
+        // $gift= CompanyAccount::where('name','Gift')->first();
+        // $gift->update([
+        //     'balance' => $gift->balance + $employee_income,
+        // ]);
+        // $company_income = $company_income - $employee_income;
+        // info("Company Income Amount : $employee_income added to Gift Account");
+        // $leader= CompanyAccount::where('name','Team Leader')->first();
+        // $leader->update([
+        //     'balance' => $leader->balance + $employee_income,
+        // ]);
+        // $company_income = $company_income - $employee_income;
+        // info("Company Income Amount : $employee_income added to Leader Account");
+        // $company_account->update([
+        //     'balance' => $company_account->balance + $company_income,
+        // ]);
         info("Company Income Amount : $company_income added to Company Account");
 
     } 
@@ -559,7 +562,7 @@ class ReferralIncome
                 ]);
                 info("Upline Income Amount Added to $upline->name : $per_person_amount"); 
             }else{
-                $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                $flush_account = CompanyAccount::find(1);
                 $flush_account->update([
                     'balance' => $flush_account->balance + $per_person_amount,
                 ]);
@@ -569,7 +572,7 @@ class ReferralIncome
         }
         if($remaining_amount > 0)
         {
-            $flush_account = CompanyAccount::where('name','Flush Income')->first();
+            $flush_account = CompanyAccount::find(1);
             $flush_account->update([
                 'balance' => $flush_account->balance + $remaining_amount,
             ]);

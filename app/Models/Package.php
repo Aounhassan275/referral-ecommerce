@@ -11,7 +11,24 @@ class Package extends Model
         'name','price','direct_income','direct_team_income','upline_income','down_line_income',
         'upline_placement_income','down_line_placement_income','trade_income',
         'company_income','max_limit','min_limit','image','withdraw_limit','fund_limit','product_limit',
-        'direct_pool_income'
+        'direct_pool_income',
+        'renew_direct_income',
+        'renew_direct_team_income',
+        'renew_upline_income',
+        'renew_down_line_income',
+        'renew_upline_placement_income',
+        'renew_down_line_placement_income',
+        'renew_trade_income',
+        'renew_company_income',
+        'renew_direct_pool_income',
+        'self_rebirth',
+        'self_associate',
+        'direct_rebirth',
+        'direct_associate',
+        'renew_self_rebirth',
+        'renew_self_associate',
+        'renew_direct_rebirth',
+        'renew_direct_associate'
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveAImage($value,'/package/');

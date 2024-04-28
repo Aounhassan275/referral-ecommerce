@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\ReferralIncome;
+use App\Helpers\RenewReferralIncome;
 use App\Helpers\UserHepler;
 use App\Models\CompanyAccount;
 use App\Models\Earning;
@@ -15,6 +16,8 @@ use App\Models\Package;
 use App\Models\SuperPool;
 use App\Models\SuperPoolTree;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -99,7 +102,7 @@ class AuthController extends Controller
                     ]);
                     ReferralIncome::CommunityPoolIncome($user,$amount_to_divide);
                 }
-                $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                $flush_account = CompanyAccount::find(1);
                 $flush_account->update([
                     'balance' => $flush_account->balance + $amount,
                 ]);
@@ -139,7 +142,7 @@ class AuthController extends Controller
                 $user->update([
                     'cash_wallet' => $user->cash_wallet - $total_amount
                 ]);
-                $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                $flush_account = CompanyAccount::find(1);
                 $flush_account->update([
                     'balance' => $flush_account->balance + $amount,
                 ]);
@@ -241,7 +244,7 @@ class AuthController extends Controller
                     ]);
                     ReferralIncome::CommunityPoolIncome($user,$amount_to_divide);
                 }
-                $flush_account = CompanyAccount::where('name','Flush Income')->first();
+                $flush_account = CompanyAccount::find(1);
                 $flush_account->update([
                     'balance' => $flush_account->balance + $amount,
                 ]);
@@ -351,6 +354,33 @@ class AuthController extends Controller
     
 		info("Add AutoPool For Package ".$superPool->id." CRONJOB END AT " . date("d-M-Y h:i a"));
         toastr()->success('Auto Pool Package '.$superPool->id.' Cronjob Run Successfully');
+        return back();
+    }
+    public function tranferTempAmount()
+    {
+        $users = User::where('total_income','>=',100)
+                ->whereNotIn('type',['fake','rebirth'])
+                ->get();
+        foreach($users as $user)
+        {
+            DB::beginTransaction();
+            try{
+                $status = RenewReferralIncome::referral($user);
+                if($status == false)
+                {
+                    DB::rollBack();
+                }else{
+                    DB::commit();
+                    $user->update([
+                        'total_amount' => 0,    
+                    ]);  
+                }  
+            }catch (Exception $e)
+            {
+                DB::rollBack();
+            }
+        }
+        toastr()->success('Transfer Temp Income Cronjob Run Successfully');
         return back();
     }
 }

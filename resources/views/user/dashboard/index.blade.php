@@ -59,21 +59,7 @@ DASHBOARD
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-6 col-xl-3">
-        <div class="card card-body">
-            <div class="media mb-3">
-                <div class="media-body">
-                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->total_income}}</h5>
-                    <span class="text-muted">Temp Income</span>
-                </div>
-
-                <div class="ml-3 align-self-center">
-                    <i class="icon-coins icon-2x text-indigo-400 opacity-75"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6 col-xl-3">
+    {{-- <div class="col-sm-6 col-xl-3">
         @if(Auth::user()->salary_type == 3)
             <div class="card card-body bg-teal-400 has-bg-image">
                 <div class="media">
@@ -107,7 +93,7 @@ DASHBOARD
         </a>
 
         @endif
-    </div>
+    </div> --}}
     <div class="col-sm-6 col-xl-3">
         <div class="card card-body">
             <div class="media mb-3">
@@ -122,8 +108,36 @@ DASHBOARD
             </div>
         </div>
     </div>
-
     <div class="col-sm-6 col-xl-3">
+        <div class="card card-body">
+            <div class="media mb-3">
+                <div class="media-body">
+                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->total_income}}</h5>
+                    <span class="text-muted">Temp Income</span>
+                </div>
+
+                <div class="ml-3 align-self-center">
+                    <i class="icon-coins icon-2x text-indigo-400 opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card card-body">
+            <div class="media mb-3">
+                <div class="media-body">
+                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->for_pool}}</h5>
+                    <span class="text-muted">For Pool</span>
+                </div>
+
+                <div class="ml-3 align-self-center">
+                    <i class="icon-coins icon-2x text-indigo-400 opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- <div class="col-sm-6 col-xl-4">
         <div class="card card-body">
             <div class="media mb-3">
                 <div class="mr-3 align-self-center">
@@ -136,7 +150,7 @@ DASHBOARD
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- <div class="col-sm-6 col-xl-3">
         <div class="card card-body">
@@ -283,20 +297,6 @@ DASHBOARD
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-6 col-xl-3">
-        <div class="card card-body">
-            <div class="media mb-3">
-                <div class="media-body">
-                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->for_pool}}</h5>
-                    <span class="text-muted">For Pool</span>
-                </div>
-
-                <div class="ml-3 align-self-center">
-                    <i class="icon-coins icon-2x text-indigo-400 opacity-75"></i>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="col-sm-6 col-xl-3">
         <div class="card card-body">
             <div class="media mb-3">

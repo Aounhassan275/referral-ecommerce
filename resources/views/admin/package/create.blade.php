@@ -59,13 +59,92 @@
                         
                    </div>
                    <div class="row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-3">
                             <label class="form-label">Trade Income</label>
                             <input type="number" class="form-control" name="trade_income"  placeholder="Trade Income" value="">
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-3">
                             <label class="form-label">Company Income</label>
                             <input type="number" class="form-control" name="company_income"  placeholder="Company Income" value="">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Self Rebirth</label>
+                            <input type="number" class="form-control" name="self_rebirth"  placeholder="Self Rebirth" value="">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Self Associate</label>
+                            <input type="number" class="form-control" name="self_associate"  placeholder="Self Associate" value="">
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="form-group col-6">
+                            <label class="form-label">Direct Rebirth</label>
+                            <input type="number" class="form-control" name="direct_rebirth"  placeholder="Direct Rebirth" value="">
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label">Direct Associate</label>
+                            <input type="number" class="form-control" name="direct_associate"  placeholder="Direct Associate" value="">
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Direct Income</label>
+                            <input type="number" class="form-control" name="renew_direct_income"  placeholder="Renew Direct Income" value="">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Direct Pool Income</label>
+                            <input type="number" class="form-control" name="renew_direct_pool_income"  placeholder="Direct Pool Income" value="">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Direct Team Income</label>
+                            <input type="number" class="form-control" name="renew_direct_team_income"  placeholder="Renew Direct Team Income" value="">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Upline Income</label>
+                            <input type="number" class="form-control" name="renew_upline_income"  placeholder="Renew Upline Income" value="">
+                        </div>
+                    </div>
+                   <div class="row">
+                        <div class="form-group col-4">
+                            <label class="form-label">Renew Down Line Income</label>
+                            <input type="number" class="form-control" name="renew_down_line_income"  placeholder="Renew Down Line Income" value="">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Renew Upline Placement Income</label>
+                            <input type="number" class="form-control" name="renew_upline_placement_income"  placeholder="Renew Upline Placement Income" value="">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Renew Down Line Placement Income</label>
+                            <input type="number" class="form-control" name="renew_down_line_placement_income"  placeholder="Renew Down Line Placement Income" value="">
+                        </div>
+                        
+                   </div>
+                   <div class="row">
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Trade Income</label>
+                            <input type="number" class="form-control" name="renew_trade_income"  placeholder="Renew Trade Income" value="">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Company Income</label>
+                            <input type="number" class="form-control" name="renew_company_income"  placeholder="Renew Company Income" value="">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Self Rebirth</label>
+                            <input type="number" class="form-control" name="renew_self_rebirth"  placeholder="Renew Self Rebirth" value="">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Self Associate</label>
+                            <input type="number" class="form-control" name="renew_self_associate"  placeholder="Renew Self Associate" value="">
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="form-group col-6">
+                            <label class="form-label">Renew Direct Rebirth</label>
+                            <input type="number" class="form-control" name="renew_direct_rebirth"  placeholder="Renew Direct Rebirth" value="">
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label">Renew Direct Associate</label>
+                            <input type="number" class="form-control" name="renew_direct_associate"  placeholder="Renew Direct Associate" value="">
                         </div>
                    </div>
                    <div class="row">

@@ -33,6 +33,9 @@
                     <div class="col-4">
                         <a href="{{url('admin/add_user_rebirth_to_super_pool')}}" class="btn btn-info" style="margin-top:10px;">Add Rebirth User To Super Pool</a>
                     </div>
+                    <div class="col-4">
+                        <a href="{{url('admin/transfer_temp_amount')}}" class="btn btn-info" style="margin-top:10px;">Transfer Temp Amount</a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">

@@ -60,13 +60,92 @@
                         
                    </div>
                    <div class="row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-3">
                             <label class="form-label">Trade Income</label>
                             <input type="number" class="form-control" name="trade_income"  placeholder="Trade Income" value="{{$package->trade_income}}">
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-3">
                             <label class="form-label">Company Income</label>
                             <input type="number" class="form-control" name="company_income"  placeholder="Company Income" value="{{$package->company_income}}">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Self Rebirth</label>
+                            <input type="number" class="form-control" name="self_rebirth"  placeholder="Self Rebirth" value="{{$package->self_rebirth}}">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Self Associate</label>
+                            <input type="number" class="form-control" name="self_associate"  placeholder="Self Associate" value="{{$package->self_associate}}">
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="form-group col-6">
+                            <label class="form-label">Direct Rebirth</label>
+                            <input type="number" class="form-control" name="direct_rebirth"  placeholder="Direct Rebirth" value="{{$package->direct_rebirth}}">
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label">Direct Associate</label>
+                            <input type="number" class="form-control" name="direct_associate"  placeholder="Direct Associate" value="{{$package->direct_associate}}">
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Direct Income</label>
+                            <input type="number" class="form-control" name="renew_direct_income"  placeholder="Renew Direct Income" value="{{$package->renew_direct_income}}">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Direct Pool Income</label>
+                            <input type="number" class="form-control" name="renew_direct_pool_income"  placeholder="Direct Pool Income" value="{{$package->renew_direct_pool_income}}">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Direct Team Income</label>
+                            <input type="number" class="form-control" name="renew_direct_team_income"  placeholder="Renew Direct Team Income" value="{{$package->renew_direct_team_income}}">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Upline Income</label>
+                            <input type="number" class="form-control" name="renew_upline_income"  placeholder="Renew Upline Income" value="{{$package->renew_upline_income}}">
+                        </div>
+                    </div>
+                   <div class="row">
+                        <div class="form-group col-4">
+                            <label class="form-label">Renew Down Line Income</label>
+                            <input type="number" class="form-control" name="renew_down_line_income"  placeholder="Renew Down Line Income" value="{{$package->renew_down_line_income}}">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Renew Upline Placement Income</label>
+                            <input type="number" class="form-control" name="renew_upline_placement_income"  placeholder="Renew Upline Placement Income" value="{{$package->renew_upline_placement_income}}">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Renew Down Line Placement Income</label>
+                            <input type="number" class="form-control" name="renew_down_line_placement_income"  placeholder="Renew Down Line Placement Income" value="{{$package->renew_down_line_placement_income}}">
+                        </div>
+                        
+                   </div>
+                   <div class="row">
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Trade Income</label>
+                            <input type="number" class="form-control" name="renew_trade_income"  placeholder="Renew Trade Income" value="{{$package->renew_trade_income}}">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Company Income</label>
+                            <input type="number" class="form-control" name="renew_company_income"  placeholder="Renew Company Income" value="{{$package->renew_company_income}}">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Self Rebirth</label>
+                            <input type="number" class="form-control" name="renew_self_rebirth"  placeholder="Renew Self Rebirth" value="{{$package->renew_self_rebirth}}">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Self Associate</label>
+                            <input type="number" class="form-control" name="renew_self_associate"  placeholder="Renew Self Associate" value="{{$package->renew_self_associate}}">
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="form-group col-6">
+                            <label class="form-label">Renew Direct Rebirth</label>
+                            <input type="number" class="form-control" name="renew_direct_rebirth"  placeholder="Renew Direct Rebirth" value="{{$package->renew_direct_rebirth}}">
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label">Renew Direct Associate</label>
+                            <input type="number" class="form-control" name="renew_direct_associate"  placeholder="Renew Direct Associate" value="{{$package->renew_direct_associate}}">
                         </div>
                    </div>
                    <div class="row">

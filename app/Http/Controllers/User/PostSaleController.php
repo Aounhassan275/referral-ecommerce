@@ -92,7 +92,7 @@ class PostSaleController extends Controller
                 'type' => 'reward_income'
             ]);
         }else{
-            $flush_account = CompanyAccount::where('name','Flush Income')->first();
+            $flush_account = CompanyAccount::find(1);
             $flush_account->update([
                 'balance' => $flush_account->balance + $directRefferralAmount,
             ]);
@@ -106,11 +106,11 @@ class PostSaleController extends Controller
         $trade_income->update([
             'balance' => $trade_income->balance += $companyTradeAmount
         ]);
-        $gift= CompanyAccount::where('name','Gift')->first();
+        $gift= CompanyAccount::find(1);
         $gift->update([
             'balance' => $gift->balance += $companyGiftAmount
         ]);
-        $teamLeaderAccount = CompanyAccount::where('name','Team Leader')->first();
+        $teamLeaderAccount = CompanyAccount::find(1);
         $teamLeaderAccount->update([
             'balance' => $teamLeaderAccount->balance += $teamLeaderAmount
         ]);

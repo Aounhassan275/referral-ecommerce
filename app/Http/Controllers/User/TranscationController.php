@@ -100,7 +100,7 @@ class TranscationController extends Controller
                 'balance' => $trade_income->balance += $sale_reward_for_trade
             ]);
             $sale_reward_for_gift = $fund_fee/100*30;
-            $gift= CompanyAccount::where('name','Gift')->first();
+            $gift= CompanyAccount::find(1);
             $gift->update([
                 'balance' => $gift->balance += $sale_reward_for_gift
             ]);

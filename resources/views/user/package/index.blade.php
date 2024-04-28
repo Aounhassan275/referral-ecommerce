@@ -6,7 +6,7 @@ PACKAGE SUBSRIPTION
 <div class="row">
     @foreach (App\Models\Package::all() as $key => $package)
     @if(Auth::user()->package)
-        @if(Auth::user()->package->price < $package->price)
+        {{-- @if(Auth::user()->package->price < $package->price) --}}
         <div class="col-xl-3 col-sm-6">
             <div class="card bg-slate-600" style="background-image: url({{asset('user_asset/global_assets/images/backgrounds/panel_bg.png')}}); background-size: contain;">
                 <div class="card-body text-center">
@@ -31,7 +31,7 @@ PACKAGE SUBSRIPTION
                 </div>
             </div>
         </div>
-        @endif
+        {{-- @endif --}}
     @else  
     <div class="col-xl-3 col-sm-6">
         <div class="card bg-slate-600" style="background-image: url({{asset('user_asset/global_assets/images/backgrounds/panel_bg.png')}}); background-size: contain;">
