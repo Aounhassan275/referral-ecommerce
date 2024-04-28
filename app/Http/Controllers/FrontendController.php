@@ -240,7 +240,10 @@ class FrontendController extends Controller
         $user->update([
            'view' => $user->view+1
         ]);
-        return view('front.product.user',compact('user'));
+        $brandIds = Product::where('user_id',$user->id)->get()->pluck('brand_id')->toArray();
+        $brands = Brand::whereIn('id',$brandIds)->get()->take(4);
+        $products = Product::where('user_id',$user->id)->orderBy('created_at','DESC')->get()->take(8);
+        return view('front.product.user',compact('user','brands','products'));
     }
     public function showProductLike($id)
     {

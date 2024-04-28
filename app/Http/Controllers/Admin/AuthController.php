@@ -358,7 +358,7 @@ class AuthController extends Controller
     }
     public function tranferTempAmount()
     {
-        $users = User::where('total_income','>=',100)
+        $users = User::where('total_income','>=',1)
                 ->whereNotIn('type',['fake','rebirth'])
                 ->get();
         foreach($users as $user)
