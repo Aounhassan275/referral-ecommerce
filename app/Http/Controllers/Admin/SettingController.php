@@ -145,7 +145,7 @@ class SettingController extends Controller
                     'email' => 'company'.$i.'@cashwecan.com',
                     'password' => Hash::make('1234'),
                     'temp_password' =>'1234',
-                    'package_id' => '5',
+                    'package_id' => '9',
                     'email_verified' => true,
                     'status' => 'active',
                     'a_date' =>  Carbon::today(),
@@ -163,7 +163,7 @@ class SettingController extends Controller
                     'password' => Hash::make('1234'),
                     'email_verified' => true,
                     'temp_password' =>'1234',
-                    'package_id' => '5',
+                    'package_id' => '9',
                     'status' => 'active',
                     'code' => uniqid(),
                     'refer_by' => $i - 1,
@@ -181,7 +181,7 @@ class SettingController extends Controller
                     'password' => Hash::make('1234'),
                     'temp_password' =>'1234',
                     'email_verified' => true,
-                    'package_id' => '5',
+                    'package_id' => '9',
                     'status' => 'active',
                     'code' => uniqid(),
                     'refer_by' => $i - 1,
@@ -194,7 +194,7 @@ class SettingController extends Controller
             } 
             DB::table('package_histories')->insert([
                 [ 'user_id' => $i,
-                'package_id' => '5',
+                'package_id' => '9',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()],
             ]);
@@ -208,7 +208,7 @@ class SettingController extends Controller
                     'email' => 'fake'.$k.'@cashwecan.com',
                     'password' => Hash::make('1234'),
                     'temp_password' =>'1234',
-                    'package_id' => '1',
+                    'package_id' => '9',
                     'status' => 'active',
                     'code' => uniqid(),
                     'refer_by' => $k - 1,
@@ -225,7 +225,7 @@ class SettingController extends Controller
                     'email' => 'fake'.$k.'@cashwecan.com',
                     'password' => Hash::make('1234'),
                     'temp_password' =>'1234',
-                    'package_id' => '1',
+                    'package_id' => '9',
                     'status' => 'active',
                     'code' => uniqid(),
                     'refer_by' => $k - 1,
@@ -239,7 +239,7 @@ class SettingController extends Controller
             } 
             DB::table('package_histories')->insert([
                 [ 'user_id' => $k,
-                'package_id' => '1',
+                'package_id' => '9',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()],
             ]);

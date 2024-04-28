@@ -16,7 +16,7 @@ class UserHepler
             'email' => $user->email,
             'password' => Hash::make('1234'),
             'temp_password' => '1234',
-            'package_id' => '2',
+            'package_id' => '9',
             'status' => 'active',
             'a_date' =>  Carbon::today(),
             'code' => uniqid(),

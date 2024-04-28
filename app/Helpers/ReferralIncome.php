@@ -89,7 +89,7 @@ class ReferralIncome
             'email' => 'fake'.$k.'@'.Setting::siteEmail(),
             'password' => Hash::make('1234'),
             'temp_password' =>'1234',
-            'package_id' => '1',
+            'package_id' => '9',
             'status' => 'active',
             'code' => uniqid(),
             'refer_by' => $account->id,
