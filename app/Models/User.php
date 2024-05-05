@@ -591,4 +591,14 @@ class User extends Authenticatable
         return $this->mrefers()->where('status','active')->count();
 
     }
+    public function getCompanyReward()
+    {
+        $totalAmount =  $this->directTeamIncome->sum('price') + 
+        $this->uplineIncome->sum('price') + $this->downlineIncome->sum('price')
+        + $this->uplinePlacementIncome->sum('price') + $this->downlinePlacementIncome->sum('price')
+        + $this->tradeIncome->sum('price') + $this->rankingIncome->sum('price')
+        + $this->rewardIncome->sum('price') + $this->associatedIncome->sum('price')
+        + $this->poolIncome->sum('price');
+        return round($totalAmount,2);
+    }
 }

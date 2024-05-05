@@ -83,9 +83,9 @@
 			</ul>
 
 			<button type="button" class="btn btn-success ml-md-3 mr-md-auto">Cash Wallet : $ {{Auth::user()->cash_wallet}}</button>
-			<button type="button" class="btn btn-info ml-md-3">Sale Reward : $ {{Auth::user()->sale_reward}}</button>
+			{{-- <button type="button" class="btn btn-info ml-md-3">Sale Reward : $ {{Auth::user()->sale_reward}}</button> --}}
 			<a href="{{url('/')}}">
-				<button type="button" class="btn btn-primary ml-md-3">Go-to E-Commerce Section</button>
+				<button type="button" class="btn btn-primary ml-md-3">Go-to Product</button>
 			</a>
 			<a href="{{route('product.user',Auth::user()->id)}}">
 				<button type="button" class="btn btn-warning ml-md-3">Go-to Profile</button>
@@ -230,6 +230,12 @@
 								<li class="nav-item"><a href="{{route('user.package.history')}}" class="nav-link {{Request::is('user/package/history')?'active':''}}">Package History</a></li>
 							</ul>
 						</li>
+						<li class="nav-item">
+							<a href="{{route('user.deposit.index')}}" class="nav-link {{Request::is('user/deposit')?'active':''}}">
+								<i class="icon-cart2"></i>
+								<span>Deposit</span>
+							</a>
+						</li>	
 						{{-- <li class="nav-item nav-item-submenu {{Request::is('user/pin*')?'nav-item-open':''}}">
 							<a href="#" class="nav-link"><i class="icon-coin-dollar"></i> <span>Pin</span></a>
 
@@ -248,6 +254,18 @@
 								<li class="nav-item"><a href="{{route('user.withdraw.index')}}" class="nav-link {{Request::is('user/withdraw')?'active':''}}">History</a></li>
 							</ul>
 						</li>
+						<li class="nav-item">
+							<a href="{{route('user.balance_transfer.index')}}" class="nav-link {{Request::is('user/balance_transfer')?'active':''}}">
+								<i class="icon-transmission"></i>
+								<span>Balance Transfer</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{route('user.transcation.index')}}" class="nav-link {{Request::is('user/transcation')?'active':''}}">
+								<i class="icon-tab"></i>
+								<span>Transcations</span>
+							</a>
+						</li>	
 						<li class="nav-item nav-item-submenu {{Request::is('user/earning*')?'nav-item-open':''}}">
 							<a href="#" class="nav-link"><i class="icon-credit-card2"></i> <span>Earning</span></a>
 
@@ -271,12 +289,6 @@
 								<span>Overall Earning Report</span>
 							</a>
 						</li>	
-						<li class="nav-item">
-							<a href="{{route('user.deposit.index')}}" class="nav-link {{Request::is('user/deposit')?'active':''}}">
-								<i class="icon-cart2"></i>
-								<span>Deposit</span>
-							</a>
-						</li>	
 						<li class="nav-item nav-item-submenu {{Request::is('user/refer*')?'nav-item-open':''}}">
 							<a href="#" class="nav-link"><i class="icon-users4"></i> <span>Referral</span></a>
 
@@ -286,18 +298,6 @@
 								<li class="nav-item"><a href="{{route('user.tree.show')}}" class="nav-link {{Request::is('user/refer/tree')?'active':''}}">Your Tree</a></li>
 							</ul>
 						</li>
-						<li class="nav-item">
-							<a href="{{route('user.balance_transfer.index')}}" class="nav-link {{Request::is('user/balance_transfer')?'active':''}}">
-								<i class="icon-transmission"></i>
-								<span>Balance Transfer</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="{{route('user.transcation.index')}}" class="nav-link {{Request::is('user/transcation')?'active':''}}">
-								<i class="icon-tab"></i>
-								<span>Transcations</span>
-							</a>
-						</li>	
 						<li class="nav-item">
 							<a href="{{route('user.super_pool.index')}}" class="nav-link {{Request::is('user/super_pool')?'active':''}}">
 								<i class="icon-tab"></i>
