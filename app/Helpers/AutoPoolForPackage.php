@@ -164,7 +164,7 @@ class AutoPoolForPackage
                     'left_refferral' => $newUser->id, 
                     'downline_income' => $refferral->downline_income + $divideBytwo, 
                     'rebirth' => $refferral->rebirth + $rebirth, 
-                    'next_pool_income' => $refferral->next_pool_income + $total, 
+                    'next_pool_income' => $refferral->next_pool_income + $total * 2, 
                 ]);
                 
                 $user->update([
@@ -205,7 +205,7 @@ class AutoPoolForPackage
                     'right_refferral' => $newUser->id, 
                     'downline_income' => $refferral->downline_income + $divideBytwo, 
                     'rebirth' => $refferral->rebirth + $rebirth, 
-                    'next_pool_income' => $refferral->next_pool_income + $total, 
+                    'next_pool_income' => $refferral->next_pool_income + $total * 2, 
                 ]);  
                 
                 $user->update([
@@ -248,7 +248,7 @@ class AutoPoolForPackage
                 'user_id' => $main_user->id,
                 'downline_income' => $divideBytwo,
                 'rebirth' => $rebirth, 
-                'next_pool_income' => $total,  
+                'next_pool_income' => $total * 2,  
                 'left_refferral' => $newUser->id,
             ]);
             
@@ -340,7 +340,7 @@ class AutoPoolForPackage
                         'left_refferral' => $newUser->id, 
                         'downline_income' => $refferral->downline_income + $divideBytwo, 
                         'rebirth' => $refferral->rebirth + $rebirth, 
-                        'next_pool_income' => $refferral->next_pool_income + $total, 
+                        'next_pool_income' => $refferral->next_pool_income + $total * 2, 
                     ]);
                     $user->update([
                         'for_pool' =>  $user->for_pool + $rebirth
@@ -384,7 +384,7 @@ class AutoPoolForPackage
                         'right_refferral' => $newUser->id, 
                         'downline_income' => $refferral->downline_income + $divideBytwo, 
                         'rebirth' => $refferral->rebirth + $rebirth, 
-                        'next_pool_income' => $refferral->next_pool_income + $total, 
+                        'next_pool_income' => $refferral->next_pool_income + $total * 2, 
                     ]);
                     $user->update([
                         'for_pool' =>  $user->for_pool + $rebirth
@@ -429,7 +429,7 @@ class AutoPoolForPackage
                     'user_id' => $old_user->id,
                     'downline_income' => $divideBytwo,
                     'rebirth' => $rebirth, 
-                    'next_pool_income' => $total,  
+                    'next_pool_income' => $total * 2,  
                     'left_refferral' => $newUser->id,
                 ]);
                 $user->update([

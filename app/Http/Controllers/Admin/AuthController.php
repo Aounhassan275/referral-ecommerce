@@ -64,12 +64,12 @@ class AuthController extends Controller
                 info("Payment Distrubtion CRONJOB User Income to Divide: $amount");
                 $amount_to_divide = $amount/2;
                 info("Payment Distrubtion CRONJOB User Income to Divide into Community Pool and Cash wallet: $amount_to_divide");
-                if($user->package->price >= 1000)
+                if($user->package->price >= 10)
                 {
                     $amount_for_packages = $amount_to_divide + $user->community_pool;
-                    $total_packages = $amount_for_packages/50;
+                    $total_packages = $amount_for_packages/10;
                     $total_packages = (int)$total_packages;
-                    $package_amount = $total_packages * 50;
+                    $package_amount = $total_packages * 10;
                     $community_amount = $amount_for_packages - $package_amount;
                     ReferralIncome::CommunityPoolIncome($user,$amount_to_divide);
                     if($total_packages > 0)

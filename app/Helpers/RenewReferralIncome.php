@@ -30,6 +30,7 @@ class RenewReferralIncome
         ReferralIncome::DownLinePlacementIncome($total_amount,$package,$user);
         //If the Refer By is leader then give him this also otherwise  goes to flush Account 
         ReferralIncome::TradeIncome($total_amount,$package,$refer_by,$user);
+        ReferralIncome::rebirthAndAsscoaiteIncome($total_amount,$package,$refer_by,$user);
         ReferralIncome::CompanyIncome($total_amount,$package,$type = 'Arrival');
         return true;
     } 
@@ -40,7 +41,7 @@ class RenewReferralIncome
         if($user)
         {
             $user->update([
-                'total_income' => $user->total_income + $direct_income
+                'cash_wallet' => $user->cash_wallet + $direct_income
             ]);
             Earning::create([
                 'price' => $direct_income,
@@ -74,7 +75,8 @@ class RenewReferralIncome
                     'type' => 'direct_team_income'
                 ]);
                 $direct_team->update([
-                    'total_income' => $direct_team->total_income + $per_person_amount
+                    'total_income' => $direct_team->total_income + $per_person_amount/2,
+                    'cash_wallet' => $direct_team->cash_wallet + $per_person_amount/2,
                 ]);
                 $direct_team_income = $direct_team_income - $per_person_amount;
             }else{
@@ -109,7 +111,8 @@ class RenewReferralIncome
                     'type' => 'upline_income'
                 ]);
                 $upline->update([
-                    'total_income' => $upline->total_income + $per_person_amount
+                    'total_income' => $upline->total_income + $per_person_amount/2,
+                    'cash_wallet' => $upline->cash_wallet + $per_person_amount/2,
                 ]);
                 info("Upline Income Amount Added to $upline->name : $per_person_amount"); 
                 $upline_income = $upline_income - $per_person_amount;
@@ -143,7 +146,8 @@ class RenewReferralIncome
                     'type' => 'down_line_income'
                 ]);
                 $downline->update([
-                    'total_income' => $downline->total_income + $per_person_amount
+                    'total_income' => $downline->total_income + $per_person_amount/2,
+                    'cash_wallet' => $downline->cash_wallet + $per_person_amount/2,
                 ]);
                 info("Downline Income Amount Added to $downline->name : $per_person_amount"); 
             }else{
@@ -179,7 +183,8 @@ class RenewReferralIncome
                         'type' => 'upline_placement_income'
                     ]);
                     $refer_by->update([
-                        'total_income' => $refer_by->total_income + $per_person_amount
+                        'total_income' => $refer_by->total_income + $per_person_amount/2,
+                        'cash_wallet' => $refer_by->cash_wallet + $per_person_amount/2,
                     ]);
                     info("Upline Placement Income Amount Added to $refer_by->name : $per_person_amount"); 
                 }else{
@@ -223,7 +228,8 @@ class RenewReferralIncome
                         'type' => 'down_line_placement_income'
                     ]);
                     $refer_by->update([
-                        'total_income' => $refer_by->total_income + $per_person_amount
+                        'total_income' => $refer_by->total_income + $per_person_amount/2,
+                        'cash_wallet' => $refer_by->cash_wallet + $per_person_amount/2,
                     ]);
                     info("Downline Placement Income Amount Added to $refer_by->name : $per_person_amount"); 
                 }else{
@@ -258,7 +264,8 @@ class RenewReferralIncome
                 'type' => 'trade_income'
             ]);
             $user->update([
-                'total_income' => $user->total_income + $new_trade_income
+                'total_income' => $user->total_income + $new_trade_income/2,
+                'cash_wallet' => $user->cash_wallet + $new_trade_income/2,
             ]);
             info("Trade Income Amount Added to $user->name : $new_trade_income"); 
             $trade_account = CompanyAccount::find(1);
@@ -275,7 +282,8 @@ class RenewReferralIncome
                     'type' => 'ranking_income'
                 ]);
                 $user->update([
-                    'total_income' => $user->total_income + $trade_income
+                    'total_income' => $user->total_income + $trade_income/2,
+                    'cash_wallet' => $user->cash_wallet + $trade_income/2,
                 ]);
                 info("Trade Income Amount Added to $user->name : $trade_income"); 
             }
@@ -315,5 +323,53 @@ class RenewReferralIncome
             'due_to' => $due_to->id,
             'type' => 'pool_income'
         ]);
+    } 
+    public static function rebirthAndAsscoaiteIncome($price,$package,$referBy,$user)
+    {
+        $self_rebirth = $price / 100 * $package->renew_self_rebirth;
+        info("Self Rebirth Amount : $self_rebirth");
+        Earning::create([
+            'price' => $self_rebirth,
+            'user_id' => $user->id,
+            'due_to' => $user->id,
+            'type' => 'rebirth_income'
+        ]);
+        $user->update([
+            'for_pool' => $user->for_pool + $self_rebirth,
+        ]);
+        $direct_rebirth = $price / 100 * $package->renew_direct_rebirth;
+        info("Direct Rebirth Amount : $direct_rebirth");
+        Earning::create([
+            'price' => $direct_rebirth,
+            'user_id' => $referBy->id,
+            'due_to' => $user->id,
+            'type' => 'rebirth_income'
+        ]);
+        $referBy->update([
+            'for_pool' => $referBy->for_pool + $direct_rebirth,
+        ]);
+        $self_associate = $price / 100 * $package->renew_self_associate;
+        info("Self Associate Amount : $self_associate");
+        Earning::create([
+            'price' => $self_associate,
+            'user_id' => $user->id,
+            'due_to' => $user->id,
+            'type' => 'associate_income'
+        ]);
+        $user->update([
+            'community_pool' => $user->community_pool + $self_associate,
+        ]);
+        $direct_associate = $price / 100 * $package->renew_direct_associate;
+        info("Direct Associate Amount : $direct_associate");
+        Earning::create([
+            'price' => $direct_associate,
+            'user_id' => $referBy->id,
+            'due_to' => $user->id,
+            'type' => 'rebirth_income'
+        ]);
+        $referBy->update([
+            'community_pool' => $referBy->community_pool + $direct_associate,
+        ]);
+       
     } 
 }
