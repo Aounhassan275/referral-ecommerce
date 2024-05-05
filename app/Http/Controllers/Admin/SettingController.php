@@ -119,10 +119,14 @@ class SettingController extends Controller
                 'balance' => 0
             ]);
         }
-        ChatMessage::truncate();
-        DB::statement('ALTER TABLE chat_messages AUTO_INCREMENT = 1;');
+        
+        // Disable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
         Chat::truncate();
         DB::statement('ALTER TABLE chats AUTO_INCREMENT = 1;');
+        ChatMessage::truncate();
+        DB::statement('ALTER TABLE chat_messages AUTO_INCREMENT = 1;');
         Deposit::truncate();
         DB::statement('ALTER TABLE deposits AUTO_INCREMENT = 1;');
         Earning::truncate();
@@ -152,6 +156,8 @@ class SettingController extends Controller
         User::truncate();
         DB::statement('ALTER TABLE users AUTO_INCREMENT = 1;');
         
+        // Re-enable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         for($i = 1;$i<= 20;$i++)
         {
             if($i == 1)
