@@ -305,6 +305,7 @@ Route::get('product_dislike/{id}', 'FrontendController@showProductDisLike')->nam
 Route::post('check_refferral_code', 'FrontendController@check_refferral_code')->name('check_refferral_code');
 Route::post('search_user', 'FrontendController@search_user')->name('search_user');
 Route::post('search_brand', 'FrontendController@search_brand')->name('search_brand');
+Route::post('store_user_review', 'FrontendController@storeUserReview')->name('store_user_review');
 //Service Provider Routes
 Route::get('our_service', 'ServiceFrontendController@showService')->name('service.index');
 Route::get('our_service/{id}', 'ServiceFrontendController@showServiceDetails')->name('service.show');

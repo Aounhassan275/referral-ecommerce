@@ -13,6 +13,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Type;
 use App\Models\User;
+use App\Models\UserReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
@@ -278,5 +279,11 @@ class FrontendController extends Controller
 
         }
 
+    }
+    public function storeUserReview(Request $request)
+    {
+        UserReview::create($request->all());
+        toastr()->success('User Review is Created Successfully');
+        return redirect()->back();
     }
 }

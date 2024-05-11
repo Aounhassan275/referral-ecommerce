@@ -140,4 +140,28 @@ class Setting extends Model
     public static function privacyPolicyImage(){
         return (new static)::where('name','Privacy Policy Image')->first()->image ?? '';
     }
+    public static function profileMainAbout(){
+        return (new static)::where('name','Profile Main About Section')->first() ?? '';
+    }
+    public static function profileMainAboutUrl(){
+        return (new static)::where('name','Profile Main About Section')->first()->value ?? '';
+    }
+    public static function profileAboutContent1(){
+        return (new static)::where('name','Profile About Content 1')->first() ?? '';
+    }
+    public static function profileAboutContent1Url(){
+        return (new static)::where('name','Profile About Content 1 Url')->first()->value ?? '';
+    }
+    public static function profileAboutContent2(){
+        return (new static)::where('name','Profile About Content 1')->first() ?? '';
+    }
+    public static function profileAboutContent2Url(){
+        return (new static)::where('name','Profile About Content 1 Url')->first()->value ?? '';
+    }
+    public static function profileAboutContent3(){
+        return (new static)::where('name','Profile About Content 1')->first() ?? '';
+    }
+    public static function profileAboutContent3Url(){
+        return (new static)::where('name','Profile About Content 1 Url')->first()->value ?? '';
+    }
 }

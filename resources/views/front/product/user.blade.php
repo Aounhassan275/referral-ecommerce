@@ -27,7 +27,8 @@
 
   <!-- Template Main CSS File -->
   <link href="{{asset('profile-theme-assets/assets/css/main.css')}}" rel="stylesheet">
-
+  <link href="{{asset('user_asset/assets/css/toastr.css')}}" rel="stylesheet" type="text/css"> 
+  @toastr_css
 </head>
 
 <body>
@@ -166,6 +167,16 @@
                 </ul>
               </div>
             </div>
+            
+            @if($user->checkstatus() == true)
+
+            <div class="col-sm-6" style="margin-top:5px;">
+               <input type="text" class="form-control" id="link_area"  value="{{route('product.user',$user->id)}}"  readonly>
+               <br>
+               <button type="button" class="copy-button btn btn-danger  btn-sm" data-clipboard-action="copy" data-clipboard-target="#link_area">Share Website</button>
+               <a href="{{url('user/register',$user->code)}}" class="btn btn-danger btn-sm ml-4" >Join Us With User Link</a>
+            </div>
+            @endif
           </div>
         </div>
 
@@ -178,13 +189,11 @@
         <div class="row gy-4">
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
             <div class="why-box">
-              <h3>Why Choose W-Linkup</h3>
+              <h3>{{App\Models\Setting::profileMainAbout()->value}}</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
-              </p>
+                {{App\Models\Setting::profileMainAbout()->description}} </p>
               <div class="text-center">
-                <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+                <a href="{{App\Models\Setting::profileMainAboutUrl()}}" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
               </div>
             </div>
           </div>
@@ -194,24 +203,33 @@
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
                   <i class="bi bi-clipboard-data"></i>
-                  <h4>Corporis voluptates officia eiusmod</h4>
-                  <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                  <h4>{{App\Models\Setting::profileAboutContent1()->value}}</h4>
+                  <p>{{App\Models\Setting::profileAboutContent1()->description}}</p>
+                  <div class="text-center">
+                    <a href="{{App\Models\Setting::profileAboutContent1Url()}}" class="btn btn-danger">Learn More </a>
+                  </div>
                 </div>
               </div>
               <!-- End Icon Box -->
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
                   <i class="bi bi-gem"></i>
-                  <h4>Ullamco laboris ladore pan</h4>
-                  <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                  <h4>{{App\Models\Setting::profileAboutContent2()->value}}</h4>
+                  <p>{{App\Models\Setting::profileAboutContent2()->description}}</p>
+                  <div class="text-center">
+                    <a href="{{App\Models\Setting::profileAboutContent2Url()}}" class="btn btn-danger">Learn More </a>
+                  </div>
                 </div>
               </div>
               <!-- End Icon Box -->
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
                   <i class="bi bi-inboxes"></i>
-                  <h4>Labore consequatur incidid dolore</h4>
-                  <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                  <h4>{{App\Models\Setting::profileAboutContent3()->value}}</h4>
+                  <p>{{App\Models\Setting::profileAboutContent3()->description}}</p>
+                  <div class="text-center">
+                    <a href="{{App\Models\Setting::profileAboutContent3Url()}}" class="btn btn-danger">Learn More</a>
+                  </div>
                 </div>
               </div>
               <!-- End Icon Box -->
@@ -529,124 +547,57 @@
         <div class="col-lg-8 d-flex align-items-stretch">
           <div class="info">
             <!-- ======= Testimonials Section ======= -->
-  <section id="testimonials" class="testimonials section-bg">
-    <div class="container" data-aos="fade-up">
-      <div class="slides-1 swiper" data-aos="fade-up" data-aos-delay="100">
-        <div class="swiper-wrapper">
-          <!-- start testimonial item -->
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <div class="row gy-4 justify-content-center">
-                <div class="col-lg-6">
-                  <div class="testimonial-content">
-                    <h3>Saul Goodman</h3>
-                    <h4>Ceo &amp; Founder</h4>
-                    <p>
-                      Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus.
-                    </p>
-                  </div>
-                </div>
-                <div class="col-lg-2 text-center">
-                  <img src="{{asset('profile-theme-assets/assets/img/testimonials/testimonials-1.jpg')}}" class="img-fluid testimonial-img" alt="">
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-          </div><!-- End testimonial item -->
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <div class="row gy-4 justify-content-center">
-                <div class="col-lg-6">
-                  <div class="testimonial-content">
-                    <h3>Sara Wilsson</h3>
-                    <h4>Designer</h4>
-                    <p>
-                      Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                      </p>
-                  </div>
-                </div>
-                <div class="col-lg-2 text-center">
-                  <img src="{{asset('profile-theme-assets/assets/img/testimonials/testimonials-2.jpg')}}" class="img-fluid testimonial-img" alt="">
-                </div>
-              </div>
-            </div>
-          </div><!-- End testimonial item -->
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <div class="row gy-4 justify-content-center">
-                <div class="col-lg-6">
-                  <div class="testimonial-content">
-                    <h3>Jena Karlis</h3>
-                    <h4>Store Owner</h4>
-                    <p>
-                      Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                    </p>
-                    <div class="">
+              <section id="testimonials" class="testimonials section-bg">
+                <div class="container" data-aos="fade-up">
+                  <div class="slides-1 swiper" data-aos="fade-up" data-aos-delay="100">
+                    <div class="swiper-wrapper">
+                      <!-- start testimonial item -->
+                      @foreach($user->userReviews as $review)
+                      <div class="swiper-slide">
+                        <div class="testimonial-item">
+                          <div class="row gy-4 justify-content-center">
+                            <div class="col-lg-8">
+                              <div class="testimonial-content">
+                                <h3>{{$review->subject}}</h3>
+                                {{-- <h4>Ceo &amp; Founder</h4> --}}
+                                <p>
+                                  {{$review->message}}
+                                </p>
+                              </div>
+                            </div>
+                            {{-- <div class="col-lg-2 text-center">
+                              <img src="{{asset('profile-theme-assets/assets/img/testimonials/testimonials-1.jpg')}}" class="img-fluid testimonial-img" alt="">
+                            </div> --}}
+                          </div>
+                        </div><!-- End testimonial item -->
+                      </div><!-- End testimonial item -->
+                      @endforeach
+                          </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                        </div>
+                          </section><!-- End Testimonials Section -->   
+                      </div>
+                    </div>
+                    <!-- ======= Contact Part ======= -->
+                    <div class="col-lg-4 mt-5 mt-lg-0 d-flex align-items-stretch">
+                      <form action="{{route('store_user_review')}}" method="post" role="form" class="php-email-form">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{$user->id}}">
+                        <div class="form-group">
+                          <label for="name">Subject</label>
+                          <input type="text" class="form-control" name="subject" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="name">Message</label>
+                          <textarea class="form-control" name="message" rows="10" required></textarea>
+                        </div>
+                        <div class="text-center"><button type="submit">Send Message</button></div>
+                      </form>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-2 text-center">
-                  <img src="{{asset('profile-theme-assets/assets/img/testimonials/testimonials-3.jpg')}}" class="img-fluid testimonial-img" alt="">
-                </div>
-              </div>
-            </div>
-          </div><!-- End testimonial item -->
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <div class="row gy-4 justify-content-center">
-                <div class="col-lg-6">
-                  <div class="testimonial-content">
-                    <h3>John Larson</h3>
-                    <h4>Entrepreneur</h4>
-                    <p>
-                      Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                     </p>
-                    </div>
-                </div>
-                <div class="col-lg-2 text-center">
-                  <img src="{{asset('profile-theme-assets/assets/img/testimonials/testimonials-4.jpg')}}" class="img-fluid testimonial-img" alt="">
-                </div>
-              </div>
-            </div>
-          </div><!-- End testimonial item -->
-              </div>
-                <div class="swiper-pagination"></div>
-             </div>
-            </div>
-               </section><!-- End Testimonials Section -->   
-          </div>
-        </div>
-        <!-- ======= Contact Part ======= -->
-        <div class="col-lg-4 mt-5 mt-lg-0 d-flex align-items-stretch">
-          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-            <div class="row">
-              <div class="form-group col-md-6">
-                <label for="name">Your Name</label>
-                <input type="text" name="name" class="form-control" id="name" required>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="name">Your Email</label>
-                <input type="email" class="form-control" name="email" id="email" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="name">Subject</label>
-              <input type="text" class="form-control" name="subject" id="subject" required>
-            </div>
-            <div class="form-group">
-              <label for="name">Message</label>
-              <textarea class="form-control" name="message" rows="10" required></textarea>
-            </div>
-            <div class="my-3">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
-            </div>
-            <div class="text-center"><button type="submit">Send Message</button></div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section><!-- End Contact Section -->
+              </section><!-- End Contact Section -->
   
   </main><!-- End #main -->
 
@@ -711,6 +662,9 @@
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
   <!-- Vendor JS Files -->
+  <script src="{{asset('user_asset/assets/js/toastr.js')}}"></script>
+  @toastr_render
+  @toastr_js
   <script src="{{asset('profile-theme-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('profile-theme-assets/assets/vendor/aos/aos.js')}}"></script>
   <script src="{{asset('profile-theme-assets/assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
@@ -719,5 +673,20 @@
   <script src="{{asset('profile-theme-assets/assets/vendor/php-email-form/validate.js')}}"></script>
   <!-- Template Main JS File -->
   <script src="{{asset('profile-theme-assets/assets/js/main.js')}}"></script>
+  <script type="text/javascript" src="{{asset('clipboard.js')}}"></script>
+  <script type="text/javascript">
+    var clipboard = new Clipboard('.copy-button');
+          clipboard.on('success', function(e) {
+              copyText.select();
+              var $div2 = $("#coppied");
+              console.log($div2);
+              console.log($div2.is(":visible"));
+              if ($div2.is(":visible")) { return; }
+              $div2.show();
+              setTimeout(function() {
+                  $div2.fadeOut();
+              }, 800);
+          });
+  </script>
 </body>
 </html>

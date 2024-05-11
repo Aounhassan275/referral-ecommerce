@@ -193,6 +193,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Earning::class)->where('type','pool_income');
     }
+    public function userReviews()
+    {
+        return $this->hasMany(UserReview::class);
+    }
     public function rewardIncome()
     {
         return $this->hasMany(Earning::class)->where('type','reward_income');
