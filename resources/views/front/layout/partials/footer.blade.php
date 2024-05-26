@@ -191,9 +191,11 @@
                                     <a class="navPages-action" href="{{url('posts')}}">Post</a>
                                 </li>
                                 @endif
+                                @if(App\Models\Setting::enableServiceSection() == '1')
                                 <li class="navPages-item navPages-item-page">
                                     <a class="navPages-action" href="{{url('our_service')}}">Services</a>
                                 </li>
+                                @endif
                                 <li class="navPages-item navPages-item-page">
                                     <a class="navPages-action" href="{{url('products')}}">Products</a>
                                 </li>

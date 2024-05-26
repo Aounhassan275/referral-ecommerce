@@ -315,6 +315,12 @@
 								@endif
 							</ul>
 						</li>	
+						<li class="nav-item">
+							<a href="{{route('user.post_purchase.index')}}" class="nav-link {{Request::is('user/post_purchase*')?'active':''}}">
+								<i class="icon-reading"></i>
+								<span>Post Purchases</span>
+							</a>
+						</li>	
 						@if(Auth::user()->type == 'Seller')
 						<li class="nav-item nav-item-submenu {{Request::is('user/post*') || Request::is('user/post_sale*') ?'nav-item-open':''}}">
 							<a href="#" class="nav-link"><i class="icon-stack3"></i> <span>Post</span></a>

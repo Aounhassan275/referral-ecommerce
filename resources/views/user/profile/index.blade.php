@@ -363,6 +363,30 @@ UPDATE YOUR OWN PROFILE
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
+                @else 
+                <p>Please Add One Product to enable profile</p>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+@if (Auth::user()->products->count() > 0)
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Special Heading</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card-body">
+                
                 @if(App\Models\Special::where('user_id',Auth::user()->id)->count() < 5)
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
@@ -406,6 +430,27 @@ UPDATE YOUR OWN PROFILE
                         
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+@if (Auth::user()->products->count() > 0)
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Event</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card-body">
                 @if(App\Models\Event::where('user_id',Auth::user()->id)->count() < 3)
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
@@ -454,13 +499,11 @@ UPDATE YOUR OWN PROFILE
                         
                     </div>
                 </div>
-                @else 
-                <p>Please Add One Product to enable profile</p>
-                @endif
             </div>
         </div>
     </div>
 </div>
+@endif
 
 <div id="create-modal" class="modal fade">
     <div class="modal-dialog">

@@ -35,4 +35,12 @@ class Post extends Model
     {
         return $this->hasMany(PostImage::class,'post_id');
     }
+    public function installements()
+    {
+        return $this->hasMany(PostInstallement::class,'post_id');
+    }
+    public function purchases()
+    {
+        return $this->hasMany(PostPurchase::class,'post_id');
+    }
 }

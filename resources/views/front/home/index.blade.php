@@ -354,6 +354,7 @@
 			</div>
 		</div>
 	</div>
+	@if(App\Models\Setting::enableServiceSection() == '1')
 	<div class="module clearfix alignBanner--right">
 		<div id="sb-listing-tabs20" class="sb-listing-tabs">
 			<div class="ltabs-heading d-flex">
@@ -418,6 +419,7 @@
 			</div>
 		</div>
 	</div>
+	@endif
 	@if(App\Models\Setting::enablePostSection() == '1')
 	<div class="module clearfix ">
 		<div id="sb-listing-tabs21" class="sb-listing-tabs">

@@ -151,9 +151,11 @@
                                         <li class="navPages-item ">
                                             <a class="navPages-action" href="{{url('products')}}"> Products </a>
                                         </li>
+                                        @if(App\Models\Setting::enableServiceSection() == '1')
                                         <li class="navPages-item ">
                                             <a class="navPages-action" href="{{url('our_service')}}"> Services </a>
                                         </li>
+                                        @endif
                                         @if(App\Models\Setting::enablePostSection() == '1')
                                         <li class="navPages-item ">
                                             <a class="navPages-action" href="{{url('posts')}}"> Posts </a>
@@ -221,11 +223,13 @@
 										</li>
 
 									@endif
+                                    @if(App\Models\Setting::enableServiceSection() == '1')
                                     <li class="navUser-item">
                                         <a class="navUser-action " href="{{url('our_service')}}" >
                                             <i class="fa fa-user"></i> Services 
                                         </a>
                                     </li>
+                                    @endif
                                     @if(App\Models\Setting::enablePostSection() == '1')
                                     <li class="navUser-item">
                                         <a class="navUser-action " href="{{url('posts')}}" >

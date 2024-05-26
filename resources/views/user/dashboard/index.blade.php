@@ -188,7 +188,25 @@ DASHBOARD
         </div>
     </div>
     <div class="col-md-6">
-        <p><b>New Members :</b></p>
+        <p><b>My Products :</b></p>
+        <div class="row">
+            @foreach(App\Models\Product::where('user_id',Auth::user()->id)->latest()->get()->take(4) as $product)
+            <div class="col-sm-6 col-lg-6">
+                <div class="card">
+                    <div class="card-img-actions m-1">
+                        <img class="card-img img-fluid" src="{{asset(@$product->images->first()->image)}}" alt="">
+                        <div class="card-img-actions-overlay card-img">
+
+                            <a href="{{route('product.show',str_replace(' ', '_',$product->name))}}" target="_blank"  class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
+                                <i class="icon-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        {{-- <p><b>New Members :</b></p>
         <div class="row">
             @foreach(App\Models\User::whereNotNull('service_id')->whereNotNull('type_id')->latest()->get()->take(4) as $service)
             <div class="col-sm-6 col-lg-6">
@@ -205,7 +223,25 @@ DASHBOARD
                 </div>
             </div>
             @endforeach
-        </div>
+        </div> --}}
+        {{-- <p><b>New Members :</b></p> --}}
+        {{-- <div class="row">
+            @foreach(App\Models\User::whereNotNull('service_id')->whereNotNull('type_id')->latest()->get()->take(4) as $service)
+            <div class="col-sm-6 col-lg-6">
+                <div class="card">
+                    <div class="card-img-actions m-1">
+                        <img class="card-img img-fluid" src="{{asset(@$service->image)}}" alt="">
+                        <div class="card-img-actions-overlay card-img">
+
+                            <a href="{{route('product.user',@$service->id)}}" target="_blank" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
+                                <i class="icon-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div> --}}
     </div>
 
 </div>

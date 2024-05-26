@@ -137,9 +137,11 @@
                                         <li class="navPages-item ">
                                             <a class="navPages-action" href="{{url('posts')}}"> Post </a>
                                         </li>
+                                        @if(App\Models\Setting::enableServiceSection() == '1')
                                         <li class="navPages-item ">
                                             <a class="navPages-action" href="{{url('our_service')}}"> Service Provider </a>
                                         </li>
+                                        @endif
                                         <li class="navPages-item ">
                                             <a class="navPages-action" href="{{url('products')}}"> Product </a>
                                         </li>
@@ -205,11 +207,13 @@
 										</li>
 
 									@endif
+                                    @if(App\Models\Setting::enableServiceSection() == '1')
                                     <li class="navUser-item">
                                         <a class="navUser-action " href="{{url('our_service')}}" >
                                             <i class="fa fa-user"></i> Services 
                                         </a>
                                     </li>
+                                    @endif
                                     <li class="navUser-item">
                                         <a class="navUser-action " href="{{url('products')}}" >
                                             <i class="fa fa-user"></i> Products 

@@ -116,6 +116,9 @@ class Setting extends Model
     public static function enablePostSection(){
         return (new static)::where('name','Enable Post Section')->first()->value ?? '1';
     }
+    public static function enableServiceSection(){
+        return (new static)::where('name','Enable Service Section')->first()->value ?? '1';
+    }
     public static function enableCountryCityOnHome(){
         return (new static)::where('name','Enable Country & City on Home')->first()->value ?? '1';
     }

@@ -94,13 +94,16 @@
                                  </div>
                               </div>
                               <div class="productView-info">
+                                 <a class="btn btn-primary" href="{{route('user.post_purchase.show',$post->id)}}">
+                                    Purchase 
+                                 </a>
                                  @if($post->user_id)
-                                    @if(!$post->user->hide_profile)
+                                    {{-- @if(!$post->user->hide_profile)
                                     <a class="image-popup-sizechart" href="{{route('user.chat.user',$post->user_id)}}">
                                        <i class="fa fa-photo" aria-hidden="true"></i>
                                        Chat 
                                     </a>
-                                    @endif
+                                    @endif --}}
                                     @if($post->user->address)
                                     <div style="margin-top:5px;">
                                        <a href="https://www.google.com.sa/maps/search/{{@$post->user->address}}?hl=en" target="_blank">
