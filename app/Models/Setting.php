@@ -156,15 +156,15 @@ class Setting extends Model
         return (new static)::where('name','Profile About Content 1 Url')->first()->value ?? '';
     }
     public static function profileAboutContent2(){
-        return (new static)::where('name','Profile About Content 1')->first() ?? '';
+        return (new static)::where('name','Profile About Content 2')->first() ?? '';
     }
     public static function profileAboutContent2Url(){
-        return (new static)::where('name','Profile About Content 1 Url')->first()->value ?? '';
+        return (new static)::where('name','Profile About Content 2 Url')->first()->value ?? '';
     }
     public static function profileAboutContent3(){
-        return (new static)::where('name','Profile About Content 1')->first() ?? '';
+        return (new static)::where('name','Profile About Content 3')->first() ?? '';
     }
     public static function profileAboutContent3Url(){
-        return (new static)::where('name','Profile About Content 1 Url')->first()->value ?? '';
+        return (new static)::where('name','Profile About Content 3 Url')->first()->value ?? '';
     }
 }

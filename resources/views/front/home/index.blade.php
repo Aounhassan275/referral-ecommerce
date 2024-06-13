@@ -58,7 +58,7 @@
 												<ul class="navPage-childList">
 													@foreach($category_brand->products->take(5) as $product)
 													<li class="navPage-childList-item">
-														<a class="navPage-subMenu-action navPages-action" href="{{route('product.show',str_replace(' ', '_',$product->name))}}">{{$product->name}}</a>
+														<a class="navPage-subMenu-action navPages-action" href="{{route('product.show',$product->uuid)}}">{{$product->name}}</a>
 													</li>
 													@endforeach
 												</ul>
@@ -246,14 +246,14 @@
 									</div>
 									@endforeach
 								</div>
-								<a href="{{route('product.show',str_replace(' ', '_',$product->name))}}" class="product-item-photo">
+								<a href="{{route('product.show',$product->uuid)}}" class="product-item-photo">
 									<img class="img-responsive lazyload" data-sizes="auto" src="{{asset($product->images->first()->image)}}" data-src="{{asset($product->images->first()->image)}}" alt="{{$product->name.' 0' }}" title="{{$product->name.' 0' }}">
 								</a>
 								{{-- <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="130" title="Quick view"> <i class="fa fa-search"></i></a> --}}
 							</div>
 							<div class="right-block">
 								<h4 class="card-title">
-									<a href="{{route('product.show',str_replace(' ', '_',$product->name))}}">{{$product->name}}</a>
+									<a href="{{route('product.show',$product->uuid)}}">{{$product->name}}</a>
 								</h4>
 								<div class="price-section price-section--withoutTax ">
 									<span data-product-price-without-tax class="price price--withoutTax">$ {{$product->price}}</span>
@@ -262,7 +262,7 @@
 								<div class="product-colors" data-product-id="130"></div>
 								<div class="button-group">
 									<div class="action-item addToCart">
-										<a href="{{route('product.show',str_replace(' ', '_',$product->name))}}"  data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">Purchase</a>
+										<a href="{{route('product.show',$product->uuid)}}"  data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">Purchase</a>
 									</div>
 								</div>
 							</div>
@@ -325,14 +325,14 @@
 											</div>
 											@endforeach
 										</div>
-										<a href="{{route('product.show',str_replace(' ', '_',$product->name))}}" class="product-item-photo">
+										<a href="{{route('product.show',$product->uuid)}}" class="product-item-photo">
 											<img class="img-responsive lazyload" data-sizes="auto" src="{{asset($product->images->first()->image)}}" data-src="{{asset($product->images->first()->image)}}" alt="{{$product->name.' 0' }}" title="{{$product->name.' 0' }}">
 										</a>
 										{{-- <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="130" title="Quick view"> <i class="fa fa-search"></i></a> --}}
 									</div>
 									<div class="right-block">
 										<h4 class="card-title">
-											<a href="{{route('product.show',str_replace(' ', '_',$product->name))}}">{{$product->name}}</a>
+											<a href="{{route('product.show',$product->uuid)}}">{{$product->name}}</a>
 										</h4>
 										<div class="price-section price-section--withoutTax ">
 											<span data-product-price-without-tax class="price price--withoutTax">$ {{$product->price}}</span>
@@ -341,7 +341,7 @@
 										<div class="product-colors" data-product-id="130"></div>
 										<div class="button-group">
 											<div class="action-item addToCart">
-												<a href="{{route('product.show',str_replace(' ', '_',$product->name))}}"  data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">Purchase</a>
+												<a href="{{route('product.show',$product->uuid)}}"  data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">Purchase</a>
 											</div>
 										</div>
 									</div>

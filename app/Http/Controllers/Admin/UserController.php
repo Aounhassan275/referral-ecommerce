@@ -103,6 +103,7 @@ class UserController extends Controller
         Auth::guard('user')->login($user);
         request()->session()->put('cash_wallet', $user->cash_wallet);
         request()->session()->put('name', $user->name);
+        request()->session()->put('user_id', $user->id);
         return redirect()->route('user.dashboard.index');
     }
     public function user_view($id)

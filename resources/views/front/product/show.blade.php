@@ -77,7 +77,7 @@
                         <section class="productView-details">
                            <div class="productView-product">
                               <p class="productView-brand" itemprop="brand" itemscope itemtype="http://schema.org/Brand">
-                                 <a href="{{route('product.show',str_replace(' ', '_',$product->name))}}" itemprop="url"><span itemprop="name">{{@$product->category->name}}</span></a>
+                                 <a href="{{route('product.show',$product->uuid)}}" itemprop="url"><span itemprop="name">{{@$product->category->name}}</span></a>
                               </p>
                               <h1 class="productView-title" itemprop="name">{{$product->name}}</h1>
                               <div class="productView-price">
@@ -142,7 +142,7 @@
                               </div>
                               
                               <div class="col-sm-12" style="margin-top:5px;">
-                                 <input type="text" class="form-control" id="link_area"  value="{{route('product.show',str_replace(' ', '_',$product->name))}}"  readonly>
+                                 <input type="text" class="form-control" id="link_area"  value="{{route('product.show',$product->uuid)}}"  readonly>
                                  <br>
                                  <button type="button" class="copy-button btn btn-dark  btn-sm" data-clipboard-action="copy" data-clipboard-target="#link_area">Share</button>
                               </div>

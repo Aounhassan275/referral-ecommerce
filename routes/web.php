@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','namespace' => 'Admin'], funct
     Route::get('add_user_to_super_pool', 'AuthController@add_user_to_super_pool');
     Route::get('add_user_rebirth_to_super_pool', 'AuthController@add_user_rebirth_to_super_pool');
     Route::get('transfer_temp_amount', 'AuthController@tranferTempAmount');
+    Route::get('add_uuid_to_products', 'AuthController@add_uuid_to_products');
      /******************MESSAGE ROUTES****************/
      Route::resource('message', 'MessageController');
     Route::group(['middleware' => 'auth:admin'], function () { 
@@ -300,7 +301,7 @@ Route::get('city/{name}', 'FrontendController@showCityDetails')->name('city.show
 Route::get('countries', 'FrontendController@showCountries')->name('country.index');
 Route::get('country/{name}', 'FrontendController@showCountryDetails')->name('country.show');
 Route::get('products', 'FrontendController@showProducts')->name('product.index');
-Route::get('product/{name}', 'FrontendController@showProductDetails')->name('product.show');
+Route::get('product/{uuid}', 'FrontendController@showProductDetails')->name('product.show');
 Route::get('product_user/{id}', 'FrontendController@showProductUserDetails')->name('product.user');
 Route::get('product_like/{id}', 'FrontendController@showProductLike')->name('product.like');
 Route::post('product/brands', 'FrontendController@getProductBrands')->name('product.brands');

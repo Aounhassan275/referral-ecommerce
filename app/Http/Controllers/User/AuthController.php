@@ -62,6 +62,7 @@ class AuthController extends Controller
             request()->session()->put('cash_wallet', $user->cash_wallet);
             request()->session()->put('name', $user->name);
             request()->session()->put('email', $user->email);
+            request()->session()->put('user_id', $user->id);
             // toastr()->success('Login Successfully');
             return redirect('user/dashboard');
         } else {

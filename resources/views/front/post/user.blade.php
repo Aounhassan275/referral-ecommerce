@@ -193,14 +193,14 @@
                                     <div class="{{$key == 0?'first-side' : ''}} productCarousel-slide product-layout product-grid">
                                        <article class="product-item-container ">
                                           <div class="left-block d-flex align-items-center justify-content-center">
-                                             <a href="{{route('product.show',str_replace(' ', '_',$product->name))}}" class="product-item-photo">
+                                             <a href="{{route('product.show',$product->uuid)}}" class="product-item-photo">
                                                 <img class="img-responsive lazyload" data-sizes="auto" @if($product->images->first()->image) src="{{asset($product->images->first()->image)}}" data-src="{{asset($product->images->first()->image)}}"@endif alt="{{$product->name}}" title="{{$product->name}}">
                                              </a>
                                              {{-- <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="130" title="Quick view"> <i class="fa fa-search"></i></a> --}}
                                           </div>
                                           <div class="right-block">
                                              <h4 class="card-title">
-                                                <a href="{{route('product.show',str_replace(' ', '_',$product->name))}}">{{$product->name}}</a>
+                                                <a href="{{route('product.show',$product->uuid)}}">{{$product->name}}</a>
                                              </h4>
                                              <p>{!! $product->description !!}</p>
                                           </div>

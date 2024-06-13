@@ -202,9 +202,9 @@ class FrontendController extends Controller
         }
         return view('front.product.index',compact('products'));
     }
-    public function showProductDetails($name)
+    public function showProductDetails($uuid)
     {
-        $product = Product::where('name',str_replace('_', ' ',$name))->first();
+        $product = Product::where('uuid',$uuid)->first();
         // $related_products = Product::where('category_id',$product->category_id)->get();
         // if($related_products->count() == 0)
         // {

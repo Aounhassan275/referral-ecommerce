@@ -13,11 +13,13 @@ use App\Helpers\UserHepler;
 use App\Models\CompanyAccount;
 use App\Models\Earning;
 use App\Models\Package;
+use App\Models\Product;
 use App\Models\SuperPool;
 use App\Models\SuperPoolTree;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -382,5 +384,15 @@ class AuthController extends Controller
         }
         toastr()->success('Transfer Temp Income Cronjob Run Successfully');
         return back();
+    }
+    public function add_uuid_to_products()
+    {
+        $products = Product::whereNull('uuid')->get();
+        foreach($products as $product)
+        {
+            $product->update([
+                'uuid' => Str::uuid()
+            ]);
+        }
     }
 }

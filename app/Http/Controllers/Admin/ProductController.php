@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -50,6 +51,9 @@ class ProductController extends Controller
             toastr()->error('Product Name already exists');
             return redirect()->back();
         }
+        $request->merge([
+            'uuid' => Str::uuid()
+        ]);
         $product = Product::create($request->all());
         foreach($request->images as $image)
         {

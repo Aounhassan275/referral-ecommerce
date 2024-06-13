@@ -331,7 +331,7 @@
             <div class="row gy-5">
               @foreach(App\Models\Product::where('user_id',$user->id)->where('brand_id',$brandProduct->id)->get() as $product)
               <div class="col-lg-3 menu-item">
-                <a href="{{route('product.show',str_replace(' ', '_',$product->name))}}" class="glightbox">
+                <a href="{{route('product.show',$product->uuid)}}" class="glightbox">
                   <img src="{{asset($product->images->first()->image)}}" class="menu-img img-fluid" alt="">
                 </a>
                 <h4>{{$product->name}}</h4>
@@ -557,6 +557,13 @@
                         <div class="testimonial-item">
                           <div class="row gy-4 justify-content-center">
                             <div class="col-lg-8">
+                              <div class="text-center">
+                                @if($review->reviewer)
+                                <img src="{{asset($review->reviewer->image)}}" class="img-fluid testimonial-img" height="80" width="80" alt="">
+                                @else 
+                                <img src="{{asset('profile-theme-assets/assets/img/testimonials/testimonials-1.jpg')}}" height="80" width="80" class="img-fluid testimonial-img" alt="">
+                                @endif
+                              </div>
                               <div class="testimonial-content">
                                 <h3>{{$review->subject}}</h3>
                                 {{-- <h4>Ceo &amp; Founder</h4> --}}
@@ -565,9 +572,6 @@
                                 </p>
                               </div>
                             </div>
-                            {{-- <div class="col-lg-2 text-center">
-                              <img src="{{asset('profile-theme-assets/assets/img/testimonials/testimonials-1.jpg')}}" class="img-fluid testimonial-img" alt="">
-                            </div> --}}
                           </div>
                         </div><!-- End testimonial item -->
                       </div><!-- End testimonial item -->
@@ -581,9 +585,15 @@
                     </div>
                     <!-- ======= Contact Part ======= -->
                     <div class="col-lg-4 mt-5 mt-lg-0 d-flex align-items-stretch">
+                      @if (Auth::guard('user')->check())
                       <form action="{{route('store_user_review')}}" method="post" role="form" class="php-email-form">
                         @csrf
+                        <input type="hidden" name="reviewer_id" value="{{request()->session()->get('user_id')}}">
                         <input type="hidden" name="user_id" value="{{$user->id}}">
+                        <div class="form-group">
+                          <label for="name">User Name</label>
+                          <input type="text" class="form-control" value="{{request()->session()->get('name')}}" readonly>
+                        </div>
                         <div class="form-group">
                           <label for="name">Subject</label>
                           <input type="text" class="form-control" name="subject" id="subject" required>
@@ -594,6 +604,7 @@
                         </div>
                         <div class="text-center"><button type="submit">Send Message</button></div>
                       </form>
+                      @endif
                     </div>
                   </div>
                 </div>

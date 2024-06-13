@@ -177,7 +177,7 @@ DASHBOARD
                         <img class="card-img img-fluid" src="{{asset(@$product->images->first()->image)}}" alt="">
                         <div class="card-img-actions-overlay card-img">
 
-                            <a href="{{route('product.show',str_replace(' ', '_',$product->name))}}" target="_blank"  class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
+                            <a href="{{route('product.show',$product->uuid)}}" target="_blank"  class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
                                 <i class="icon-link"></i>
                             </a>
                         </div>
@@ -197,7 +197,7 @@ DASHBOARD
                         <img class="card-img img-fluid" src="{{asset(@$product->images->first()->image)}}" alt="">
                         <div class="card-img-actions-overlay card-img">
 
-                            <a href="{{route('product.show',str_replace(' ', '_',$product->name))}}" target="_blank"  class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
+                            <a href="{{route('product.show',$product->uuid)}}" target="_blank"  class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
                                 <i class="icon-link"></i>
                             </a>
                         </div>

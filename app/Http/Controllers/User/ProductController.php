@@ -16,6 +16,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -147,6 +148,9 @@ class ProductController extends Controller
                     }
                 }
             }
+            $request->merge([
+                'uuid' => Str::uuid()
+            ]);
             $product = Product::create($request->all());
             foreach($request->images as $key => $image)
             {
@@ -240,6 +244,7 @@ class ProductController extends Controller
             'country_id' => @$user->country_id, 
             'city_id' => @$user->city_id, 
             'user_id' => @$user->id, 
+            'uuid' => Str::uuid(), 
         ]);
         toastr()->success('Product is Created Successfully');
         return redirect(route('admin.product.edit',$new_product->id));
