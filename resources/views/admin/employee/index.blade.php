@@ -74,7 +74,7 @@
                     <td>{{$key+1}}</td>
                     <td>{{$admin->name}}</td>
                     <td>{{$admin->email}}</td>
-                    <td>$ {{number_format($admin->balance, 2)}}</td>
+                    <td>{{App\Models\Setting::currency()}} {{number_format($admin->balance, 2)}}</td>
                     <td>{{$admin->community_income}} %</td>
                     <td>{{$admin->new_arrival_income}} %</td>
                     <td class="table-action">

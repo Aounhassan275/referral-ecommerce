@@ -63,7 +63,7 @@
             @foreach (Auth::user()->pin_used as $key => $pinused)
                 <tr>
                     <td>{{$key+1}}</td>
-                    <td>$ {{$pinused->pin->amount}}</td>
+                    <td>{{App\Models\Setting::currency()}} {{$pinused->pin->amount}}</td>
                     <td>{{$pinused->created_at->format('M d,Y')}}</td>
                 </tr>
             @endforeach

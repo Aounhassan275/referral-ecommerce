@@ -39,7 +39,7 @@ VIEW DOWNLINE PLACEMENT INCOME
                     <td>{{$income->user->refer_by_name($income->due_to)}}</td>
                     <td>{{$income->user->refer_by_user($income->due_to) ? $income->user->refer_by_user($income->due_to)->email : ''}}</td>
                     <td>{{$income->created_at->format('d M,Y')}}</td>
-                    <td>$ {{$income->price}}</td>
+                    <td>{{App\Models\Setting::currency()}} {{$income->price}}</td>
                 </tr>
                 @endforeach
         </tbody>

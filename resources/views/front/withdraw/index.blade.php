@@ -62,7 +62,7 @@
                                         </div>
                                         <span>{{$withdraw->user->name}}</span>
                                     </th>
-                                    <td>$ {{$withdraw->payment}}</td>
+                                    <td>{{App\Models\Setting::currency()}} {{$withdraw->payment}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

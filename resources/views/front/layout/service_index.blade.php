@@ -209,11 +209,6 @@
 										<li class="navUser-item d-none d-sm-block">
 											<a class="navUser-action" href="{{App\Models\Setting::companyReferralLink()}}"><i class="fa fa-user"></i> Sign Up</a>
 										</li>
-										<li class="navUser-item">
-											<a class="navUser-action " href="{{url('products')}}" >
-												<i class="fa fa-user"></i> Products 
-											</a>
-										</li>
 
 									@endif
                                     @if(App\Models\Setting::enablePostSection() == '1')

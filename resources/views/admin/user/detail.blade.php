@@ -56,7 +56,7 @@
                                 <i class="feather-lg text-success" data-feather="dollar-sign"></i>
                             </div>
                             <div class="media-body">
-                                <h3 class="mb-2">$ {{$user->totalEarning()}}</h3>
+                                <h3 class="mb-2">{{App\Models\Setting::currency()}} {{$user->totalEarning()}}</h3>
                                 <div class="mb-0">User Total Earning</div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                                 <i class="feather-lg text-warning" data-feather="dollar-sign"></i>
                             </div>
                             <div class="media-body">
-                                <h3 class="mb-2">$ {{$user->total_income}}</h3>
+                                <h3 class="mb-2">{{App\Models\Setting::currency()}} {{$user->total_income}}</h3>
                                 <div class="mb-0">User Temp Income</div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                                 <i class="feather-lg text-danger" data-feather="dollar-sign"></i>
                             </div>
                             <div class="media-body">
-                                <h3 class="mb-2">$ {{$user->cash_wallet}}</h3>
+                                <h3 class="mb-2">{{App\Models\Setting::currency()}} {{$user->cash_wallet}}</h3>
                                 <div class="mb-0">User Cash Wallet</div>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                                 <i class="feather-lg text-primary" data-feather="dollar-sign"></i>
                             </div>
                             <div class="media-body">
-                                <h3 class="mb-2">$ {{$user->community_pool}}</h3>
+                                <h3 class="mb-2">{{App\Models\Setting::currency()}} {{$user->community_pool}}</h3>
                                 <div class="mb-0">User Community Pool</div>
                             </div>
                         </div>

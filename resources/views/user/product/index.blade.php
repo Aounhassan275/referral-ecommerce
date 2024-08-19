@@ -31,7 +31,7 @@
             <tr> 
                 <td>{{$key+1}}</td>
                 <td>{{$product->name}}</td>
-                <td>$ {{$product->price}}</td>
+                <td>{{App\Models\Setting::currency()}} {{$product->price}}</td>
                 <td>{{@$product->category->name}}</td>
                 <td>{{@$product->brand->name}}</td>
                 <td><a href="{{route('user.order.index')}}">{{@$product->orders->count()}}</a></td>

@@ -24,7 +24,7 @@
 
                     <div class="media-body">
 
-                        <h3 class="mb-2">$ {{number_format(Auth::user()->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(Auth::user()->balance, 2)}}</h3>
 
                         <div class="mb-0">Available Balance</div>
 

@@ -14,7 +14,7 @@
                 <a href="{{route('user.super_pool.show').'?user_id='.$user->id}}">
                     <h6 class="font-weight-semibold mb-0">{{$user->name}}</h6>
                 </a>
-                <span class="d-block text-muted">$ {{$user->balance}}</span>
+                <span class="d-block text-muted">{{App\Models\Setting::currency()}} {{$user->balance}}</span>
             </div>
 
             <div class="card-footer d-flex justify-content-around text-center p-0">
@@ -52,7 +52,7 @@
                 <a href="{{route('user.super_pool.show').'?user_id='.$users[0]['id']}}">
                     <h6 class="font-weight-semibold mb-0">{{$users[0]['name']}}</h6>
                 </a>
-                <span class="d-block text-muted">$ {{$users[0]['balance']}}</span>
+                <span class="d-block text-muted">{{App\Models\Setting::currency()}} {{$users[0]['balance']}}</span>
             </div>
 
             <div class="card-footer d-flex justify-content-around text-center p-0">
@@ -118,7 +118,7 @@
                 <a href="{{route('user.super_pool.show').'?user_id='.$users[1]['id']}}">
                     <h6 class="font-weight-semibold mb-0">{{$users[1]['name']}}</h6>
                 </a>
-                <span class="d-block text-muted">$ {{$users[1]['balance']}}</span>
+                <span class="d-block text-muted">{{App\Models\Setting::currency()}} {{$users[1]['balance']}}</span>
             </div>
 
             <div class="card-footer d-flex justify-content-around text-center p-0">

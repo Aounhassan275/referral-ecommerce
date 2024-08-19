@@ -115,7 +115,7 @@ Buy Products
                 </div>
 
                 <div class="mt-3 mt-lg-0 ml-lg-3 text-center">
-                    <h3 class="mb-0 font-weight-semibold">$ {{@$product->price}}</h3>
+                    <h3 class="mb-0 font-weight-semibold">{{App\Models\Setting::currency()}} {{@$product->price}}</h3>
 
                     <div>
                         <i class="icon-star-full2 font-size-base text-warning-300"></i>

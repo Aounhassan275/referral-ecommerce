@@ -91,7 +91,7 @@
                     </div>
 
                     <div class="media-body">
-                        <h3 class="mb-2">$ {{number_format(@$account->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$account->balance, 2)}}</h3>
 
                         <div class="mb-0">{{$account->name}}</div>
 

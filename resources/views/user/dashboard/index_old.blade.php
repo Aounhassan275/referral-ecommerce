@@ -67,7 +67,7 @@ DASHBOARD
                         <i class="icon-nbsp icon-3x opacity-75"></i>
                     </div>
                     <div class="media-body">
-                        <h3 class="mb-0">$ {{Auth::user()->total_income}}</h3>
+                        <h3 class="mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->total_income}}</h3>
                         <span class="text-uppercase font-size-xs">Amount to Transfer</span>
                     </div>
                 </div>
@@ -83,7 +83,7 @@ DASHBOARD
 
                         <div class="media-body">
                             <blink>
-                                <h3 class="mb-0">$ {{Auth::user()->total_income}}</h3>
+                                <h3 class="mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->total_income}}</h3>
                                 <span class="text-uppercase font-size-xs">Amount to Transfer</span>
                             </blink>
                         </div>
@@ -98,7 +98,7 @@ DASHBOARD
         <div class="card card-body">
             <div class="media mb-3">
                 <div class="media-body">
-                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->cash_wallet}}</h5>
+                    <h5 class="font-weight-semibold mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->cash_wallet}}</h5>
                     <span class="text-muted">Cash Wallet</span>
                 </div>
 
@@ -112,7 +112,7 @@ DASHBOARD
         <div class="card card-body">
             <div class="media mb-3">
                 <div class="media-body">
-                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->total_income}}</h5>
+                    <h5 class="font-weight-semibold mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->total_income}}</h5>
                     <span class="text-muted">Temp Income</span>
                 </div>
 
@@ -126,7 +126,7 @@ DASHBOARD
         <div class="card card-body">
             <div class="media mb-3">
                 <div class="media-body">
-                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->for_pool}}</h5>
+                    <h5 class="font-weight-semibold mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->for_pool}}</h5>
                     <span class="text-muted">For Pool</span>
                 </div>
 
@@ -145,7 +145,7 @@ DASHBOARD
                 </div>
 
                 <div class="media-body">
-                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->community_pool}}</h5>
+                    <h5 class="font-weight-semibold mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->community_pool}}</h5>
                     <span class="text-muted">Community Pool</span>
                 </div>
             </div>
@@ -161,7 +161,7 @@ DASHBOARD
 
                 <div class="media-body">
                     <h6 class="font-weight-semibold mb-0">Today Earning</h6>
-                    <span class="text-muted">$ {{Auth::user()->todayEarning()}}</span>
+                    <span class="text-muted">{{App\Models\Setting::currency()}} {{Auth::user()->todayEarning()}}</span>
                 </div>
             </div>
         </div>
@@ -173,7 +173,7 @@ DASHBOARD
         <div class="card card-body bg-blue-400 has-bg-image">
             <div class="media">
                 <div class="media-body">
-                    <h3 class="mb-0">$ {{App\Models\PostSale::where('receiver_id',Auth::user()->id)->sum('amount')}}</h3>
+                    <h3 class="mb-0">{{App\Models\Setting::currency()}} {{App\Models\PostSale::where('receiver_id',Auth::user()->id)->sum('amount')}}</h3>
                     <span class="text-uppercase font-size-xs">Total Purchase</span>
                 </div>
 
@@ -188,7 +188,7 @@ DASHBOARD
         <div class="card card-body bg-danger-400 has-bg-image">
             <div class="media">
                 <div class="media-body">
-                    <h3 class="mb-0">$ {{Auth::user()->rewardIncome->sum('price')}}</h3>
+                    <h3 class="mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->rewardIncome->sum('price')}}</h3>
                     <span class="text-uppercase font-size-xs">Personal Reward</span>
                 </div>
 
@@ -207,7 +207,7 @@ DASHBOARD
                 </div>
 
                 <div class="media-body text-right">
-                    <h3 class="mb-0">$ {{Auth::user()->rankingIncome->sum('price')}}</h3>
+                    <h3 class="mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->rankingIncome->sum('price')}}</h3>
                     <span class="text-uppercase font-size-xs">Rank Income</span>
                 </div>
             </div>
@@ -249,7 +249,7 @@ DASHBOARD
         <div class="card card-body bg-brown-400 has-bg-image">
             <div class="media">
                 <div class="media-body">
-                    <h3 class="mb-0">$ {{Auth::user()->associatedIncome->sum('price')}}</h3>
+                    <h3 class="mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->associatedIncome->sum('price')}}</h3>
                     <span class="text-uppercase font-size-xs">Associated Income</span>
                 </div>
 
@@ -265,7 +265,7 @@ DASHBOARD
                 <div class="media-body">
                     <h3 class="mb-0">
                         @if(Auth::user()->package)
-                        $ {{Auth::user()->package->price + Auth::user()->investment_amount}}
+                        {{App\Models\Setting::currency()}} {{Auth::user()->package->price + Auth::user()->investment_amount}}
                         @endif
                     </h3>
                     <span class="text-uppercase font-size-xs">Package Price</span>
@@ -301,7 +301,7 @@ DASHBOARD
         <div class="card card-body">
             <div class="media mb-3">
                 <div class="media-body">
-                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->pool_income}}</h5>
+                    <h5 class="font-weight-semibold mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->pool_income}}</h5>
                     <span class="text-muted">Pool Income</span>
                 </div>
 
@@ -316,7 +316,7 @@ DASHBOARD
             <div class="card card-body">
                 <div class="media mb-3">
                     <div class="media-body">
-                        <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->pool_income}}</h5>
+                        <h5 class="font-weight-semibold mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->pool_income}}</h5>
                         <span class="text-muted">Transfer</span>
                     </div>
 
@@ -331,7 +331,7 @@ DASHBOARD
         <div class="card card-body">
             <div class="media mb-3">
                 <div class="media-body">
-                    <h5 class="font-weight-semibold mb-0">$ {{Auth::user()->pool_income}}</h5>
+                    <h5 class="font-weight-semibold mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->pool_income}}</h5>
                     <span class="text-muted">Pool Income</span>
                 </div>
 
@@ -353,7 +353,7 @@ DASHBOARD
                 <div class="media-body text-right">
                     <h3 class="font-weight-semibold mb-0">
                         @if(Auth::user()->package)
-                        $ {{Auth::user()->package->price + Auth::user()->investment_amount}}
+                        {{App\Models\Setting::currency()}} {{Auth::user()->package->price + Auth::user()->investment_amount}}
                         @endif
                     </h3>
                     <span class="text-uppercase font-size-sm text-muted">Package Price</span>
@@ -490,7 +490,7 @@ DASHBOARD
                                 <td>{{$income->type}}</td>
                                 <td>{{$income->user->refer_by_name($income->due_to)}}</td>
                                 <td>{{$income->created_at->format('d M,Y')}}</td>
-                                <td>$ {{$income->price}}</td>
+                                <td>{{App\Models\Setting::currency()}} {{$income->price}}</td>
                                 <th></th>
                             </tr>
                         @endforeach

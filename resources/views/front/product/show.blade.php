@@ -80,6 +80,12 @@
                                  <a href="{{route('product.show',$product->uuid)}}" itemprop="url"><span itemprop="name">{{@$product->category->name}}</span></a>
                               </p>
                               <h1 class="productView-title" itemprop="name">{{$product->name}}</h1>
+                              @if($product->user_id  && !@$product->user->hide_profile)
+                              <p class="productView-brand" itemprop="brand" itemscope itemtype="http://schema.org/Brand">
+                                 Product of: <a href="{{route('product.user',$product->user_id)}}" itemprop="url">{{@$product->user->name}}</a>
+                              </p>
+                              @endif
+
                               <div class="productView-price">
                                  <div class="price-section price-section--withoutTax "  itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                     <meta itemprop="availability" itemtype="http://schema.org/ItemAvailability" content="http://schema.org/InStock">
@@ -89,7 +95,7 @@
                                        <meta itemprop="priceCurrency" content="USD">
                                        <meta itemprop="valueAddedTaxIncluded" content="false">
                                     </div>
-                                    <span data-product-price-without-tax class="price price--withoutTax">$ {{$product->price}}</span>
+                                    <span data-product-price-without-tax class="price price--withoutTax">{{App\Models\Setting::currency()}} {{$product->price}}</span>
                                     {{-- <span data-product-price-without-tax class="price price--noSaleWithoutTax">$340.00</span> --}}
                                  </div>
                               </div>
@@ -127,8 +133,8 @@
                                     <dd class="productView-info-value"><a href="{{route('city.show',str_replace(' ', '_',@$product->city->name))}}" itemprop="url"><span itemprop="name">{{@$product->stock}}</span></a></dd>
                                     @endif
                                     @if($product->user_id  && !@$product->user->hide_profile)
-                                       <dt class="productView-info-name">Product Of</dt>
-                                       <dd class="productView-info-value"><a href="{{route('product.user',$product->user_id)}}" itemprop="url" style="color:blue;"><span itemprop="name">{{@$product->user->name}}</span></a></dd>
+                                       {{-- <dt class="productView-info-name">Product Of</dt>
+                                       <dd class="productView-info-value"><a href="{{route('product.user',$product->user_id)}}" itemprop="url" style="color:blue;"><span itemprop="name">{{@$product->user->name}}</span></a></dd> --}}
                                        @if($product->user->address)
                                           <dt class="productView-info-name">Address :</dt>
                                           <dd class="productView-info-value"><a href="https://www.google.com.sa/maps/search/{{@$product->user->address}}?hl=en"  style="color:green;" target="_blank" itemprop="url"><span itemprop="name">{{@$product->user->address}}</span></a></dd>

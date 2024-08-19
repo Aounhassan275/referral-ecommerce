@@ -56,7 +56,7 @@
 							<a href="{{route('product.show',$product->uuid)}}">{{$product->name}}</a>
 						</h4>
 						<div class="price-section price-section--withoutTax ">
-							<span data-product-price-without-tax class="price price--withoutTax">$ {{$product->price}}</span>
+							<span data-product-price-without-tax class="price price--withoutTax">{{App\Models\Setting::currency()}} {{$product->price}}</span>
 						</div>
 						<div class="description"> {!! substr( $product->name, 0, 50) !!}... </div>
 						<div class="product-colors" data-product-id="130"></div>

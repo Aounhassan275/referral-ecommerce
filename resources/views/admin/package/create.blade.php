@@ -26,6 +26,28 @@
                         </div>
                    </div>
                    <div class="row">
+                        <div class="form-group col-4">
+                            <label class="form-label">Package 10 % Sale</label>
+                            <input type="text" name="ten_percent_sale" class="form-control" placeholder="Package Name">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Package 20 % Sale</label>
+                            <input type="number" class="form-control" name="twenty_percent_sale"  placeholder="Package 20 % Sale">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Package 30 % Sale</label>
+                            <input type="number" class="form-control" name="thirty_percent_sale"  placeholder="Package 30 % Sale">
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label">Package 40 % Sale</label>
+                            <input type="number" class="form-control" name="fourty_percent_sale"  placeholder="Package 40 % Sale">
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label">Package 50 % Sale</label>
+                            <input type="number" class="form-control" name="fifty_percent_sale"  placeholder="Package 50 % Sale">
+                        </div>
+                   </div>
+                   <div class="row">
                         <div class="form-group col-3">
                             <label class="form-label">Total Direct Income</label>
                             <input type="number" class="form-control" name="direct_income"  placeholder="Total Direct Income" value="">

@@ -8,13 +8,13 @@
         <div class="alert bg-info text-white alert-styled-right alert-dismissible">
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
             <span class="font-weight-semibold">
-            Alert!</span>Your Purcashing product name {{$product->name}} which price is $ {{$product->price}}
+            Alert!</span>Your Purcashing product name {{$product->name}} which price is {{App\Models\Setting::currency()}} {{$product->price}}
             @if(App\Models\Setting::orderFee() > 0)
-            and order Fee Will be $ {{ $product->price/100 * App\Models\Setting::orderFee()}}.
+            and order Fee Will be {{App\Models\Setting::currency()}} {{ $product->price/100 * App\Models\Setting::orderFee()}}.
             @else 
             .
             @endif
-            So,you must have $ {{$product->price + $product->price/100 * App\Models\Setting::orderFee()}} in your cash wallet to purchase this product.
+            So,you must have {{App\Models\Setting::currency()}} {{$product->price + $product->price/100 * App\Models\Setting::orderFee()}} in your cash wallet to purchase this product.
         </div>
     </div>
 </div>

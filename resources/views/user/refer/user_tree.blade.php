@@ -13,7 +13,7 @@
                 </div>
 
                 <h6 class="font-weight-semibold mb-0">{{$user->name}}</h6>
-                <span class="d-block text-muted">$ {{$user->balance}}</span>
+                <span class="d-block text-muted">{{App\Models\Setting::currency()}} {{$user->balance}}</span>
             </div>
 
             <div class="card-footer d-flex justify-content-around text-center p-0">
@@ -59,7 +59,7 @@
                 </div>
 
                 <h6 class="font-weight-semibold mb-0">{{$up->name}}</h6>
-                <span class="d-block text-muted">$ {{$up->balance}}</span>
+                <span class="d-block text-muted">{{App\Models\Setting::currency()}} {{$up->balance}}</span>
             </div>
 
             <div class="card-footer d-flex justify-content-around text-center p-0">
@@ -103,7 +103,7 @@
                 </div>
 
                 <h6 class="font-weight-semibold mb-0">{{$down->name}}</h6>
-                <span class="d-block text-muted">$ {{$down->balance}}</span>
+                <span class="d-block text-muted">{{App\Models\Setting::currency()}} {{$down->balance}}</span>
             </div>
 
             <div class="card-footer d-flex justify-content-around text-center p-0">

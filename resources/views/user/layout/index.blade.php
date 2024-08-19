@@ -82,8 +82,8 @@
 				</li>
 			</ul>
 
-			<button type="button" class="btn btn-success ml-md-3 mr-md-auto">Cash Wallet : $ {{Auth::user()->cash_wallet}}</button>
-			{{-- <button type="button" class="btn btn-info ml-md-3">Sale Reward : $ {{Auth::user()->sale_reward}}</button> --}}
+			<button type="button" class="btn btn-success ml-md-3 mr-md-auto">Cash Wallet : {{App\Models\Setting::currency()}} {{Auth::user()->cash_wallet}}</button>
+			{{-- <button type="button" class="btn btn-info ml-md-3">Sale Reward : {{App\Models\Setting::currency()}} {{Auth::user()->sale_reward}}</button> --}}
 			<a href="{{url('/')}}">
 				<button type="button" class="btn btn-primary ml-md-3">Go-to Product</button>
 			</a>

@@ -33,12 +33,12 @@
                                     <img src="{{asset('front/image/places-icon-1.png')}}" alt="#">
                                 </div>
                                 <div class="part-prize">
-                                    <span class="percentage"><b>$ {{$package->price}}</b></span>
+                                    <span class="percentage"><b>{{App\Models\Setting::currency()}} {{$package->price}}</b></span>
                                     <h4 class="min-max">
-                                        {{-- <span class="left">Max Income Till Upline : <b>$ {{$package->direct_income}}</b></span> --}}
+                                        {{-- <span class="left">Max Income Till Upline : <b>{{App\Models\Setting::currency()}} {{$package->direct_income}}</b></span> --}}
                                         {{-- <br> --}}
                                         {{-- <br> --}}
-                                        {{-- <span class="right">Community Income: <b>$ {{$package->community_income}}</b></span> --}}
+                                        {{-- <span class="right">Community Income: <b>{{App\Models\Setting::currency()}} {{$package->community_income}}</b></span> --}}
                                     </h4>
                                 </div>
                                 <div class="single-image">

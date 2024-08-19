@@ -32,7 +32,7 @@
             <tr> 
                 <td>{{$key+1}}</td>
                 <td>{{$post_purchase->post->name}}</td>
-                <td>$ {{$post_purchase->amount}}</td>
+                <td>{{App\Models\Setting::currency()}} {{$post_purchase->amount}}</td>
                 <td><a href="{{route('product.user',$post_purchase->owner_id)}}"> {{@$post_purchase->owner->name}}</a></td>
                 <td>
                     @if($post_purchase->post_installement_id)

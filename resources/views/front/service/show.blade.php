@@ -124,13 +124,13 @@
                     <div class="single-products">
                             <div class="productinfo text-center">
                                 <img src="{{asset(@$product->images->first()->image)}}" alt="" />
-                                <h2>$ {{@$product->price}}</h2>
+                                <h2>{{App\Models\Setting::currency()}} {{@$product->price}}</h2>
                                 <p>{!! substr( $product->name, 0, 30) !!}</p>
                                 <a href="{{route('product.show',$product->uuid)}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Buy</a>
                             </div>
                             <div class="product-overlay">
                                 <div class="overlay-content">
-                                    <h2>$ {{@$product->price}}</h2>
+                                    <h2>{{App\Models\Setting::currency()}} {{@$product->price}}</h2>
                                     <p>{!! substr( $product->name, 0, 30) !!}</p>
                                     <a href="{{route('product.show',$product->uuid)}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Buy</a>
                                 </div>

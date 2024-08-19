@@ -38,7 +38,7 @@
                     @endif
                 </td>
                 <td><a href="{{route('product.user',$payment->user_id)}}"> {{@$payment->user->name}}</a></td>
-                <td>$ {{$payment->amount}}</td>
+                <td>{{App\Models\Setting::currency()}} {{$payment->amount}}</td>
                 <td>{{@$payment->created_at}}</td>
             </tr>
             @endforeach

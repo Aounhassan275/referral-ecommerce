@@ -25,7 +25,7 @@
                         @php  
                             $company_account= App\Models\CompanyAccount::find(1);
                         @endphp
-                        <h3 class="mb-2">$ {{number_format(@$company_account->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$company_account->balance, 2)}}</h3>
 
                         <div class="mb-0">Company Account Balance</div>
 
@@ -56,7 +56,7 @@
                         @php  
                         $flush_account= App\Models\CompanyAccount::find(2);
                         @endphp
-                        <h3 class="mb-2">$ {{number_format(@$flush_account->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$flush_account->balance, 2)}}</h3>
 
                         <div class="mb-0">Flush Account Balance</div>
 
@@ -87,7 +87,7 @@
                         @php  
                             $team_leader= App\Models\CompanyAccount::where('name','Team Leader')->first();
                         @endphp
-                        <h3 class="mb-2">$ {{number_format(@$team_leader->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$team_leader->balance, 2)}}</h3>
 
                         <div class="mb-0">Team Leader Account Balance</div>
 
@@ -118,7 +118,7 @@
                         @php  
                             $salary_account= App\Models\CompanyAccount::where('name','Salary Account')->first();
                         @endphp
-                        <h3 class="mb-2">$ {{number_format(@$salary_account->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$salary_account->balance, 2)}}</h3>
 
                         <div class="mb-0">Salary Account Balance</div>
 
@@ -149,7 +149,7 @@
                         @php  
                             $new_account= App\Models\CompanyAccount::where('name','New Account')->first();
                         @endphp
-                        <h3 class="mb-2">$ {{number_format(@$new_account->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$new_account->balance, 2)}}</h3>
 
                         <div class="mb-0">New Account Balance</div>
 
@@ -180,7 +180,7 @@
                         @php  
                             $pool_account= App\Models\CompanyAccount::where('name','Pool Income')->first();
                         @endphp
-                        <h3 class="mb-2">$ {{number_format(@$pool_account->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$pool_account->balance, 2)}}</h3>
 
                         <div class="mb-0">Pool Account Balance</div>
 
@@ -209,7 +209,7 @@
                     </div>
 
                     <div class="media-body">
-                        <h3 class="mb-2">$ {{Auth::user()->purchase_packages()}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{Auth::user()->purchase_packages()}}</h3>
 
                         <div class="mb-0">Purchased Packages</div>
 
@@ -242,7 +242,7 @@
                         @php  
                             $gift= App\Models\CompanyAccount::where('name','Gift')->first();
                         @endphp
-                        <h3 class="mb-2">$ {{number_format(@$gift->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$gift->balance, 2)}}</h3>
 
                         <div class="mb-0">Gift Account Balance</div>
 
@@ -275,7 +275,7 @@
                         @php  
                             $trade_income= App\Models\CompanyAccount::where('name','Trade Income')->first();
                         @endphp
-                        <h3 class="mb-2">$ {{number_format(@$trade_income->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$trade_income->balance, 2)}}</h3>
                         <div class="mb-0">Trade Income</div>
                     </div>
 
@@ -301,7 +301,7 @@
                     </div>
 
                     <div class="media-body">
-                        <h3 class="mb-2">$ {{App\Models\User::active()->sum('cash_wallet')}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{App\Models\User::active()->sum('cash_wallet')}}</h3>
 
                         <div class="mb-0">User Cash Wallet</div>
 
@@ -329,7 +329,7 @@
                     </div>
 
                     <div class="media-body">
-                        <h3 class="mb-2">$ {{App\Models\User::active()->sum('total_income')}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{App\Models\User::active()->sum('total_income')}}</h3>
 
                         <div class="mb-0">User Temp Income</div>
 

@@ -28,7 +28,7 @@
             @foreach ($pins as $key => $pin)
             <tr>
                 <td>{{$key+1}}</td>
-                <td>$ {{$pin->pin->amount}}</td>
+                <td>{{App\Models\Setting::currency()}} {{$pin->pin->amount}}</td>
                 <td>{{$pin->user->name}}</td>
                 <td>{{$pin->created_at->format('M d,Y')}}</td>
             </tr>

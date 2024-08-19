@@ -32,7 +32,7 @@
             <tr> 
                 <td>{{$key+1}}</td>
                 <td>{{$order->product->name}}</td>
-                <td>$ {{$order->product->price}}</td>
+                <td>{{App\Models\Setting::currency()}} {{$order->product->price}}</td>
                 <td><a href="{{route('product.user',$order->user_id)}}"> {{@$order->user->name}}</a></td>
                 <td>{{@$order->address}}</td>
                 <td>{{@$order->payment_option}}</td>

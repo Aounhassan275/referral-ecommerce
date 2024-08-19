@@ -28,7 +28,12 @@ class Package extends Model
         'renew_self_rebirth',
         'renew_self_associate',
         'renew_direct_rebirth',
-        'renew_direct_associate'
+        'renew_direct_associate',
+        'ten_percent_sale',
+        'twenty_percent_sale',
+        'thirty_percent_sale',
+        'fourty_percent_sale',
+        'fifty_percent_sale',
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveAImage($value,'/package/');

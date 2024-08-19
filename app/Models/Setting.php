@@ -167,4 +167,7 @@ class Setting extends Model
     public static function profileAboutContent3Url(){
         return (new static)::where('name','Profile About Content 3 Url')->first()->value ?? '';
     }
+    public static function currency(){
+        return (new static)::where('name','Currency')->first()->value ?? 'PKR';
+    }
 }

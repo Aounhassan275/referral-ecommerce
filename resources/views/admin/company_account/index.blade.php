@@ -47,7 +47,7 @@
                 <tr>
                     <td>{{$key+1}}</td>
                     <td>{{$account->name}}</td>
-                    <td>$ {{$account->balance}}</td>
+                    <td>{{App\Models\Setting::currency()}} {{$account->balance}}</td>
                 </tr>
                 @endforeach
             </tbody>

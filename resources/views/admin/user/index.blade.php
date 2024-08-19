@@ -38,11 +38,11 @@
                         <td>{{$key+1}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>$ {{$user->cash_wallet}}</td>
-                        <td>$ {{$user->total_income}}</td>
-                        <td>$ {{$user->community_pool}}</td>
-                        <td>$ {{$user->investment_amount}}</td>
-                        <td>$ {{$user->totalEarning()}}</td>
+                        <td>{{App\Models\Setting::currency()}} {{$user->cash_wallet}}</td>
+                        <td>{{App\Models\Setting::currency()}} {{$user->total_income}}</td>
+                        <td>{{App\Models\Setting::currency()}} {{$user->community_pool}}</td>
+                        <td>{{App\Models\Setting::currency()}} {{$user->investment_amount}}</td>
+                        <td>{{App\Models\Setting::currency()}} {{$user->totalEarning()}}</td>
                         <td>{{$user->refer_by_name($user->refer_by)}}</td>
                         <td>{{$user->refer_by_name($user->referral)}}</td>
                         @if ($user->package)

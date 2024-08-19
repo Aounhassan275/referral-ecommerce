@@ -47,7 +47,7 @@ DASHBOARD
         <div class="card card-body bg-blue-400 has-bg-image">
             <div class="media">
                 <div class="media-body">
-                    <h3 class="mb-0">$ {{Auth::user()->cash_wallet}}</h3>
+                    <h3 class="mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->cash_wallet}}</h3>
                     <span class="text-uppercase font-size-xs">Cash Wallet</span>
                 </div>
 
@@ -62,7 +62,7 @@ DASHBOARD
         <div class="card card-body bg-danger-400 has-bg-image">
             <div class="media">
                 <div class="media-body">
-                    <h3 class="mb-0">$ {{Auth::user()->directIncome->sum('price')}}</h3>
+                    <h3 class="mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->directIncome->sum('price')}}</h3>
                     <span class="text-uppercase font-size-xs">Direct Reward</span>
                 </div>
 
@@ -81,7 +81,7 @@ DASHBOARD
                 </div>
 
                 <div class="media-body text-right">
-                    <h3 class="mb-0">$ {{Auth::user()->getCompanyReward()}}</h3>
+                    <h3 class="mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->getCompanyReward()}}</h3>
                     <span class="text-uppercase font-size-xs">In-direct Reward</span>
                 </div>
             </div>
@@ -108,7 +108,7 @@ DASHBOARD
         <div class="card card-body bg-violet-400 has-bg-image">
             <div class="media">
                 <div class="media-body">
-                    <h3 class="mb-0">$ {{App\Models\PostSale::where('receiver_id',Auth::user()->id)->sum('amount')}}</h3>
+                    <h3 class="mb-0">{{App\Models\Setting::currency()}} {{App\Models\PostSale::where('receiver_id',Auth::user()->id)->sum('amount')}}</h3>
                     <span class="text-uppercase font-size-xs">Total Purchase</span>
                 </div>
 
@@ -123,7 +123,7 @@ DASHBOARD
         <div class="card card-body bg-brown-400 has-bg-image">
             <div class="media">
                 <div class="media-body">
-                    <h3 class="mb-0">$ {{Auth::user()->rewardIncome->sum('price')}}</h3>
+                    <h3 class="mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->rewardIncome->sum('price')}}</h3>
                     <span class="text-uppercase font-size-xs">Purchase Reward</span>
                 </div>
 
@@ -277,7 +277,7 @@ DASHBOARD
                                 <td>{{$income->type}}</td>
                                 <td>{{$income->user->refer_by_name($income->due_to)}}</td>
                                 <td>{{$income->created_at->format('d M,Y')}}</td>
-                                <td>$ {{$income->price}}</td>
+                                <td>{{App\Models\Setting::currency()}} {{$income->price}}</td>
                                 <th></th>
                             </tr>
                         @endforeach

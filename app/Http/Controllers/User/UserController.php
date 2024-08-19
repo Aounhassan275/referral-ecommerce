@@ -8,6 +8,7 @@ use App\Helpers\UserHepler;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyAccount;
 use App\Models\Earning;
+use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserImages;
 use Illuminate\Http\Request;
@@ -279,7 +280,7 @@ class UserController extends Controller
         {
             return response()->json([
                 'status' => false,
-                'message' => 'Amount must be $ 2 or more'
+                'message' => 'Amount must be '.Setting::currency().' 2 or more'
             ]);
            
         }
@@ -353,7 +354,7 @@ class UserController extends Controller
         {
             return response()->json([
                 'status' => false,
-                'message' => 'Amount must be $ 2 or more'
+                'message' => 'Amount must be '.Setting::currency().'2 or more'
             ]);
            
         }

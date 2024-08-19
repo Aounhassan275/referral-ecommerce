@@ -307,7 +307,7 @@
             <div class="row gy-5">
               @foreach($products as $allProduct)
               <div class="col-lg-3 menu-item">
-                <a href="{{route('product.show',str_replace(' ', '_',$allProduct->name))}}" class="glightbox">
+                <a href="{{route('product.show',$allProduct->uuid)}}" class="glightbox">
                   <img src="{{asset($allProduct->images->first()->image)}}" class="menu-img img-fluid" alt="">
                 </a>
                 <h4>{{$allProduct->name}}</h4>
@@ -315,7 +315,7 @@
                   {!! substr( $allProduct->description, 0, 50) !!}...
                 </p>
                 <p class="price">
-                  $ {{$allProduct->price}}
+                  {{App\Models\Setting::currency()}} {{$allProduct->price}}
                 </p>
               </div>
               @endforeach
@@ -339,7 +339,7 @@
                   {!! substr( $product->description, 0, 50) !!}...
                 </p>
                 <p class="price">
-                  $ {{$product->price}}
+                  {{App\Models\Setting::currency()}} {{$product->price}}
                 </p>
               </div>
               @endforeach
