@@ -199,6 +199,35 @@
                             <input type="file" class="form-control" name="image" >
                         </div>
                    </div>
+                   <div class="row">
+                        <div class="col-12">
+                            <p><strong>Company Related Incomes</strong></p>
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Starter Package Income</label>
+                            <input type="text" name="starter_package_income" class="form-control" placeholder="Starter Package Income">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Salary Package Income</label>
+                            <input type="text" name="salary_package_income" class="form-control" placeholder="Salary Package Income">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Brand Package Income</label>
+                            <input type="text" name="brand_package_income" class="form-control" placeholder="Brand Package Income">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">New Account Income</label>
+                            <input type="text" name="company_new_account_income" class="form-control" placeholder="New Account Income">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Employee Account Income</label>
+                            <input type="text" name="company_employee_account_income" class="form-control"  placeholder="Employee Account Income">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Renew Income</label>
+                            <input type="text" name="company_renew_income" class="form-control"  placeholder="Renew Income">
+                        </div>
+                   </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>

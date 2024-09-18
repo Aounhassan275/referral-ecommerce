@@ -34,6 +34,12 @@ class Package extends Model
         'thirty_percent_sale',
         'fourty_percent_sale',
         'fifty_percent_sale',
+        'starter_package_income',
+        'salary_package_income',
+        'brand_package_income',
+        'company_new_account_income',
+        'company_employee_account_income',
+        'company_renew_income',
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveAImage($value,'/package/');

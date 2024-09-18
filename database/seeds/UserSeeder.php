@@ -256,6 +256,22 @@ class UserSeeder extends Seeder
             'name' => 'Pool Income',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()],
+            [ 
+            'name' => 'Starter Account',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()],
+            [ 
+            'name' => 'Brand Account',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()],
+            [ 
+            'name' => 'Employee Account',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()],
+            [ 
+            'name' => 'Renew Account',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()],
             
         ]);
         DB::table('settings')->insert([
@@ -332,6 +348,11 @@ class UserSeeder extends Seeder
             [ 
             'name' => 'Enable Category on Home',
             'value' => '1',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()],
+            [ 
+            'name' => 'Dashboard',
+            'value' => 'simple',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()],
         ]);

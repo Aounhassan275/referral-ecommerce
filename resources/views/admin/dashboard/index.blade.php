@@ -7,7 +7,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-3   d-xxl-flex">
+    <div class="col-md-4   d-xxl-flex">
 
         <div class="card flex-fill">
 
@@ -38,7 +38,7 @@
         </div>
 
     </div>
-    {{-- <div class="col-md-3   d-xxl-flex">
+    <div class="col-md-4   d-xxl-flex">
 
         <div class="card flex-fill">
 
@@ -54,11 +54,11 @@
 
                     <div class="media-body">
                         @php  
-                        $flush_account= App\Models\CompanyAccount::find(2);
+                        $starter_account= App\Models\CompanyAccount::where('name','Starter Account')->first();
                         @endphp
-                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$flush_account->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$starter_account->balance, 2)}}</h3>
 
-                        <div class="mb-0">Flush Account Balance</div>
+                        <div class="mb-0">Starter Account Balance</div>
 
                     </div>
 
@@ -69,7 +69,7 @@
         </div>
 
     </div>
-    <div class="col-md-3   d-xxl-flex">
+    <div class="col-md-4   d-xxl-flex">
 
         <div class="card flex-fill">
 
@@ -85,11 +85,11 @@
 
                     <div class="media-body">
                         @php  
-                            $team_leader= App\Models\CompanyAccount::where('name','Team Leader')->first();
+                            $brand_account= App\Models\CompanyAccount::where('name','Brand Account')->first();
                         @endphp
-                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$team_leader->balance, 2)}}</h3>
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$brand_account->balance, 2)}}</h3>
 
-                        <div class="mb-0">Team Leader Account Balance</div>
+                        <div class="mb-0">Brand Account Balance</div>
 
                     </div>
 
@@ -100,7 +100,7 @@
         </div>
 
     </div>
-    <div class="col-md-3   d-xxl-flex">
+    <div class="col-md-4   d-xxl-flex">
 
         <div class="card flex-fill">
 
@@ -130,8 +130,8 @@
 
         </div>
 
-    </div> --}}
-    <div class="col-md-3  d-xxl-flex">
+    </div>
+    <div class="col-md-4  d-xxl-flex">
 
         <div class="card flex-fill">
 
@@ -162,7 +162,69 @@
         </div>
 
     </div>
-    <div class="col-md-3  d-xxl-flex">
+    <div class="col-md-4  d-xxl-flex">
+
+        <div class="card flex-fill">
+
+            <div class="card-body py-4">
+
+                <div class="media">
+
+                    <div class="d-inline-block mt-2 mr-3">
+
+                        <i class="feather-lg text-danger" data-feather="dollar-sign"></i>
+
+                    </div>
+
+                    <div class="media-body">
+                        @php  
+                            $employeeAccount= App\Models\CompanyAccount::where('name','Employee Account')->first();
+                        @endphp
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$employeeAccount->balance, 2)}}</h3>
+
+                        <div class="mb-0">Employee Account Balance</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-md-4  d-xxl-flex">
+
+        <div class="card flex-fill">
+
+            <div class="card-body py-4">
+
+                <div class="media">
+
+                    <div class="d-inline-block mt-2 mr-3">
+
+                        <i class="feather-lg text-danger" data-feather="dollar-sign"></i>
+
+                    </div>
+
+                    <div class="media-body">
+                        @php  
+                            $renewAccount= App\Models\CompanyAccount::where('name','Renew Account')->first();
+                        @endphp
+                        <h3 class="mb-2">{{App\Models\Setting::currency()}} {{number_format(@$renewAccount->balance, 2)}}</h3>
+
+                        <div class="mb-0">Renew Account Balance</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-md-4  d-xxl-flex">
 
         <div class="card flex-fill">
 
@@ -194,7 +256,7 @@
 
     </div>
     
-    <div class="col-md-3  d-xxl-flex">
+    <div class="col-md-4  d-xxl-flex">
 
         <div class="card flex-fill">
 

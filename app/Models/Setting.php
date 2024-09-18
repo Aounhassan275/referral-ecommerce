@@ -170,4 +170,7 @@ class Setting extends Model
     public static function currency(){
         return (new static)::where('name','Currency')->first()->value ?? 'PKR';
     }
+    public static function dashboard(){
+        return (new static)::where('name','Dashboard')->first()->value ?? 'simple';
+    }
 }

@@ -212,7 +212,7 @@ class ReferralIncome
         $per_person_amount = $direct_team_income/20;
         info("Direct Team Income Amount Per Person : $per_person_amount"); 
         $direct_teams = $user->directTeamParents();
-        foreach($direct_teams as $direct_team)
+        foreach($direct_teams as $index => $direct_team)
         {
             $referral_account = User::where('referral',$direct_team->id)->first();
             if($referral_account)
@@ -221,6 +221,7 @@ class ReferralIncome
                     'price' => $per_person_amount,
                     'user_id' => $direct_team->id,
                     'due_to' => $due_to->id,
+                    'level' => $index+1,
                     'type' => 'direct_team_income'
                 ]);
                 if($direct_team->salary_type == 3)
@@ -512,6 +513,57 @@ class ReferralIncome
         $company_account->update([
             'balance' => $company_account->balance + $company_income,
         ]);
+        $starter_package_income = $price / 100 * $package->starter_package_income;
+        info("Total Starter Package Income Amount : $starter_package_income");
+        $starter_account= CompanyAccount::where('name','Starter Account')->first();
+        if($starter_account && $starter_package_income > 0){
+            $starter_account->update([
+                'balance' => $starter_account->balance + $starter_package_income,
+            ]);
+        }
+        $salary_package_income = $price / 100 * $package->salary_package_income;
+        info("Total Salary Package Income Amount : $salary_package_income");
+        $salary_account= CompanyAccount::where('name','Salary Account')->first();
+        if($salary_account && $salary_package_income > 0){
+            $salary_account->update([
+                'balance' => $salary_account->balance + $salary_package_income,
+            ]);
+        }
+        $brand_package_income = $price / 100 * $package->brand_package_income;
+        info("Total Brand Package Income Amount : $brand_package_income");
+        $brand_account= CompanyAccount::where('name','Brand Account')->first();
+        if($brand_account && $brand_package_income > 0){
+            $brand_account->update([
+                'balance' => $brand_account->balance + $brand_package_income,
+            ]);
+        }
+        $company_new_account_income = $price / 100 * $package->company_new_account_income;
+        info("Total Company New Account Income Amount : $company_new_account_income");
+        $new_account= CompanyAccount::where('name','New Account')->first();
+        if($new_account && $company_new_account_income > 0){
+            $new_account->update([
+                'balance' => $new_account->balance + $company_new_account_income,
+            ]);
+        }
+        $company_employee_account_income = $price / 100 * $package->company_employee_account_income;
+        info("Total Company employee Account Income Amount : $company_employee_account_income");
+        $employee_account= CompanyAccount::where('name','Employee Account')->first();
+        if($employee_account && $company_employee_account_income > 0){
+            $employee_account->update([
+                'balance' => $employee_account->balance + $company_employee_account_income,
+            ]);
+        }
+
+        $company_renew_income = $price / 100 * $package->company_renew_income;
+        info("Total Company Renew Account Income Amount : $company_renew_income");
+        $renew_account= CompanyAccount::where('name','Renew Account')->first();
+        if($renew_account && $company_renew_income > 0){
+            $renew_account->update([
+                'balance' => $renew_account->balance + $company_renew_income,
+            ]);
+        }
+
+
         // $employees = Admin::employee();
         // foreach($employees as $employee)
         // {

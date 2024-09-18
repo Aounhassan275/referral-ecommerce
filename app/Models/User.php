@@ -605,4 +605,64 @@ class User extends Authenticatable
         + $this->poolIncome->sum('price');
         return round($totalAmount,2);
     }
+    public function getReferralsInlast30Days()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        return User::query()->where('refer_by',$this->id)->whereDate('created_at','>=',$startDate)->where('status','active')->count();
+    }
+    public function getdirectRewardOflast30Days()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        return Earning::query()->where('user_id',$this->id)->where('type','direct_income')->whereDate('created_at','>=',$startDate)->sum('price');
+    }
+    public function getTradeIncomeOflast30Days()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        return Earning::query()->where('user_id',$this->id)->where('type','trade_income')->whereDate('created_at','>=',$startDate)->sum('price');
+    }
+    public function getLast16LevelsDirectTeamIncome()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        return Earning::query()->where('user_id',$this->id)
+                            ->where('type','direct_team_income')
+                            ->where('level','>',4)
+                            ->whereDate('created_at','>=',$startDate)
+                            ->sum('price');
+    }
+    public function getAMDirectTeamIncome()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        return Earning::query()->where('user_id',$this->id)
+                            ->where('type','direct_team_income')
+                            ->where('level',1)
+                            ->whereDate('created_at','>=',$startDate)
+                            ->sum('price');
+    }
+    public function getZMDirectTeamIncome()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        return Earning::query()->where('user_id',$this->id)
+                            ->where('type','direct_team_income')
+                            ->where('level',2)
+                            ->whereDate('created_at','>=',$startDate)
+                            ->sum('price');
+    }
+    public function getRMDirectTeamIncome()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        return Earning::query()->where('user_id',$this->id)
+                            ->where('type','direct_team_income')
+                            ->where('level',3)
+                            ->whereDate('created_at','>=',$startDate)
+                            ->sum('price');
+    }
+    public function getMDDirectTeamIncome()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        return Earning::query()->where('user_id',$this->id)
+                            ->where('type','direct_team_income')
+                            ->where('level',4)
+                            ->whereDate('created_at','>=',$startDate)
+                            ->sum('price');
+    }
 }
