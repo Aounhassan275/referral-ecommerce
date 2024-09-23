@@ -40,6 +40,7 @@ class Package extends Model
         'company_new_account_income',
         'company_employee_account_income',
         'company_renew_income',
+        'fake_price',
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveAImage($value,'/package/');

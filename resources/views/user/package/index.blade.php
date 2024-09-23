@@ -18,7 +18,10 @@ PACKAGE SUBSRIPTION
                         @endif
                     </div>
                     <h6 class="font-weight-semibold mb-0">{{$package->name}}</h6>
-                    <span class="d-block opacity-75">{{App\Models\Setting::currency()}} {{$package->price}} /-</span>
+                    <h6 class="font-weight-semibold mb-0">{{App\Models\Setting::currency()}}  {{$package->price}} /-</h6>
+                    @if($package->fake_price > 0)
+                    <span class="d-block opacity-75"><del>{{App\Models\Setting::currency()}} {{$package->fake_price}} /-</del></span>
+                    @endif
                     
                     <div class="list-icons list-icons-extended mt-3">
                         @if(Auth::user()->cash_wallet >= $package->price)
@@ -44,7 +47,7 @@ PACKAGE SUBSRIPTION
                     @endif
                 </div>
                 <h6 class="font-weight-semibold mb-0">{{$package->name}}</h6>
-                <span class="d-block opacity-75">{{App\Models\Setting::currency()}} {{$package->price}} /-</span>
+                <span class="d-block opacity-75">{{App\Models\Setting::currency()}} <del>{{$package->fake_price}}</del> {{$package->price}} /-</span>
                 
                 <div class="list-icons list-icons-extended mt-3">
                     @if(Auth::user()->cash_wallet >= $package->price)

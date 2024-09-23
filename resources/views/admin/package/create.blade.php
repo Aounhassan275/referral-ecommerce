@@ -16,13 +16,17 @@
                 <form method="POST" action="{{route('admin.package.store')}}" enctype="multipart/form-data">
                    @csrf
                    <div class="row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label class="form-label">Package Name</label>
                             <input type="text" name="name" class="form-control" placeholder="Package Name">
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label class="form-label">Package Price</label>
                             <input type="number" class="form-control" name="price"  placeholder="Package Price">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Package Fake Price</label>
+                            <input type="number" class="form-control" name="fake_price"  placeholder="Package Fake Price">
                         </div>
                    </div>
                    <div class="row">
@@ -208,22 +212,26 @@
                             <input type="text" name="starter_package_income" class="form-control" placeholder="Starter Package Income">
                         </div>
                         <div class="form-group col-4">
+                            <label class="form-label">Seller Package Income</label>
+                            <input type="text" name="seller_package_income" class="form-control" placeholder="Seller Package Income">
+                        </div>
+                        <div class="form-group col-4">
                             <label class="form-label">Salary Package Income</label>
                             <input type="text" name="salary_package_income" class="form-control" placeholder="Salary Package Income">
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             <label class="form-label">Brand Package Income</label>
                             <input type="text" name="brand_package_income" class="form-control" placeholder="Brand Package Income">
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             <label class="form-label">New Account Income</label>
                             <input type="text" name="company_new_account_income" class="form-control" placeholder="New Account Income">
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             <label class="form-label">Employee Account Income</label>
                             <input type="text" name="company_employee_account_income" class="form-control"  placeholder="Employee Account Income">
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             <label class="form-label">Renew Income</label>
                             <input type="text" name="company_renew_income" class="form-control"  placeholder="Renew Income">
                         </div>

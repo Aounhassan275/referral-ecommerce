@@ -16,25 +16,37 @@
                         <a href="{{url('admin/payment_distrubtion_of_trade_income')}}" class="btn btn-info " style="margin-top:10px;">Transfer Trade Income To Users</a>
                     </div>
                     <div class="col-4">
-                        <a href="{{url('admin/upgrade_package')}}" class="btn btn-primary " style="margin-top:10px;">Upgrade Package</a>
+                        <a href="{{url('admin/upgrade_package')}}" class="btn btn-info " style="margin-top:10px;">Upgrade Package</a>
                     </div>
                     <div class="col-4">
-                        <a href="{{url('admin/payment_distrubtion')}}" class="btn btn-success " style="margin-top:10px;">Payment Distrubtion</a>
+                        <a href="{{url('admin/payment_distrubtion')}}" class="btn btn-info " style="margin-top:10px;">Payment Distrubtion</a>
                     </div>
                     <div class="col-4">
-                        <a href="{{url('admin/payment_distrubtion_for_assoiated_account')}}" class="btn btn-warning " style="margin-top:10px;">Payment Distrubtion For Assoiated Account</a>
+                        <a href="{{url('admin/payment_distrubtion_for_assoiated_account')}}" class="btn btn-danger " style="margin-top:10px;">Payment Distrubtion For Assoiated Account</a>
                     </div>
                     <div class="col-4">
                         <a href="{{url('admin/payment_distrubtion_for_associated_Users')}}" class="btn btn-danger" style="margin-top:10px;">Payment Distrubtion For Associated Users</a>
                     </div>
                     <div class="col-4">
-                        <a href="{{url('admin/add_user_to_super_pool')}}" class="btn btn-info" style="margin-top:10px;">Add User To Super Pool</a>
+                        <a href="{{url('admin/add_user_to_super_pool')}}" class="btn btn-danger" style="margin-top:10px;">Add User To Super Pool</a>
                     </div>
                     <div class="col-4">
-                        <a href="{{url('admin/add_user_rebirth_to_super_pool')}}" class="btn btn-info" style="margin-top:10px;">Add Rebirth User To Super Pool</a>
+                        <a href="{{url('admin/add_user_rebirth_to_super_pool')}}" class="btn btn-primary" style="margin-top:10px;">Add Rebirth User To Super Pool</a>
                     </div>
                     <div class="col-4">
-                        <a href="{{url('admin/transfer_temp_amount')}}" class="btn btn-info" style="margin-top:10px;">Transfer Temp Amount</a>
+                        <a href="{{url('admin/transfer_temp_amount')}}" class="btn btn-primary" style="margin-top:10px;">Transfer Temp Amount</a>
+                    </div>
+                    <div class="col-4">
+                        <a href="{{url('admin/starter_package_reward_payment')}}" class="btn btn-primary" style="margin-top:10px;">Starter Package Reward Transfer</a>
+                    </div>
+                    <div class="col-4">
+                        <a href="{{url('admin/seller_package_reward_payment')}}" class="btn btn-warning" style="margin-top:10px;">Seller Package Reward Transfer</a>
+                    </div>
+                    <div class="col-4">
+                        <a href="{{url('admin/brand_package_reward_payment')}}" class="btn btn-warning" style="margin-top:10px;">Brand Package Reward Transfer</a>
+                    </div>
+                    <div class="col-4">
+                        <a href="{{url('admin/salary_account_payment')}}" class="btn btn-warning" style="margin-top:10px;">Trade Rank Reward Transfer</a>
                     </div>
                 </div>
             </div>

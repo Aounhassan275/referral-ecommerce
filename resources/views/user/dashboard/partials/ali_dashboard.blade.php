@@ -38,8 +38,8 @@
                 </div>
 
                 <div class="media-body text-right">
-                    <h3 class="mb-0">0</h3>
-                    <span class="text-uppercase font-size-xs">Trade Rank</span>
+                    <h3 class="mb-0">{{App\Models\Setting::currency()}} {{Auth::user()->tradeRankReward->sum('price')}}</h3>
+                    <span class="text-uppercase font-size-xs">Trade Rank Reward</span>
                 </div>
             </div>
         </div>
@@ -236,7 +236,7 @@
             <div class="media mb-3">
                 <div class="media-body">
                     <h6 class="font-weight-semibold mb-0">Starter Package Reward</h6>
-                    <span class="opacity-75">{{App\Models\Setting::currency()}}</span>
+                    <span class="opacity-75">{{App\Models\Setting::currency()}} {{Auth::user()->getStarterPackageReward()}}</span>
                 </div>
 
                 <div class="ml-3 align-self-center">
@@ -255,8 +255,8 @@
         <div class="card card-body bg-purple-400 has-bg-image">
             <div class="media mb-3">
                 <div class="media-body">
-                    <h6 class="font-weight-semibold mb-0">Salary Package Reward</h6>
-                    <span class="opacity-75">{{App\Models\Setting::currency()}}</span>
+                    <h6 class="font-weight-semibold mb-0">Seller Package Reward</h6>
+                    <span class="opacity-75">{{App\Models\Setting::currency()}} {{Auth::user()->getSellerPackageReward()}}</span>
                 </div>
 
                 <div class="ml-3 align-self-center">
@@ -280,7 +280,7 @@
 
                 <div class="media-body">
                     <h6 class="font-weight-semibold mb-0">Brand Package Reward</h6>
-                    <span class="opacity-75">{{App\Models\Setting::currency()}}</span>
+                    <span class="opacity-75">{{App\Models\Setting::currency()}} {{Auth::user()->getBrandPackageReward()}}</span>
                 </div>
             </div>
 
@@ -300,7 +300,7 @@
 
                 <div class="media-body">
                     <h6 class="font-weight-semibold mb-0">Total Trade Reward</h6>
-                    <span class="opacity-75">{{App\Models\Setting::currency()}}</span>
+                    <span class="opacity-75">{{App\Models\Setting::currency()}} {{Auth::user()->tradeIncome->sum('price')}}</span>
                 </div>
             </div>
 

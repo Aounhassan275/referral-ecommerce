@@ -272,6 +272,10 @@ class UserSeeder extends Seeder
             'name' => 'Renew Account',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()],
+            [ 
+            'name' => 'Seller Account',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()],
             
         ]);
         DB::table('settings')->insert([

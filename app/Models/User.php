@@ -161,6 +161,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Earning::class)->where('type','trade_income');
     }
+    public function tradeRankReward()
+    {
+        return $this->hasMany(Earning::class)->where('type','trade_rank_reward');
+    }
     public function directIncome()
     {
         return $this->hasMany(Earning::class)->where('type','direct_income');
@@ -662,6 +666,30 @@ class User extends Authenticatable
         return Earning::query()->where('user_id',$this->id)
                             ->where('type','direct_team_income')
                             ->where('level',4)
+                            ->whereDate('created_at','>=',$startDate)
+                            ->sum('price');
+    }
+    public function getStarterPackageReward()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        return Earning::query()->where('user_id',$this->id)
+                            ->where('type','starter_package_reward')
+                            ->whereDate('created_at','>=',$startDate)
+                            ->sum('price');
+    }
+    public function getSellerPackageReward()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        return Earning::query()->where('user_id',$this->id)
+                            ->where('type','seller_package_reward')
+                            ->whereDate('created_at','>=',$startDate)
+                            ->sum('price');
+    }
+    public function getBrandPackageReward()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        return Earning::query()->where('user_id',$this->id)
+                            ->where('type','brand_package_reward')
                             ->whereDate('created_at','>=',$startDate)
                             ->sum('price');
     }

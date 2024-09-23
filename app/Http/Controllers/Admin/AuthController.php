@@ -395,4 +395,144 @@ class AuthController extends Controller
             ]);
         }
     }
+    public function starter_package_reward_payment()
+    {
+        $users = User::whereNotNull('package_id')
+                ->whereNotIn('type',['fake','rebirth'])
+                ->get();
+        $starter_income= CompanyAccount::where('name','Starter Account')->first();
+		if ($users) {
+            $total_users = $users->count();
+            $starter_balance = $starter_income->balance/10;
+            $amount = round($starter_balance/$total_users,2);
+            info("Payment Distrubtion of Starter Package Reward CRONJOB Total Users : $total_users");
+            foreach($users as $user)
+            {
+                info("Payment Distrubtion of Starter Package Reward CRONJOB User : $user->name");
+                Earning::create([
+                    'price' => $amount,
+                    'user_id' => $user->id,
+                    'type' => 'starter_package_reward'
+                ]);
+                
+                $user->update([
+                    'total_income' => $user->total_income + $amount
+                ]);
+                info("Payment Distrubtion of Starter Package Reward CRONJOB For User $user->name : Amount $amount Added to flush company Account");  
+            }
+            $starter_income->update([
+                'balance' => $starter_income->balance -= $starter_balance 
+            ]);
+		} else {
+			info("Payment Distrubtion of Starter Package Reward CRONJOB: Users not found. ");
+		}
+		info("Payment Distrubtion of Starter Package Reward CRONJOB END AT " . date("d-M-Y h:i a"));
+        toastr()->success('Payment Distribution of Starter Package Reward Done Successfully');
+        return back();
+    }
+    public function seller_package_reward_payment()
+    {
+        $users = User::whereNotNull('package_id')
+                ->whereNotIn('type',['fake','rebirth'])
+                ->get();
+        $seller_income= CompanyAccount::where('name','Seller Account')->first();
+		if ($users) {
+            $total_users = $users->count();
+            $seller_balance = $seller_income->balance/10;
+            $amount = round($seller_balance/$total_users,2);
+            info("Payment Distrubtion of seller Package Reward CRONJOB Total Users : $total_users");
+            foreach($users as $user)
+            {
+                info("Payment Distrubtion of seller Package Reward CRONJOB User : $user->name");
+                Earning::create([
+                    'price' => $amount,
+                    'user_id' => $user->id,
+                    'type' => 'seller_package_reward'
+                ]);
+                
+                $user->update([
+                    'total_income' => $user->total_income + $amount
+                ]);
+                info("Payment Distrubtion of seller Package Reward CRONJOB For User $user->name : Amount $amount Added to flush company Account");  
+            }
+            $seller_income->update([
+                'balance' => $seller_income->balance -= $seller_balance 
+            ]);
+		} else {
+			info("Payment Distrubtion of seller Package Reward CRONJOB: Users not found. ");
+		}
+		info("Payment Distrubtion of seller Package Reward CRONJOB END AT " . date("d-M-Y h:i a"));
+        toastr()->success('Payment Distribution of seller Package Reward Done Successfully');
+        return back();
+    }
+    public function brand_package_reward_payment()
+    {
+        $users = User::whereNotNull('package_id')
+                ->whereNotIn('type',['fake','rebirth'])
+                ->get();
+        $brand_income= CompanyAccount::where('name','Brand Account')->first();
+		if ($users) {
+            $total_users = $users->count();
+            $brand_balance = $brand_income->balance/10;
+            $amount = round($brand_balance/$total_users,2);
+            info("Payment Distrubtion of brand Package Reward CRONJOB Total Users : $total_users");
+            foreach($users as $user)
+            {
+                info("Payment Distrubtion of brand Package Reward CRONJOB User : $user->name");
+                Earning::create([
+                    'price' => $amount,
+                    'user_id' => $user->id,
+                    'type' => 'brand_package_reward'
+                ]);
+                
+                $user->update([
+                    'total_income' => $user->total_income + $amount
+                ]);
+                info("Payment Distrubtion of brand Package Reward CRONJOB For User $user->name : Amount $amount Added to flush company Account");  
+            }
+            $brand_income->update([
+                'balance' => $brand_income->balance -= $brand_balance 
+            ]);
+		} else {
+			info("Payment Distrubtion of brand Package Reward CRONJOB: Users not found. ");
+		}
+		info("Payment Distrubtion of brand Package Reward CRONJOB END AT " . date("d-M-Y h:i a"));
+        toastr()->success('Payment Distribution of brand Package Reward Done Successfully');
+        return back();
+    }
+    public function salary_account_payment()
+    {
+        $users = User::whereNotNull('package_id')
+                ->whereIn('type',['Regional Manager','Zonal Manager','Area Manager','Field Manager','Seller','Managing Director'])
+                ->get();
+        $salary_account= CompanyAccount::where('name','Salary Account')->first();
+		if ($users) {
+            $total_users = $users->count();
+            $salary_balance = $salary_account->balance/10;
+            $amount = round($salary_balance/$total_users,2);
+            info("Payment Distrubtion of Salary Package Reward CRONJOB Total Users : $total_users");
+            foreach($users as $user)
+            {
+                info("Payment Distrubtion of Salary Package Reward CRONJOB User : $user->name");
+                Earning::create([
+                    'price' => $amount,
+                    'user_id' => $user->id,
+                    'type' => 'trade_rank_reward'
+                ]);
+                
+                $user->update([
+                    'total_income' => $user->total_income + $amount
+                ]);
+                info("Payment Distrubtion of Salary Package Reward CRONJOB For User $user->name : Amount $amount Added to flush company Account");  
+            }
+            $salary_account->update([
+                'balance' => $salary_account->balance -= $salary_account 
+            ]);
+		} else {
+			info("Payment Distrubtion of Salary Package Reward CRONJOB: Users not found. ");
+		}
+		info("Payment Distrubtion of Salary Package Reward CRONJOB END AT " . date("d-M-Y h:i a"));
+        toastr()->success('Payment Distribution of Salary Package Reward Done Successfully');
+        return back();
+    }
 }

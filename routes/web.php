@@ -29,6 +29,10 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','namespace' => 'Admin'], funct
     Route::get('add_user_rebirth_to_super_pool', 'AuthController@add_user_rebirth_to_super_pool');
     Route::get('transfer_temp_amount', 'AuthController@tranferTempAmount');
     Route::get('add_uuid_to_products', 'AuthController@add_uuid_to_products');
+    Route::get('starter_package_reward_payment', 'AuthController@starter_package_reward_payment');
+    Route::get('seller_package_reward_payment', 'AuthController@seller_package_reward_payment');
+    Route::get('brand_package_reward_payment', 'AuthController@brand_package_reward_payment');
+    Route::get('salary_account_payment', 'AuthController@salary_account_payment');
      /******************MESSAGE ROUTES****************/
      Route::resource('message', 'MessageController');
     Route::group(['middleware' => 'auth:admin'], function () { 

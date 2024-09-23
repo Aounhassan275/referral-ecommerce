@@ -357,6 +357,14 @@ class RenewReferralIncome
                 'balance' => $renew_account->balance + $company_renew_income,
             ]);
         }
+        $seller_package_income = $price / 100 * $package->seller_package_income;
+        info("Total Company Seller Account Income Amount : $seller_package_income");
+        $seller_account= CompanyAccount::where('name','Seller Account')->first();
+        if($seller_account && $seller_package_income > 0){
+            $seller_account->update([
+                'balance' => $seller_account->balance + $seller_package_income,
+            ]);
+        }
     } 
     
     public static  function directPoolIncome($price,$package,$user,$due_to)
