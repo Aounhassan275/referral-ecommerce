@@ -35,14 +35,14 @@
 			<div class="product-layout product-grid product-grid-4 col-lg-3 col-md-4 col-6">
 				<article class="product-item-container ">
 					<div class="left-block d-flex align-items-center justify-content-center">
-						<div class="product-card__gallery product-card__left d-none d-sm-block">
+						{{-- <div class="product-card__gallery product-card__left d-none d-sm-block">
 							@foreach($product->images as $image_key => $image)
 							<div class="item-img {{$image_key == 0?'thumb-active':''}} " data-src="{{asset($image->image)}}">
 								<img class="card-image lazyload" data-sizes="auto" width="41px" height="41px" src="{{asset($image->image)}}" 
 								data-src="{{asset($image->image)}}" alt="{{$product->name.' '.$image_key }}" title="{{$product->name.' '.$image_key }}">
 							</div>
 							@endforeach
-						</div>
+						</div> --}}
 						<a href="{{route('product.show',$product->uuid)}}" class="product-item-photo">
 							<img class="img-responsive lazyload" data-sizes="auto" src="{{asset($product->images->first()->image)}}" data-src="{{asset($product->images->first()->image)}}" alt="{{$product->name.' 0' }}" title="{{$product->name.' 0' }}">
 						</a>

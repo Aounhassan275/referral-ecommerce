@@ -41,6 +41,15 @@
  <div class="row page">
 	@include('front.layout.partials.sidebar')
 	<main class="col-lg-9 col-md-12 page-content" id="product-listing-container">
+      
+         @if($product->user && $product->user->banner())
+         <img src="{{asset($product->user->banner())}}" style="height:300px;width:700px;" alt="">
+         @endif
+         @if($product->user_id  && !@$product->user->hide_profile)
+            <h3 class="text-center">
+               Product of: <a href="{{route('product.user',$product->user_id)}}" itemprop="url">{{@$product->user->name}}</a>
+            </h3>         
+         @endif
 	      <div class="productView">
                         <section class="productView-images" data-image-gallery>
                            <figure class="productView-image"
@@ -80,11 +89,11 @@
                                  <a href="{{route('product.show',$product->uuid)}}" itemprop="url"><span itemprop="name">{{@$product->category->name}}</span></a>
                               </p>
                               <h1 class="productView-title" itemprop="name">{{$product->name}}</h1>
-                              @if($product->user_id  && !@$product->user->hide_profile)
+                              {{-- @if($product->user_id  && !@$product->user->hide_profile)
                               <p class="productView-brand" itemprop="brand" itemscope itemtype="http://schema.org/Brand">
                                  Product of: <a href="{{route('product.user',$product->user_id)}}" itemprop="url">{{@$product->user->name}}</a>
                               </p>
-                              @endif
+                              @endif --}}
 
                               <div class="productView-price">
                                  <div class="price-section price-section--withoutTax "  itemprop="offers" itemscope itemtype="http://schema.org/Offer">
