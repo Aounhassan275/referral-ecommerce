@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Helpers\ReferralIncome;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyAccount;
@@ -16,6 +17,10 @@ use Illuminate\Support\Facades\Validator;
 
 class PostSaleController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,12 +29,12 @@ class PostSaleController extends Controller
     public function index()
     {
         $sales = PostSale::where('sender_id',Auth::user()->id)->get();
-        return view('user.post_sale.index')->with('sales',$sales);
+        return view($this->directory.'.post_sale.index')->with('sales',$sales);
     }
     public function receivedSale()
     {
         $sales = PostSale::where('receiver_id',Auth::user()->id)->get();
-        return view('user.post_sale.received')->with('sales',$sales);
+        return view($this->directory.'.post_sale.received')->with('sales',$sales);
     }
 
     /**
@@ -40,7 +45,7 @@ class PostSaleController extends Controller
     public function create()
     {
         $users = User::where('id','!=',Auth::user()->id)->whereNotIn('type',['fake','rebirth'])->orderBy('name')->get();
-        return view('user.post_sale.create')->with('users',$users);
+        return view($this->directory.'.post_sale.create')->with('users',$users);
     }
 
     /**

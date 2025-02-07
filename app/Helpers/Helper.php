@@ -27,4 +27,7 @@ class Helper
             // 'gender',
         ];
     }
+    public static function dashboard(){
+        return 'adminty-user';
+    }
 }

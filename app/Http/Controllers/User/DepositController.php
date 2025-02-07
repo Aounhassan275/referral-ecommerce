@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Helpers\ReferralIncome;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
@@ -22,6 +23,10 @@ use Illuminate\Support\Facades\DB;
 
 class DepositController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,14 +34,14 @@ class DepositController extends Controller
      */
     public function index()
     {
-        return view('user.deposit.index');
+        return view($this->directory.'.deposit.index');
     }
     public function deposit($payment, $package)
     {
         $package= Package::find($package);
         $payment= Payment::find($payment);
 
-        return view('user.deposit.index')
+        return view($this->directory.'.deposit.index')
             ->with('payment',$payment)
             ->with('package',$package);
     }

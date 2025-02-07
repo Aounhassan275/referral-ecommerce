@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyAccount;
 use App\Models\Setting;
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Validator;
 
 class TranscationController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +27,7 @@ class TranscationController extends Controller
     {
         $transcations = Transcation::where('receiver_id',Auth::user()->id)
         ->orWhere('sender_id',Auth::user()->id)->get();
-        return view('user.transcation.index')->with('transcations',$transcations);
+        return view($this->directory.'.transcation.index')->with('transcations',$transcations);
     }
     public function balance_transfer()
     {
@@ -32,7 +37,7 @@ class TranscationController extends Controller
            return redirect(route('user.dashboard.index'));
         }
         $users = User::where('id','!=',Auth::user()->id)->whereNotIn('type',['fake','rebirth'])->orderBy('name')->get();
-        return view('user.balance_transfer.index')->with('users',$users);
+        return view($this->directory.'.balance_transfer.index')->with('users',$users);
     }
 
     /**

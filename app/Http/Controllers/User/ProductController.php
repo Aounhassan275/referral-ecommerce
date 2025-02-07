@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
@@ -20,6 +21,10 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +32,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('user.product.index');
+        return view($this->directory.'.product.index');
 
     }
 
@@ -38,7 +43,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('user.product.create');
+        return view($this->directory.'.product.create');
 
     }
 
@@ -270,7 +275,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('user.product.edit')->with('product',$product);
+        return view($this->directory.'.product.edit')->with('product',$product);
     }
 
     /**
@@ -333,12 +338,12 @@ class ProductController extends Controller
     public function showProducts()
     {
         $products = Product::orderBy('display_order')->paginate(30);
-        return view('user.product.view',compact('products'));
+        return view($this->directory.'.product.view',compact('products'));
     }
     public function showProductDetails($name)
     {
         $product = Product::where('name',str_replace('_', ' ',$name))->first();
-        return view('user.product.show',compact('product'));
+        return view($this->directory.'.product.show',compact('product'));
     }
     public function orderProducts($id)
     {
@@ -348,6 +353,6 @@ class ProductController extends Controller
             toastr()->error('You are the owner of this Product!');
             return back();
         }
-        return view('user.order.create',compact('product'));
+        return view($this->directory.'.order.create',compact('product'));
     }
 }

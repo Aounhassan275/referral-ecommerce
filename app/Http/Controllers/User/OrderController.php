@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyAccount;
 use App\Models\Order;
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +25,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('user.order.index');
+        return view($this->directory.'.order.index');
     }
 
     /**

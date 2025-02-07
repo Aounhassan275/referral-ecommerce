@@ -192,7 +192,7 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
     /*******************Logout ROUTES*************/       
     Route::get('logout','AuthController@logout')->name('logout');
     /*******************Dashoard ROUTES*************/
-    Route::view('dashboard', 'user.dashboard.index')->name('dashboard.index');
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
     /*******************Coins ROUTES*************/
     Route::get('coin', 'UserController@coins')->name('coin.index');
     /******************PACKAGE ROUTES****************/

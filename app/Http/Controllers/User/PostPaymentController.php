@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\PostPayment;
 use Exception;
@@ -10,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class PostPaymentController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,7 @@ class PostPaymentController extends Controller
      */
     public function index()
     {
-        return view('user.post_payment.index');
+        return view($this->directory.'.post_payment.index');
     }
 
     /**
@@ -63,7 +68,7 @@ class PostPaymentController extends Controller
     public function show($id)
     {
         $postPayments = PostPayment::where('post_purchase_id',$id)->get();
-        return view('user.post_payment.index',compact('postPayments'));
+        return view($this->directory.'.post_payment.index',compact('postPayments'));
     }
 
     /**

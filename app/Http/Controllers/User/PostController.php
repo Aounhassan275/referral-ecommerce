@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyAccount;
 use App\Models\Post;
@@ -15,6 +16,10 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +27,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('user.post.index');
+        return view($this->directory.'.post.index');
     }
 
     /**
@@ -32,7 +37,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('user.post.create');
+        return view($this->directory.'.post.create');
     }
 
     /**
@@ -92,7 +97,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('user.post.show',compact('post'));
+        return view($this->directory.'.post.show',compact('post'));
     }
 
     /**
@@ -104,7 +109,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        return view('user.post.edit')->with('post',$post);
+        return view($this->directory.'.post.edit')->with('post',$post);
     }
 
 
@@ -145,6 +150,6 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $installements = PostInstallement::where('post_id',$id)->get();
-        return view('user.post.installement',compact('installements','post'));
+        return view($this->directory.'.post.installement',compact('installements','post'));
     }
 }

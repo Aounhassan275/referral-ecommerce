@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\PostPayment;
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Auth;
 
 class PostPurchaseController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +24,7 @@ class PostPurchaseController extends Controller
      */
     public function index()
     {
-        return view('user.post_purchase.index');
+        return view($this->directory.'.post_purchase.index');
     }
 
     /**
@@ -78,7 +83,7 @@ class PostPurchaseController extends Controller
             toastr()->warning("Its your post. System not allowed to purchase own post.");
             return redirect()->to(route('user.dashboard.index'));
         }
-        return view('user.post_purchase.create',compact('post'));
+        return view($this->directory.'.post_purchase.create',compact('post'));
     }
 
     /**

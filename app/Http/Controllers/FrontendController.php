@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\City;
@@ -244,7 +245,11 @@ class FrontendController extends Controller
         $brandIds = Product::where('user_id',$user->id)->get()->pluck('brand_id')->toArray();
         $brands = Brand::whereIn('id',$brandIds)->get()->take(4);
         $products = Product::where('user_id',$user->id)->orderBy('created_at','DESC')->get()->take(8);
-        return view('front.product.user',compact('user','brands','products'));
+        if(Helper::dashboard() == 'adminty-user'){
+            return view('front.product.adminty-user',compact('user','brands','products'));
+        }else{
+            return view('front.product.user',compact('user','brands','products'));
+        }
     }
     public function showProductLike($id)
     {

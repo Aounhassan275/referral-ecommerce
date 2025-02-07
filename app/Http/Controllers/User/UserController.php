@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Helpers\MailHelper;
 use App\Helpers\ReferralIncome;
 use App\Helpers\UserHepler;
@@ -17,6 +18,10 @@ use GuzzleHttp\Client;
 
 class UserController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +29,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.profile.index');
+        return view($this->directory.'.profile.index');
     }
 
     /**
@@ -242,7 +247,7 @@ class UserController extends Controller
           toastr()->success('Your Package is Expire');
            return redirect(route('user.dashboard.index'));
         }
-        return view('user.refer.index')->with('user',$user);
+        return view($this->directory.'.refer.index')->with('user',$user);
     }
     public function emailVerification()
     {
@@ -400,6 +405,6 @@ class UserController extends Controller
             $currencies = $currencies['data'];
         }catch (\Exception $e) {
         }
-        return view('user.coin.index', compact('currencies'));
+        return view($this->directory.'.coin.index', compact('currencies'));
     }
 }

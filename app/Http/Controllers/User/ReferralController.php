@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Deposit;
@@ -20,6 +21,10 @@ use Illuminate\Support\Facades\Log;
 
 class ReferralController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     public function showTree()
     {
         $user = Auth::user();
@@ -30,7 +35,7 @@ class ReferralController extends Controller
         }
         $upline = $user->uplineUser();
         $downline = $user->downlineUser();
-        return view('user.refer.user_tree',compact('user','downline','upline'));
+        return view($this->directory.'.refer.user_tree',compact('user','downline','upline'));
     }    
     public function showSuperPool(Request $request)
     {
@@ -60,7 +65,7 @@ class ReferralController extends Controller
             }
         }
         // dd($users);
-        return view('user.refer.super_pool',compact('user','users'));
+        return view($this->directory.'.refer.super_pool',compact('user','users'));
     }    
     public function transferEarning($directReferral,$user)
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Pin;
 use App\Models\PinUsed;
@@ -11,6 +12,10 @@ use Illuminate\Support\Facades\Validator;
 
 class PinController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +28,7 @@ class PinController extends Controller
           toastr()->success('Your Package is Expire');
            return redirect(route('user.dashboard.index'));
         }
-        return view('user.pin.index');
+        return view($this->directory.'.pin.index');
     }
 
     /**
@@ -75,7 +80,7 @@ class PinController extends Controller
            return redirect(route('user.dashboard.index'));
         }
         $pins= PinUsed::where('pin_id',$id)->get();
-        return view('user.pin.show',compact('pins'));
+        return view($this->directory.'.pin.show',compact('pins'));
     }
 
     /**

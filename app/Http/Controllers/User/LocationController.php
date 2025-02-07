@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Location;
 use Carbon\Carbon;
@@ -10,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class LocationController extends Controller
 {
+    
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +23,7 @@ class LocationController extends Controller
      */
     public function index()
     {
-        return view('user.location.index');
+        return view($this->directory.'.location.index');
     }
 
     /**

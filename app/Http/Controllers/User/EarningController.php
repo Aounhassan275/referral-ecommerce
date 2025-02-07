@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
@@ -14,6 +15,7 @@ class EarningController extends Controller
     private $timeFormat;
     private $DateFormat;
 
+    public $directory;
     public function __construct() {
         $this->months = [
                 "January", "February", "March",
@@ -24,6 +26,7 @@ class EarningController extends Controller
 
         $this->timeFormat = 'Y-m-d H:i:s';
         $this->DateFormat = 'Y-m-d';
+        $this->directory = Helper::dashboard();
     }
     public function trade_income(Request $request)
     {
@@ -79,7 +82,7 @@ class EarningController extends Controller
         $data['default_from'] = $from;
         $data['payments']    = implode(', ', $paymentsData);
         $data['labels']      = "'".implode("', '", $labelsArray)."'";
-        return view('user.earning.trade_income')->with('data', $data);
+        return view($this->directory.'.earning.trade_income')->with('data', $data);
     } 
     public function direct_income(Request $request)
     {
@@ -135,7 +138,7 @@ class EarningController extends Controller
         $data['default_from'] = $from;
         $data['payments']    = implode(', ', $paymentsData);
         $data['labels']      = "'".implode("', '", $labelsArray)."'";
-        return view('user.earning.direct_income')->with('data', $data);
+        return view($this->directory.'.earning.direct_income')->with('data', $data);
     } 
     public function direct_team_income(Request $request)
     {
@@ -191,7 +194,7 @@ class EarningController extends Controller
         $data['default_from'] = $from;
         $data['payments']    = implode(', ', $paymentsData);
         $data['labels']      = "'".implode("', '", $labelsArray)."'";
-        return view('user.earning.direct_team_income')->with('data', $data);
+        return view($this->directory.'.earning.direct_team_income')->with('data', $data);
     } 
     public function upline_income(Request $request)
     {
@@ -247,7 +250,7 @@ class EarningController extends Controller
         $data['default_from'] = $from;
         $data['payments']    = implode(', ', $paymentsData);
         $data['labels']      = "'".implode("', '", $labelsArray)."'";         
-        return view('user.earning.upline_income')->with('data', $data);
+        return view($this->directory.'.earning.upline_income')->with('data', $data);
     }
     public function down_line_income(Request $request)
     {
@@ -303,7 +306,7 @@ class EarningController extends Controller
         $data['default_from'] = $from;
         $data['payments']    = implode(', ', $paymentsData);
         $data['labels']      = "'".implode("', '", $labelsArray)."'";         
-        return view('user.earning.down_line_income')->with('data', $data);
+        return view($this->directory.'.earning.down_line_income')->with('data', $data);
     }
     public function upline_placement_income(Request $request)
     {
@@ -359,7 +362,7 @@ class EarningController extends Controller
         $data['default_from'] = $from;
         $data['payments']    = implode(', ', $paymentsData);
         $data['labels']      = "'".implode("', '", $labelsArray)."'";         
-        return view('user.earning.upline_placement_income')->with('data', $data);
+        return view($this->directory.'.earning.upline_placement_income')->with('data', $data);
     }
     public function down_line_placement_income(Request $request)
     {
@@ -415,7 +418,7 @@ class EarningController extends Controller
         $data['default_from'] = $from;
         $data['payments']    = implode(', ', $paymentsData);
         $data['labels']      = "'".implode("', '", $labelsArray)."'";         
-        return view('user.earning.down_line_placement_income')->with('data', $data);
+        return view($this->directory.'.earning.down_line_placement_income')->with('data', $data);
     }
     public function ranking_income(Request $request)
     {
@@ -471,7 +474,7 @@ class EarningController extends Controller
         $data['default_from'] = $from;
         $data['payments']    = implode(', ', $paymentsData);
         $data['labels']      = "'".implode("', '", $labelsArray)."'";         
-        return view('user.earning.ranking_income')->with('data', $data);
+        return view($this->directory.'.earning.ranking_income')->with('data', $data);
     }
     public function pool_income(Request $request)
     {
@@ -527,7 +530,7 @@ class EarningController extends Controller
         $data['default_from'] = $from;
         $data['payments']    = implode(', ', $paymentsData);
         $data['labels']      = "'".implode("', '", $labelsArray)."'";         
-        return view('user.earning.pool_income')->with('data', $data);
+        return view($this->directory.'.earning.pool_income')->with('data', $data);
     }
     public function reward_income(Request $request)
     {
@@ -583,7 +586,7 @@ class EarningController extends Controller
         $data['default_from'] = $from;
         $data['payments']    = implode(', ', $paymentsData);
         $data['labels']      = "'".implode("', '", $labelsArray)."'";         
-        return view('user.earning.reward_income')->with('data', $data);
+        return view($this->directory.'.earning.reward_income')->with('data', $data);
     }
     public function associated_income(Request $request)
     {
@@ -638,7 +641,7 @@ class EarningController extends Controller
         $data['default_from'] = $from;
         $data['payments']    = implode(', ', $paymentsData);
         $data['labels']      = "'".implode("', '", $labelsArray)."'";         
-        return view('user.earning.associated_income')->with('data', $data);
+        return view($this->directory.'.earning.associated_income')->with('data', $data);
     }
     public function overall_earning(Request $request)
     {
@@ -705,7 +708,7 @@ class EarningController extends Controller
         $data['packagesCount']  = 7;
         $data['labels']         = "'".implode("', '", $labelsArray)."'";
         $data['labelsArray']    = $labelsArray;  
-        return view('user.report.over_all_earning')->with('data', $data);
+        return view($this->directory.'.report.over_all_earning')->with('data', $data);
     }
     public function user_overall_earning(Request $request,$id)
     {
@@ -770,7 +773,7 @@ class EarningController extends Controller
         $data['packagesCount']  = 7;
         $data['labels']         = "'".implode("', '", $labelsArray)."'";
         $data['labelsArray']    = $labelsArray;  
-        return view('user.report.user_overall_earning')->with('data', $data)->with('user',$user);
+        return view($this->directory.'.report.user_overall_earning')->with('data', $data)->with('user',$user);
     }
     public function userStatusUpdate(Request $request)
     {

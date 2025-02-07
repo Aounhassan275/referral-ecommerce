@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Withdraw;
 use Carbon\Carbon;
@@ -10,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class WithdrawController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,7 @@ class WithdrawController extends Controller
      */
     public function index()
     {
-        return view('user.withdraw.index');
+        return view($this->directory.'.withdraw.index');
 
     }
 
@@ -28,7 +33,7 @@ class WithdrawController extends Controller
      */
     public function create()
     {
-        return view('user.withdraw.create');
+        return view($this->directory.'.withdraw.create');
     }
 
     /**
@@ -83,7 +88,7 @@ class WithdrawController extends Controller
      */
     public function edit(Withdraw $withdraw)
     {
-        return view('user.withdraw.edit')->with('withdraw',$withdraw);
+        return view($this->directory.'.withdraw.edit')->with('withdraw',$withdraw);
     }
 
     /**
