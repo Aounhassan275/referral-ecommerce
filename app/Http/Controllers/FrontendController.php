@@ -7,14 +7,18 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Event;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\Setting;
+use App\Models\Special;
 use App\Models\Type;
 use App\Models\User;
+use App\Models\UserMainSection;
 use App\Models\UserReview;
+use App\Models\UserSpecial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
@@ -244,9 +248,15 @@ class FrontendController extends Controller
         ]);
         $brandIds = Product::where('user_id',$user->id)->get()->pluck('brand_id')->toArray();
         $brands = Brand::whereIn('id',$brandIds)->get()->take(4);
+        $allProducts = Product::whereNull('user_id')->orderBy('created_at','DESC')->get()->take(8);
         $products = Product::where('user_id',$user->id)->orderBy('created_at','DESC')->get()->take(8);
+        $singleProduct = Product::where('user_id',$user->id)->orderBy('created_at','DESC')->first();
+        $events = Event::where('user_id',$user->id)->orderBy('created_at','DESC')->get()->take(3);
+        $specials = Special::where('user_id',$user->id)->get()->take(5);
+        $userSpecials = UserSpecial::where('user_id',$user->id)->get()->take(4);
+        $userMainSections = UserMainSection::where('user_id',$user->id)->get()->take(4);
         if(Helper::dashboard() == 'adminty-user'){
-            return view('front.product.adminty-user',compact('user','brands','products'));
+            return view('front.product.adminty-user',compact('user','brands','products','events','userSpecials','specials','userMainSections','singleProduct','allProducts'));
         }else{
             return view('front.product.user',compact('user','brands','products'));
         }

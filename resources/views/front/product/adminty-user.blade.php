@@ -75,7 +75,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <a href="index.html" class="logo me-auto"><img src="{{asset('adminty-user-assets/img/logo.png')}}" alt="">wlinkup</a>
+      <a href="{{url('/')}}" class="logo me-auto"><img src="{{asset('adminty-user-assets/img/logo.png')}}" alt="">wlinkup</a>
      
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
@@ -93,6 +93,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
+  @if($events->count() > 0)
   <section id="hero">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
@@ -100,42 +101,19 @@
 
       <div class="carousel-inner" role="listbox">
 
-        <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url({{asset('adminty-user-assets/img/slide/slide-1.jpg')}})">
-          <div class="container">
-            <h2>Welcome to <span>Wlinkup</span></h2>
-            <p>W-Linkup: Your Ultimate Marketing Platform! 🌟
-
-              🚀 Promote Anything, Anytime!
-              Looking for the best way to showcase your brand, product, or service? W-Linkup is here for you!
-              
-              </p>
-            <a href="#about" class="btn-get-started scrollto">👉 Visit W-Linkup Now!</a>
-          </div>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(({{asset('adminty-user-assets/img/slide/slide-2.jpg')}})">
-          <div class="container">
-            <h2>Lorem Ipsum Dolor</h2>
-            <p>Whether youre launching a product, growing your business, or sharing your ideas, W-Linkup is the place to be.
-              Start promoting today! Because success is just a click away.</p>
-            <a href="#about" class="btn-get-started scrollto">👉 Visit W-Linkup Now!</a>
-          </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(({{asset('adminty-user-assets/img/slide/slide-3.jpg')}})">
-          <div class="container">
-            <h2>Sequi ea ut et est quaerat</h2>
-            <p>Unlimited Opportunities: Promote anything you can think of.
-              User-Friendly Tools: Perfect for beginners and pros alike.
-              Massive Reach: Get your message in front of the right audience.
-              Cost-Effective Solutions: Marketing that fits your budget.
-              </p>
-            <a href="#about" class="btn-get-started scrollto">👉 Visit W-Linkup Now!</a>
-          </div>
-        </div>
+         <!-- Slide 1 -->
+         @foreach($events as $event)
+         <div class="carousel-item active" style="background-image: url({{asset($event->image)}})">
+           <div class="container">
+             <h2>{{$event->title}}</h2>
+             <p>{{$event->description}}
+               </p>
+               @if($event->link)
+             <a href="{{$event->link}}" class="btn-get-started scrollto">👉 Visit!</a>
+             @endif
+           </div>
+         </div>
+         @endforeach
 
       </div>
 
@@ -149,51 +127,30 @@
 
     </div>
   </section><!-- End Hero -->
-
+  @endif
   <main id="main">
+    @if($userSpecials->count() > 0)
 
     <!-- ======= Featured Services Section ======= -->
     <section id="featured-services" class="featured-services">
       <div class="container" data-aos="fade-up">
 
         <div class="row">
+          @foreach($userSpecials as $userSpecial)
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="fas fa-heartbeat"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              <div class="icon"><img src="{{asset($userSpecial->image)}}" height="50" width="50"></div>
+              <h4 class="title"><a href="#">{{$userSpecial->name}}</a></h4>
+              <p class="description">{{$userSpecial->description}}</p>
             </div>
           </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="fas fa-pills"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="fas fa-thermometer"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
-              <div class="icon"><i class="fas fa-dna"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
+          @endforeach=
 
         </div>
 
       </div>
     </section><!-- End Featured Services Section -->
-
+    @endif
     <!-- ======= Cta Section ======= -->
     <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
@@ -214,11 +171,15 @@
 
         <div class="section-title">
           <h2>About Us</h2>
-          <p>W-Linkup: Your Ultimate Marketing Platform! 🌟 🚀 Promote Anything, Anytime! Looking for the best way to showcase your brand, product, or service? W-Linkup is here for you!</p>
+          <p>{{$user->about_us_detail}}</p>
         </div>
         <div class="row">
           <div class="col-lg-6" data-aos="fade-right">
+            @if($user->image)
+            <img src="{{asset($user->image)}}" class="img-fluid" alt="profile image">
+            @else
             <img src="{{asset('adminty-user-assets/img/about.jpg')}}" class="img-fluid" alt="profile image">
+            @endif
           </div>
           <!-- start table -->
           <div class="col-lg-6 menu-item-4">
@@ -228,64 +189,64 @@
                     <table>
                       <tr>
                         <td>Email:</td>
-                        <th scope="row">sadaathomoeopathic@gmail.com</th>
+                        <th scope="row">{{$user->email}}/th>
                       </tr>
                       <tr>
                         <td>Date of Birth:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->dob ? \Carbon\Carbon::parse($user->dob)->format('d M,Y') : '' }}</th>
                       </tr>
                       <tr>
                         <td>Blood Group:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->blood_group }}</th>
                       </tr>
                       <tr>
                         <td>Martial Status:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->martial_status }}</th>
                       </tr>
                       <tr>
                         <td>Phone:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row"><a href="tel:{{$user->phone}}">{{$user->phone}}</a></th>
                       </tr>
                       <tr>
                         <td>Country:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->country ? $user->country->name : '' }}</th>
                       </tr>
                       <tr>
                         <td>City:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->city ? $user->city->name : '' }}</th>
                       </tr>
                       <tr>
                         <td>Address:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->address }}</th>
                       </tr>
                       <tr>
                         <td>Profession:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->profession }}</th>
                       </tr>
                     </tr><tr>
                       <td>Service:</td>
-                      <th scope="row">wlinkup</th>
+                      <th scope="row">{{$user->service ? $user->service->name : ''}}</th>
                     </tr><tr>
                       <td>Service Type:</td>
-                      <th scope="row">wlinkup</th>
+                      <th scope="row">{{$user->serviceType ? $user->serviceType->name : ''}}</th>
                     </tr>
                       <tr>
                         <td>Education:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->education }}</th>
                       </tr>
                       <tr>
                         <td>Religion:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->religion }}</th>
                       </tr>
                       <tr>
                         <td>Sect.:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->sect }}</th>
                       </tr><tr>
                         <td>Caste:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->caste }}</th>
                       </tr><tr>
                         <td>Monthly Income:</td>
-                        <th scope="row">wlinkup</th>
+                        <th scope="row">{{$user->monthly_income }}</th>
                       
                     </table>
                 </div>
@@ -305,7 +266,7 @@
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="fa fa-eye"></i>
-              <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="{{$user->view}}" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Visitors</strong> <br> how many people visit the site</p>
               </div>
           </div>
@@ -313,7 +274,7 @@
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="fa fa-shopping-cart"></i>
-              <span data-purecounter-start="0" data-purecounter-end="26" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="{{$user->products->count()}}" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Produsts</strong> <br> 
                 Total products added</p>
             </div>
@@ -322,7 +283,7 @@
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="fa fa-handshake"></i>
-              <span data-purecounter-start="0" data-purecounter-end="14" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="{{$user->mrefers()->count()}}" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Team</strong> <br>
                 Who join with us</p>
               </div>
@@ -348,311 +309,73 @@
 
         <div class="row">
           <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-right">
+            @foreach($userMainSections as $userMainSection)
             <div class="icon-box mt-5 mt-lg-0">
-              <i class="bx bx-receipt"></i>
-              <h4>Est labore ad</h4>
-              <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+             <img src="{{asset($userMainSection->image)}}" height="48" width="48" alt="">
+              <h4>{{$userMainSection->name}}</h4>
+              <p>{{$userMainSection->description}}</p>
             </div>
-            <div class="icon-box mt-5">
-              <i class="bx bx-cube-alt"></i>
-              <h4>Harum esse qui</h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
-            </div>
-            <div class="icon-box mt-5">
-              <i class="bx bx-images"></i>
-              <h4>Aut occaecati</h4>
-              <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
-            </div>
-            <div class="icon-box mt-5">
-              <i class="bx bx-shield"></i>
-              <h4>Beatae veritatis</h4>
-              <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
-            </div>
+            @endforeach
+           
           </div>
-          <div class="image col-lg-6 order-1 order-lg-2" style='background-image: url("assets/img/features.jpg");' data-aos="zoom-in"></div>
+          @if($user->mainImage())
+          <div class="image col-lg-6 order-1 order-lg-2" style='background-image: url("{{asset($user->mainImage())}}");' data-aos="zoom-in"></div>
+          @else
+          <div class="image col-lg-6 order-1 order-lg-2" style='background-image: url("{{asset('adminty-user-assets/img/features.jpg')}}");' data-aos="zoom-in"></div>
+          @endif
         </div>
 
       </div>
     </section><!-- End Features Section -->
-
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services services">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Services</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon"><i class="fas fa-heartbeat"></i></div>
-            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon"><i class="fas fa-pills"></i></div>
-            <h4 class="title"><a href="">Dolor Sitema</a></h4>
-            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon"><i class="fas fa-hospital-user"></i></div>
-            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon"><i class="fas fa-dna"></i></div>
-            <h4 class="title"><a href="">Magni Dolores</a></h4>
-            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon"><i class="fas fa-wheelchair"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon"><i class="fas fa-notes-medical"></i></div>
-            <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Services Section -->
 
     <!-- ======= Menu Section ======= -->
     <section id="menu" class="menu">
       <div class="container" data-aos="fade-up" >
 
         <div class="section-header text-center" >
-          <h2>Our Menu </h2>
-          <p>Check Our <span>Yummy Menu</span></p>
+          <h2>Our Products </h2>
+          <p>Check Our <span>Products</span></p>
         </div>
 
         <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
-
+          @foreach($brands as $brandKey => $brand)
           <li class="nav-item">
-            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
-              <h4>Starters</h4>
+            <a class="nav-link {{$brandKey == 0 ? 'active show' : ''}}" data-bs-toggle="tab" data-bs-target="#brand-{{$brandKey}}">
+              <h4>{{$brand->name}}</h4>
             </a>
           </li><!-- End tab nav item -->
-
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
-              <h4>Breakfast</h4>
-            </a><!-- End tab nav item -->
-
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-lunch">
-              <h4>Lunch</h4>
-            </a>
-          </li><!-- End tab nav item -->
-
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-              <h4>Dinner</h4>
-            </a>
-          </li><!-- End tab nav item -->
+          @endforeach
 
         </ul>
 
         <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+          @foreach($brands as $brandProductKey => $productBrand)
 
-          <div class="tab-pane fade active show" id="menu-starters">
+          <div class="tab-pane fade {{$brandProductKey == 0 ? 'active show' : ''}}" id="brand-{{$brandProductKey}}">
 
             <div class="tab-header text-center">
-              <p>Menu</p>
-              <h3>Starters</h3>
+              <p>{{$productBrand->name}}</p>
+              <h3>Products</h3>
             </div>
 
             <div class="row gy-5">
-
+              @foreach(App\Models\Product::where('user_id',$user->id)->where('brand_id',$productBrand->id)->get() as $product)
               <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets/img/menu/menu-item-1.png')}}" class="glightbox"><img src="{{asset('adminty-user-assets/img/menu/menu-item-1.png')}}" class="menu-img img-fluid" alt=""></a>
-                <h4>Magnam Tiste</h4>
+                <a href="{{route('product.show',$product->uuid)}}" class="glightbox">
+                  <img src="{{asset($product->images->first()->image)}}" class="menu-img img-fluid" alt=""></a>
+                <h4>{{$product->name}}</h4>
                 <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
+                  {!! substr( $product->description, 0, 50) !!}...
                 </p>
                 <p class="price">
-                  $5.95
+                  {{App\Models\Setting::currency()}} {{$product->price}}
                 </p>
               </div><!-- Menu Item -->
-
+              @endforeach
               
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets/img/menu/menu-item-5.png')}}" class="glightbox"><img src="{{asset('adminty-user-assets/img/menu/menu-item-5.png')}}" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets/img/menu/menu-item-6.png')}}" class="glightbox"><img src="{{asset('adminty-user-assets/img/menu/menu-item-6.png')}}" class="menu-img img-fluid" alt=""></a>
-                <h4>Laboriosam Direva</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $9.95
-                </p>
-              </div><!-- Menu Item -->
-
             </div>
           </div><!-- End Starter Menu Content -->
-
-          <div class="tab-pane fade" id="menu-breakfast">
-
-            <div class="tab-header text-center">
-              <p>Menu</p>
-              <h3>Breakfast</h3>
-            </div>
-
-            <div class="row gy-5">
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets/img/menu/menu-item-1.png')}}" class="glightbox"><img src="{{asset('adminty-user-assets/img/menu/menu-item-1.png')}}" class="menu-img img-fluid" alt=""></a>
-                <h4>Magnam Tiste</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $5.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets/img/menu/menu-item-2.png')}}" class="glightbox"><img src="{{asset('adminty-user-assets/img/menu/menu-item-2.png')}}" class="menu-img img-fluid" alt=""></a>
-                <h4>Aut Luia</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $14.95
-                </p>
-              </div><!-- Menu Item -->
-
-
-            </div>
-          </div><!-- End Breakfast Menu Content -->
-
-          <div class="tab-pane fade" id="menu-lunch">
-
-            <div class="tab-header text-center">
-              <p>Menu</p>
-              <h3>Lunch</h3>
-            </div>
-
-            <div class="row gy-5">
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets/img/menu/menu-item-1.png')}}" class="glightbox"><img src="{{asset('adminty-user-assets/img/menu/menu-item-1.png')}}" class="menu-img img-fluid" alt=""></a>
-                <h4>Magnam Tiste</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $5.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets/img/menu/menu-item-2.png')}}" class="glightbox"><img src="{{asset('adminty-user-assets/img/menu/menu-item-2.png')}}" class="menu-img img-fluid" alt=""></a>
-                <h4>Aut Luia</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $14.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets/img/menu/menu-item-3.png')}}" class="glightbox"><img src="{{asset('adminty-user-assets/img/menu/menu-item-3.png')}}" class="menu-img img-fluid" alt=""></a>
-                <h4>Est Eligendi</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $8.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets')}}/img/menu/menu-item-4.png" class="glightbox"><img src="{{asset('adminty-user-assets')}}/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets')}}/img/menu/menu-item-5.png" class="glightbox"><img src="{{asset('adminty-user-assets')}}/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets')}}/img/menu/menu-item-6.png" class="glightbox"><img src="{{asset('adminty-user-assets')}}/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Laboriosam Direva</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $9.95
-                </p>
-              </div><!-- Menu Item -->
-
-            </div>
-          </div><!-- End Lunch Menu Content -->
-
-          <div class="tab-pane fade" id="menu-dinner">
-
-            <div class="tab-header text-center">
-              <p>Menu</p>
-              <h3>Dinner</h3>
-            </div>
-
-            <div class="row gy-5">
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets')}}/img/menu/menu-item-1.png" class="glightbox"><img src="{{asset('adminty-user-assets')}}/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Magnam Tiste</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $5.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="{{asset('adminty-user-assets')}}/img/menu/menu-item-2.png" class="glightbox"><img src="{{asset('adminty-user-assets')}}/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Aut Luia</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $14.95
-                </p>
-              </div><!-- Menu Item -->
-
-
-            </div>
-          </div><!-- End Dinner Menu Content -->
-
+          @endforeach
         </div>
 
       </div>
@@ -678,6 +401,7 @@
     </div>
        
   <!-- Open Content -->
+  @if($singleProduct)
   <section class="bg-light">
       <div class="container pb-5">
         <div class="section-header text-center" >
@@ -685,9 +409,10 @@
           <p>Check Our <span>Single Product</span></p>
         </div>
           <div class="row">
+            
               <div class="col-lg-5 mt-5">
                   <div class="card mb-3">
-                      <img class="card-img img-fluid" src="{{asset('adminty-user-assets')}}/img/product_single_10.jpg" alt="Card image cap" id="product-detail">
+                      <img class="card-img img-fluid" src="{{asset($singleProduct->images->first()->image)}}" alt="Card image cap" id="product-detail">
                   </div>
                   <div class="row">
                       <!--Start Controls-->
@@ -706,67 +431,47 @@
                               <!--First slide-->
                               <div class="carousel-item active">
                                   <div class="row">
+                                    @foreach($singleProduct->images->take(3) as $productImage)
                                       <div class="col-4">
                                           <a href="#">
-                                              <img class="card-img img-fluid" src="{{asset('adminty-user-assets')}}/img/product_single_01.jpg" alt="Product Image 1">
+                                              <img class="card-img img-fluid" src="{{asset($productImage->image)}}" alt="Product Image 1">
                                           </a>
                                       </div>
-                                      <div class="col-4">
-                                          <a href="#">
-                                              <img class="card-img img-fluid" src="{{asset('adminty-user-assets')}}/img/product_single_02.jpg" alt="Product Image 2">
-                                          </a>
-                                      </div>
-                                      <div class="col-4">
-                                          <a href="#">
-                                              <img class="card-img img-fluid" src="{{asset('adminty-user-assets')}}/img/product_single_03.jpg" alt="Product Image 3">
-                                          </a>
-                                      </div>
+                                      @endforeach
                                   </div>
                               </div>
                               <!--/.First slide-->
 
                               <!--Second slide-->
+                              @if(count($singleProduct->images->skip(3)->take(3)) > 0)
                               <div class="carousel-item">
                                   <div class="row">
+                                    @foreach($singleProduct->images->skip(3)->take(3) as $nextProductImage)
                                       <div class="col-4">
                                           <a href="#">
-                                              <img class="card-img img-fluid" src="{{asset('adminty-user-assets')}}/img/product_single_04.jpg" alt="Product Image 4">
+                                              <img class="card-img img-fluid" src="{{asset($nextProductImage->image)}}" alt="Product Image 4">
                                           </a>
                                       </div>
-                                      <div class="col-4">
-                                          <a href="#">
-                                              <img class="card-img img-fluid" src="{{asset('adminty-user-assets')}}/img/product_single_05.jpg" alt="Product Image 5">
-                                          </a>
-                                      </div>
-                                      <div class="col-4">
-                                          <a href="#">
-                                              <img class="card-img img-fluid" src="{{asset('adminty-user-assets')}}/img/product_single_06.jpg" alt="Product Image 6">
-                                          </a>
-                                      </div>
+                                      @endforeach
                                   </div>
                               </div>
+                              @endif
                               <!--/.Second slide-->
 
                               <!--Third slide-->
+                              @if(count($singleProduct->images->skip(6)->take(3)) > 0)
                               <div class="carousel-item">
                                   <div class="row">
+                                    @foreach($singleProduct->images->skip(6)->take(3) as $nextProductImage)
                                       <div class="col-4">
                                           <a href="#">
-                                              <img class="card-img img-fluid" src="{{asset('adminty-user-assets')}}/img/product_single_07.jpg" alt="Product Image 7">
+                                              <img class="card-img img-fluid" src="{{asset($nextProductImage->image)}}" alt="Product Image 7">
                                           </a>
                                       </div>
-                                      <div class="col-4">
-                                          <a href="#">
-                                              <img class="card-img img-fluid" src="{{asset('adminty-user-assets')}}/img/product_single_08.jpg" alt="Product Image 8">
-                                          </a>
-                                      </div>
-                                      <div class="col-4">
-                                          <a href="#">
-                                              <img class="card-img img-fluid" src="{{asset('adminty-user-assets')}}/img/product_single_09.jpg" alt="Product Image 9">
-                                          </a>
-                                      </div>
+                                      @endforeach
                                   </div>
                               </div>
+                              @endif
                               <!--/.Third slide-->
                           </div>
                           <!--End Slides-->
@@ -786,53 +491,53 @@
               <div class="col-lg-7 mt-5">
                   <div class="card">
                       <div class="card-body">
-                          <h1 class="h2">Active Wear</h1>
-                          <p class="h3 py-2">$25.00</p>
+                          <h1 class="h2">{{$singleProduct->name}}</h1>
+                          <p class="h3 py-2">{{App\Models\Setting::currency()}} {{$product->price}}</p>
                           <!-- table start -->
                           <table>
                             <tr>
                               <td>Category:</td>
-                              <th scope="row">wlinkup</th>
+                              <th scope="row">{{@$singleProduct->category->name}}</th>
                             </tr>
                             <tr>
                               <td>Brand:</td>
-                              <th scope="row">wlinkup</th>
+                              <th scope="row">{{@$singleProduct->brand->name}}</th>
                             </tr>
                             <tr>
                               <td>Country:</td>
-                              <th scope="row">wlinkup</th>
+                              <th scope="row">{{@$singleProduct->country->name}}</th>
                             </tr>
                             <tr>
                               <td>City:</td>
-                              <th scope="row">wlinkup</th>
+                              <th scope="row">{{@$singleProduct->city->name}}</th>
                             </tr>
                             <tr>
                               <td>View:</td>
-                              <th scope="row">wlinkup</th>
+                              <th scope="row">{{@$singleProduct->view}}</th>
                             </tr>
                             <tr>
                               <td>Product of:</td>
-                              <th scope="row">wlinkup</th>
+                              <th scope="row">{{@$singleProduct->user->name}}</th>
                             </tr>
                             <tr>
                               <td>Stock:</td>
-                              <th scope="row">wlinkup</th>
+                              <th scope="row">{{@$singleProduct->stock}}</th>
                             </tr>
                             <tr>
                               <td>Address:</td>
-                              <th scope="row">wlinkup</th>
+                              <th scope="row">{{@$singleProduct->user->address}}</th>
                             </tr>
                             <tr>
                               <td>Phone:</td>
-                              <th scope="row">wlinkup</th>
+                              <th scope="row">{{@$singleProduct->user->phone}}</th>
                             </tr>
                             <tr>
                               <td>Like:</td>
-                              <th scope="row">wlinkup</th>
+                              <th scope="row">{{$singleProduct->like}}</th>
                             </tr>
                             <tr>
                               <td>dislike:</td>
-                              <th scope="row">wlinkup</th>
+                              <th scope="row">{{$singleProduct->dislike}}</th>
                             </tr>
                            
                           </table>
@@ -841,33 +546,30 @@
                           <div class="section-header text-center" >
                             <h5>Description:</h5>
                           </div>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
+                          <p>{!! $singleProduct->description !!}</p>
                                                     
-                          <form action="" method="GET">
-                              <input type="hidden" name="product-title" value="Activewear">
-                              <div class="row">
-                                  
-                                  <div class="col-auto">
-                                      <ul class="list-inline pb-3">
-                                          <li class="list-inline-item text-right">
-                                              Quantity
-                                              <input type="hidden" name="product-quanity" id="product-quanity" value="1">
-                                          </li>
-                                          <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-                                          <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
-                                          <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
-                                      </ul>
-                                  </div>
+                          <div class="row pb-3">
+                              <div class="col d-grid">
+                                <form action="{{route('product.like',$singleProduct->id)}}" method="GET">
+                                  @csrf
+                                  <button class="btn btn-success" >Like ({{$singleProduct->like}})</button>
+                                </form>
                               </div>
-                              <div class="row pb-3">
-                                  <div class="col d-grid">
-                                      <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
-                                  </div>
-                                  <div class="col d-grid">
-                                      <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Share</button>
-                                  </div>
+                              <div class="col d-grid">
+
+                                <form action="{{route('product.dislike',$singleProduct->id)}}" method="GET">
+                                  @csrf
+                                  <button class="btn btn-danger" >Disike ({{$singleProduct->dislike}})</button>
+                                </form>                              
                               </div>
-                          </form>
+                          </div>
+                          <div class="row pb-3">
+                            @if($product->stock > 0 && App\Models\Setting::enablepurchase() == 1)
+                              <div class="col d-grid">
+                                  <a href="{{route('user.product.order',$product->id)}}" class="btn btn-success btn-lg" name="submit" value="buy">Buy</a>
+                              </div>
+                              @endif
+                          </div>
 
                       </div>
                   </div>
@@ -876,10 +578,10 @@
       </div>
   </section>
   <!-- Close Content -->
-
+  @endif
 
     </section><!-- End Product Section -->
-
+    @if($allProducts->count() > 0)
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">
       <div class="container" data-aos="fade-up">
@@ -890,21 +592,19 @@
 
         <div class="gallery-slider swiper">
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets')}}/img/gallery/gallery-1.jpg"><img src="{{asset('adminty-user-assets')}}/img/gallery/gallery-1.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets')}}/img/gallery/gallery-2.jpg"><img src="{{asset('adminty-user-assets')}}/img/gallery/gallery-2.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets')}}/img/gallery/gallery-3.jpg"><img src="{{asset('adminty-user-assets')}}/img/gallery/gallery-3.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets')}}/img/gallery/gallery-4.jpg"><img src="{{asset('adminty-user-assets')}}/img/gallery/gallery-4.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets')}}/img/gallery/gallery-5.jpg"><img src="{{asset('adminty-user-assets')}}/img/gallery/gallery-5.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets')}}/img/gallery/gallery-6.jpg"><img src="{{asset('adminty-user-assets')}}/img/gallery/gallery-6.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets')}}/img/gallery/gallery-7.jpg"><img src="{{asset('adminty-user-assets')}}/img/gallery/gallery-7.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets')}}/img/gallery/gallery-8.jpg"><img src="{{asset('adminty-user-assets')}}/img/gallery/gallery-8.jpg" class="img-fluid" alt=""></a></div>
-          </div>
+            @foreach($allProducts as $allProduct)
+            <div class="swiper-slide">
+              <a class="gallery-lightbox" href="{{route('product.show',$allProduct->uuid)}}">
+                <img src="{{asset($allProduct->images->first()->image)}}" class="img-fluid" alt="">
+              </a>
+            </div>
+            @endforeach          </div>
           <div class="swiper-pagination"></div>
         </div>
 
       </div>
     </section><!-- End Gallery Section -->
-
+    @endif
     <!-- ======= Leaders Section ======= -->
     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
@@ -1019,323 +719,45 @@
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-3">
             <ul class="nav nav-tabs flex-column">
+              @foreach($specials as $key => $special)
               <li class="nav-item">
                 <a
-                  class="nav-link active show"
+                  class="nav-link {{$key == 0 ? 'active show' : ''}}"
                   data-bs-toggle="tab"
-                  href="#tab-1"
-                  >Modi sit est</a
+                  href="#special-{{$key}}"
+                  >{{$special->title}}</a
                 >
               </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-2"
-                  >Unde praesentium sed</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-3"
-                  >Pariatur explicabo vel</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-4"
-                  >Nostrum qui quasi</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-5"
-                  >Iusto ut expedita aut</a
-                >
-              </li>
+              @endforeach
             </ul>
           </div>
           <div class="col-lg-9 mt-4 mt-lg-0">
             <div class="tab-content">
-              <div class="tab-pane active show" id="tab-1">
+              @foreach($specials as $specialKey => $specialObject)
+              <div class="tab-pane {{$specialKey == 0 ? 'active show': ''}}" id="special-{{$specialKey}}">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Architecto ut aperiam autem id</h3>
-                    <p class="fst-italic">
-                      Qui laudantium consequatur laborum sit qui ad sapiente
-                      dila parde sonata raqer a videna mareta paulona marka
-                    </p>
+                    <h3>{{$specialObject->heading}}</h3>
                     <p>
-                      Et nobis maiores eius. Voluptatibus ut enim blanditiis
-                      atque harum sint. Laborum eos ipsum ipsa odit magni.
-                      Incidunt hic ut molestiae aut qui. Est repellat minima
-                      eveniet eius et quis magni nihil. Consequatur dolorem
-                      quaerat quos qui similique accusamus nostrum rem vero
+                      {{$specialObject->description}}
                     </p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img
-                      src="{{asset('adminty-user-assets')}}/img/departments-5.jpg"
+                      src="{{asset($specialObject->image)}}"
                       alt=""
                       class="img-fluid"
                     />
                   </div>
                 </div>
               </div>
-              <div class="tab-pane" id="tab-2">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Et blanditiis nemo veritatis excepturi</h3>
-                    <p class="fst-italic">
-                      Qui laudantium consequatur laborum sit qui ad sapiente
-                      dila parde sonata raqer a videna mareta paulona marka
-                    </p>
-                    <p>
-                      Ea ipsum voluptatem consequatur quis est. Illum error
-                      ullam omnis quia et reiciendis sunt sunt est. Non
-                      aliquid repellendus itaque accusamus eius et velit ipsa
-                      voluptates. Optio nesciunt eaque beatae accusamus lerode
-                      pakto madirna desera vafle de nideran pal
-                    </p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img
-                      src="{{asset('adminty-user-assets')}}/img/departments-4.jpg"
-                      alt=""
-                      class="img-fluid"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-3">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
-                    <p class="fst-italic">
-                      Eos voluptatibus quo. Odio similique illum id quidem non
-                      enim fuga. Qui natus non sunt dicta dolor et. In
-                      asperiores velit quaerat perferendis aut
-                    </p>
-                    <p>
-                      Iure officiis odit rerum. Harum sequi eum illum corrupti
-                      culpa veritatis quisquam. Neque necessitatibus illo
-                      rerum eum ut. Commodi ipsam minima molestiae sed
-                      laboriosam a iste odio. Earum odit nesciunt fugiat sit
-                      ullam. Soluta et harum voluptatem optio quae
-                    </p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img
-                      src="{{asset('adminty-user-assets')}}/img/departments-3.jpg"
-                      alt=""
-                      class="img-fluid"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-4">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>
-                      Fuga dolores inventore laboriosam ut est accusamus
-                      laboriosam dolore
-                    </h3>
-                    <p class="fst-italic">
-                      Totam aperiam accusamus. Repellat consequuntur iure
-                      voluptas iure porro quis delectus
-                    </p>
-                    <p>
-                      Eaque consequuntur consequuntur libero expedita in
-                      voluptas. Nostrum ipsam necessitatibus aliquam fugiat
-                      debitis quis velit. Eum ex maxime error in consequatur
-                      corporis atque. Eligendi asperiores sed qui veritatis
-                      aperiam quia a laborum inventore
-                    </p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img
-                      src="{{asset('adminty-user-assets')}}/img/departments-2.jpg"
-                      alt=""
-                      class="img-fluid"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-5">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>
-                      Est eveniet ipsam sindera pad rone matrelat sando reda
-                    </h3>
-                    <p class="fst-italic">
-                      Omnis blanditiis saepe eos autem qui sunt debitis porro
-                      quia.
-                    </p>
-                    <p>
-                      Exercitationem nostrum omnis. Ut reiciendis repudiandae
-                      minus. Omnis recusandae ut non quam ut quod eius qui.
-                      Ipsum quia odit vero atque qui quibusdam amet. Occaecati
-                      sed est sint aut vitae molestiae voluptate vel
-                    </p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img
-                      src="{{asset('adminty-user-assets')}}/img/departments-1.jpg"
-                      alt=""
-                      class="img-fluid"
-                    />
-                  </div>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
 
       </div>
     </section><!-- End Departments Section -->
-
-    <!-- ======= Events Section ======= -->
-    <section id="events" class="events">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title">
-          <h2>Events</h2>
-          <p><h5>Join Us for an Unforgettable Experience</h5>
-          </p>
-        </div>
-
-        <div
-          class="events-slider swiper"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="row event-item">
-                <div class="col-lg-6">
-                  <img
-                    src="{{asset('adminty-user-assets')}}/img/departments-3.jpg"
-                    class="img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                  <h3>Birthday Parties</h3>
-                  <div class="price">
-                    <p><span>$189</span></p>
-                  </div>
-                  <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
-                  <ul>
-                    <li>
-                      <i class="bi bi-check-circled"></i> Ullamco laboris nisi
-                      ut aliquip ex ea commodo consequat.
-                    </li>
-                    <li>
-                      <i class="bi bi-check-circled"></i> Duis aute irure
-                      dolor in reprehenderit in voluptate velit.
-                    </li>
-                    <li>
-                      <i class="bi bi-check-circled"></i> Ullamco laboris nisi
-                      ut aliquip ex ea commodo consequat.
-                    </li>
-                  </ul>
-                  <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- End testimonial item -->
-            <div class="swiper-slide">
-              <div class="row event-item">
-                <div class="col-lg-6">
-                  <img
-                    src="{{asset('adminty-user-assets')}}/img/departments-2.jpg"
-                    class="img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                  <h3>Private Parties</h3>
-                  <div class="price">
-                    <p><span>$290</span></p>
-                  </div>
-                  <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
-                  <ul>
-                    <li>
-                      <i class="bi bi-check-circled"></i> Ullamco laboris nisi
-                      ut aliquip ex ea commodo consequat.
-                    </li>
-                    <li>
-                      <i class="bi bi-check-circled"></i> Duis aute irure
-                      dolor in reprehenderit in voluptate velit.
-                    </li>
-                    <li>
-                      <i class="bi bi-check-circled"></i> Ullamco laboris nisi
-                      ut aliquip ex ea commodo consequat.
-                    </li>
-                  </ul>
-                  <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- End testimonial item -->
-            <div class="swiper-slide">
-              <div class="row event-item">
-                <div class="col-lg-6">
-                  <img
-                    src="{{asset('adminty-user-assets')}}/img/departments-1.jpg"
-                    class="img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                  <h3>Custom Parties</h3>
-                  <div class="price">
-                    <p><span>$99</span></p>
-                  </div>
-                  <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
-                  <ul>
-                    <li>
-                      <i class="bi bi-check-circled"></i> Ullamco laboris nisi
-                      ut aliquip ex ea commodo consequat.
-                    </li>
-                    <li>
-                      <i class="bi bi-check-circled"></i> Duis aute irure
-                      dolor in reprehenderit in voluptate velit.
-                    </li>
-                    <li>
-                      <i class="bi bi-check-circled"></i> Ullamco laboris nisi
-                      ut aliquip ex ea commodo consequat.
-                    </li>
-                  </ul>
-                  <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- End testimonial item -->
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
-    </section><!-- End Events Section -->
 
     <!-- ======= Frequently Asked Questioins Section ======= -->
     <section id="faq" class="faq section-bg">

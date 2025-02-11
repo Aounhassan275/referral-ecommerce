@@ -403,6 +403,7 @@ UPDATE YOUR OWN PROFILE
                                 <tr>
                                     <th>Sr#</th>
                                     <th>Title</th>
+                                    <th>Heading</th>
                                     <th>Image</th>
                                     <th>Description</th>
                                     <th>Action</th>
@@ -413,6 +414,7 @@ UPDATE YOUR OWN PROFILE
                                 <tr> 
                                     <td>{{$key+1}}</td>
                                     <td>{{$special->title}}</td>
+                                    <td>{{$special->heading}}</td>
                                     <td>
                                         <img src="{{asset($special->image)}}" height="50" width="50" alt="">
                                     </td>
@@ -420,6 +422,7 @@ UPDATE YOUR OWN PROFILE
                                     <td>
                                         <button data-toggle="modal" data-target="#edit_modal"
                                             description="{{$special->description}}" 
+                                            heading="{{$special->heading}}" 
                                             id="{{$special->id}}" title="{{$special->title}}" 
                                             class="edit-btn btn btn-primary">Edit</button>
                                     </td>
@@ -434,8 +437,6 @@ UPDATE YOUR OWN PROFILE
         </div>
     </div>
 </div>
-@endif
-@if (Auth::user()->products->count() > 0)
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -503,152 +504,135 @@ UPDATE YOUR OWN PROFILE
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">User Service</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card-body">
+                @if(App\Models\UserSpecial::where('user_id',Auth::user()->id)->count() < 4)
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <button data-toggle="modal" data-target="#create-user-special-modal"
+                            class="btn btn-primary float-right">Create User Service</button>
+                        
+                    </div>
+                </div>
+                @endif
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sr#</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr> 
+                            </thead>
+                            <tbody>
+                                @foreach (App\Models\UserSpecial::where('user_id',Auth::user()->id)->get() as $key => $userSpecial)
+                                <tr> 
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$userSpecial->name}}</td>
+                                    <td>
+                                        <img src="{{asset($userSpecial->image)}}" height="50" width="50" alt="">
+                                    </td>
+                                    <td>{{$userSpecial->description}}</td>
+                                    <td>
+                                        <button data-toggle="modal" data-target="#edit_user_special_modal"
+                                            description="{{$userSpecial->description}}" 
+                                            id="{{$userSpecial->id}}" name="{{$userSpecial->name}}" 
+                                            class="edit-user-special-btn btn btn-primary">Edit</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">User Main Section</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card-body">
+                @if(App\Models\UserMainSection::where('user_id',Auth::user()->id)->count() < 4)
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <button data-toggle="modal" data-target="#create-user-main-section-modal"
+                            class="btn btn-primary float-right">Create User Main Section</button>
+                        
+                    </div>
+                </div>
+                @endif
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sr#</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr> 
+                            </thead>
+                            <tbody>
+                                @foreach (App\Models\UserMainSection::where('user_id',Auth::user()->id)->get() as $key => $UserMainSection)
+                                <tr> 
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$UserMainSection->name}}</td>
+                                    <td>
+                                        <img src="{{asset($UserMainSection->image)}}" height="50" width="50" alt="">
+                                    </td>
+                                    <td>{{$UserMainSection->description}}</td>
+                                    <td>
+                                        <button data-toggle="modal" data-target="#edit_user_main_section_modal"
+                                            description="{{$UserMainSection->description}}" 
+                                            id="{{$UserMainSection->id}}" name="{{$UserMainSection->name}}" 
+                                            class="edit-user-main-section-btn btn btn-primary">Edit</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endif
-
-<div id="create-modal" class="modal fade">
-    <div class="modal-dialog">
-        <form action="{{route('user.special.store')}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="myModalLabel">Special</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" name="title" placeholder="Title" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Image</label>
-                        <input type="file" name="image"  class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea name="description" class="form-control" required></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light">Upload</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<div id="edit_modal" class="modal fade">
-    <div class="modal-dialog">
-        <form id="updateForm" method="POST" enctype="multipart/form-data">
-            @method('PUT')
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="myModalLabel">Update Special Heading</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">  
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" name="title" id="title" placeholder="Title" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Image</label>
-                        <input type="file" name="image"  class="form-control" >
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea name="description" id="description" class="form-control" required></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light">Upload</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<div id="create-event-modal" class="modal fade">
-    <div class="modal-dialog">
-        <form action="{{route('user.event.store')}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="myModalLabel">Event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" name="title" placeholder="Title" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Price</label>
-                        <input type="text" name="price" placeholder="Price" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Link</label>
-                        <input type="text" name="link" placeholder="Link" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Image</label>
-                        <input type="file" name="image"  class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea name="description" class="form-control" required></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light">Upload</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<div id="edit_event_modal" class="modal fade">
-    <div class="modal-dialog">
-        <form id="updateEventForm" method="POST" enctype="multipart/form-data">
-            @method('PUT')
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="myModalLabel">Update Event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">  
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" name="title" id="event_title" placeholder="Title" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Price</label>
-                        <input type="text" name="price" id="event_price" placeholder="Price" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Link</label>
-                        <input type="text" name="link" id="event_link" placeholder="Link" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Image</label>
-                        <input type="file" name="image"  class="form-control" >
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea name="description" id="event_description" class="form-control" required></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light">Upload</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+@include('adminty-user.profile.partials.specials-modals')
+@include('adminty-user.profile.partials.event-modals')
+@include('adminty-user.profile.partials.user-special-modals')
+@include('adminty-user.profile.partials.user-main-section-modals')
 @endsection
 
 @section('scripts')
@@ -728,11 +712,14 @@ UPDATE YOUR OWN PROFILE
             let id = $(this).attr('id');
             let description = $(this).attr('description');
             let title = $(this).attr('title');
+            let heading = $(this).attr('heading');
             $('#id').val(id);
             $('#title').val(title);
+            $('#heading').val(heading);
             $('#description').html(description);
             $('#updateForm').attr('action','{{route('user.special.update','')}}' +'/'+id);
         });
+        
         $('.edit-event-btn').click(function(){
             let id = $(this).attr('id');
             let description = $(this).attr('description');
@@ -744,6 +731,22 @@ UPDATE YOUR OWN PROFILE
             $('#event_link').val(link);
             $('#event_description').html(description);
             $('#updateEventForm').attr('action','{{route('user.event.update','')}}' +'/'+id);
+        });
+        $('.edit-user-special-btn').click(function(){
+            let id = $(this).attr('id');
+            let description = $(this).attr('description');
+            let name = $(this).attr('name');
+            $('#user_special_name').val(name);
+            $('#user_special_description').html(description);
+            $('#updateUserSpecialForm').attr('action','{{route('user.user_special.update','')}}' +'/'+id);
+        });
+        $('.edit-user-main-section-btn').click(function(){
+            let id = $(this).attr('id');
+            let description = $(this).attr('description');
+            let name = $(this).attr('name');
+            $('#user_main_section_name').val(name);
+            $('#user_main_section_description').html(description);
+            $('#updateUserMainSectionForm').attr('action','{{route('user.user_main_section.update','')}}' +'/'+id);
         });
     });
 </script>
