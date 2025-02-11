@@ -16,6 +16,7 @@ use App\Models\Setting;
 use App\Models\Special;
 use App\Models\Type;
 use App\Models\User;
+use App\Models\UserFaq;
 use App\Models\UserMainSection;
 use App\Models\UserReview;
 use App\Models\UserSpecial;
@@ -255,8 +256,9 @@ class FrontendController extends Controller
         $specials = Special::where('user_id',$user->id)->get()->take(5);
         $userSpecials = UserSpecial::where('user_id',$user->id)->get()->take(4);
         $userMainSections = UserMainSection::where('user_id',$user->id)->get()->take(4);
+        $userFaqs = UserFaq::where('user_id',$user->id)->get()->take(6);
         if(Helper::dashboard() == 'adminty-user'){
-            return view('front.product.adminty-user',compact('user','brands','products','events','userSpecials','specials','userMainSections','singleProduct','allProducts'));
+            return view('front.product.adminty-user',compact('user','brands','products','events','userSpecials','specials','userMainSections','singleProduct','allProducts','userFaqs'));
         }else{
             return view('front.product.user',compact('user','brands','products'));
         }

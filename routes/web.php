@@ -287,6 +287,7 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
     /******************EVENT ROUTES****************/
     Route::resource('user_special', 'UserSpecialController');  
     Route::resource('user_main_section', 'UserMainSectionController');  
+    Route::resource('user_faq', 'UserFaqController');  
 });
 
 

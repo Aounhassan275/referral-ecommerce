@@ -628,11 +628,70 @@ UPDATE YOUR OWN PROFILE
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">User FAQ</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card-body">
+                @if(App\Models\UserFaq::where('user_id',Auth::user()->id)->count() < 6)
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <button data-toggle="modal" data-target="#create-user-faq-section-modal"
+                            class="btn btn-primary float-right">Create User Faq Section</button>
+                        
+                    </div>
+                </div>
+                @endif
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sr#</th>
+                                    <th>Question</th>
+                                    <th>Answer</th>
+                                    <th>Action</th>
+                                </tr> 
+                            </thead>
+                            <tbody>
+                                @foreach (App\Models\UserFaq::where('user_id',Auth::user()->id)->get() as $key => $user_faq)
+                                <tr> 
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$user_faq->question}}</td>
+                                    <td>{{$user_faq->answer}}</td>
+                                    <td>
+                                        <button data-toggle="modal" data-target="#edit_user_faq_section_modal"
+                                            question="{{$user_faq->question}}" 
+                                            id="{{$user_faq->id}}" answer="{{$user_faq->answer}}" 
+                                            class="edit-user-faq-section-btn btn btn-primary">Edit</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endif
 @include('adminty-user.profile.partials.specials-modals')
 @include('adminty-user.profile.partials.event-modals')
 @include('adminty-user.profile.partials.user-special-modals')
 @include('adminty-user.profile.partials.user-main-section-modals')
+@include('adminty-user.profile.partials.user-faq-section-modals')
 @endsection
 
 @section('scripts')
@@ -747,6 +806,14 @@ UPDATE YOUR OWN PROFILE
             $('#user_main_section_name').val(name);
             $('#user_main_section_description').html(description);
             $('#updateUserMainSectionForm').attr('action','{{route('user.user_main_section.update','')}}' +'/'+id);
+        });        
+        $('.edit-user-faq-section-btn').click(function(){
+            let id = $(this).attr('id');
+            let question = $(this).attr('question');
+            let answer = $(this).attr('answer');
+            $('#user_faq_section_question').html(question);
+            $('#user_faq_section_answer').html(answer);
+            $('#updateUserFaqSectionForm').attr('action','{{route('user.user_faq.update','')}}' +'/'+id);
         });
     });
 </script>
