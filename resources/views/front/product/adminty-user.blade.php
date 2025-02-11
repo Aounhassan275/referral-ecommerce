@@ -605,108 +605,7 @@
       </div>
     </section><!-- End Gallery Section -->
     @endif
-    <!-- ======= Leaders Section ======= -->
-    <section id="testimonials" class="testimonials">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Leaders</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Team <strong>100</strong> :
-                  Reword <strong>2889</strong> <br>
-                  Products <strong>121</strong> :
-                  Visitors <strong>1332</strong>
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{asset('adminty-user-assets')}}/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              
-                
-              </div>
-            </div><!-- End Leaders item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Team <strong>100</strong> :
-                  Reword <strong>2889</strong> <br>
-                  Products <strong>121</strong> :
-                  Visitors <strong>1332</strong>
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{asset('adminty-user-assets')}}/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-              </div>
-            </div><!-- End Leaders item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Team <strong>100</strong> :
-                  Reword <strong>2889</strong> <br>
-                  Products <strong>121</strong> :
-                  Visitors <strong>1332</strong>
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{asset('adminty-user-assets')}}/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-              </div>
-            </div><!-- End Leaders item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Team <strong>100</strong> :
-                  Reword <strong>2889</strong> <br>
-                  Products <strong>121</strong> :
-                  Visitors <strong>1332</strong>
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{asset('adminty-user-assets')}}/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </div><!-- End Leaders item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Team <strong>100</strong> :
-                  Reword <strong>2889</strong> <br>
-                  Products <strong>121</strong> :
-                  Visitors <strong>1332</strong>
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{asset('adminty-user-assets')}}/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              </div>
-            </div><!-- End Leaders item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Leaders Section -->
-
+    @if($specials->count() > 0)
     <!-- ======= Departments Section ======= -->
     <section id="departments" class="departments">
       <div class="container" data-aos="fade-up">
@@ -758,7 +657,7 @@
 
       </div>
     </section><!-- End Departments Section -->
-
+    @endif
     <!-- ======= Frequently Asked Questioins Section ======= -->
     @if($userFaqs->count() > 0)
     <section id="faq" class="faq section-bg">
@@ -798,15 +697,31 @@
             <div class="footer-info">
               <h3>My Social Links</h3>
               <div class="social-links mt-3">
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              <a href="#" class="youtube"><i class="bi bi-youtube"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="tiktok"><i class="bi bi-tiktok"></i></a>
-              <a href="#" class="snack video"><i class="bi bi-camera-reels"></i></a>  
-              </div>
+                @if($user->facebook)
+              <a href="{{$user->facebook}}" class="facebook"><i class="bi bi-facebook"></i></a>
+              @endif
+              @if($user->whatsapp)
+              <a href="https://api.whatsapp.com/send?phone={{@$user->whatsapp}}" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+              @endif
+              @if($user->twitter)
+              <a href="{{$user->twitter}}" class="twitter"><i class="bi bi-twitter"></i></a>
+              @endif
+              @if($user->linkedin)
+              <a href="{{$user->linkedin}}" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              @endif
+              @if($user->youtube)
+              <a href="{{$user->youtube}}" class="youtube"><i class="bi bi-youtube"></i></a>
+              @endif
+              @if($user->instagram)
+              <a href="{{$user->instagram}}" class="instagram"><i class="bi bi-instagram"></i></a>
+              @endif
+              @if($user->tiktok)
+              <a href="{{$user->tiktok}}" class="tiktok"><i class="bi bi-tiktok"></i></a>
+              @endif
+              @if($user->snack_video)
+              <a href="{{$user->snack_video}}" class="snack video"><i class="bi bi-camera-reels"></i></a>  
+                @endif
+            </div>
             </div>
           </div>
 
