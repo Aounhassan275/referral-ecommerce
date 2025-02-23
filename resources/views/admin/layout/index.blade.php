@@ -63,6 +63,7 @@
 							<li class="sidebar-item"><a class="sidebar-link" href="{{route('admin.payment.index')}}">Payment</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="{{route('admin.profile.index')}}">Profile</a></li>
 							<li class="sidebar-item"><a class="sidebar-link" href="{{route('admin.balance_transfer.index')}}">Balance Transfer</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="{{route('admin.payment_policy.index')}}">Payment Policy</a></li>
 						</ul>
 					</li>
 					<li class="sidebar-item {{Request::is('admin/company_account/*') ?'active':''}}">

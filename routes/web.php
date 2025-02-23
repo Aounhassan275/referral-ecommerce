@@ -164,6 +164,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','namespace' => 'Admin'], funct
     Route::resource('note', 'NoteController'); 
     /******************Blog Categroy ROUTES****************/
     Route::resource('blog_category', 'BlogCategoryController'); 
+    Route::resource('payment_policy', 'PaymentPolicyController'); 
 });
 });
 /******************USER PANELS ROUTES****************/
