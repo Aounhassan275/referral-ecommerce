@@ -11,8 +11,13 @@
         <div class="card-header">
             <h5 class="card-title">View Payment Type Table</h5>
         </div>
-        <a href="{{route('admin.payment_type.create')}}" class="btn btn-primary">Create Payment Type</a>
-        <div class="table-responsive">
+        <div class="row">
+            <div class="col-12">
+                <a href="{{route('admin.payment_policy.create')}}" class="btn btn-primary float-right">Create Payment Type</a>
+
+            </div>
+        </div>
+        <div class="table-responsive mt-4">
             <table id="datatables-buttons" class="table table-striped ">
                 <thead>
                     <tr>
