@@ -134,23 +134,15 @@
                         
                    </div>
                    <div class="row">
-                        <div class="form-group col-3">
-                            <label class="form-label">Trade Income</label>
-                            <input type="number" class="form-control" name="trade_income"  placeholder="Trade Income" value="{{$package->trade_income}}">
-                        </div>
-                        <div class="form-group col-3">
-                            <label class="form-label">Company Income</label>
-                            <input type="number" class="form-control" name="company_income"  placeholder="Company Income" value="{{$package->company_income}}">
-                        </div>
-                        <div class="form-group col-3">
+                        <div class="form-group col-4">
                             <label class="form-label">Self Renew</label>
                             <input type="number" class="form-control" name="self_rebirth"  placeholder="Self Renew" value="{{$package->self_rebirth}}">
                         </div>
-                        <div class="form-group col-3">
+                        <div class="form-group col-4">
                             <label class="form-label">Self Associate</label>
                             <input type="number" class="form-control" name="self_associate"  placeholder="Self Associate" value="{{$package->self_associate}}">
                         </div>
-                        <div class="form-group col-3">
+                        <div class="form-group col-4">
                             <label class="form-label">Self Loan Limit</label>
                             <input type="number" class="form-control" name="self_loan_limit"  placeholder="Self Loan Limit" value="{{$package->self_loan_limit}}">
                         </div>
@@ -199,8 +191,16 @@
                    <div class="row">
                         <div class="col-12">
                             <p><strong>Company Related Incomes</strong></p>
-                        </div>                        
+                        </div>              
                         <div class="form-group col-4">
+                            <label class="form-label">Trade Income</label>
+                            <input type="number" class="form-control" name="trade_income"  placeholder="Trade Income" value="{{$package->trade_income}}">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Company Income</label>
+                            <input type="number" class="form-control" name="company_income"  placeholder="Company Income" value="{{$package->company_income}}">
+                        </div>          
+                        {{-- <div class="form-group col-4">
                             <label class="form-label">Starter Package Income</label>
                             <input type="text" name="starter_package_income" class="form-control" value="{{$package->starter_package_income}}" placeholder="Starter Package Income">
                         </div>
@@ -215,7 +215,7 @@
                         <div class="form-group col-3">
                             <label class="form-label">Brand Package Income</label>
                             <input type="text" name="brand_package_income" class="form-control" value="{{$package->brand_package_income}}" placeholder="Brand Package Income">
-                        </div>
+                        </div> --}}
                         <div class="form-group col-3">
                             <label class="form-label">New Account Income</label>
                             <input type="text" name="company_new_account_income" class="form-control" value="{{$package->company_new_account_income}}" placeholder="New Account Income">
@@ -314,14 +314,6 @@
                    </div>
                    <div class="row">
                         <div class="form-group col-3">
-                            <label class="form-label">Renew Trade Income</label>
-                            <input type="number" class="form-control" name="renew_trade_income"  placeholder="Renew Trade Income" value="{{$package->renew_trade_income}}">
-                        </div>
-                        <div class="form-group col-3">
-                            <label class="form-label">Renew Company Income</label>
-                            <input type="number" class="form-control" name="renew_company_income"  placeholder="Renew Company Income" value="{{$package->renew_company_income}}">
-                        </div>
-                        <div class="form-group col-3">
                             <label class="form-label">Renew Self Rebirth</label>
                             <input type="number" class="form-control" name="renew_self_rebirth"  placeholder="Renew Self Rebirth" value="{{$package->renew_self_rebirth}}">
                         </div>
@@ -329,8 +321,6 @@
                             <label class="form-label">Renew Self Associate</label>
                             <input type="number" class="form-control" name="renew_self_associate"  placeholder="Renew Self Associate" value="{{$package->renew_self_associate}}">
                         </div>
-                   </div>
-                   <div class="row">
                         <div class="form-group col-4">
                             <label class="form-label">Renew Direct Rebirth</label>
                             <input type="number" class="form-control" name="renew_direct_rebirth"  placeholder="Renew Direct Rebirth" value="{{$package->renew_direct_rebirth}}">
@@ -347,8 +337,16 @@
                    <div class="row">
                         <div class="col-12">
                             <p><strong>Company Related Incomes For Renew</strong></p>
-                        </div>                        
-                        <div class="form-group col-4">
+                        </div>       
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Trade Income</label>
+                            <input type="number" class="form-control" name="renew_trade_income"  placeholder="Renew Trade Income" value="{{$package->renew_trade_income}}">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Company Income</label>
+                            <input type="number" class="form-control" name="renew_company_income"  placeholder="Renew Company Income" value="{{$package->renew_company_income}}">
+                        </div>                 
+                        {{-- <div class="form-group col-4">
                             <label class="form-label">Starter Package Income</label>
                             <input type="text" name="renew_starter_package_income" class="form-control" value="{{$package->renew_starter_package_income}}" placeholder="Starter Package Income">
                         </div>
@@ -363,7 +361,7 @@
                         <div class="form-group col-3">
                             <label class="form-label">Brand Package Income</label>
                             <input type="text" name="renew_brand_package_income" class="form-control" value="{{$package->renew_brand_package_income}}" placeholder="Brand Package Income">
-                        </div>
+                        </div> --}}
                         <div class="form-group col-3">
                             <label class="form-label">New Account Income</label>
                             <input type="text" name="renew_company_new_account_income" class="form-control" value="{{$package->renew_company_new_account_income}}" placeholder="New Account Income">
