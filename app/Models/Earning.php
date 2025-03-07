@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Earning extends Model
 {
     protected $fillable = [
-        'price','user_id','type','due_to','level'
+        'price','user_id','type','due_to','level','status'
     ];
     public function user()
     {

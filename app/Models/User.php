@@ -407,6 +407,20 @@ class User extends Authenticatable
         }
         return $parents;
     }
+    // yeh Sirf Direct Income ka liye use kr rhy hain
+	public function directParentsForDirectIncome()
+    {
+        $parents = [];
+        $parent = $this;
+        for($i = 0; $i < 5;$i++)
+        {
+            $parent = User::where('id',$parent->refer_by)->first();
+            if(!$parent)
+                break;
+            $parents[] = $parent;
+        }
+        return $parents;
+    }
 	public function refer_by_name($id)
     {
         $user = User::find($id);

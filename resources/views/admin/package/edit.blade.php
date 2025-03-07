@@ -167,6 +167,98 @@
                    </div>
                    <hr>
                    <div class="row">
+                        <div class="form-group col-6">
+                            <label class="form-label">Max Limit</label>
+                            <input type="number" class="form-control" name="max_limit"  placeholder="Max Limit" value="{{$package->max_limit}}">
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label">Min Limit</label>
+                            <input type="number" class="form-control" name="min_limit"  placeholder="Min Limit" value="{{$package->min_limit}}">
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="form-group col-6">
+                            <label class="form-label">Withdraw Limit</label>
+                            <input type="number" class="form-control" name="withdraw_limit"  placeholder="Withdraw Limit" value="{{$package->withdraw_limit}}">
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label">Fund Limit</label>
+                            <input type="number" class="form-control" name="fund_limit"  placeholder="Fund Limit" value="{{$package->fund_limit}}">
+                        </div>
+                    </div>
+                   <div class="row">
+                        <div class="form-group col-6">
+                            <label class="form-label">Product Limit</label>
+                            <input type="number" class="form-control" name="product_limit"  placeholder="Product Limit" value="{{$package->product_limit}}">
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label">Image</label>
+                            <input type="file" class="form-control" name="image"  >
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="col-12">
+                            <p><strong>Company Related Incomes</strong></p>
+                        </div>                        
+                        <div class="form-group col-4">
+                            <label class="form-label">Starter Package Income</label>
+                            <input type="text" name="starter_package_income" class="form-control" value="{{$package->starter_package_income}}" placeholder="Starter Package Income">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Seller Package Income</label>
+                            <input type="text" name="seller_package_income" class="form-control" value="{{$package->seller_package_income}}" placeholder="Seller Package Income">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Salary Package Income</label>
+                            <input type="text" name="salary_package_income" class="form-control" value="{{$package->salary_package_income}}" placeholder="Salary Package Income">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Brand Package Income</label>
+                            <input type="text" name="brand_package_income" class="form-control" value="{{$package->brand_package_income}}" placeholder="Brand Package Income">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">New Account Income</label>
+                            <input type="text" name="company_new_account_income" class="form-control" value="{{$package->company_new_account_income}}" placeholder="New Account Income">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Employee Account Income</label>
+                            <input type="text" name="company_employee_account_income" class="form-control" value="{{$package->company_employee_account_income}}" placeholder="Employee Account Income">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew Income</label>
+                            <input type="text" name="company_renew_income" class="form-control" value="{{$package->company_renew_income}}" placeholder="Renew Income">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Renew All Accounts</label>
+                            <input type="text" name="renew_all_accounts" class="form-control" value="{{$package->renew_all_accounts}}" placeholder="Renew All Accounts">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">All Associate</label>
+                            <input type="text" name="all_assoicate" class="form-control" value="{{$package->all_assoicate}}" placeholder="All Assoicates">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Company Associate</label>
+                            <input type="text" name="company_assoicate" class="form-control" value="{{$package->company_assoicate}}" placeholder="Company Assoicates">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">For Medicine</label>
+                            <input type="text" name="for_medicine" class="form-control" value="{{$package->for_medicine}}" placeholder="For Medicine">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">For Purchase All</label>
+                            <input type="text" name="for_purchase_all" class="form-control" value="{{$package->for_purchase_all}}" placeholder="For Purchase All">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Monthly Draw</label>
+                            <input type="text" name="monthly_draw" class="form-control" value="{{$package->monthly_draw}}" placeholder="Monthly Draw">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Company Products</label>
+                            <input type="text" name="company_products" class="form-control" value="{{$package->company_products}}" placeholder="Company Products">
+                        </div>
+                   </div>
+                   <hr>
+                   <div class="row">
                         <div class="col-12">
                             <p><strong>Renew Fields</strong></p>
                         </div>
@@ -252,96 +344,65 @@
                             <input type="number" class="form-control" name="renew_self_loan_limit"  placeholder="Renew Self Loan Limit" value="{{$package->renew_self_loan_limit}}">
                         </div>
                    </div>
-                   <hr>
-                   <div class="row">
-                        <div class="form-group col-6">
-                            <label class="form-label">Max Limit</label>
-                            <input type="number" class="form-control" name="max_limit"  placeholder="Max Limit" value="{{$package->max_limit}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <label class="form-label">Min Limit</label>
-                            <input type="number" class="form-control" name="min_limit"  placeholder="Min Limit" value="{{$package->min_limit}}">
-                        </div>
-                   </div>
-                   <div class="row">
-                    <div class="form-group col-6">
-                        <label class="form-label">Withdraw Limit</label>
-                        <input type="number" class="form-control" name="withdraw_limit"  placeholder="Withdraw Limit" value="{{$package->withdraw_limit}}">
-                    </div>
-                    <div class="form-group col-6">
-                        <label class="form-label">Fund Limit</label>
-                        <input type="number" class="form-control" name="fund_limit"  placeholder="Fund Limit" value="{{$package->fund_limit}}">
-                    </div>
-               </div>
-                   <div class="row">
-                        <div class="form-group col-6">
-                            <label class="form-label">Product Limit</label>
-                            <input type="number" class="form-control" name="product_limit"  placeholder="Product Limit" value="{{$package->product_limit}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <label class="form-label">Image</label>
-                            <input type="file" class="form-control" name="image"  >
-                        </div>
-                   </div>
                    <div class="row">
                         <div class="col-12">
-                            <p><strong>Company Related Incomes</strong></p>
+                            <p><strong>Company Related Incomes For Renew</strong></p>
                         </div>                        
                         <div class="form-group col-4">
                             <label class="form-label">Starter Package Income</label>
-                            <input type="text" name="starter_package_income" class="form-control" value="{{$package->starter_package_income}}" placeholder="Starter Package Income">
+                            <input type="text" name="renew_starter_package_income" class="form-control" value="{{$package->renew_starter_package_income}}" placeholder="Starter Package Income">
                         </div>
                         <div class="form-group col-4">
                             <label class="form-label">Seller Package Income</label>
-                            <input type="text" name="seller_package_income" class="form-control" value="{{$package->seller_package_income}}" placeholder="Seller Package Income">
+                            <input type="text" name="renew_seller_package_income" class="form-control" value="{{$package->seller_package_income}}" placeholder="Seller Package Income">
                         </div>
                         <div class="form-group col-4">
                             <label class="form-label">Salary Package Income</label>
-                            <input type="text" name="salary_package_income" class="form-control" value="{{$package->salary_package_income}}" placeholder="Salary Package Income">
+                            <input type="text" name="renew_salary_package_income" class="form-control" value="{{$package->renew_salary_package_income}}" placeholder="Salary Package Income">
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">Brand Package Income</label>
-                            <input type="text" name="brand_package_income" class="form-control" value="{{$package->brand_package_income}}" placeholder="Brand Package Income">
+                            <input type="text" name="renew_brand_package_income" class="form-control" value="{{$package->renew_brand_package_income}}" placeholder="Brand Package Income">
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">New Account Income</label>
-                            <input type="text" name="company_new_account_income" class="form-control" value="{{$package->company_new_account_income}}" placeholder="New Account Income">
+                            <input type="text" name="renew_company_new_account_income" class="form-control" value="{{$package->renew_company_new_account_income}}" placeholder="New Account Income">
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">Employee Account Income</label>
-                            <input type="text" name="company_employee_account_income" class="form-control" value="{{$package->company_employee_account_income}}" placeholder="Employee Account Income">
+                            <input type="text" name="renew_company_employee_account_income" class="form-control" value="{{$package->renew_company_employee_account_income}}" placeholder="Employee Account Income">
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">Renew Income</label>
-                            <input type="text" name="company_renew_income" class="form-control" value="{{$package->company_renew_income}}" placeholder="Renew Income">
+                            <input type="text" name="renew_company_renew_income" class="form-control" value="{{$package->renew_company_renew_income}}" placeholder="Renew Income">
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">Renew All Accounts</label>
-                            <input type="text" name="renew_all_accounts" class="form-control" value="{{$package->renew_all_accounts}}" placeholder="Renew All Accounts">
+                            <input type="text" name="renew_renew_all_accounts" class="form-control" value="{{$package->renew_renew_all_accounts}}" placeholder="Renew All Accounts">
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">All Associate</label>
-                            <input type="text" name="all_assoicate" class="form-control" value="{{$package->all_assoicate}}" placeholder="All Assoicates">
+                            <input type="text" name="renew_all_assoicate" class="form-control" value="{{$package->renew_all_assoicate}}" placeholder="All Assoicates">
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">Company Associate</label>
-                            <input type="text" name="company_assoicate" class="form-control" value="{{$package->company_assoicate}}" placeholder="Company Assoicates">
+                            <input type="text" name="renew_company_assoicate" class="form-control" value="{{$package->renew_company_assoicate}}" placeholder="Company Assoicates">
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">For Medicine</label>
-                            <input type="text" name="for_medicine" class="form-control" value="{{$package->for_medicine}}" placeholder="For Medicine">
+                            <input type="text" name="renew_for_medicine" class="form-control" value="{{$package->renew_for_medicine}}" placeholder="For Medicine">
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">For Purchase All</label>
-                            <input type="text" name="for_purchase_all" class="form-control" value="{{$package->for_purchase_all}}" placeholder="For Purchase All">
+                            <input type="text" name="renew_for_purchase_all" class="form-control" value="{{$package->renew_for_purchase_all}}" placeholder="For Purchase All">
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">Monthly Draw</label>
-                            <input type="text" name="monthly_draw" class="form-control" value="{{$package->monthly_draw}}" placeholder="Monthly Draw">
+                            <input type="text" name="renew_monthly_draw" class="form-control" value="{{$package->renew_monthly_draw}}" placeholder="Monthly Draw">
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">Company Products</label>
-                            <input type="text" name="company_products" class="form-control" value="{{$package->company_products}}" placeholder="Company Products">
+                            <input type="text" name="renew_company_products" class="form-control" value="{{$package->renew_company_products}}" placeholder="Company Products">
                         </div>
                    </div>
                     <div class="text-right">

@@ -69,6 +69,20 @@ class Package extends Model
         'for_purchase_all',
         'monthly_draw',
         'company_products',
+        'renew_starter_package_income',
+        'renew_seller_package_income',
+        'renew_salary_package_income',
+        'renew_brand_package_income',
+        'renew_company_new_account_income',
+        'renew_company_employee_account_income',
+        'renew_company_renew_income',
+        'renew_renew_all_accounts',
+        'renew_all_assoicate',
+        'renew_company_assoicate',
+        'renew_for_medicine',
+        'renew_for_purchase_all',
+        'renew_monthly_draw',
+        'renew_company_products',
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveAImage($value,'/package/');
