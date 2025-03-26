@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Helpers\Helper;
+use App\Helpers\FundTransferHelper;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyAccount;
 use App\Models\Setting;
@@ -89,26 +90,7 @@ class TranscationController extends Controller
                 toastr()->error('Insufficient Balance.');
                 return redirect()->back();
             }
-            $sale_reward_for_users = $fund_fee/100*20;
-            $user->update([
-                'cash_wallet' => $user->cash_wallet - $total_amount,
-                'sale_reward' => $user->sale_reward += $sale_reward_for_users
-            ]);
-            $receiver = User::find($request->receiver_id);
-            $receiver->update([
-                'cash_wallet' => $receiver->cash_wallet += $request->amount,
-                'sale_reward' => $receiver->sale_reward += $sale_reward_for_users
-            ]);
-            $sale_reward_for_trade = $fund_fee/100*30;
-            $trade_income= CompanyAccount::where('name','Trade Income')->first();
-            $trade_income->update([
-                'balance' => $trade_income->balance += $sale_reward_for_trade
-            ]);
-            $sale_reward_for_gift = $fund_fee/100*30;
-            $gift= CompanyAccount::find(1);
-            $gift->update([
-                'balance' => $gift->balance += $sale_reward_for_gift
-            ]);
+            FundTransferHelper::transfer($fund_fee,$request,$user,$total_amount);
 
         }else{
             if($user->cash_wallet < $request->amount)

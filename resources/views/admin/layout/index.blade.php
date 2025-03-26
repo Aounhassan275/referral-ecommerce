@@ -8,7 +8,7 @@
     <meta name="description" content="{{App\Models\Setting::siteName()}} | BEST ONLINE EARNING SITE | No. 1 Marketing Forum to Earn Online.">
 	<meta name="author" content="Bootlab">
     <title>ADMIN PANEL | {{App\Models\Setting::siteName()}}</title> 
-	<link rel="shortcut icon" type="image/png" href="{{asset('front/image/favicon.png')}}">	
+	<link rel="shortcut icon" type="image/png" href="{{asset('user_asset/'.App\Models\Setting::favicon().'.ico')}}">	
 
 	<link rel="preconnect" href="{{asset('//fonts.gstatic.com/')}}" crossorigin="">
 
@@ -34,8 +34,7 @@
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content ">
 				<a class="sidebar-brand" href="{{url('/')}}">
-          			<i class="align-middle" data-feather="box"></i>
-          			<span class="align-middle"> {{App\Models\Setting::siteName()}}</span>
+          			<img src="{{asset('user_asset/'.App\Models\Setting::logo().'.png')}}" style="width:185px;" alt="">
         		</a>
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">

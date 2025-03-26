@@ -189,6 +189,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Earning::class)->where('type','down_line_placement_income');
     }
+    public function allUplineIncomeReminaindAmount()
+    {
+        $uplineIncome = $this->uplineIncome->where('status',0)->sum('price');
+        $downlineIncome = $this->downlineIncome->where('status',0)->sum('price');
+        $uplinePlacementIncome = $this->uplinePlacementIncome->where('status',0)->sum('price');
+        $downlinePlacementIncome = $this->downlinePlacementIncome->where('status',0)->sum('price');
+        return $downlinePlacementIncome + $uplinePlacementIncome + $downlineIncome + $uplineIncome;
+    }
     public function rankingIncome()
     {
         return $this->hasMany(Earning::class)->where('type','ranking_income');
@@ -611,6 +619,11 @@ class User extends Authenticatable
     public function totalDirectReferral()
     {
         return $this->mrefers()->where('status','active')->count();
+
+    }
+    public function totalPendingDirectReferral()
+    {
+        return $this->mrefers()->where('status','!=','active')->count();
 
     }
     public function getCompanyReward()

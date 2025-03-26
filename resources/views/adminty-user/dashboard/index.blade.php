@@ -64,7 +64,7 @@ DASHBOARD
               <span class="text-c-pink f-w-600"
                 >CASH WALLET</span
               >
-              <h4>$589</h4>
+              <h4>PKR {{Auth::user()->cash_wallet}}</h4>
               <div>
                 <span class="f-left m-t-10 text-muted">
                   <i
@@ -85,7 +85,7 @@ DASHBOARD
               <span class="text-c-blue f-w-600"
                 >DIRECT REWARD</span
               >
-              <h4>40</h4>
+              <h4>PKR {{Auth::user()->directIncome->sum('price')}}</h4>
               <div>
                 <span class="f-left m-t-10 text-muted">
                   <i
@@ -106,7 +106,7 @@ DASHBOARD
               <span class="text-c-green f-w-600"
                 >REFERRALS</span
               >
-              <h4>45</h4>
+              <h4>{{Auth::user()->getReferralsInlast30Days()}}</h4>
               <div>
                 <span class="f-left m-t-10 text-muted">
                   <i
@@ -127,7 +127,7 @@ DASHBOARD
               <span class="text-c-yellow f-w-600"
                 >F.M REWARD</span
               >
-              <h4>+562</h4>
+              <h4>PKR {{Auth::user()->directIncome->where('level','1')->sum('price')}}</h4>
               <div>
                 <span class="f-left m-t-10 text-muted">
                   <i
@@ -141,6 +141,78 @@ DASHBOARD
         </div>
         <!-- statustic-card  end -->
 
+        <!-- user-radial-card  start -->
+        <div class="col-xl-3 col-md-6">
+          <div class="card">
+            <div class="card-block user-radial-card">
+              <div
+                data-label="50%"
+                class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger"
+              >
+                <img
+                  src="{{asset('adminty-assets/assets/images/avatar-2.jpg')}}"
+                  alt="User-Image"
+                />
+              </div>
+              <span class="f-36 text-c-pink">PKR</span>
+              <p>10 Refferral Award (PKR {{Auth::user()->package ? Auth::user()->package->ten_percent_sale : 0}})</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card">
+            <div class="card-block user-radial-card">
+              <div
+                data-label="50%"
+                class="radial-bar radial-bar-40 radial-bar-lg radial-bar-success"
+              >
+                <img
+                  src="{{asset('adminty-assets/assets/images/avatar-2.jpg')}}"
+                  alt="User-Image"
+                />
+              </div>
+              <span class="f-36 text-c-green">PKR</span>
+              <p>20 Refferral Award (PKR {{Auth::user()->package ? Auth::user()->package->ten_percent_sale : 0}})</p>
+            
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card">
+            <div class="card-block user-radial-card">
+              <div
+                data-label="50%"
+                class="radial-bar radial-bar-60 radial-bar-lg radial-bar-primary"
+              >
+                <img
+                  src="{{asset('adminty-assets/assets/images/avatar-2.jpg')}}"
+                  alt="User-Image"
+                />
+              </div>
+              <span class="f-36 text-c-lite-green">PKR</span>
+              <p>40 Refferral Award (PKR {{Auth::user()->package ? Auth::user()->package->ten_percent_sale : 0}})</p>
+            
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card">
+            <div class="card-block user-radial-card">
+              <div
+                data-label="50%"
+                class="radial-bar radial-bar-35 radial-bar-lg radial-bar-warning"
+              >
+                <img
+                  src="{{asset('adminty-assets/assets/images/avatar-2.jpg')}}"
+                  alt="User-Image"
+                />
+              </div>
+              <span class="f-36 text-c-pink">PKR</span>
+              <p>50 Refferral Award (PKR {{Auth::user()->package ? Auth::user()->package->ten_percent_sale : 0}})</p>
+            
+            </div>
+          </div>
+        </div>
         <!-- A.M user card  start -->
         <div class="col-xl-3 col-md-6">
           <div class="card user-widget-card bg-c-blue">
@@ -148,7 +220,7 @@ DASHBOARD
               <i
                 class="feather icon-user bg-simple-c-blue card1-icon"
               ></i>
-              <h4>652</h4>
+              <h4>PKR {{Auth::user()->directIncome->where('level','2')->sum('price')}}</h4>
               <p>A.M REWARD</p>
               <a href="#!" class="more-info">1st Level</a>
             </div>
@@ -160,7 +232,7 @@ DASHBOARD
               <i
                 class="feather icon-users bg-simple-c-pink card1-icon"
               ></i>
-              <h4>652</h4>
+              <h4>PKR {{Auth::user()->directIncome->where('level','3')->sum('price')}}</h4>
               <p>Z.M REWARD</p>
               <a href="#!" class="more-info">2nd Level</a>
             </div>
@@ -172,7 +244,7 @@ DASHBOARD
               <i
                 class="feather icon-users bg-simple-c-green card1-icon"
               ></i>
-              <h4>652</h4>
+              <h4>PKR {{Auth::user()->directIncome->where('level','4')->sum('price')}}</h4>
               <p>R.M REWARD</p>
               <a href="#!" class="more-info">3rd Level</a>
             </div>
@@ -184,7 +256,7 @@ DASHBOARD
               <i
                 class="feather icon-users bg-simple-c-yellow card1-icon"
               ></i>
-              <h4>652</h4>
+              <h4>PKR {{Auth::user()->directIncome->where('level','5')->sum('price')}}</h4>
               <p>M.D REWARD</p>
               <a href="#!" class="more-info">4th Level</a>
             </div>
@@ -198,10 +270,10 @@ DASHBOARD
               <i
                 class="feather icon-airplay text-c-lite-green d-block f-40"
               ></i>
-              <h4 class="m-t-20">
-                <span class="text-c-lite-green">8.62</span>
+              <h6 class="m-t-20">
+                <span class="text-c-lite-green">PKR {{Auth::user()->allUplineIncomeReminaindAmount()}}</span>
                 IF WORK
-              </h4>
+              </h6>
               <p class="m-b-20">On Active Member</p>
               <button class="btn btn-primary btn-sm btn-round">
                 Till 1st
@@ -215,10 +287,10 @@ DASHBOARD
               <i
                 class="feather icon-feather text-c-green d-block f-40"
               ></i>
-              <h4 class="m-t-20">
-                <span class="text-c-blue">40</span>
+              <h6 class="m-t-20">
+                <span class="text-c-blue">{{count(Auth::user()->mrefers())}}</span>
                 ALL MEMBERS
-              </h4>
+              </h6>
               <p class="m-b-20">My Team</p>
               <button class="btn btn-success btn-sm btn-round">
                 Check them out
@@ -232,10 +304,10 @@ DASHBOARD
               <i
                 class="feather icon-users text-c-pink d-block f-40"
               ></i>
-              <h4 class="m-t-20">
-                <span class="text-c-blue">40</span> ACTIVE
+              <h6 class="m-t-20">
+                <span class="text-c-blue">{{Auth::user()->totalDirectReferral()}}</span> ACTIVE
                 MEMBERS
-              </h4>
+              </h6>
               <p class="m-b-20">Buy Package</p>
               <button class="btn btn-danger btn-sm btn-round">
                 Check them out
@@ -249,10 +321,10 @@ DASHBOARD
               <i
                 class="feather icon-battery-charging text-c-lite-green d-block f-40"
               ></i>
-              <h4 class="m-t-20">
-                <span class="text-c-lite-green">8</span>
+              <h6 class="m-t-20">
+                <span class="text-c-lite-green">{{Auth::user()->totalPendingDirectReferral()}}</span>
                 PENDING MEMBERS
-              </h4>
+              </h6>
               <p class="m-b-20">Pending Package</p>
               <button class="btn btn-primary btn-sm btn-round">
                 Check them out
@@ -277,7 +349,7 @@ DASHBOARD
                 class="feather icon-users st-icon bg-c-pink txt-lite-color"
               ></i>
               <div class="text-left">
-                <h3 class="d-inline-block">3,874</h3>
+                <h3 class="d-inline-block">PKR {{Auth::user()->directTeamIncome->sum('price')}}</h3>
                 <i
                   class="feather icon-arrow-down text-c-pink f-30"
                 ></i>
@@ -300,7 +372,7 @@ DASHBOARD
                 class="feather icon-shopping-cart st-icon bg-c-blue"
               ></i>
               <div class="text-left">
-                <h3 class="d-inline-block">5,456</h3>
+                <h3 class="d-inline-block">PKR 0</h3>
                 <i
                   class="feather icon-arrow-up text-c-green f-30"
                 ></i>
@@ -323,7 +395,7 @@ DASHBOARD
                 class="feather icon-briefcase st-icon bg-c-green"
               ></i>
               <div class="text-left">
-                <h3 class="d-inline-block">5,456</h3>
+                <h3 class="d-inline-block">PKR 0</h3>
                 <i
                   class="feather icon-arrow-up f-30 text-c-green"
                 ></i>
@@ -346,7 +418,7 @@ DASHBOARD
                 class="feather icon-sliders st-icon bg-c-yellow"
               ></i>
               <div class="text-left">
-                <h3 class="d-inline-block">5,456</h3>
+                <h3 class="d-inline-block">PKR 0</h3>
                 <i
                   class="feather icon-arrow-up f-30 text-c-green"
                 ></i>
@@ -373,7 +445,7 @@ DASHBOARD
                   </label>
                 </div>
                 <div class="col text-right">
-                  <h5 class="">1000</h5>
+                  <h5 class="">2000</h5>
                 </div>
               </div>
               <div class="progress m-t-15">
@@ -394,12 +466,12 @@ DASHBOARD
               <div class="row align-items-center">
                 <div class="col">
                   <label class="label bg-c-lite-green">
-                    35%
+                    100%
                     <i class="m-l-10 feather icon-arrow-up"></i>
                   </label>
                 </div>
                 <div class="col text-right">
-                  <h5 class="">5000</h5>
+                  <h5 class="">10000</h5>
                 </div>
               </div>
               <div class="progress m-t-15">
@@ -420,12 +492,12 @@ DASHBOARD
               <div class="row align-items-center">
                 <div class="col">
                   <label class="label label-danger">
-                    35%
+                    100%
                     <i class="m-l-10 feather icon-arrow-up"></i>
                   </label>
                 </div>
                 <div class="col text-right">
-                  <h5 class="">10000</h5>
+                  <h5 class="">30000</h5>
                 </div>
               </div>
               <div class="progress m-t-15">
@@ -451,7 +523,7 @@ DASHBOARD
                   </label>
                 </div>
                 <div class="col text-right">
-                  <h5 class="">1</h5>
+                  <h5 class="">{{Auth::user()->products->count()}}</h5>
                 </div>
               </div>
               <div class="progress m-t-15">
@@ -472,7 +544,7 @@ DASHBOARD
             <div class="card-block">
               <h6 class="m-b-0">PURCHASE 1 to 9999</h6>
               <h4 class="m-t-10 m-b-10">
-                <i class="feather icon-arrow-up m-r-15"></i>7652
+                <i class="feather icon-arrow-up m-r-15"></i>PKR {{ App\Models\CompanyAccount::where('name','For Purchase All Account')->first() ? App\Models\CompanyAccount::where('name','For Purchase All Account')->first()->balance / 4 : 0}}
               </h4>
               <p class="m-b-0">If Shop in this Range.</p>
             </div>
@@ -483,7 +555,7 @@ DASHBOARD
             <div class="card-block">
               <h6 class="m-b-0">PURCHASE 10000 to 29999</h6>
               <h4 class="m-t-10 m-b-10">
-                <i class="feather icon-arrow-up m-r-15"></i>6325
+                <i class="feather icon-arrow-up m-r-15"></i>PKR {{ App\Models\CompanyAccount::where('name','For Purchase All Account')->first() ? App\Models\CompanyAccount::where('name','For Purchase All Account')->first()->balance / 4 : 0}}
               </h4>
               <p class="m-b-0">If Shop in this Range.</p>
             </div>
@@ -496,7 +568,7 @@ DASHBOARD
             <div class="card-block">
               <h6 class="m-b-0">PURCHASE 30000 to 59999</h6>
               <h4 class="m-t-10 m-b-10">
-                <i class="feather icon-arrow-up m-r-15"></i>652
+                <i class="feather icon-arrow-up m-r-15"></i>PKR {{ App\Models\CompanyAccount::where('name','For Purchase All Account')->first() ? App\Models\CompanyAccount::where('name','For Purchase All Account')->first()->balance / 4 : 0}}
               </h4>
               <p class="m-b-0">If Shop in this Range.</p>
             </div>
@@ -507,7 +579,7 @@ DASHBOARD
             <div class="card-block">
               <h6 class="m-b-0">PURCHASE 60000 to 99999</h6>
               <h4 class="m-t-10 m-b-10">
-                <i class="feather icon-arrow-up m-r-15"></i>5963
+                <i class="feather icon-arrow-up m-r-15"></i>PKR {{ App\Models\CompanyAccount::where('name','For Purchase All Account')->first() ? App\Models\CompanyAccount::where('name','For Purchase All Account')->first()->balance / 4 : 0}}
               </h4>
               <p class="m-b-0">If Shop in this Range.</p>
             </div>
@@ -521,7 +593,7 @@ DASHBOARD
               <h5>DRAW 1</h5>
             </div>
             <div class="card-block text-center">
-              <span class="d-block text-c-blue f-36">56</span>
+              <span class="d-block text-c-blue f-36">PKR {{ App\Models\CompanyAccount::where('name','Monthly Draw Account')->first() ? App\Models\CompanyAccount::where('name','Monthly Draw Account')->first()->balance / 4 : 0}}</span>
               <p class="m-b-0">For Buyer and Seller.</p>
               <div class="progress">
                 <div
@@ -541,7 +613,7 @@ DASHBOARD
               <h5>DRAW 2</h5>
             </div>
             <div class="card-block text-center">
-              <span class="d-block text-c-green f-36">14</span>
+              <span class="d-block text-c-green f-36">PKR {{ App\Models\CompanyAccount::where('name','Monthly Draw Account')->first() ? App\Models\CompanyAccount::where('name','Monthly Draw Account')->first()->balance / 4 : 0}}</span>
               <p class="m-b-0">For Buyer and Seller.</p>
               <div class="progress">
                 <div
@@ -561,7 +633,7 @@ DASHBOARD
               <h5>DRAW 3</h5>
             </div>
             <div class="card-block text-center">
-              <span class="d-block text-c-pink f-36">85</span>
+              <span class="d-block text-c-pink f-36">PKR {{ App\Models\CompanyAccount::where('name','Monthly Draw Account')->first() ? App\Models\CompanyAccount::where('name','Monthly Draw Account')->first()->balance / 4 : 0}}</span>
               <p class="m-b-0">For Buyer and Seller.</p>
               <div class="progress">
                 <div
@@ -581,7 +653,7 @@ DASHBOARD
               <h5>DRAW 4</h5>
             </div>
             <div class="card-block text-center">
-              <span class="d-block text-c-yellow f-36">42</span>
+              <span class="d-block text-c-yellow f-36">PKR {{ App\Models\CompanyAccount::where('name','Monthly Draw Account')->first() ? App\Models\CompanyAccount::where('name','Monthly Draw Account')->first()->balance / 4 : 0}}</span>
               <p class="m-b-0">For Buyer and Seller.</p>
               <div class="progress">
                 <div
@@ -601,7 +673,7 @@ DASHBOARD
             class="card bg-c-pink text-white widget-visitor-card"
           >
             <div class="card-block-small text-center">
-              <h2>1,658</h2>
+              <h2>PKR 0</h2>
               <h6>LOAN LIMIT</h6>
               <i class="feather icon-user"></i>
             </div>
@@ -612,7 +684,7 @@ DASHBOARD
             class="card bg-c-blue text-white widget-visitor-card"
           >
             <div class="card-block-small text-center">
-              <h2>5,678</h2>
+              <h2>PKR 0</h2>
               <h6>LOAN BALANCE</h6>
               <i class="feather icon-file-text"></i>
             </div>
@@ -623,7 +695,7 @@ DASHBOARD
             class="card bg-c-yellow text-white widget-visitor-card"
           >
             <div class="card-block-small text-center">
-              <h2>5,678</h2>
+              <h2>PKR 0</h2>
               <h6>PAYED LOAN</h6>
               <i class="feather icon-award"></i>
             </div>
@@ -634,7 +706,7 @@ DASHBOARD
             class="card bg-c-pink text-white widget-visitor-card"
           >
             <div class="card-block-small text-center">
-              <h2>1,658</h2>
+              <h2>PKR 0</h2>
               <h6>PENDING LOAN</h6>
               <i class="feather icon-user"></i>
             </div>
@@ -647,7 +719,7 @@ DASHBOARD
           <div class="card bg-c-yellow order-card">
             <div class="card-block">
               <h6>MY STOCK</h6>
-              <h2>42,562</h2>
+              <h2>PKR 0</h2>
               <p class="m-b-0">
                 Purchase from the Company
                 <i class="feather icon-arrow-up m-l-10"></i>
@@ -660,7 +732,7 @@ DASHBOARD
           <div class="card bg-c-blue order-card">
             <div class="card-block">
               <h6>STOCK R.O.I</h6>
-              <h2>486</h2>
+              <h2>PKR 0</h2>
               <p class="m-b-0">
                 Reward on Purchase in R.O.I
                 <i
@@ -675,7 +747,7 @@ DASHBOARD
           <div class="card bg-c-green order-card">
             <div class="card-block">
               <h6>GET R.O.I</h6>
-              <h2>1641</h2>
+              <h2>PKR 0</h2>
               <p class="m-b-0">
                 Get Total R.O.I
                 <i
@@ -690,7 +762,7 @@ DASHBOARD
           <div class="card bg-c-yellow order-card">
             <div class="card-block">
               <h6>STOCK REWORD</h6>
-              <h2>42,562</h2>
+              <h2>PKR 0</h2>
               <p class="m-b-0">
                 EXTRA % ON DELIVERY
                 <i class="feather icon-arrow-up m-l-10"></i>
@@ -712,7 +784,7 @@ DASHBOARD
                 </div>
                 <div class="col">
                   <h6 class="m-b-0">TOTAL PURCHASE</h6>
-                  <p>2000</p>
+                  <p>PKR {{Auth::user()->fundReceived()}}</p>
                   <p class="m-b-0"></p>
                 </div>
               </div>
@@ -733,7 +805,7 @@ DASHBOARD
                 </div>
                 <div class="col">
                   <h6 class="m-b-0">TOTAL SALES</h6>
-                  <p>231</p>
+                  <p>PKR 0</p>
                   <p class="m-b-0"></p>
                 </div>
               </div>
@@ -754,7 +826,7 @@ DASHBOARD
                 </div>
                 <div class="col">
                   <h6 class="m-b-0">TOTAL TRANSFER</h6>
-                  <p>2211</p>
+                  <p>PKR {{Auth::user()->fundTransfer()}}</p>
                   <p class="m-b-0"></p>
                 </div>
               </div>
@@ -775,7 +847,7 @@ DASHBOARD
                 </div>
                 <div class="col">
                   <h6 class="m-b-0">TOTAL WITHDRAWAL</h6>
-                  <p>23166</p>
+                  <p>PKR {{Auth::user()->completedWithdraw()}}</p>
                   <p class="m-b-0"></p>
                 </div>
               </div>
@@ -800,7 +872,7 @@ DASHBOARD
                   <h6 class="text-muted m-b-10">
                     TOTAL ORDERS
                   </h6>
-                  <h2 class="m-b-0">379</h2>
+                  <h2 class="m-b-0">{{Auth::user()->orders->count()}}</h2>
                 </div>
               </div>
             </div>
@@ -819,7 +891,7 @@ DASHBOARD
                   <h6 class="text-muted m-b-10">
                     PENDING ORDERS
                   </h6>
-                  <h2 class="m-b-0">205</h2>
+                  <h2 class="m-b-0">{{Auth::user()->orders->where('status','onHold')->count()}}</h2>
                 </div>
               </div>
             </div>
@@ -838,7 +910,7 @@ DASHBOARD
                   <h6 class="text-muted m-b-10">
                     COMPLETE ORDERS
                   </h6>
-                  <h2 class="m-b-0">84</h2>
+                  <h2 class="m-b-0">{{Auth::user()->orders->where('status','Completed')->count()}}</h2>
                 </div>
               </div>
             </div>
@@ -857,7 +929,7 @@ DASHBOARD
                   <h6 class="text-muted m-b-10">
                     REJECTED ORDERS
                   </h6>
-                  <h2 class="m-b-0">325</h2>
+                  <h2 class="m-b-0">{{Auth::user()->orders->where('status','Rejected')->count()}}</h2>
                 </div>
               </div>
             </div>
@@ -865,75 +937,6 @@ DASHBOARD
         </div>
         <!-- customar project  end -->
 
-        <!-- user-radial-card  start -->
-        <div class="col-xl-3 col-md-6">
-          <div class="card">
-            <div class="card-block user-radial-card">
-              <div
-                data-label="50%"
-                class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger"
-              >
-                <img
-                  src="{{asset('adminty-assets/assets/images/avatar-2.jpg')}}"
-                  alt="User-Image"
-                />
-              </div>
-              <span class="f-36 text-c-pink">3,6</span>
-              <p>From 6 GB</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-          <div class="card">
-            <div class="card-block user-radial-card">
-              <div
-                data-label="50%"
-                class="radial-bar radial-bar-40 radial-bar-lg radial-bar-success"
-              >
-                <img
-                  src="{{asset('adminty-assets/assets/images/avatar-2.jpg')}}"
-                  alt="User-Image"
-                />
-              </div>
-              <span class="f-36 text-c-green">85%</span>
-              <p>From 6 GB</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-          <div class="card">
-            <div class="card-block user-radial-card">
-              <div
-                data-label="50%"
-                class="radial-bar radial-bar-60 radial-bar-lg radial-bar-primary"
-              >
-                <img
-                  src="{{asset('adminty-assets/assets/images/avatar-2.jpg')}}"
-                  alt="User-Image"
-                />
-              </div>
-              <span class="f-36 text-c-lite-green">73%</span>
-              <p>From 6 GB</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-          <div class="card">
-            <div class="card-block user-radial-card">
-              <div
-                data-label="50%"
-                class="radial-bar radial-bar-35 radial-bar-lg radial-bar-warning"
-              >
-                <img
-                  src="{{asset('adminty-assets/assets/images/avatar-2.jpg')}}"
-                  alt="User-Image"
-                />
-              </div>
-              <span class="f-36 text-c-yellow">6</span>
-              <p>From 6 GB</p>
-            </div>
-          </div>
-        </div>
         <!-- user-radial-card  end -->
       </div>
     </div>

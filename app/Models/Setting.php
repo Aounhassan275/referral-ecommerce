@@ -113,6 +113,9 @@ class Setting extends Model
     public static function logo(){
         return (new static)::where('name','Logo')->first()->value ?? 'buy_e_buzar_logo';
     }
+    public static function favicon(){
+        return (new static)::where('name','Favicon')->first()->value ?? 'favicon';
+    }
     public static function enablePostSection(){
         return (new static)::where('name','Enable Post Section')->first()->value ?? '1';
     }

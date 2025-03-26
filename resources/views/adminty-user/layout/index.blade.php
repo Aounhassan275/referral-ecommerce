@@ -17,7 +17,7 @@
     <!-- Favicon icon -->
     <link
       rel="icon"
-      href="{{asset('adminty-assets/assets/images/favicon.png')}}"
+      href="{{asset('user_asset/'.App\Models\Setting::favicon().'.ico')}}"
       type="image/x-icon"
     />
     <!-- Google font-->
@@ -113,10 +113,10 @@
               <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu"></i>
               </a>
-              <a href="index.html">
+              <a href="{{url('/')}}">
                 <img
                   class="img-fluid"
-                  src="{{asset('adminty-assets/assets/images/logo.png')}}"
+                  src="{{asset('user_asset/'.App\Models\Setting::logo().'.png')}}" style="width:185px;"
                   alt="Theme-Logo"
                 />
               </a>
