@@ -12,11 +12,11 @@
             <div class="card-header">
                 <h5 class="card-title">Add Setting</h5>
                 
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-12">
                         <a href="{{route('admin.setting.empty_database')}}" class="btn btn-info " style="margin-top:10px;">Empty Database</a>
                     </div>
-                </div> --}}
+                </div>
             </div>
             <div class="card-body">
                 <form method="POST" action="{{route('admin.setting.store')}}" enctype="multipart/form-data" >
