@@ -153,7 +153,7 @@
                                         </li>
                                         @if(App\Models\Setting::enableServiceSection() == '1')
                                         <li class="navPages-item ">
-                                            <a class="navPages-action" href="{{url('our_service')}}"> Services </a>
+                                            <a class="navPages-action" href="{{url('service_countries')}}"> Services </a>
                                         </li>
                                         @endif
                                         @if(App\Models\Setting::enablePostSection() == '1')
@@ -225,7 +225,7 @@
 									@endif
                                     @if(App\Models\Setting::enableServiceSection() == '1')
                                     <li class="navUser-item">
-                                        <a class="navUser-action " href="{{url('our_service')}}" >
+                                        <a class="navUser-action " href="{{url('service_countries')}}" >
                                             <i class="fa fa-user"></i> Services 
                                         </a>
                                     </li>

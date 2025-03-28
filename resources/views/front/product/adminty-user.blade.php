@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Wlinkup Profile</title>
+  <title>Profile | {{App\Models\Setting::siteName()}}</title>
   <meta content="wlinkup" name="description">
   <meta content="#earn #Store #job #username" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('adminty-user-assets/img/favicon.png')}}" rel="icon">
+  <link href="{{asset('user_asset/'.App\Models\Setting::favicon().'.ico')}}" rel="icon">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,10 +72,10 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
+  <header id="header" class="">
     <div class="container d-flex align-items-center">
 
-      <a href="{{url('/')}}" class="logo me-auto"><img src="{{asset('adminty-user-assets/img/logo.png')}}" alt="">wlinkup</a>
+      <a href="{{url('/')}}" class="logo me-auto"><img src="{{asset('user_asset/'.App\Models\Setting::logo().'.png')}}" alt=""></a>
      
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>

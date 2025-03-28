@@ -37,8 +37,8 @@
     <div class="container d-flex align-items-center justify-content-between">
       <a href="{{url('/')}}" class="logo d-flex align-items-center me-auto me-lg-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="{{asset('profile-theme-assets/assets/img/logo.png')}}" alt=""> -->
-        <h2>W-Linkup<span>.</span></h2>
+        <img src="{{asset('user_asset/'.App\Models\Setting::logo().'.png')}}" alt="">
+        {{-- <h2>W-Linkup<span>.</span></h2> --}}
       </a>
       <nav id="navbar" class="navbar">
         <ul>

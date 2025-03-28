@@ -147,7 +147,7 @@
                                             <a class="navPages-action" href="{{url('our_service')}}"> Service Provider </a>
                                         </li>
                                         <li class="navPages-item ">
-                                            <a class="navPages-action" href="{{url('products')}}"> Product </a>
+                                            <a class="navPages-action" href="{{url('/')}}"> Product </a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -219,7 +219,7 @@
                                     </li>
                                     @endif
                                     <li class="navUser-item">
-                                        <a class="navUser-action " href="{{url('products')}}" >
+                                        <a class="navUser-action " href="{{url('/')}}" >
                                             <i class="fa fa-user"></i> Products 
                                         </a>
                                     </li>

@@ -427,7 +427,7 @@
                           <span class="pcoded-mtext">Direct Team</span>
                         </a>
                       </li>
-                      <li class="{{Request::is('user/earning/upline_income')?'active':''}}">
+                      {{-- <li class="{{Request::is('user/earning/upline_income')?'active':''}}">
                         <a href="{{route('user.earning.upline_income')}}">
                           <span class="pcoded-mtext">Upline</span>
                         </a>
@@ -471,17 +471,17 @@
                         <a href="{{route('user.earning.associated_income')}}">
                           <span class="pcoded-mtext">Associated</span>
                         </a>
-                      </li>
+                      </li> --}}
                     </ul>
                   </li> 
-				  <li class="{{Request::is('user/overall_earning')?'active':''}}">
+				  {{-- <li class="{{Request::is('user/overall_earning')?'active':''}}">
                     <a href="{{route('user.report.overall_earning')}}">
                       <span class="pcoded-micon"
                         ><i class="feather icon-menu"></i
                       ></span>
                       <span class="pcoded-mtext">Overall Earning Report</span>
                     </a>
-                  </li>
+                  </li> --}}
                   <li class="pcoded-hasmenu {{Request::is('user/refer*')?'active pcoded-trigger':''}} ">
                     <a href="javascript:void(0)">
                       <span class="pcoded-micon"
@@ -495,11 +495,11 @@
                           <span class="pcoded-mtext">Direct Referral</span>
                         </a>
                       </li>
-                      <li class="{{Request::is('user/refer/super_pool')?'active':''}}">
+                      {{-- <li class="{{Request::is('user/refer/super_pool')?'active':''}}">
                         <a href="{{route('user.super_pool.index')}}">
                           <span class="pcoded-mtext">Super Pool</span>
                         </a>
-                      </li>
+                      </li> --}}
                       <li class="{{Request::is('user/refer/tree')?'active':''}}">
                         <a href="{{route('user.tree.show')}}">
                           <span class="pcoded-mtext">Your Tree</span>
@@ -507,14 +507,14 @@
                       </li>
                     </ul>
                   </li> 
-				  <li class="{{Request::is('user/super_pool')?'active':''}}">
+				  {{-- <li class="{{Request::is('user/super_pool')?'active':''}}">
                     <a href="{{route('user.super_pool.index')}}">
                       <span class="pcoded-micon"
                         ><i class="feather icon-menu"></i
                       ></span>
                       <span class="pcoded-mtext">Super Pool</span>
                     </a>
-                  </li>
+                  </li> --}}
                   <li class="pcoded-hasmenu {{Request::is('user/product*') || Request::is('user/orders*') ?'active pcoded-trigger':''}} ">
                     <a href="javascript:void(0)">
                       <span class="pcoded-micon"
@@ -542,6 +542,7 @@
 					  @endif
                     </ul>
                   </li> 
+                  @if(App\Models\Setting::enablePostSection() == '1')
 				  <li class="{{Request::is('user/post_purchase')?'active':''}}">
                     <a href="{{route('user.post_purchase.index')}}">
                       <span class="pcoded-micon"
@@ -550,42 +551,43 @@
                       <span class="pcoded-mtext">Post Purchases</span>
                     </a>
                   </li>
-				  @if(Auth::user()->type == 'Seller')
-					<li class="pcoded-hasmenu {{Request::is('user/post*') || Request::is('user/post_sale*') ?'active pcoded-trigger':''}} ">
-						<a href="javascript:void(0)">
-						<span class="pcoded-micon"
-							><i class="feather icon-layers"></i
-						></span>
-						<span class="pcoded-mtext">Post</span>
-						</a>
-						<ul class="pcoded-submenu">
-						<li class="{{Request::is('user/post/create')?'active':''}}">
-							<a href="{{route('user.post.create')}}">
-							<span class="pcoded-mtext">Add Post</span>
-							</a>
-						</li>
-						<li class="{{Request::is('user/post')?'active':''}}">
-							<a href="{{route('user.post.index')}}">
-							<span class="pcoded-mtext">Manage Post</span>
-							</a>
-						</li>
-						<li class="{{Request::is('user/post_sale/create')?'active':''}}">
-							<a href="{{route('user.post_sale.create')}}">
-							<span class="pcoded-mtext">Add Sale</span>
-							</a>
-						</li>
-						<li class="{{Request::is('user/post_sale')?'active':''}}">
-							<a href="{{route('user.post_sale.index')}}">
-							<span class="pcoded-mtext">Own Sale</span>
-							</a>
-						</li>
-						<li class="{{Request::is('user/post_sale/received')?'active':''}}">
-							<a href="{{route('user.post_sale.received')}}">
-							<span class="pcoded-mtext">Received Sale</span>
-							</a>
-						</li>
-						</ul>
-					</li> 
+                  @if(Auth::user()->type == 'Seller')
+                  <li class="pcoded-hasmenu {{Request::is('user/post*') || Request::is('user/post_sale*') ?'active pcoded-trigger':''}} ">
+                    <a href="javascript:void(0)">
+                    <span class="pcoded-micon"
+                      ><i class="feather icon-layers"></i
+                    ></span>
+                    <span class="pcoded-mtext">Post</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                    <li class="{{Request::is('user/post/create')?'active':''}}">
+                      <a href="{{route('user.post.create')}}">
+                      <span class="pcoded-mtext">Add Post</span>
+                      </a>
+                    </li>
+                    <li class="{{Request::is('user/post')?'active':''}}">
+                      <a href="{{route('user.post.index')}}">
+                      <span class="pcoded-mtext">Manage Post</span>
+                      </a>
+                    </li>
+                    <li class="{{Request::is('user/post_sale/create')?'active':''}}">
+                      <a href="{{route('user.post_sale.create')}}">
+                      <span class="pcoded-mtext">Add Sale</span>
+                      </a>
+                    </li>
+                    <li class="{{Request::is('user/post_sale')?'active':''}}">
+                      <a href="{{route('user.post_sale.index')}}">
+                      <span class="pcoded-mtext">Own Sale</span>
+                      </a>
+                    </li>
+                    <li class="{{Request::is('user/post_sale/received')?'active':''}}">
+                      <a href="{{route('user.post_sale.received')}}">
+                      <span class="pcoded-mtext">Received Sale</span>
+                      </a>
+                    </li>
+                    </ul>
+                  </li> 
+                  @endif
 				  @endif
                 </ul>
               </div>

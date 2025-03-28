@@ -299,7 +299,7 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
 /******************FRONTEND ROUTES****************/
 Route::view('test', 'front.layout.test');
 Route::get('home', 'FrontendController@home')->name('home');
-Route::get('/', 'FrontendController@showProducts')->name('new_home');
+Route::get('/', 'FrontendController@showCountries')->name('new_home');
 Route::get('categories', 'FrontendController@showCategory')->name('category.index');
 Route::get('category/{name}', 'FrontendController@showCategoryDetails')->name('category.show');
 Route::get('brands', 'FrontendController@showBrands')->name('brand.index');

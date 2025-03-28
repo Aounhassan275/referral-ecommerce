@@ -11,7 +11,7 @@ Add Products to Store
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
             <span class="font-weight-semibold">Oh!</span> 
             Your Limit For Adding Products / Stocks is Completed.You only allow to have {{Auth::user()->package->product_limit}}.
-            Please upgrade <a href="{{route('user.package.index')}}" class="alert-link">package</a> Or Pay Product Fee which is {{App\Models\Setting::productFee()}} USD Dollar deducted from your cash wallet.
+            Please upgrade <a href="{{route('user.package.index')}}" class="alert-link">package</a> Or Pay Product Fee which is {{App\Models\Setting::productFee()}} PKR deducted from your cash wallet.
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@ Add Products to Store
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
             <span class="font-weight-semibold">Oh!</span> 
             You dont purchase package till now.
-            Please purchase <a href="{{route('user.package.index')}}" class="alert-link">package</a>  Or Pay Product Fee which is {{App\Models\Setting::productFee()}} USD Dollar deducted from your cash wallet..
+            Please purchase <a href="{{route('user.package.index')}}" class="alert-link">package</a>  Or Pay Product Fee which is {{App\Models\Setting::productFee()}} PKR deducted from your cash wallet..
         </div>
     </div>
 </div>
