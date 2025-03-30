@@ -44,7 +44,7 @@
                                 Your Product
                             @else 
                                 @if($order->owner_id)
-                                    <a href="{{route('product.user',$order->owner->id)}}">  {{@$order->owner->name}}</a>
+                                    <a href="{{route('product.user',str_replace(' ', '_',$order->owner->name))}}">  {{@$order->owner->name}}</a>
                                 @endif
                             @endif
                         </td>

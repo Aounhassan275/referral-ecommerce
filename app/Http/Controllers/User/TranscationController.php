@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Helpers\FundTransferHelper;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyAccount;
+use App\Models\PaymentPolicy;
 use App\Models\Setting;
 use App\Models\Transcation;
 use App\Models\User;
@@ -90,7 +91,17 @@ class TranscationController extends Controller
                 toastr()->error('Insufficient Balance.');
                 return redirect()->back();
             }
-            FundTransferHelper::transfer($fund_fee,$request,$user,$total_amount);
+            $user->update([
+                'cash_wallet' => $user->cash_wallet - $total_amount,
+            ]);
+            $receiver = User::find($request->receiver_id);
+            $receiver->update([
+                'cash_wallet' => $receiver->cash_wallet += $request->amount,
+            ]);
+            $paymentPolicy = PaymentPolicy::where('type','Balance Transfer')->first();
+            if($paymentPolicy){
+                FundTransferHelper::transfer($fund_fee,$user,$paymentPolicy,$receiver);
+            }
 
         }else{
             if($user->cash_wallet < $request->amount)

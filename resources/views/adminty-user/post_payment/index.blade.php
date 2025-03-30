@@ -37,7 +37,7 @@
                     <span class="badge badge-danger">No</span>
                     @endif
                 </td>
-                <td><a href="{{route('product.user',$payment->user_id)}}"> {{@$payment->user->name}}</a></td>
+                <td><a href="{{route('product.user',str_replace(' ', '_',@$payment->user->name))}}"> {{@$payment->user->name}}</a></td>
                 <td>{{App\Models\Setting::currency()}} {{$payment->amount}}</td>
                 <td>{{@$payment->created_at}}</td>
             </tr>

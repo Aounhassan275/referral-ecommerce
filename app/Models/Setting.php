@@ -20,6 +20,9 @@ class Setting extends Model
     public static function saleFee(){
         return (new static)::where('name','Sale Fee')->first()->value ?? 10;
     }
+    public static function withdrawFee(){
+        return (new static)::where('name','Withdraw Fee')->first()->value ?? 10;
+    }
     public static function phone(){
         $value = (new static)::where('name','Phone')->first()->value ?? null;
         if($value)

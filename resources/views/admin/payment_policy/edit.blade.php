@@ -22,7 +22,8 @@
                          <select name="type" id="type" class="form-control select2" required>
                              <option selected disabled>Select</option>
                              <option {{$paymentPolicy->type == 'Balance Transfer' ? 'selected' : ''}} value="Balance Transfer">Balance Transfer</option>
-                             <option {{$paymentPolicy->type == 'Withdrawr' ? 'selected' : ''}} value="Withdraw">Withdraw</option>
+                             <option {{$paymentPolicy->type == 'Withdraw' ? 'selected' : ''}} value="Withdraw">Withdraw</option>
+                             <option {{$paymentPolicy->type == 'Post Sale' ? 'selected' : ''}} value="Post Sale">Post Sale</option>
                          </select>                        
                      </div>
                          <div class="form-group col-3">

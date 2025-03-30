@@ -26,7 +26,7 @@ Chat
             @if($message->user_id != Auth::user()->id)
             <li class="media">
                 <div class="mr-3">
-                    <a href="{{route('product.user',$chat->member->id)}}">
+                    <a href="{{route('product.user',str_replace(' ', '_',$chat->member->name))}}">
                         <img src="{{asset($chat->member->image)}}" class="rounded-circle" width="40" height="40" alt="">
                     </a>
                 </div>
@@ -49,7 +49,7 @@ Chat
                     </div>
                 </div>
                 <div class="ml-3">
-                    <a href="{{route('product.user',$message->user->id)}}">
+                    <a href="{{route('product.user',str_replace(' ', '_',$message->user->name))}}">
                         <img src="{{asset($message->user->image)}}" class="rounded-circle" width="40" height="40" alt="">
                     </a>
                 </div>

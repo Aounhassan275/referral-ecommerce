@@ -5,7 +5,7 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="myModalLabel">Special</h5>
+                    <h5 class="modal-title mt-0" id="myModalLabel">Department</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
@@ -15,7 +15,7 @@
                         <input type="text" name="title" placeholder="Title" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Title</label>
+                        <label>Heading</label>
                         <input type="text" name="heading" placeholder="Heading" class="form-control" required>
                     </div>
                     <div class="form-group">
@@ -42,7 +42,7 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="myModalLabel">Update Special Heading</h5>
+                    <h5 class="modal-title mt-0" id="myModalLabel">Update Department</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">  
@@ -51,7 +51,7 @@
                         <input type="text" name="title" id="title" placeholder="Title" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Title</label>
+                        <label>Heading</label>
                         <input type="text" name="heading" id="heading" placeholder="heading" class="form-control" required>
                     </div>
                     <div class="form-group">

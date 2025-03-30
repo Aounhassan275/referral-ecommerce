@@ -40,7 +40,7 @@
                             <td>{{$key+1}}</td>
                             <td>{{$order->product->name}}</td>
                             <td>{{App\Models\Setting::currency()}} {{$order->product->price}}</td>
-                            <td><a href="{{route('product.user',$order->user_id)}}"> {{@$order->user->name}}</a></td>
+                            <td><a href="{{route('product.user',str_replace(' ', '_',@$order->user->name))}}"> {{@$order->user->name}}</a></td>
                             <td>{{@$order->address}}</td>
                             <td>{{@$order->payment_option}}</td>
                             <td>
@@ -48,7 +48,7 @@
                                     Your Product
                                 @else 
                                     @if($order->owner_id)
-                                        <a href="{{route('product.user',$order->owner->id)}}">  {{@$order->owner->name}}</a>
+                                        <a href="{{route('product.user',str_replace(' ', '_',@$order->owner->name))}}">  {{@$order->owner->name}}</a>
                                     @endif
                                 @endif
                             </td>
@@ -105,7 +105,7 @@
                             <td>{{$key+1}}</td>
                             <td>{{$order->product->name}}</td>
                             <td>{{App\Models\Setting::currency()}} {{$order->product->price}}</td>
-                            <td><a href="{{route('product.user',$order->user_id)}}"> {{@$order->user->name}}</a></td>
+                            <td><a href="{{route('product.user',str_replace(' ', '_',@$order->user->name))}}"> {{@$order->user->name}}</a></td>
                             <td>{{@$order->address}}</td>
                             <td>{{@$order->payment_option}}</td>
                             <td>
@@ -113,7 +113,7 @@
                                     Your Product
                                 @else     
                                     @if($order->owner_id)
-                                        <a href="{{route('product.user',$order->owner->id)}}">  {{@$order->owner->name}}</a>
+                                        <a href="{{route('product.user',str_replace(' ', '_',@$order->owner->name))}}">  {{@$order->owner->name}}</a>
                                     @endif
                                 @endif
                             </td>

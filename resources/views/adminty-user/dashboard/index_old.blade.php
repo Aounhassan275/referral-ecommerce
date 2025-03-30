@@ -446,7 +446,7 @@ DASHBOARD
                         <img class="card-img img-fluid" src="{{asset(@$service->image)}}" alt="">
                         <div class="card-img-actions-overlay card-img">
 
-                            <a href="{{route('product.user',@$service->id)}}" target="_blank" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
+                            <a href="{{route('product.user',str_replace(' ', '_',@$service->name))}}" target="_blank" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
                                 <i class="icon-link"></i>
                             </a>
                         </div>

@@ -35,14 +35,14 @@
 			<div class="product-layout product-grid product-grid-4 col-lg-3 col-md-4 col-6">
 				<article class="product-item-container ">
 					<div class="left-block d-flex align-items-center justify-content-center">
-						<a href="{{route('product.user',$user->id)}}" class="product-item-photo">
+						<a href="{{route('product.user',str_replace(' ', '_',$user->name))}}" class="product-item-photo">
 							<img class="img-responsive lazyload" data-sizes="auto" src="{{asset($user->image)}}" data-src="{{asset($user->image)}}" alt="{{$user->name.' 0' }}" title="{{$user->name.' 0' }}">
 						</a>
 						{{-- <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="130" title="Quick view"> <i class="fa fa-search"></i></a> --}}
 					</div>
 					<div class="right-block">
 						<h4 class="card-title">
-							<a href="{{route('product.user',$user->id)}}">{!! substr( $user->name, 0, 15) !!}</a>
+							<a href="{{route('product.user',str_replace(' ', '_',$user->name))}}">{!! substr( $user->name, 0, 15) !!}</a>
 						</h4>
 						<div class="price-section price-section--withoutTax ">
 							<span data-product-price-without-tax class="price price--withoutTax">(<span style="color:green;"><i class="fa fa-eye"></i>{{$user->view}}</span>)</span>
@@ -51,7 +51,7 @@
 						<div class="product-colors" data-product-id="130"></div>
 						<div class="button-group">
 							<div class="action-item addToCart">
-								<a href="{{route('product.user',$user->id)}}"  data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">View Profile</a>
+								<a href="{{route('product.user',str_replace(' ', '_',$user->name))}}"  data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">View Profile</a>
 							</div>
 						</div>
 					</div>

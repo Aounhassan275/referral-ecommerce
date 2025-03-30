@@ -375,7 +375,7 @@ UPDATE YOUR OWN PROFILE
     <div class="col-12">
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">Special Heading</h5>
+                <h5 class="card-title">Department</h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
@@ -391,46 +391,49 @@ UPDATE YOUR OWN PROFILE
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <button data-toggle="modal" data-target="#create-modal"
-                            class="btn btn-primary float-right">Create Special Heading</button>
+                            class="btn btn-primary float-right">Create Department</button>
                         
                     </div>
                 </div>
                 @endif
-                <div class="row">
+                <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Sr#</th>
-                                    <th>Title</th>
-                                    <th>Heading</th>
-                                    <th>Image</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
-                                </tr> 
-                            </thead>
-                            <tbody>
-                                @foreach (App\Models\Special::where('user_id',Auth::user()->id)->get() as $key => $special)
-                                <tr> 
-                                    <td>{{$key+1}}</td>
-                                    <td>{{$special->title}}</td>
-                                    <td>{{$special->heading}}</td>
-                                    <td>
-                                        <img src="{{asset($special->image)}}" height="50" width="50" alt="">
-                                    </td>
-                                    <td>{{$special->description}}</td>
-                                    <td>
-                                        <button data-toggle="modal" data-target="#edit_modal"
-                                            description="{{$special->description}}" 
-                                            heading="{{$special->heading}}" 
-                                            id="{{$special->id}}" title="{{$special->title}}" 
-                                            class="edit-btn btn btn-primary">Edit</button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sr#</th>
+                                        <th>Title</th>
+                                        <th>Heading</th>
+                                        <th>Image</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    @foreach (App\Models\Special::where('user_id',Auth::user()->id)->get() as $key => $special)
+                                    <tr> 
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$special->title}}</td>
+                                        <td>{{$special->heading}}</td>
+                                        <td>
+                                            <img src="{{asset($special->image)}}" height="50" width="50" alt="">
+                                        </td>
+                                        <td>{{$special->description}}</td>
+                                        <td>
+                                            <button data-toggle="modal" data-target="#edit_modal"
+                                                description="{{$special->description}}" 
+                                                heading="{{$special->heading}}" 
+                                                id="{{$special->id}}" title="{{$special->title}}" 
+                                                class="edit-btn btn btn-primary">Edit</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -461,43 +464,46 @@ UPDATE YOUR OWN PROFILE
                     </div>
                 </div>
                 @endif
-                <div class="row">
+                <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Sr#</th>
-                                    <th>Title</th>
-                                    <th>Price</th>
-                                    <th>Link</th>
-                                    <th>Image</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
-                                </tr> 
-                            </thead>
-                            <tbody>
-                                @foreach (App\Models\Event::where('user_id',Auth::user()->id)->get() as $key => $event)
-                                <tr> 
-                                    <td>{{$key+1}}</td>
-                                    <td>{{$event->title}}</td>
-                                    <td>{{$event->price}}</td>
-                                    <td>{{$event->link}}</td>
-                                    <td>
-                                        <img src="{{asset($event->image)}}" height="50" width="50" alt="">
-                                    </td>
-                                    <td>{{$event->description}}</td>
-                                    <td>
-                                        <button data-toggle="modal" data-target="#edit_event_modal"
-                                            description="{{$event->description}}" 
-                                            price="{{$event->price}}" link="{{$event->link}}" 
-                                            id="{{$event->id}}" title="{{$event->title}}" 
-                                            class="edit-event-btn btn btn-primary">Edit</button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        
+                        <div class="table-responsive">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sr#</th>
+                                        <th>Title</th>
+                                        <th>Price</th>
+                                        <th>Link</th>
+                                        <th>Image</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    @foreach (App\Models\Event::where('user_id',Auth::user()->id)->get() as $key => $event)
+                                    <tr> 
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$event->title}}</td>
+                                        <td>{{$event->price}}</td>
+                                        <td>{{$event->link}}</td>
+                                        <td>
+                                            <img src="{{asset($event->image)}}" height="50" width="50" alt="">
+                                        </td>
+                                        <td>{{$event->description}}</td>
+                                        <td>
+                                            <button data-toggle="modal" data-target="#edit_event_modal"
+                                                description="{{$event->description}}" 
+                                                price="{{$event->price}}" link="{{$event->link}}" 
+                                                id="{{$event->id}}" title="{{$event->title}}" 
+                                                class="edit-event-btn btn btn-primary">Edit</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -528,38 +534,41 @@ UPDATE YOUR OWN PROFILE
                     </div>
                 </div>
                 @endif
-                <div class="row">
+                <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Sr#</th>
-                                    <th>Name</th>
-                                    <th>Image</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
-                                </tr> 
-                            </thead>
-                            <tbody>
-                                @foreach (App\Models\UserSpecial::where('user_id',Auth::user()->id)->get() as $key => $userSpecial)
-                                <tr> 
-                                    <td>{{$key+1}}</td>
-                                    <td>{{$userSpecial->name}}</td>
-                                    <td>
-                                        <img src="{{asset($userSpecial->image)}}" height="50" width="50" alt="">
-                                    </td>
-                                    <td>{{$userSpecial->description}}</td>
-                                    <td>
-                                        <button data-toggle="modal" data-target="#edit_user_special_modal"
-                                            description="{{$userSpecial->description}}" 
-                                            id="{{$userSpecial->id}}" name="{{$userSpecial->name}}" 
-                                            class="edit-user-special-btn btn btn-primary">Edit</button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        
+                        <div class="table-responsive">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sr#</th>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    @foreach (App\Models\UserSpecial::where('user_id',Auth::user()->id)->get() as $key => $userSpecial)
+                                    <tr> 
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$userSpecial->name}}</td>
+                                        <td>
+                                            <img src="{{asset($userSpecial->image)}}" height="50" width="50" alt="">
+                                        </td>
+                                        <td>{{$userSpecial->description}}</td>
+                                        <td>
+                                            <button data-toggle="modal" data-target="#edit_user_special_modal"
+                                                description="{{$userSpecial->description}}" 
+                                                id="{{$userSpecial->id}}" name="{{$userSpecial->name}}" 
+                                                class="edit-user-special-btn btn btn-primary">Edit</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -590,38 +599,41 @@ UPDATE YOUR OWN PROFILE
                     </div>
                 </div>
                 @endif
-                <div class="row">
+                <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Sr#</th>
-                                    <th>Name</th>
-                                    <th>Image</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
-                                </tr> 
-                            </thead>
-                            <tbody>
-                                @foreach (App\Models\UserMainSection::where('user_id',Auth::user()->id)->get() as $key => $UserMainSection)
-                                <tr> 
-                                    <td>{{$key+1}}</td>
-                                    <td>{{$UserMainSection->name}}</td>
-                                    <td>
-                                        <img src="{{asset($UserMainSection->image)}}" height="50" width="50" alt="">
-                                    </td>
-                                    <td>{{$UserMainSection->description}}</td>
-                                    <td>
-                                        <button data-toggle="modal" data-target="#edit_user_main_section_modal"
-                                            description="{{$UserMainSection->description}}" 
-                                            id="{{$UserMainSection->id}}" name="{{$UserMainSection->name}}" 
-                                            class="edit-user-main-section-btn btn btn-primary">Edit</button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sr#</th>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    @foreach (App\Models\UserMainSection::where('user_id',Auth::user()->id)->get() as $key => $UserMainSection)
+                                    <tr> 
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$UserMainSection->name}}</td>
+                                        <td>
+                                            <img src="{{asset($UserMainSection->image)}}" height="50" width="50" alt="">
+                                        </td>
+                                        <td>{{$UserMainSection->description}}</td>
+                                        <td>
+                                            <button data-toggle="modal" data-target="#edit_user_main_section_modal"
+                                                description="{{$UserMainSection->description}}" 
+                                                id="{{$UserMainSection->id}}" name="{{$UserMainSection->name}}" 
+                                                class="edit-user-main-section-btn btn btn-primary">Edit</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         
+                        </div>
                     </div>
                 </div>
             </div>
@@ -652,34 +664,37 @@ UPDATE YOUR OWN PROFILE
                     </div>
                 </div>
                 @endif
-                <div class="row">
+                <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Sr#</th>
-                                    <th>Question</th>
-                                    <th>Answer</th>
-                                    <th>Action</th>
-                                </tr> 
-                            </thead>
-                            <tbody>
-                                @foreach (App\Models\UserFaq::where('user_id',Auth::user()->id)->get() as $key => $user_faq)
-                                <tr> 
-                                    <td>{{$key+1}}</td>
-                                    <td>{{$user_faq->question}}</td>
-                                    <td>{{$user_faq->answer}}</td>
-                                    <td>
-                                        <button data-toggle="modal" data-target="#edit_user_faq_section_modal"
-                                            question="{{$user_faq->question}}" 
-                                            id="{{$user_faq->id}}" answer="{{$user_faq->answer}}" 
-                                            class="edit-user-faq-section-btn btn btn-primary">Edit</button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        
+                        <div class="table-responsive">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sr#</th>
+                                        <th>Question</th>
+                                        <th>Answer</th>
+                                        <th>Action</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    @foreach (App\Models\UserFaq::where('user_id',Auth::user()->id)->get() as $key => $user_faq)
+                                    <tr> 
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$user_faq->question}}</td>
+                                        <td>{{$user_faq->answer}}</td>
+                                        <td>
+                                            <button data-toggle="modal" data-target="#edit_user_faq_section_modal"
+                                                question="{{$user_faq->question}}" 
+                                                id="{{$user_faq->id}}" answer="{{$user_faq->answer}}" 
+                                                class="edit-user-faq-section-btn btn btn-primary">Edit</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            
+                        </div>
                     </div>
                 </div>
             </div>

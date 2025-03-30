@@ -141,7 +141,7 @@
                               @if($user->checkstatus() == true)
 
                               <div class="col-sm-12" style="margin-top:5px;">
-                                 <input type="text" class="form-control" id="link_area"  value="{{route('product.user',$user->id)}}"  readonly>
+                                 <input type="text" class="form-control" id="link_area"  value="{{route('product.user',str_replace(' ', '_',$user->name))}}"  readonly>
                                  <br>
                                  <button type="button" class="copy-button btn btn-dark  btn-sm" data-clipboard-action="copy" data-clipboard-target="#link_area">Share</button>
                                  <a href="{{url('user/register',$user->code)}}" class="btn btn-dark btn-sm ml-4" >Join</a>

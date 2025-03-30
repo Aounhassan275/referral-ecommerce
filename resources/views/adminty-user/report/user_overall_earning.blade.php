@@ -13,7 +13,7 @@ OVERALL EARNING REPORT
 
 
 @section('contents')
-@if(Auth::user()->type == 'Managing Director' || Auth::user()->type == 'Regional Manager' || Auth::user()->type == 'Zonal Manager' || Auth::user()->type == 'Area Manager')
+@if(Auth::user()->type == 'Managing Director' )
 <div class="row" >
     <div class="col-md-12">
         <!-- Basic layout-->

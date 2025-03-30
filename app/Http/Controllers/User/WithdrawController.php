@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\FundTransferHelper;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\PaymentPolicy;
+use App\Models\Setting;
 use App\Models\Withdraw;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -54,17 +57,24 @@ class WithdrawController extends Controller
             toastr()->error('Balance must be 5 in a cash wallet to get Withdraw');
             return redirect()->back();
         }
-        if($request->payment > $user->cash_wallet){
-              toastr()->error('Not enough balance');
-              return redirect()->back();
+        $withdrawFee = $request->amount/100 * Setting::withdrawFee();
+        $total_amount = $request->payment + $withdrawFee;
+        if($user->cash_wallet < $total_amount)
+        {
+            toastr()->error('Insufficient Balance.');
+            return redirect()->back();
         }
         Withdraw::create([
             'user_id' => $user->id
         ]+$request->all());
         
         $user->update([
-            'cash_wallet' => $user->cash_wallet - $request->payment,    
+            'cash_wallet' => $user->cash_wallet - $total_amount,    
         ]);
+        $paymentPolicy = PaymentPolicy::where('type','Withdraw')->first();
+        if($paymentPolicy){
+            FundTransferHelper::transfer($withdrawFee,$user,$paymentPolicy,null);
+        }
         toastr()->success('Withdraw Request is Submit Successfully');
         return redirect()->back();
     }

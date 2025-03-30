@@ -241,9 +241,9 @@ class FrontendController extends Controller
         }
         return response()->json($brands);
     }
-    public function showProductUserDetails($id)
+    public function showProductUserDetails($name)
     {
-        $user = User::find($id);
+        $user = User::where('name',str_replace('_', ' ',$name))->first();
         $user->update([
            'view' => $user->view+1
         ]);

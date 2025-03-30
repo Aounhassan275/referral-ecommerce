@@ -22,6 +22,7 @@
                             <option selected disabled>Select</option>
                             <option value="Balance Transfer">Balance Transfer</option>
                             <option value="Withdraw">Withdraw</option>
+                            <option value="Post Sale">Post Sale</option>
                         </select>                        
                     </div>
                         <div class="form-group col-3">

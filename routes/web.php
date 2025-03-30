@@ -277,6 +277,7 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
     /******************POST INSTALLEMENT ROUTES****************/
     Route::resource('post_installement', 'PostInstallementController'); 
     Route::get('post_sale/received', 'PostSaleController@receivedSale')->name('post_sale.received');  
+    Route::get('post_sale/get_sale_create', 'PostSaleController@get_sale_create')->name('post_sale.get_sale_create');  
     Route::resource('post_sale', 'PostSaleController');  
     /******************POST PURCHASE  ROUTES****************/
     Route::resource('post_purchase', 'PostPurchaseController');
@@ -311,7 +312,7 @@ Route::get('countries', 'FrontendController@showCountries')->name('country.index
 Route::get('country/{name}', 'FrontendController@showCountryDetails')->name('country.show');
 Route::get('products', 'FrontendController@showProducts')->name('product.index');
 Route::get('product/{uuid}', 'FrontendController@showProductDetails')->name('product.show');
-Route::get('product_user/{id}', 'FrontendController@showProductUserDetails')->name('product.user');
+Route::get('product_user/{name}', 'FrontendController@showProductUserDetails')->name('product.user');
 Route::get('product_like/{id}', 'FrontendController@showProductLike')->name('product.like');
 Route::post('product/brands', 'FrontendController@getProductBrands')->name('product.brands');
 Route::get('product_dislike/{id}', 'FrontendController@showProductDisLike')->name('product.dislike');

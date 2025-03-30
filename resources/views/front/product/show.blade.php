@@ -47,7 +47,7 @@
          @endif
          @if($product->user_id  && !@$product->user->hide_profile)
             <h3 class="text-center">
-               Product of: <a href="{{route('product.user',$product->user_id)}}" itemprop="url">{{@$product->user->name}}</a>
+               Product of: <a href="{{route('product.user',str_replace(' ', '_',@$product->user->name))}}" itemprop="url">{{@$product->user->name}}</a>
             </h3>         
          @endif
 	      <div class="productView">

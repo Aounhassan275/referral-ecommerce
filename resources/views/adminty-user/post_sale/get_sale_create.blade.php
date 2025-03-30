@@ -1,6 +1,6 @@
 @extends('adminty-user.layout.index')
 @section('title')
-Sale
+Get Sale
 @endsection
 @section('styles')
 
@@ -19,7 +19,7 @@ Sale
         <!-- Basic layout-->
         <div class="card">
             <div class="card-header header-elements-inline bg-dark">
-                <h5 class="card-title">Add Sale</h5>
+                <h5 class="card-title">Get Sale</h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
@@ -35,7 +35,7 @@ Sale
                         <div class="form-group col-md-4">
                             <label class="form-label">Amount</label>
                             <input type="number"    name="amount" id="amount" class="form-control"  required>                        
-                            <input type="hidden"  name="sender_id" id="sender_id" class="form-control" value="{{Auth::user()->id}}">                        
+                            <input type="hidden"  name="receiver_id" id="receiver_id" class="form-control" value="{{Auth::user()->id}}">                        
                             <input type="hidden"  name="new_password" id="new_password" class="form-control" >                        
                         </div>
                         <div class="form-group col-md-4">
@@ -44,7 +44,7 @@ Sale
                         </div>
                         <div class="form-group col-md-4">
                             <label class="form-label">Members</label>
-                            <select data-placeholder="Enter 'as'" name="receiver_id" id="receiver_id" class="form-control select-minimum " data-fouc>
+                            <select data-placeholder="Enter 'as'" name="sender_id" id="sender_id" class="form-control select-minimum " data-fouc>
                                 <option></option>
                                 <optgroup label="Members">
                                     @foreach($users as $user)
@@ -100,12 +100,6 @@ Sale
         $('#new_password').val(password);
         $('#transfer_modal').modal('hide');
         $('#transcationsForm').submit();
-    });
-    $('#amount').on('change', function () {
-        amount = $(this).val();
-        saleFee = "{{App\Models\Setting::saleFee()}}";
-        totalSaleFee = amount/100 * saleFee;
-        $('#amount_charged').val(totalSaleFee);
     });
     $('#amount').on('change', function () {
         amount = $(this).val();

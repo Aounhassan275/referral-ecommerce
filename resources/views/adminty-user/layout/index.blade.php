@@ -145,6 +145,9 @@
                     <i class="feather icon-maximize full-screen"></i>
                   </a>
                 </li>
+                <li>
+                  <span class="badge badge-info">{{Auth::user()->type}}</span>
+                </li>
               </ul>
               <ul class="nav-right">
                 <li class="header-notification">
@@ -190,7 +193,7 @@
                         </a>
                       </li>
                       <li>
-                        <a href="{{route('product.user',Auth::user()->id)}}">
+                        <a href="{{route('product.user',str_replace(' ', '_',Auth::user()->name))}}">
                           <i class="feather icon-user"></i> My web
                         </a>
                       </li>
@@ -573,6 +576,11 @@
                     <li class="{{Request::is('user/post_sale/create')?'active':''}}">
                       <a href="{{route('user.post_sale.create')}}">
                       <span class="pcoded-mtext">Add Sale</span>
+                      </a>
+                    </li>
+                    <li class="{{Request::is('user/post_sale/get_sale_create')?'active':''}}">
+                      <a href="{{route('user.post_sale.get_sale_create')}}">
+                      <span class="pcoded-mtext">Get Sale</span>
                       </a>
                     </li>
                     <li class="{{Request::is('user/post_sale')?'active':''}}">

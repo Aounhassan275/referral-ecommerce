@@ -29,11 +29,15 @@ Withdraw
                 <form action="{{route('user.withdraw.store')}}"  method="post">
                     @csrf
                     <div class="row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label class="form-label">Withdraw Payment</label>
-                            <input type="number" name="payment" class="form-control" value="" required>                        
+                            <input type="number" name="payment" id="payment" class="form-control" value="" required>                        
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
+                            <label class="form-label">Fee</label>
+                            <input type="number"id="fee" readonly class="form-control" value="" required>                        
+                        </div>
+                        <div class="form-group col-4">
                             <label class="form-label">Account Holder Name</label>
                             <input type="text" name="name" class="form-control" placeholder="Enter Account Holder Name" required>
                             <input type="hidden" name="status" class="form-control border-teal border-1" value="in process" required>
@@ -68,4 +72,14 @@ Withdraw
 
     </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+    $('#payment').on('change', function () {
+        amount = $(this).val();
+        withdrawFee = "{{App\Models\Setting::withdrawFee()}}";
+        totalWithdrawFee = amount/100 * withdrawFee;
+        $('#fee').val(totalWithdrawFee);
+    });
+</script>
 @endsection
