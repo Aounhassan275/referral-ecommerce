@@ -95,33 +95,34 @@ class ReferralIncome
     public static  function directIncome($price,$package,$user,$due_to)
     {
         $direct_teams = $user->directParentsForDirectIncome();
+        info("Direct Income To Accounts : ".count($direct_teams)); 
         $totalDirectIncomeValues = $package->direct_income + $package->direct_income_2 + $package->direct_income_3 + $package->direct_income_4 + $package->direct_income_5;
         $totalDirectIncome = $price / 100 * $totalDirectIncomeValues;
         foreach($direct_teams as $index => $direct_team)
         {
             if($index == 0){
                 $direct_income = $price / 100 * $package->direct_income;
-                info("Direct Income Level 1 adding $direct_income $user->cash_wallet to $user->name");    
+                info("Direct Income Level 1 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
             } 
             if($index == 1){
                 $direct_income = $price / 100 * $package->direct_income_2;
-                info("Direct Income Level 2 adding $direct_income $user->cash_wallet to $user->name");    
+                info("Direct Income Level 2 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
             } 
             if($index == 2){
                 $direct_income = $price / 100 * $package->direct_income_3;
-                info("Direct Income Level 3 adding $direct_income $user->cash_wallet to $user->name");    
+                info("Direct Income Level 3 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
             } 
             if($index == 3){
                 $direct_income = $price / 100 * $package->direct_income_4;
-                info("Direct Income Level 4 adding $direct_income $user->cash_wallet to $user->name");    
+                info("Direct Income Level 4 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
             } 
             if($index == 4){
                 $direct_income = $price / 100 * $package->direct_income_5;
-                info("Direct Income Level 5 adding $direct_income $user->cash_wallet to $user->name");    
+                info("Direct Income Level 5 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
             } 
-            $referral_account = User::where('referral',$direct_team->id)->first();
-            if($referral_account)
-            {
+            // $referral_account = User::where('referral',$direct_team->id)->first();
+            // if($referral_account)
+            // {
                 Earning::create([
                     'price' => $direct_income,
                     'user_id' => $direct_team->id,
@@ -133,7 +134,7 @@ class ReferralIncome
                     'cash_wallet' => $direct_team->cash_wallet + $direct_income
                 ]);
                 $totalDirectIncome = $totalDirectIncome - $direct_income;
-            }
+            // }
         }
         if($totalDirectIncome > 0 ){
             $flush_account = CompanyAccount::find(1);
