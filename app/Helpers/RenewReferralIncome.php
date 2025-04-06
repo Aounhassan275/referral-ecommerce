@@ -16,7 +16,7 @@ class RenewReferralIncome
         $total_amount = $user->total_amount;
         //Give it Main Refer By and add money in Total Income of Refer By User
         ReferralIncome::directIncome($total_amount,$package,$refer_by,$user);
-        ReferralIncome::directPoolIncome($total_amount,$package,$refer_by,$user);
+        // ReferralIncome::directPoolIncome($total_amount,$package,$refer_by,$user);
         //Give it to Parents of your Direct Referral Remaining goes to company Account named Flush Income
         //add money in Total Income
         ReferralIncome::directTeamIncome($total_amount,$package,$refer_by,$user);
