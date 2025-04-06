@@ -68,6 +68,7 @@ class User extends Authenticatable
         'business_detail',
         'is_validate',
         'real_name',
+        'loan_limit',
     ];
 
     /**
@@ -719,5 +720,28 @@ class User extends Authenticatable
                             ->where('type','brand_package_reward')
                             ->whereDate('created_at','>=',$startDate)
                             ->sum('price');
+    }
+    public function isLoanAllowed()
+    {
+        if($this->loanBalance() == 0){
+            return false;
+        }
+        if($this->cash_wallet < 0){
+            return false;
+        }
+        return true;
+    }
+    public function loanBalance()
+    {
+        return $this->loan_limit - $this->loanPending();
+
+    }
+    public function loanPaid()
+    {
+        return Loan::where('user_id',$this->id)->where('status',1)->sum('amount');
+    }
+    public function loanPending()
+    {
+        return Loan::where('user_id',$this->id)->where('status',0)->sum('amount');
     }
 }

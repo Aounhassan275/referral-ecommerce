@@ -56,6 +56,9 @@ class ReferralIncome
             'package_id' => $package->id,
             'user_id' => $user->id
         ]);
+        $user->update([
+            'loan_limit' => $user->loan_limit +  $package->self_loan_limit
+        ]);
         return true;
     } 
     public static  function FakeAccount($fake_account,$user)

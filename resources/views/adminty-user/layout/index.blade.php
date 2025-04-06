@@ -62,6 +62,7 @@
       type="text/css"
       href="{{asset('adminty-assets/assets/css/jquery.mCustomScrollbar.css')}}"
     />
+    <link href="{{asset('user_asset/assets/css/toastr.css')}}" rel="stylesheet" type="text/css">
     @yield('styles')
   </head>
 
@@ -402,6 +403,14 @@
                         ><i class="feather icon-menu"></i
                       ></span>
                       <span class="pcoded-mtext">Balance Transfer</span>
+                    </a>
+                  </li>
+				  <li class="{{Request::is('user/loan')?'active':''}}">
+                    <a href="{{route('user.loan.index')}}">
+                      <span class="pcoded-micon"
+                        ><i class="feather icon-menu"></i
+                      ></span>
+                      <span class="pcoded-mtext">Loan</span>
                     </a>
                   </li>
 				  <li class="{{Request::is('user/transcation')?'active':''}}">

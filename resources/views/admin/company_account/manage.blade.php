@@ -48,6 +48,9 @@
                     <div class="col-4">
                         <a href="{{url('admin/salary_account_payment')}}" class="btn btn-warning" style="margin-top:10px;">Trade Rank Reward Transfer</a>
                     </div>
+                    <div class="col-4">
+                        <a href="{{url('admin/get_pending_loan')}}" class="btn btn-success" style="margin-top:10px;">Get Pending Loan</a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">

@@ -142,7 +142,7 @@ DASHBOARD
         <!-- statustic-card  end -->
 
         <!-- user-radial-card  start -->
-        <div class="col-xl-3 col-md-6">
+        {{-- <div class="col-xl-3 col-md-6">
           <div class="card">
             <div class="card-block user-radial-card">
               <div
@@ -212,7 +212,7 @@ DASHBOARD
             
             </div>
           </div>
-        </div>
+        </div> --}}
         <!-- A.M user card  start -->
         <div class="col-xl-3 col-md-6">
           <div class="card user-widget-card bg-c-blue">
@@ -673,7 +673,7 @@ DASHBOARD
             class="card bg-c-pink text-white widget-visitor-card"
           >
             <div class="card-block-small text-center">
-              <h2>PKR 0</h2>
+              <h2>PKR {{Auth::user()->loan_limit}}</h2>
               <h6>LOAN LIMIT</h6>
               <i class="feather icon-user"></i>
             </div>
@@ -684,7 +684,7 @@ DASHBOARD
             class="card bg-c-blue text-white widget-visitor-card"
           >
             <div class="card-block-small text-center">
-              <h2>PKR 0</h2>
+              <h2>PKR {{Auth::user()->loanBalance()}}</h2>
               <h6>LOAN BALANCE</h6>
               <i class="feather icon-file-text"></i>
             </div>
@@ -695,7 +695,7 @@ DASHBOARD
             class="card bg-c-yellow text-white widget-visitor-card"
           >
             <div class="card-block-small text-center">
-              <h2>PKR 0</h2>
+              <h2>PKR {{Auth::user()->loanPaid()}}</h2>
               <h6>PAYED LOAN</h6>
               <i class="feather icon-award"></i>
             </div>
@@ -706,7 +706,7 @@ DASHBOARD
             class="card bg-c-pink text-white widget-visitor-card"
           >
             <div class="card-block-small text-center">
-              <h2>PKR 0</h2>
+              <h2>PKR {{Auth::user()->loanPending()}}</h2>
               <h6>PENDING LOAN</h6>
               <i class="feather icon-user"></i>
             </div>

@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','namespace' => 'Admin'], funct
     Route::get('seller_package_reward_payment', 'AuthController@seller_package_reward_payment');
     Route::get('brand_package_reward_payment', 'AuthController@brand_package_reward_payment');
     Route::get('salary_account_payment', 'AuthController@salary_account_payment');
+    Route::get('get_pending_loan', 'AuthController@get_pending_loan');
      /******************MESSAGE ROUTES****************/
      Route::resource('message', 'MessageController');
     Route::group(['middleware' => 'auth:admin'], function () { 
@@ -286,6 +287,9 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'User'], function
     Route::resource('special', 'SpecialController');  
     /******************EVENT ROUTES****************/
     Route::resource('event', 'EventController');  
+    /******************LOAN ROUTES****************/
+    Route::get('loan/pay/{id}', 'LoanController@pay')->name('loan.pay');  
+    Route::resource('loan', 'LoanController');  
     /******************EVENT ROUTES****************/
     Route::resource('user_special', 'UserSpecialController');  
     Route::resource('user_main_section', 'UserMainSectionController');  

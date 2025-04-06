@@ -12,6 +12,7 @@ use App\Helpers\RenewReferralIncome;
 use App\Helpers\UserHepler;
 use App\Models\CompanyAccount;
 use App\Models\Earning;
+use App\Models\Loan;
 use App\Models\Package;
 use App\Models\Product;
 use App\Models\SuperPool;
@@ -533,6 +534,31 @@ class AuthController extends Controller
 		}
 		info("Payment Distrubtion of Salary Package Reward CRONJOB END AT " . date("d-M-Y h:i a"));
         toastr()->success('Payment Distribution of Salary Package Reward Done Successfully');
+        return back();
+    }
+    public function get_pending_loan()
+    {
+        $pendingLoans = Loan::where('status',0)->whereDate('return_date','<',date('Y-m-d'))->get();
+        $salary_account= CompanyAccount::where('name','Salary Account')->first();
+		if ($pendingLoans->count() > 0) {
+            $total_loans = $pendingLoans->count();
+            info("Get Pending Loans CRONJOB Total Users : $total_loans");
+            foreach($pendingLoans as $pendingLoan)
+            {
+                $user = User::find($pendingLoan->user_id);
+                info("Get Pending Loans CRONJOB User : $user->name");
+                $user->update([
+                    'cash_wallet' => $user->cash_wallet - $pendingLoan->amount
+                ]);
+                $pendingLoan->update([
+                    'status' => 1
+                ]);
+            }
+		} else {
+			info("Get Pending Loan CRONJOB: Loan not found. ");
+		}
+		info("Get Pending Loan CRONJOB END AT " . date("d-M-Y h:i a"));
+        toastr()->success('Pending Loan Cleared Successfully');
         return back();
     }
 }
