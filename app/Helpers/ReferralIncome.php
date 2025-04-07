@@ -56,8 +56,9 @@ class ReferralIncome
             'package_id' => $package->id,
             'user_id' => $user->id
         ]);
+        $self_loan_limit = $package->price / 100 * $package->self_loan_limit;
         $user->update([
-            'loan_limit' => $user->loan_limit +  $package->self_loan_limit
+            'loan_limit' => $user->loan_limit +  $self_loan_limit
         ]);
         return true;
     } 

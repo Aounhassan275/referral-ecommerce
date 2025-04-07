@@ -32,8 +32,10 @@ class RenewReferralIncome
         ReferralIncome::TradeIncome($total_amount,$package,$refer_by,$user);
         ReferralIncome::rebirthAndAsscoaiteIncome($total_amount,$package,$refer_by,$user);
         ReferralIncome::CompanyIncome($total_amount,$package,$type = 'Arrival');
+        
+        $self_loan_limit = $package->price / 100 * $package->self_loan_limit;
         $user->update([
-            'loan_limit' => $user->loan_limit +  $package->renew_self_loan_limit
+            'loan_limit' => $user->loan_limit +  $self_loan_limit
         ]);
         return true;
     } 
