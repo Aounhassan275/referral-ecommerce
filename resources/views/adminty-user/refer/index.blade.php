@@ -147,7 +147,7 @@ REFERRALS
                 </tr> 
             </thead>
             <tbody>
-                @foreach (Auth::user()->mrefers() as $key => $user)
+                @foreach ($referrals as $key => $user)
                     <tr> 
                         <td>{{$key + 1}}</td>
                         <td>

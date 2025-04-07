@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>{{$user->name}} | W-LINKUP PROFILE</title>
-  <meta content="wlinkup" name="description">
-  <meta content="wlinkup" name="keywords">
+  <title>{{$user->name}} | {{App\Models\Setting::siteName()}} PROFILE</title>
+  <meta content="{{App\Models\Setting::siteName()}}" name="description">
+  <meta content="{{App\Models\Setting::siteName()}}" name="keywords">
 
   <!-- Favicons -->
   <link href="{{asset('profile-theme-assets/assets/img/favicon.png')}}" rel="icon">
@@ -662,7 +662,7 @@
     </div>
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>wlinkup</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>{{App\Models\Setting::siteName()}}</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
          Designed by <a href="https://buyebazar.com/">buyebazar</a>

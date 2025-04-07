@@ -292,9 +292,9 @@ DASHBOARD
                 ALL MEMBERS
               </h6>
               <p class="m-b-20">My Team</p>
-              <button class="btn btn-success btn-sm btn-round">
+              <a href="{{url('user/refer')}}" style="color:white;" class="btn btn-success btn-sm btn-round">
                 Check them out
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -309,9 +309,9 @@ DASHBOARD
                 MEMBERS
               </h6>
               <p class="m-b-20">Buy Package</p>
-              <button class="btn btn-danger btn-sm btn-round">
+              <a href="{{url('user/refer?member_type=active')}}" style="color:white;" class="btn btn-danger btn-sm btn-round">
                 Check them out
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -326,9 +326,9 @@ DASHBOARD
                 PENDING MEMBERS
               </h6>
               <p class="m-b-20">Pending Package</p>
-              <button class="btn btn-primary btn-sm btn-round">
+              <a  href="{{url('user/refer?member_type=pending')}}" style="color:white;" class="btn btn-primary btn-sm btn-round">
                 Check them out
-              </button>
+              </a>
             </div>
           </div>
         </div>

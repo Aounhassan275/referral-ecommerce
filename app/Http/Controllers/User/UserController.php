@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\UserImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 
 class UserController extends Controller
@@ -50,7 +51,52 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-    //
+        if($request->code)
+        { 
+            if($request->password != $request->confirm_password){
+                toastr()->error('Password Dont Match');
+                return redirect()->back()->withInput();
+            }
+            $image = $request->image->getClientOriginalExtension();
+            if($image != "jpeg" && $image != "jpg" && $image != "png"){
+                toastr()->error('Only Image File get Upload');
+                return redirect()->back()->withInput();
+            }
+            $code = $request->code?$request->code:$request->new_code;
+            $user= User::where('code',$code)->first();
+            if($user){
+           
+                $validator = Validator::make($request->all(),[
+                    'name' => 'required|unique:users'
+                ]);
+                
+                if($validator->fails()){
+                    toastr()->error('Username  already exists');
+                    return redirect()->back();
+                }
+                $new_user =  User::create([
+                    'code' => uniqid(),
+                    'verification' => uniqid(),
+                    'refer_by' => $user->id,
+                    'temp_password' => $request->password,
+                ]+$request->all());
+                
+            }
+        }else{
+           $validator = Validator::make($request->all(),[
+                'name' => 'required|unique:users'
+            ]);
+
+            if($validator->fails()){
+                toastr()->error('Username  already exists');
+                return redirect()->back();
+            }
+            toastr()->error('Contact Support.');
+            return redirect()->back();
+            
+        }
+        toastr()->success('Your Account Has Been successfully Created, Please Verify Your Email Account via Link.');
+        return redirect()->back();
     }
 
     /**
@@ -239,7 +285,7 @@ class UserController extends Controller
     {
         //
     }
-    public function refer()
+    public function refer(Request $request)
     {
         $user = Auth::user();
         if($user->checkStatus() == false)   
@@ -247,7 +293,14 @@ class UserController extends Controller
           toastr()->success('Your Package is Expire');
            return redirect(route('user.dashboard.index'));
         }
-        return view($this->directory.'.refer.index')->with('user',$user);
+        if($request->member_type == 'active'){
+            $referrals = Auth::user()->mrefers()->where('status','active');
+        }else if($request->member_type == 'pending'){
+            $referrals = Auth::user()->mrefers()->where('status','!=','active');
+        }else{
+            $referrals = Auth::user()->mrefers();
+        }
+        return view($this->directory.'.refer.index')->with('user',$user)->with('referrals',$referrals);
     }
     public function emailVerification()
     {

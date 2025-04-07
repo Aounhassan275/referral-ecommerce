@@ -62,6 +62,12 @@
       type="text/css"
       href="{{asset('adminty-assets/assets/css/jquery.mCustomScrollbar.css')}}"
     />
+    <link rel="stylesheet" href="{{asset('adminty-assets/bower_components/select2/dist/css/select2.min.css')}}" />
+     <!-- Multi Select css -->
+     <link rel="stylesheet" type="text/css"
+     href="{{asset('adminty-assets/bower_components/bootstrap-multiselect/dist/css/bootstrap-multiselect.css')}}" />
+ <link rel="stylesheet" type="text/css" href="{{asset('adminty-assets/bower_components/multiselect/css/multi-select.css')}}" />
+
     <link href="{{asset('user_asset/assets/css/toastr.css')}}" rel="stylesheet" type="text/css">
     @yield('styles')
   </head>
@@ -687,7 +693,17 @@
     <script src="{{asset('adminty-assets/assets/js/pcoded.min.js')}}"></script>
     <script src="{{asset('adminty-assets/assets/js/vartical-layout.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('adminty-assets/assets/js/script.js')}}"></script>
-	
+    <script type="text/javascript" src="{{asset('adminty-assets/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+        <!-- Multiselect js -->
+        <script type="text/javascript"
+            src="{{asset('adminty-assets/bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect.js')}}">
+
+
+            </script>
+        <script type="text/javascript" src="{{asset('adminty-assets/bower_components/multiselect/js/jquery.multi-select.js')}}"></script>
+        <script type="text/javascript" src=".{{asset('adminty-assets/assets/js/jquery.quicksearch.js')}}"></script>
+        <!-- Custom js -->
+        <script type="text/javascript" src="{{asset('adminty-assets/assets/pages/advance-elements/select2-custom.js')}}"></script>
 	<script src="{{asset('user_asset/assets/js/toastr.js')}}"></script>
 	@toastr_render
 	@yield('scripts')
