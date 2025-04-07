@@ -29,11 +29,11 @@ class RenewReferralIncome
         //Give it to Downline Tree members refer by and remaining goes to flush Account 
         ReferralIncome::DownLinePlacementIncome($total_amount,$package,$user);
         //If the Refer By is leader then give him this also otherwise  goes to flush Account 
-        ReferralIncome::TradeIncome($total_amount,$package,$refer_by,$user);
+        // ReferralIncome::TradeIncome($total_amount,$package,$refer_by,$user);
         ReferralIncome::rebirthAndAsscoaiteIncome($total_amount,$package,$refer_by,$user);
         ReferralIncome::CompanyIncome($total_amount,$package,$type = 'Arrival');
         
-        $self_loan_limit = $package->price / 100 * $package->self_loan_limit;
+        $self_loan_limit = $package->price / 100 * $package->renew_self_loan_limit;
         $user->update([
             'loan_limit' => $user->loan_limit +  $self_loan_limit
         ]);
@@ -41,23 +41,52 @@ class RenewReferralIncome
     } 
     public static  function directIncome($price,$package,$user,$due_to)
     {
-        $direct_income = $price / 100 * $package->renew_direct_income;
-        info("Direct Income adding $direct_income $user->total_income to $user->name");
-        if($user)
+        $direct_teams = $due_to->directParentsForDirectIncome();
+        info("Direct Income To Accounts : ".count($direct_teams)); 
+        $totalDirectIncomeValues = $package->renew_direct_income + $package->renew_direct_income_2 + $package->renew_direct_income_3 + $package->renew_direct_income_4 + $package->renew_direct_income_5;
+        $totalDirectIncome = $price / 100 * $totalDirectIncomeValues;
+        foreach($direct_teams as $index => $direct_team)
         {
-            $user->update([
-                'cash_wallet' => $user->cash_wallet + $direct_income
-            ]);
-            Earning::create([
-                'price' => $direct_income,
-                'user_id' => $user->id,
-                'due_to' => $due_to->id,
-                'type' => 'ranking_income'
-            ]);
-        }else{
-            $companyAccount = CompanyAccount::find(1);
-            $companyAccount->update([
-                'balance' => $companyAccount->balance + $direct_income,
+            if($index == 0){
+                $direct_income = $price / 100 * $package->renew_direct_income;
+                info("Direct Income Level 1 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
+            } 
+            if($index == 1){
+                $direct_income = $price / 100 * $package->renew_direct_income_2;
+                info("Direct Income Level 2 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
+            } 
+            if($index == 2){
+                $direct_income = $price / 100 * $package->renew_direct_income_3;
+                info("Direct Income Level 3 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
+            } 
+            if($index == 3){
+                $direct_income = $price / 100 * $package->renew_direct_income_4;
+                info("Direct Income Level 4 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
+            } 
+            if($index == 4){
+                $direct_income = $price / 100 * $package->renew_direct_income_5;
+                info("Direct Income Level 5 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
+            } 
+            // $referral_account = User::where('referral',$direct_team->id)->first();
+            // if($referral_account)
+            // {
+                Earning::create([
+                    'price' => $direct_income,
+                    'user_id' => $direct_team->id,
+                    'due_to' => $due_to->id,
+                    'level' => $index+1,
+                    'type' => 'direct_income'
+                ]);
+                $direct_team->update([
+                    'cash_wallet' => $direct_team->cash_wallet + $direct_income
+                ]);
+                $totalDirectIncome = $totalDirectIncome - $direct_income;
+            // }
+        }
+        if($totalDirectIncome > 0 ){
+            $flush_account = CompanyAccount::find(1);
+            $flush_account->update([
+                'balance' => $flush_account->balance + $totalDirectIncome,
             ]);
         }
     } 
@@ -114,12 +143,13 @@ class RenewReferralIncome
                     'price' => $per_person_amount,
                     'user_id' => $upline->id,
                     'due_to' => $user->id,
-                    'type' => 'upline_income'
+                    'type' => 'upline_income',
+                    'status' => 0,
                 ]);
-                $upline->update([
-                    'total_income' => $upline->total_income + $per_person_amount/2,
-                    'cash_wallet' => $upline->cash_wallet + $per_person_amount/2,
-                ]);
+                // $upline->update([
+                //     'total_income' => $upline->total_income + $per_person_amount/2,
+                //     'cash_wallet' => $upline->cash_wallet + $per_person_amount/2,
+                // ]);
                 info("Upline Income Amount Added to $upline->name : $per_person_amount"); 
                 $upline_income = $upline_income - $per_person_amount;
             }else{
@@ -149,12 +179,13 @@ class RenewReferralIncome
                     'price' => $per_person_amount,
                     'user_id' => $downline->id,
                     'due_to' => $user->id,
-                    'type' => 'down_line_income'
+                    'type' => 'down_line_income',
+                    'status' => 0,
                 ]);
-                $downline->update([
-                    'total_income' => $downline->total_income + $per_person_amount/2,
-                    'cash_wallet' => $downline->cash_wallet + $per_person_amount/2,
-                ]);
+                // $downline->update([
+                //     'total_income' => $downline->total_income + $per_person_amount/2,
+                //     'cash_wallet' => $downline->cash_wallet + $per_person_amount/2,
+                // ]);
                 info("Downline Income Amount Added to $downline->name : $per_person_amount"); 
             }else{
                 $flush_account = CompanyAccount::find(1);
@@ -186,12 +217,13 @@ class RenewReferralIncome
                         'price' => $per_person_amount,
                         'user_id' => $refer_by->id,
                         'due_to' => $user->id,
-                        'type' => 'upline_placement_income'
+                        'type' => 'upline_placement_income',
+                        'status' => 0,
                     ]);
-                    $refer_by->update([
-                        'total_income' => $refer_by->total_income + $per_person_amount/2,
-                        'cash_wallet' => $refer_by->cash_wallet + $per_person_amount/2,
-                    ]);
+                    // $refer_by->update([
+                    //     'total_income' => $refer_by->total_income + $per_person_amount/2,
+                    //     'cash_wallet' => $refer_by->cash_wallet + $per_person_amount/2,
+                    // ]);
                     info("Upline Placement Income Amount Added to $refer_by->name : $per_person_amount"); 
                 }else{
                     $flush_account = CompanyAccount::find(1);
@@ -231,12 +263,13 @@ class RenewReferralIncome
                         'price' => $per_person_amount,
                         'user_id' => $refer_by->id,
                         'due_to' => $user->id,
-                        'type' => 'down_line_placement_income'
+                        'type' => 'down_line_placement_income',
+                        'status' => 0,
                     ]);
-                    $refer_by->update([
-                        'total_income' => $refer_by->total_income + $per_person_amount/2,
-                        'cash_wallet' => $refer_by->cash_wallet + $per_person_amount/2,
-                    ]);
+                    // $refer_by->update([
+                    //     'total_income' => $refer_by->total_income + $per_person_amount/2,
+                    //     'cash_wallet' => $refer_by->cash_wallet + $per_person_amount/2,
+                    // ]);
                     info("Downline Placement Income Amount Added to $refer_by->name : $per_person_amount"); 
                 }else{
                     $flush_account = CompanyAccount::find(1);
@@ -313,31 +346,16 @@ class RenewReferralIncome
         ]);
         info("Company Income Amount : $company_income added to Company Account");
         
-        $starter_package_income = $price / 100 * $package->starter_package_income;
-        info("Total Starter Package Income Amount : $starter_package_income");
-        $starter_account= CompanyAccount::where('name','Starter Account')->first();
-        if($starter_account && $starter_package_income > 0){
-            $starter_account->update([
-                'balance' => $starter_account->balance + $starter_package_income,
+        
+        $trade_income = $price / 100 * $package->renew_trade_income;
+        info("Total Trade Income Amount : $trade_income");
+        $tradeAccount= CompanyAccount::where('name','Trade Account')->first();
+        if($tradeAccount && $trade_income > 0){
+            $tradeAccount->update([
+                'balance' => $tradeAccount->balance + $trade_income,
             ]);
         }
-        $salary_package_income = $price / 100 * $package->salary_package_income;
-        info("Total Salary Package Income Amount : $salary_package_income");
-        $salary_account= CompanyAccount::where('name','Salary Account')->first();
-        if($salary_account && $salary_package_income > 0){
-            $salary_account->update([
-                'balance' => $salary_account->balance + $salary_package_income,
-            ]);
-        }
-        $brand_package_income = $price / 100 * $package->brand_package_income;
-        info("Total Brand Package Income Amount : $brand_package_income");
-        $brand_account= CompanyAccount::where('name','Brand Account')->first();
-        if($brand_account && $brand_package_income > 0){
-            $brand_account->update([
-                'balance' => $brand_account->balance + $brand_package_income,
-            ]);
-        }
-        $company_new_account_income = $price / 100 * $package->company_new_account_income;
+        $company_new_account_income = $price / 100 * $package->renew_company_new_account_income;
         info("Total Company New Account Income Amount : $company_new_account_income");
         $new_account= CompanyAccount::where('name','New Account')->first();
         if($new_account && $company_new_account_income > 0){
@@ -345,7 +363,7 @@ class RenewReferralIncome
                 'balance' => $new_account->balance + $company_new_account_income,
             ]);
         }
-        $company_employee_account_income = $price / 100 * $package->company_employee_account_income;
+        $company_employee_account_income = $price / 100 * $package->renew_company_employee_account_income;
         info("Total Company employee Account Income Amount : $company_employee_account_income");
         $employee_account= CompanyAccount::where('name','Employee Account')->first();
         if($employee_account && $company_employee_account_income > 0){
@@ -354,7 +372,7 @@ class RenewReferralIncome
             ]);
         }
 
-        $company_renew_income = $price / 100 * $package->company_renew_income;
+        $company_renew_income = $price / 100 * $package->renew_company_renew_income;
         info("Total Company Renew Account Income Amount : $company_renew_income");
         $renew_account= CompanyAccount::where('name','Renew Account')->first();
         if($renew_account && $company_renew_income > 0){
@@ -362,14 +380,64 @@ class RenewReferralIncome
                 'balance' => $renew_account->balance + $company_renew_income,
             ]);
         }
-        $seller_package_income = $price / 100 * $package->seller_package_income;
-        info("Total Company Seller Account Income Amount : $seller_package_income");
-        $seller_account= CompanyAccount::where('name','Seller Account')->first();
-        if($seller_account && $seller_package_income > 0){
-            $seller_account->update([
-                'balance' => $seller_account->balance + $seller_package_income,
+        $renew_all_account_income = $price / 100 * $package->renew_renew_all_accounts;
+        info("Total Renew All Accounts Income Amount : $renew_all_account_income");
+        $renew_all_account= CompanyAccount::where('name','Renew All Account')->first();
+        if($renew_all_account && $renew_all_account_income > 0){
+            $renew_all_account->update([
+                'balance' => $renew_all_account->balance + $renew_all_account_income,
             ]);
         }
+        $all_assoicate_income = $price / 100 * $package->renew_all_assoicate;
+        info("Total All Assoicate Income Amount : $all_assoicate_income");
+        $all_assoicate_account= CompanyAccount::where('name','All Assoicate Account')->first();
+        if($all_assoicate_account && $all_assoicate_income > 0){
+            $all_assoicate_account->update([
+                'balance' => $all_assoicate_account->balance + $all_assoicate_income,
+            ]);
+        }
+        $company_assoicate_income = $price / 100 * $package->renew_company_assoicate;
+        info("Total Company Assoicate Income Amount : $all_assoicate_income");
+        $company_assoicate_account= CompanyAccount::where('name','Company Assoicate Account')->first();
+        if($company_assoicate_account && $company_assoicate_income > 0){
+            $company_assoicate_account->update([
+                'balance' => $company_assoicate_account->balance + $company_assoicate_income,
+            ]);
+        }
+        $for_medicine_income = $price / 100 * $package->renew_for_medicine;
+        info("Total For Medicine Income Amount : $for_medicine_income");
+        $for_medicine_account= CompanyAccount::where('name','For Medicine Account')->first();
+        if($for_medicine_account && $for_medicine_income > 0){
+            $for_medicine_account->update([
+                'balance' => $for_medicine_account->balance + $for_medicine_income,
+            ]);
+        }
+        $for_purchase_all_income = $price / 100 * $package->renew_for_purchase_all;
+        info("Total For Purchase All Income Amount : $for_purchase_all_income");
+        $ffor_purchase_all_account= CompanyAccount::where('name','For Purchase All Account')->first();
+        if($ffor_purchase_all_account && $for_purchase_all_income > 0){
+            $ffor_purchase_all_account->update([
+                'balance' => $ffor_purchase_all_account->balance + $for_purchase_all_income,
+            ]);
+        }
+        $monthly_draw_income = $price / 100 * $package->renew_monthly_draw;
+        info("Total Monthly Draw Income Amount : $monthly_draw_income");
+        $monthly_draw_account= CompanyAccount::where('name','Monthly Draw Account')->first();
+        if($monthly_draw_account && $monthly_draw_income > 0){
+            $monthly_draw_account->update([
+                'balance' => $monthly_draw_account->balance + $monthly_draw_income,
+            ]);
+        }
+        $company_products_income = $price / 100 * $package->renew_company_products;
+        info("Total Company Products Income Amount : $company_products_income");
+        $company_products_account = CompanyAccount::where('name','Company Products Account')->first();
+        if($company_products_account && $company_products_income > 0){
+            $company_products_account->update([
+                'balance' => $company_products_account->balance + $company_products_income,
+            ]);
+        }
+        info("Company Income Amount : $company_income added to Company Account");
+
     } 
     
     public static  function directPoolIncome($price,$package,$user,$due_to)
@@ -395,10 +463,10 @@ class RenewReferralIncome
             'price' => $self_rebirth,
             'user_id' => $user->id,
             'due_to' => $user->id,
-            'type' => 'rebirth_income'
+            'type' => 'self_renew_income'
         ]);
         $user->update([
-            'for_pool' => $user->for_pool + $self_rebirth,
+            'community_pool' => $user->community_pool + $self_rebirth,
         ]);
         $direct_rebirth = $price / 100 * $package->renew_direct_rebirth;
         info("Direct Rebirth Amount : $direct_rebirth");
@@ -406,10 +474,10 @@ class RenewReferralIncome
             'price' => $direct_rebirth,
             'user_id' => $referBy->id,
             'due_to' => $user->id,
-            'type' => 'rebirth_income'
+            'type' => 'direct_renew_income'
         ]);
         $referBy->update([
-            'for_pool' => $referBy->for_pool + $direct_rebirth,
+            'community_pool' => $referBy->community_pool + $direct_rebirth,
         ]);
         $self_associate = $price / 100 * $package->renew_self_associate;
         info("Self Associate Amount : $self_associate");
@@ -417,7 +485,7 @@ class RenewReferralIncome
             'price' => $self_associate,
             'user_id' => $user->id,
             'due_to' => $user->id,
-            'type' => 'associate_income'
+            'type' => 'self_associate_income'
         ]);
         $user->update([
             'community_pool' => $user->community_pool + $self_associate,
@@ -428,7 +496,7 @@ class RenewReferralIncome
             'price' => $direct_associate,
             'user_id' => $referBy->id,
             'due_to' => $user->id,
-            'type' => 'rebirth_income'
+            'type' => 'direct_associate_income'
         ]);
         $referBy->update([
             'community_pool' => $referBy->community_pool + $direct_associate,

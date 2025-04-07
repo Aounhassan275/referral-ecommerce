@@ -95,7 +95,7 @@ class ReferralIncome
             'referral' => $new_fake_account->id
         ]);
         info("Create New Fake Account : $new_fake_account->name"); 
-    } 
+    }  
     public static  function directIncome($price,$package,$user,$due_to)
     {
         $direct_teams = $due_to->directParentsForDirectIncome();
