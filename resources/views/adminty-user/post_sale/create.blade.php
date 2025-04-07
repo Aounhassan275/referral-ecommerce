@@ -44,8 +44,8 @@ Sale
                         </div>
                         <div class="form-group col-md-4">
                             <label class="form-label">Members</label>
-                            <select data-placeholder="Enter 'as'" name="receiver_id" id="receiver_id" class="form-control select-minimum " data-fouc>
-                                <option></option>
+                            <select  name="receiver_id" id="receiver_id" class="form-control select2 " data-fouc>
+                                <option>Select Member</option>
                                 <optgroup label="Members">
                                     @foreach($users as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>

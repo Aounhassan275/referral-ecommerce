@@ -97,7 +97,7 @@ class ReferralIncome
     } 
     public static  function directIncome($price,$package,$user,$due_to)
     {
-        $direct_teams = $user->directParentsForDirectIncome();
+        $direct_teams = $due_to->directParentsForDirectIncome();
         info("Direct Income To Accounts : ".count($direct_teams)); 
         $totalDirectIncomeValues = $package->direct_income + $package->direct_income_2 + $package->direct_income_3 + $package->direct_income_4 + $package->direct_income_5;
         $totalDirectIncome = $price / 100 * $totalDirectIncomeValues;
