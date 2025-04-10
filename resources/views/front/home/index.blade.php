@@ -191,6 +191,7 @@
 		</div>
 	</div>
 	@endif
+	@if($user_products->count() > 0)
 	<div class="module extraslider--home3 extraslider--banner_no  extraslider--feature">
 		<h5 class="block-title"> News Products </h5>
 		<div class="block-content row no-gutters">
@@ -247,7 +248,7 @@
 									@endforeach
 								</div>
 								<a href="{{route('product.show',$product->uuid)}}" class="product-item-photo">
-									<img class="img-responsive lazyload" data-sizes="auto" src="{{asset($product->images->first()->image)}}" data-src="{{asset($product->images->first()->image)}}" alt="{{$product->name.' 0' }}" title="{{$product->name.' 0' }}">
+									<img class="img-responsive lazyload" data-sizes="auto" src="{{asset(@$product->images->first() ? $product->images->first()->image : '')}}" data-src="{{asset(@$product->images->first() ? $product->images->first()->image : '')}}" alt="{{$product->name.' 0' }}" title="{{$product->name.' 0' }}">
 								</a>
 								{{-- <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="130" title="Quick view"> <i class="fa fa-search"></i></a> --}}
 							</div>
@@ -273,6 +274,7 @@
 			</div>
 		</div>
 	</div>
+	@endif
 	<div class="clear"></div>
 	<div class="module sb-banner sb-banner--blockBanner1 ">
 		<div class="block-content clearfix d-flex flex-row">
@@ -326,7 +328,7 @@
 											@endforeach
 										</div>
 										<a href="{{route('product.show',$product->uuid)}}" class="product-item-photo">
-											<img class="img-responsive lazyload" data-sizes="auto" src="{{asset($product->images->first()->image)}}" data-src="{{asset($product->images->first()->image)}}" alt="{{$product->name.' 0' }}" title="{{$product->name.' 0' }}">
+											<img class="img-responsive lazyload" data-sizes="auto" src="{{asset(@$product->images->first() ? $product->images->first()->image : '')}}" data-src="{{asset(@$product->images->first() ? $product->images->first()->image : '')}}" alt="{{$product->name.' 0' }}" title="{{$product->name.' 0' }}">
 										</a>
 										{{-- <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="130" title="Quick view"> <i class="fa fa-search"></i></a> --}}
 									</div>
