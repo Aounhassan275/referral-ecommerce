@@ -73,7 +73,7 @@ class PostFrontendController extends Controller
             // $cities = City::paginate(12);
             $cities = City::select('cities.*')
                         ->join('posts', 'cities.id', 'posts.city_id')
-                        ->groupBy('posts.city_id')
+                        ->distinct()
                         ->paginate(12);
         }
         return view('front.post_city.index',compact('cities'));
@@ -119,7 +119,7 @@ class PostFrontendController extends Controller
             
             $countries = Country::select('countries.*')
                         ->join('posts', 'countries.id', 'posts.country_id')
-                        ->groupBy('posts.country_id')
+                        ->distinct()
                         ->paginate(12);
         }
         return view('front.post_country.index',compact('countries'));
@@ -130,7 +130,7 @@ class PostFrontendController extends Controller
         $cities = City::select('cities.*')
             ->join('posts', 'cities.id', 'posts.city_id')
             ->where('cities.country_id',$country->id)
-            ->groupBy('posts.city_id')
+            ->distinct()
             ->paginate(12);
         $posts = Post::where('country_id',$country->id)->paginate(12);
         return view('front.post_country.show',compact('country','posts','cities'));

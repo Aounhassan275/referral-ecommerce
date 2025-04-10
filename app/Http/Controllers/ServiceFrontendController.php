@@ -57,7 +57,7 @@ class ServiceFrontendController extends Controller
             // $cities = City::paginate(12);
             $cities = City::select('cities.*')
                         ->join('users', 'cities.id', 'users.city_id')
-                        ->groupBy('users.city_id')
+                        ->distinct()
                         ->paginate(12);
         }
         return view('front.service_city.index',compact('cities'));
@@ -114,7 +114,7 @@ class ServiceFrontendController extends Controller
             
             $countries = Country::select('countries.*')
                         ->join('users', 'countries.id', 'users.country_id')
-                        ->groupBy('users.country_id')
+                        ->distinct()
                         ->paginate(12);
         }
         return view('front.service_country.index',compact('countries'));
@@ -125,7 +125,7 @@ class ServiceFrontendController extends Controller
         $cities = City::select('cities.*')
             ->join('users', 'cities.id', 'users.city_id')
             ->where('cities.country_id',$country->id)
-            ->groupBy('users.city_id')
+            ->distinct()
             ->paginate(12);
         return view('front.service_country.show',compact('country','cities'));
     }

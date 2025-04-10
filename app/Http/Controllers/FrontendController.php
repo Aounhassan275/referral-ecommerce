@@ -65,12 +65,12 @@ class FrontendController extends Controller
         $post_category = PostCategory::find(Setting::postCategory());
         $countries = Country::select('countries.*')
                     ->join('users', 'countries.id', 'users.country_id')
-                    ->groupBy('users.country_id')
+                    ->distinct()
                     ->get()->take(12);
         
         $cities = City::select('cities.*')
                     ->join('users', 'cities.id', 'users.city_id')
-                    ->groupBy('users.city_id')
+                    ->distinct()
                     ->get()->take(12);
         return view('front.home.index',compact('products','user_products','product_category','service_category','post_category','countries','cities','new_products','serviceTypeUsers','posts'));
     }
@@ -129,7 +129,7 @@ class FrontendController extends Controller
             // $cities = City::paginate(12);
             $cities = City::select('cities.*')
                         ->join('products', 'cities.id', 'products.city_id')
-                        ->groupBy('products.city_id')
+                        ->distinct()
                         ->paginate(12);
         }
         return view('front.city.index',compact('cities'));
@@ -176,7 +176,7 @@ class FrontendController extends Controller
             
             $countries = Country::select('countries.*')
                         ->join('products', 'countries.id', 'products.country_id')
-                        ->groupBy('products.country_id')
+                        ->distinct()
                         ->paginate(12);
         }
         return view('front.country.index',compact('countries'));
@@ -187,7 +187,7 @@ class FrontendController extends Controller
         $cities = City::select('cities.*')
             ->join('products', 'cities.id', 'products.city_id')
             ->where('cities.country_id',$country->id)
-            ->groupBy('products.city_id')
+            ->distinct()
             ->paginate(12);
         $products = Product::where('country_id',$country->id)->paginate(12);
         return view('front.country.show',compact('country','products','cities'));
