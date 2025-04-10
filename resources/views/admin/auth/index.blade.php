@@ -38,7 +38,6 @@
         a.appendChild(r);
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
-    	@toastr_css
 </head>
 
 <body>
@@ -83,8 +82,6 @@
     </main>
 
 	<script src="{{asset('js\app.js')}}"></script>
-	@toastr_js
-	@toastr_render
 </body>
 
 </html>

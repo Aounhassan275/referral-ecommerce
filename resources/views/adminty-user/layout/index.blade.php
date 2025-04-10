@@ -705,7 +705,6 @@
         <!-- Custom js -->
         <script type="text/javascript" src="{{asset('adminty-assets/assets/pages/advance-elements/select2-custom.js')}}"></script>
 	<script src="{{asset('user_asset/assets/js/toastr.js')}}"></script>
-	@toastr_render
 	@yield('scripts')
 </body>
 

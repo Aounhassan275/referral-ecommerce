@@ -406,7 +406,6 @@
 
 
 	<script src="{{asset('user_asset/assets/js/toastr.js')}}"></script>
-	@toastr_render
 	@yield('scripts')
 </body>
 </html>

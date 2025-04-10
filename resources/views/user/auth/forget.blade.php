@@ -120,7 +120,6 @@
 	</div>
 	<!-- /page content -->
     <script src="{{asset('user_asset/assets/js/toastr.js')}}"></script>
-	@toastr_render
 	
     <script>
         $(document).on('submit', '#verficationForm', function (event) {

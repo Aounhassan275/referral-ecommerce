@@ -28,7 +28,6 @@
   <!-- Template Main CSS File -->
   <link href="{{asset('profile-theme-assets/assets/css/main.css')}}" rel="stylesheet">
   <link href="{{asset('user_asset/assets/css/toastr.css')}}" rel="stylesheet" type="text/css"> 
-  @toastr_css
 </head>
 
 <body>
@@ -674,8 +673,7 @@
   <div id="preloader"></div>
   <!-- Vendor JS Files -->
   <script src="{{asset('user_asset/assets/js/toastr.js')}}"></script>
-  @toastr_render
-  @toastr_js
+
   <script src="{{asset('profile-theme-assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('profile-theme-assets/assets/vendor/aos/aos.js')}}"></script>
   <script src="{{asset('profile-theme-assets/assets/vendor/glightbox/js/glightbox.min.js')}}"></script>

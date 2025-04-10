@@ -28,7 +28,6 @@
             "csrf_token": "7ad3f2efebfc93e089c70f6aec1537967fc622710b30f42552901e66ebde9330"
         };
     </script>
-    @toastr_css
     @yield('css')
 </head>
 
@@ -316,8 +315,7 @@
     @include('front.layout.partials.footer')
     
     <script src="{{asset('user_asset/assets/js/toastr.js')}}"></script>
-	@toastr_render
-	@toastr_js
+
     <script>
         window.__webpack_public_path__ = "https://cdn11.bigcommerce.com/s-3zqjz60dg3/stencil/671eab80-1ec6-0137-c53b-0242ac11000a/e/80359d40-88bb-013b-10b2-66c6c8fc1ce5/dist/";
     </script>

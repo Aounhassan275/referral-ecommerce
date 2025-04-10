@@ -26,7 +26,6 @@
 		}
 	</style>
 	<!-- END SETTINGS -->
-	@toastr_css
 </head>
 
 <body>
@@ -251,8 +250,7 @@
 	</div>
 
 	<script src="{{asset('js\app.js')}}"></script>
-	@toastr_js
-	@toastr_render
+
 	@yield('scripts')
 </body>
 

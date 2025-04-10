@@ -25,7 +25,7 @@
         var BCData = {
             "csrf_token": "7ad3f2efebfc93e089c70f6aec1537967fc622710b30f42552901e66ebde9330"
         };
-    </script> @toastr_css
+    </script>
 </head>
 
 <body class="banners-effect2 default--style">
