@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\FundTransferHelper;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyAccount;
 use App\Models\Order;
+use App\Models\PaymentPolicy;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\User;
@@ -27,6 +29,10 @@ class OrderController extends Controller
     {
         return view($this->directory.'.order.index');
     }
+    public function orders()
+    {
+        return view($this->directory.'.order.orders');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -46,9 +52,9 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $totalDeduction =  $request->total_amount;
         if($request->payment_option == "Pay on System")
         {
-            $totalDeduction =  $request->price/100 * Setting::orderFee() + $request->price;
             if($totalDeduction > Auth::user()->cash_wallet)
             {            
                 toastr()->error('You dont have enough amount in Cash Wallet to purchase this Product!');
@@ -57,44 +63,34 @@ class OrderController extends Controller
             Auth::user()->update([
                 'cash_wallet' => Auth::user()->cash_wallet -= $totalDeduction
             ]);
+        }elseif($request->payment_option == "Pay From Stock")
+        {
+            if($totalDeduction > Auth::user()->stockBalance())
+            {            
+                toastr()->error('You dont have enough amount in For Stock Purchase to purchase this Product!');
+                return redirect()->back();
+            }
+            Auth::user()->update([
+                'cash_wallet' => Auth::user()->cash_wallet -= $totalDeduction
+            ]);
         }else{
-            if($request->order_fee > Auth::user()->cash_wallet)
+            if($totalDeduction > Auth::user()->cash_wallet)
             {            
                 toastr()->error('You dont have enough amount in Cash Wallet to purchase this Product!');
                 return redirect()->back();
             }
             Auth::user()->update([
-                'cash_wallet' => Auth::user()->cash_wallet -= $request->order_fee
+                'cash_wallet' => Auth::user()->cash_wallet -= $totalDeduction
             ]);
         }
-        $sale_reward_for_users = $request->order_fee/100 * 20;
-        if($request->owner_id)
-        {
+        $owner = null;
+        if($request->owner_id){
             $owner = User::find($request->owner_id);
-            $owner->update([
-                'sale_reward' => $owner->sale_reward += $sale_reward_for_users
-            ]);
-        }else{
-            $trade_income= CompanyAccount::where('name','Trade Income')->first();
-            $trade_income->update([
-                'balance' => $trade_income->balance += $sale_reward_for_users
-            ]);
-
         }
-        $user = User::find($request->user_id);
-        $user->update([
-            'sale_reward' => $user->sale_reward += $sale_reward_for_users
-        ]);
-        $sale_reward_for_trade = $request->order_fee/100*50;
-        $trade_income= CompanyAccount::where('name','Trade Income')->first();
-        $trade_income->update([
-            'balance' => $trade_income->balance += $sale_reward_for_trade
-        ]);
-        $sale_reward_for_gift = $request->order_fee/100*10;
-        $gift= CompanyAccount::find(1);
-        $gift->update([
-            'balance' => $gift->balance += $sale_reward_for_gift
-        ]);
+        $paymentPolicy = PaymentPolicy::where('type','Post Sale')->first();
+        if($paymentPolicy){
+            FundTransferHelper::transfer($request->order_fee,Auth::user(),$paymentPolicy,$owner);
+        }
         Order::create($request->all());
         $product = Product::find($request->product_id);
         $product->update([

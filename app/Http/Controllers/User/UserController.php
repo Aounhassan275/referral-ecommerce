@@ -342,54 +342,12 @@ class UserController extends Controller
             ]);
            
         }
-        if($user->package->price >= 1000)
-        {
-            $amount_to_divide = $request->community_pool/2;
-            $amount_for_packages = $amount_to_divide + $user->community_pool;
-            $total_packages = $amount_for_packages/50;
-            $total_packages = (int)$total_packages;
-            $package_amount = $total_packages * 50;
-            $community_amount = $amount_for_packages - $package_amount;
-            info("Amount To Transfer For Community Pool $user->name : $amount_to_divide");
-            ReferralIncome::CommunityPoolIncome($user,$amount_to_divide);
-            if($total_packages > 0)
-            {
-                for($i = 0;$i < $total_packages;$i++)     
-                {
-                    UserHepler::CreateUser($user);
-                }     
-            }
-            if($community_amount > 0)
-            {
-                $user->update([
-                    'community_pool' =>  $community_amount,
-                ]);
-            }else{
-                $user->update([
-                    'community_pool' =>  0,
-                ]);
-            }
-            info("Amount To Deduct From Total Amount $user->name  ($user->total_income) : $amount");
-            $user->update([
-                'cash_wallet' => $user->cash_wallet + $request->cash_wallet,
-                'total_income' => $user->total_income - $amount
-            ]);
-        }else{
-            $user->update([
-                'cash_wallet' => $user->cash_wallet + $request->cash_wallet,
-                // 'community_pool' =>  $user->community_pool +$request->community_pool,
-                'investment_amount' =>  $user->investment_amount +$request->community_pool,
-                'total_income' => $user->total_income - $amount
-            ]);
-            if($user->package->price == 2)
-            {
-                $user->update([
-                    'community_pool' =>  $user->community_pool +$request->community_pool
-                ]);
-            }else{
-                ReferralIncome::CommunityPoolIncome($user,$request->community_pool);
-            }
-        }
+        $user->update([
+            'cash_wallet' => $user->cash_wallet + $request->cash_wallet,
+            // 'community_pool' =>  $user->community_pool +$request->community_pool,
+            'investment_amount' =>  $user->investment_amount +$request->community_pool,
+            'total_income' => $user->total_income - $amount
+        ]);
         toastr()->success('Amount Transferred Successfully');
         return response()->json([
             'status' => true,

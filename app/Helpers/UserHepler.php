@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Hash;
 
 class UserHepler
 {
-    public static function CreateUser($user)
+    public static function CreateUser($user,$package)
     {
         $new_user = User::create([
             'name' => $user->name.uniqid(),
             'email' => $user->email,
             'password' => Hash::make('1234'),
             'temp_password' => '1234',
-            'package_id' => '9',
+            'package_id' => $package->id,
             'status' => 'active',
             'a_date' =>  Carbon::today(),
             'code' => uniqid(),

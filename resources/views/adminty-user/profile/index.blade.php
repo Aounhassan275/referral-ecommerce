@@ -18,7 +18,7 @@ UPDATE YOUR OWN PROFILE
                 <h5 class="card-title">Update Profile</h5>
             </div>
             <div class="card-body">
-                @if (Auth::user()->products->count() > 0)
+                @if (Auth::user()->package)
                 <form action="{{route('user.user.update',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
@@ -364,13 +364,13 @@ UPDATE YOUR OWN PROFILE
                     </div>
                 </form>
                 @else 
-                <p>Please Add One Product to enable profile</p>
+                <p>Please Buy Package to enable profile</p>
                 @endif
             </div>
         </div>
     </div>
 </div>
-@if (Auth::user()->products->count() > 0)
+@if (Auth::user()->package)
 <div class="row">
     <div class="col-12">
         <div class="card">

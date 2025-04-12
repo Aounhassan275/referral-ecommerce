@@ -24,6 +24,7 @@
                              <option {{$paymentPolicy->type == 'Balance Transfer' ? 'selected' : ''}} value="Balance Transfer">Balance Transfer</option>
                              <option {{$paymentPolicy->type == 'Withdraw' ? 'selected' : ''}} value="Withdraw">Withdraw</option>
                              <option {{$paymentPolicy->type == 'Post Sale' ? 'selected' : ''}} value="Post Sale">Post Sale</option>
+                             <option {{$paymentPolicy->type == 'Stock Purchase' ? 'selected' : ''}} value="Stock Purchase">Stock Purchase</option>
                          </select>                        
                      </div>
                          <div class="form-group col-3">

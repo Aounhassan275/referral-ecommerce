@@ -67,16 +67,16 @@ class ServiceFrontendController extends Controller
         $city = City::where('name',str_replace('_', ' ',$name))->first();
         if($request->keyword)
         {
-            $type_ids = User::where('city_id',$city->id)->get()->pluck('type_id')->toArray();
-            $type_ids = array_unique($type_ids);
-            $types = Type::whereIn('id',$type_ids)->where('name', 'LIKE', '%'.$request->keyword.'%')->orderBy('name','ASC')->paginate(12);
+            $service_ids = User::where('city_id',$city->id)->get()->pluck('service_id')->toArray();
+            $service_ids = array_unique($service_ids);
+            $services = Service::whereIn('id',$service_ids)->where('name', 'LIKE', '%'.$request->keyword.'%')->orderBy('name','ASC')->paginate(12);
         }else{
             
-            $type_ids = User::where('city_id',$city->id)->get()->pluck('type_id')->toArray();
-            $type_ids = array_unique($type_ids);
-            $types = Type::whereIn('id',$type_ids)->orderBy('name','ASC')->paginate(12);      
+            $service_ids = User::where('city_id',$city->id)->get()->pluck('service_id')->toArray();
+            $service_ids = array_unique($service_ids);
+            $services = Service::whereIn('id',$service_ids)->orderBy('name','ASC')->paginate(12);      
         }
-        return view('front.service_city.show',compact('city','types'));
+        return view('front.service_city.show',compact('city','services'));
     }
     public function showServiceCityDetails($type_name,$city_name,Request $request)
     {

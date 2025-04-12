@@ -69,6 +69,7 @@ class User extends Authenticatable
         'is_validate',
         'real_name',
         'loan_limit',
+        'for_stock',
     ];
 
     /**
@@ -743,5 +744,26 @@ class User extends Authenticatable
     public function loanPending()
     {
         return Loan::where('user_id',$this->id)->where('status',0)->sum('amount');
+    }
+    public function stockBalance()
+    {
+        return $this->for_stock + $this->stockDeposit() - $this->stockOrders();
+
+    }
+    public function stockDeposit()
+    {
+        return Stock::where('user_id',$this->id)->where('status',1)->sum('amount');
+    }
+    public function stockOrders()
+    {
+        return  $this->orders->where('payment_option','Pay From Stock')->sum('total_amount');
+    }
+    public function stockPaidToAdmin()
+    {
+        return Stock::where('user_id',$this->id)->where('status',0)->sum('amount');
+    }
+    public function stockPendingForAdmin()
+    {
+        return $this->for_stock - $this->stockPaidToAdmin();
     }
 }

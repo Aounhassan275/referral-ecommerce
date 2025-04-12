@@ -18,7 +18,7 @@
 	   </li>
 	   <li class="breadcrumb-item">
 			<i class="fa fa-home"></i>
-		  <a href="{{url('services')}}" class="breadcrumb-label">{{$city->name}} Service Provider</a>
+		  <a href="{{url('services')}}" class="breadcrumb-label">{{$city->name}} Services</a>
 	   </li>
 	</ul>
  </div>
@@ -31,26 +31,27 @@
 			 <!-- snippet location categories -->
 		  </div>
 		  <div class="products-list row" >
-			@foreach($types as $type)
+			@foreach($services as $service)
 			<div class="product-layout product-grid product-grid-4 col-lg-3 col-md-4 col-6">
 				<article class="product-item-container ">
 					<div class="left-block d-flex align-items-center justify-content-center">
-						<a href="{{url('service/type/'.str_replace(' ', '_',$type->name).'/city/'.str_replace(' ', '_',$city->name))}}" class="product-item-photo">
-							<img class="img-responsive lazyload" data-sizes="auto" src="{{asset($type->image)}}" data-src="{{asset($type->image)}}" alt="{{$type->name.' 0' }}" title="{{$type->name.' 0' }}">
+						<a href="{{route('services.show',str_replace(' ', '_',$service->name))}}" class="product-item-photo">
+							<img class="img-responsive lazyload" data-sizes="auto" src="{{asset($service->image)}}" data-src="{{asset($service->image)}}" alt="{{$service->name.' 0' }}" title="{{$service->name.' 0' }}">
 						</a>
+						{{-- <a href="#" class="quickview btn-button d-none d-md-block" data-animation="false" data-product-id="130" title="Quick view"> <i class="fa fa-search"></i></a> --}}
 					</div>
 					<div class="right-block">
 						<h4 class="card-title">
-							<a href="{{url('service/type/'.str_replace(' ', '_',$type->name).'/city/'.str_replace(' ', '_',$city->name))}}">{!! substr( $type->name, 0, 15) !!}</a>
+							<a href="{{route('services.show',str_replace(' ', '_',$service->name))}}">{!! substr( $service->name, 0, 15) !!}</a>
 						</h4>
 						<div class="price-section price-section--withoutTax ">
-							<span data-product-price-without-tax class="price price--withoutTax">(<span style="color:green;"><i class="fa fa-eye"></i>{{$type->users->where('city_id',$city->id)->count()}}</span>)</span>
+							<span data-product-price-without-tax class="price price--withoutTax">(<span style="color:green;"><i class="fa fa-eye"></i>{{$service->types->count()}}</span>)</span>
 						</div>
-						<div class="description"> {!! substr( $type->name, 0, 15) !!}... </div>
+						<div class="description"> {!! substr( $service->name, 0, 15) !!}... </div>
 						<div class="product-colors" data-product-id="130"></div>
 						<div class="button-group">
 							<div class="action-item addToCart">
-								<a href="{{url('service/type/'.str_replace(' ', '_',$type->name).'/city/'.str_replace(' ', '_',$city->name))}}"  data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">View Profile</a>
+								<a href="{{route('services.show',str_replace(' ', '_',$service->name))}}"  data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">View Profile</a>
 							</div>
 						</div>
 					</div>
@@ -60,7 +61,7 @@
 		</div>
 		  <div class="pagination">
 			 <ul class="pagination-list">
-				{!! $types->links() !!}
+				{!! $services->links() !!}
 			 </ul>
 		  </div>
 	   </div>

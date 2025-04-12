@@ -45,6 +45,7 @@
                             @endif
                             <input type="hidden" name="price" value="{{@$product->price}}">
                             <input type="hidden" name="order_fee" value="{{@$product->price/100 * App\Models\Setting::orderFee()}}">
+                            <input type="hidden" name="total_amount" value="{{$product->price + $product->price/100 * App\Models\Setting::orderFee()}}">
                             <input type="text" name="address" class="form-control" placeholder="Enter Shipping Address" value="{{Auth::user()->address}}">
                         </div>
                         <div class="form-group col-6">
@@ -52,6 +53,7 @@
                             <br>
                             <label for=""><input type="radio" name="payment_option" checked value="Pay on System"> Pay on System</label>
                             <label for=""><input type="radio" name="payment_option" value="Deal Byself"> Deal Byself</label>
+                            <label for=""><input type="radio" name="payment_option" value="Pay From Stock"> Pay From Stock</label>
                         </div>
                    </div>
                     <div class="text-right">

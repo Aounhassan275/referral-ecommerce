@@ -31,28 +31,28 @@
 	<main class="col-lg-9 col-md-12 page-content" id="product-listing-container">
 		<div class="products-category clearfix">
 		   <div class="form-group category-info">
-			  <h3 class="title-category ">{{$city->name}} BRANDS</h3>
+			  <h3 class="title-category ">{{$city->name}} CATGORIES</h3>
 			  <!-- snippet location categories -->
 		   </div>
 		   <div class="products-list row" >
-			 @foreach($brands as $brand)
+			 @foreach($categories as $category)
 			 <div class="product-layout product-grid product-grid-4 col-lg-3 col-md-4 col-6">
 				 <article class="product-item-container ">
 					 <div class="left-block d-flex align-items-center justify-content-center">
-						 <a href="{{asset($brand->image)}}" target="_blank" class="product-item-photo">
-							 <img class="img-responsive lazyload" data-sizes="auto" src="{{asset($brand->image)}}" data-src="{{asset($brand->image)}}" alt="{{$brand->name}}" title="{{$brand->name}}">
+						 <a href="{{asset($category->image)}}" target="_blank" class="product-item-photo">
+							 <img class="img-responsive lazyload" data-sizes="auto" src="{{asset($category->image)}}" data-src="{{asset($category->image)}}" alt="{{$category->name}}" title="{{$category->name}}">
 						 </a>
 					 </div>
 					 <div class="right-block">
 						 <h4 class="card-title">
-							 <a href="{{url('brand/'.str_replace(' ', '_',$brand->name).'/city/'.str_replace(' ', '_',$city->name))}}">{{$brand->name}}</a>
+							 <a href="{{route('category.show',str_replace(' ', '_',$category->name))}}">{{$category->name}}</a>
 						 </h4>
 						 <div class="price-section price-section--withoutTax ">
-							 <span data-product-price-without-tax class="price price--withoutTax">({{$brand->products->where('city_id',$city->id)->count()}})</span>
+							 <span data-product-price-without-tax class="price price--withoutTax">({{$category->brands->count()}})</span>
 						 </div>
 						 <div class="button-group">
 							 <div class="action-item addToCart">
-								 <a href="{{url('brand/'.str_replace(' ', '_',$brand->name).'/city/'.str_replace(' ', '_',$city->name))}}"  class="" title="Add to Cart">View</a>
+								 <a href="{{route('category.show',str_replace(' ', '_',$category->name))}}" data-wait-message="Add to Cart" class="action-link  button--cart" title="Add to Cart">View</a>
 							 </div>
 						 </div>
 					 </div>
@@ -62,7 +62,7 @@
 		 </div>
 		   <div class="pagination">
 			  <ul class="pagination-list">
-				 {!! $brands->links() !!}
+				 {!! $categories->links() !!}
 			  </ul>
 		   </div>
 		</div>

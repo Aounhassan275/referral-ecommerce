@@ -20,20 +20,11 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','namespace' => 'App\Http\Contr
   /*******************LOGIN ROUTES*************/
   Route::view('login', 'admin.auth.index')->name('login');
   Route::post('login','AuthController@login');
-  Route::get('payment_distrubtion', 'AuthController@payment_distrubtion');
   Route::get('payment_distrubtion_for_assoiated_account', 'AuthController@payment_distrubtion_for_assoiated_account');
-  Route::get('upgrade_package', 'AuthController@upgradePackage');
-  Route::get('payment_distrubtion_for_associated_Users', 'AuthController@payment_distrubtionforassociatedUsers');
   Route::get('payment_distrubtion_of_trade_income', 'AuthController@paymentDistrubtionofTradeIncome');
-  Route::get('add_user_to_super_pool', 'AuthController@add_user_to_super_pool');
-  Route::get('add_user_rebirth_to_super_pool', 'AuthController@add_user_rebirth_to_super_pool');
-  Route::get('transfer_temp_amount', 'AuthController@tranferTempAmount');
   Route::get('add_uuid_to_products', 'AuthController@add_uuid_to_products');
-  Route::get('starter_package_reward_payment', 'AuthController@starter_package_reward_payment');
-  Route::get('seller_package_reward_payment', 'AuthController@seller_package_reward_payment');
-  Route::get('brand_package_reward_payment', 'AuthController@brand_package_reward_payment');
-  Route::get('salary_account_payment', 'AuthController@salary_account_payment');
   Route::get('get_pending_loan', 'AuthController@get_pending_loan');
+  Route::get('create_associate_account', 'AuthController@create_associate_account');
    /******************MESSAGE ROUTES****************/
    Route::resource('message', 'MessageController');
   Route::group(['middleware' => 'auth:admin'], function () { 
@@ -259,7 +250,7 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'App\Http\Control
   Route::get('product/create_through_other/{id}', 'ProductController@productCreateThroughOther')->name('product.create_through_other');
         
   /******************ORDER ROUTES****************/
-  Route::view('orders', 'user.order.orders')->name('order.orders');
+  Route::get('orders', 'OrderController@orders')->name('order.orders');
   Route::get('order/onHold/{id}', 'OrderController@orderonHold')->name('order.onHold');
   Route::get('order/completed/{id}', 'OrderController@orderCompleted')->name('order.completed');
   Route::get('order/rejected/{id}', 'OrderController@orderRejected')->name('order.rejected');
@@ -290,6 +281,8 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'App\Http\Control
   /******************LOAN ROUTES****************/
   Route::get('loan/pay/{id}', 'LoanController@pay')->name('loan.pay');  
   Route::resource('loan', 'LoanController');  
+  /******************STOCK ROUTES****************/
+  Route::resource('stock', 'StockController');  
   /******************EVENT ROUTES****************/
   Route::resource('user_special', 'UserSpecialController');  
   Route::resource('user_main_section', 'UserMainSectionController');  

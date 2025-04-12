@@ -60,6 +60,10 @@ class ReferralIncome
         $user->update([
             'loan_limit' => $user->loan_limit +  $self_loan_limit
         ]);
+        $for_stock = $package->price / 100 * $package->for_stock;
+        $user->update([
+            'for_stock' => $user->for_stock +  $for_stock
+        ]);
         return true;
     } 
     public static  function FakeAccount($fake_account,$user)

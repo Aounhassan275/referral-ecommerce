@@ -4,7 +4,7 @@ PACKAGE SUBSRIPTION
 @endsection
 @section('contents')
 <div class="row">
-    @foreach (App\Models\Package::all() as $key => $package)
+    @foreach (App\Models\Package::where('is_renew',0)->where('is_associate',0)->get() as $key => $package)
     @if(Auth::user()->package)
         {{-- @if(Auth::user()->package->price < $package->price) --}}
         <div class="col-xl-3 col-sm-6">

@@ -16,6 +16,18 @@
                 <form method="POST" action="{{route('admin.package.store')}}" enctype="multipart/form-data">
                    @csrf
                    <div class="row">
+                        <div class="form-group col-6">
+                            <label class="form-label">Renewal Package</label><br>
+                            <input type="radio" name="is_renew" value="1"> Yes
+                            <input type="radio" name="is_renew" checked value="0"> No
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label">Associate Package</label><br>
+                            <input type="radio" name="is_associate" value="1"> Yes
+                            <input type="radio" name="is_associate" checked value="0"> No
+                        </div>
+                   </div>
+                   <div class="row">
                         <div class="form-group col-4">
                             <label class="form-label">Package Name</label>
                             <input type="text" name="name" class="form-control" placeholder="Package Name">
@@ -247,7 +259,7 @@
                         </div>
                    </div>
                    <hr>
-                   <div class="row">
+                   {{-- <div class="row">
                         <div class="col-12">
                             <p><strong>Renew Fields</strong></p>
                         </div>
@@ -329,22 +341,6 @@
                             <label class="form-label">Renew Trade Income</label>
                             <input type="number" class="form-control" name="renew_trade_income"  placeholder="Renew Trade Income" value="">
                         </div>
-                        {{-- <div class="form-group col-4">
-                            <label class="form-label">Starter Package Income</label>
-                            <input type="text" name="renew_starter_package_income" class="form-control" placeholder="Starter Package Income">
-                        </div>
-                        <div class="form-group col-4">
-                            <label class="form-label">Seller Package Income</label>
-                            <input type="text" name="renew_seller_package_income" class="form-control" placeholder="Seller Package Income">
-                        </div>
-                        <div class="form-group col-4">
-                            <label class="form-label">Salary Package Income</label>
-                            <input type="text" name="renew_salary_package_income" class="form-control" placeholder="Salary Package Income">
-                        </div>
-                        <div class="form-group col-3">
-                            <label class="form-label">Brand Package Income</label>
-                            <input type="text" name="renew_brand_package_income" class="form-control" placeholder="Brand Package Income">
-                        </div> --}}
                         <div class="form-group col-3">
                             <label class="form-label">New Account Income</label>
                             <input type="text" name="renew_company_new_account_income" class="form-control" placeholder="New Account Income">
@@ -385,7 +381,7 @@
                             <label class="form-label">Company Products</label>
                             <input type="text" name="renew_company_products" class="form-control" placeholder="Company Products">
                         </div>
-                   </div>
+                   </div> --}}
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>

@@ -71,9 +71,9 @@
                             <td class="text-center">
                                 @if(@$order->owner_id == Auth::user()->id && $order->status == "Pending")
                                     <a href="{{route('user.order.onHold',$order->id)}}" data-toggle="tooltip" data-placement="top" title="On Hold"><i class="icon-pencil7"></i></a>
-                                @elseif($order->status == "onHold" && $order->image)
+                                @elseif(@$order->owner_id != Auth::user()->id && $order->status == "onHold" && $order->image)
                                     <a href="{{route('user.order.completed',$order->id)}}" data-toggle="tooltip" data-placement="top" title="Completed"><i class="icon-check"></i></a>
-                                @elseif($order->status == 'Pending')
+                                @elseif(@$order->owner_id != Auth::user()->id && $order->status == 'Pending')
                                     <a href="{{route('user.order.rejected',$order->id)}}" data-toggle="tooltip" data-placement="top" title="Rejected" style="color:red;"><i class="icon-trash"></i></a>
                                 @endif
                             </td>
@@ -141,7 +141,7 @@
                             <td class="text-center">
                                 @if(@$order->owner_id == Auth::user()->id && $order->status == "Pending")
                                     <a href="{{route('user.order.onHold',$order->id)}}" data-toggle="tooltip" data-placement="top" title="On Hold"><i class="icon-pencil7"></i></a>
-                                @elseif($order->status == "onHold")
+                                @elseif(@$order->owner_id != Auth::user()->id && $order->status == "onHold")
                                     <a href="{{route('user.order.rejected',$order->id)}}" data-toggle="tooltip" data-placement="top" title="Rejected" style="color:red;"><i class="icon-delete"></i></a>
                                     <a href="{{route('user.order.completed',$order->id)}}" data-toggle="tooltip" data-placement="top" title="Completed"><i class="icon-check"></i></a>
                                 @endif

@@ -83,6 +83,9 @@ class Package extends Model
         'renew_for_purchase_all',
         'renew_monthly_draw',
         'renew_company_products',
+        'is_associate',
+        'is_renew',
+        'for_stock',
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveAImage($value,'/package/');

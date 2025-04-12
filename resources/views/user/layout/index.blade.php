@@ -87,7 +87,7 @@
 			<a href="{{url('/')}}">
 				<button type="button" class="btn btn-primary ml-md-3">Go-to Product</button>
 			</a>
-			<a href="{{route('product.user',Auth::user()->id)}}">
+			<a href="{{route('product.user',str_replace(' ', '_',Auth::user()->name))}}">
 				<button type="button" class="btn btn-warning ml-md-3">Go-to Profile</button>
 			</a>
 			<button type="button" class="btn btn-danger ml-md-3 ">

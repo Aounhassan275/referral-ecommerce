@@ -23,6 +23,7 @@
                             <option value="Balance Transfer">Balance Transfer</option>
                             <option value="Withdraw">Withdraw</option>
                             <option value="Post Sale">Post Sale</option>
+                            <option value="Stock Purchase">Stock Purchase</option>
                         </select>                        
                     </div>
                         <div class="form-group col-3">

@@ -16,6 +16,18 @@
                 <form action="{{route('admin.package.update',$package->id)}}" method="post" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
+                    <div class="row">
+                         <div class="form-group col-6">
+                             <label class="form-label">Renewal Package</label><br>
+                             <input type="radio" name="is_renew" {{$package->is_renew ? 'checked' : ''}}  value="1"> Yes
+                             <input type="radio" name="is_renew" {{!$package->is_renew ? 'checked' : ''}}  value="0"> No
+                         </div>
+                         <div class="form-group col-6">
+                             <label class="form-label">Associate Package</label><br>
+                             <input type="radio" name="is_associate" {{$package->is_associate ? 'checked' : ''}} value="1"> Yes
+                             <input type="radio" name="is_associate" {{!$package->is_associate ? 'checked' : ''}} value="0"> No
+                         </div>
+                    </div>
                    <div class="row">
                         <div class="form-group col-4">
                             <label class="form-label">Package Name</label>
@@ -146,6 +158,10 @@
                             <label class="form-label">Self Loan Limit</label>
                             <input type="number" class="form-control" name="self_loan_limit"  placeholder="Self Loan Limit" value="{{$package->self_loan_limit}}">
                         </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">For Stock</label>
+                            <input type="number" class="form-control" name="for_stock"  placeholder="For Stock" value="{{$package->for_stock}}">
+                        </div>
                    </div>
                    <div class="row">
                         <div class="form-group col-6">
@@ -258,7 +274,7 @@
                         </div>
                    </div>
                    <hr>
-                   <div class="row">
+                   {{-- <div class="row">
                         <div class="col-12">
                             <p><strong>Renew Fields</strong></p>
                         </div>
@@ -345,23 +361,7 @@
                         <div class="form-group col-3">
                             <label class="form-label">Renew Company Income</label>
                             <input type="number" class="form-control" name="renew_company_income"  placeholder="Renew Company Income" value="{{$package->renew_company_income}}">
-                        </div>                 
-                        {{-- <div class="form-group col-4">
-                            <label class="form-label">Starter Package Income</label>
-                            <input type="text" name="renew_starter_package_income" class="form-control" value="{{$package->renew_starter_package_income}}" placeholder="Starter Package Income">
-                        </div>
-                        <div class="form-group col-4">
-                            <label class="form-label">Seller Package Income</label>
-                            <input type="text" name="renew_seller_package_income" class="form-control" value="{{$package->seller_package_income}}" placeholder="Seller Package Income">
-                        </div>
-                        <div class="form-group col-4">
-                            <label class="form-label">Salary Package Income</label>
-                            <input type="text" name="renew_salary_package_income" class="form-control" value="{{$package->renew_salary_package_income}}" placeholder="Salary Package Income">
-                        </div>
-                        <div class="form-group col-3">
-                            <label class="form-label">Brand Package Income</label>
-                            <input type="text" name="renew_brand_package_income" class="form-control" value="{{$package->renew_brand_package_income}}" placeholder="Brand Package Income">
-                        </div> --}}
+                        </div>       
                         <div class="form-group col-3">
                             <label class="form-label">New Account Income</label>
                             <input type="text" name="renew_company_new_account_income" class="form-control" value="{{$package->renew_company_new_account_income}}" placeholder="New Account Income">
@@ -402,7 +402,7 @@
                             <label class="form-label">Company Products</label>
                             <input type="text" name="renew_company_products" class="form-control" value="{{$package->renew_company_products}}" placeholder="Company Products">
                         </div>
-                   </div>
+                   </div> --}}
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>

@@ -24,6 +24,7 @@
                         <th style="width:auto;">Withdraw Limit</th>
                         <th style="width:auto;">Fund Limit</th>
                         <th style="width:auto;">Product Limit</th>
+                        <th style="width:auto;">Type</th>
                         <th style="width:auto;">Action</th>
                         <th style="width:auto;">Action</th>
                     </tr>
@@ -40,6 +41,15 @@
                         <td>{{$package->withdraw_limit}}</td>
                         <td>{{$package->fund_limit}}</td>
                         <td>{{$package->product_limit}}</td>
+                        <td>
+                            @if($package->is_renew)
+                                <span class="badge badge-info">Renew</span>
+                            @elseif($package->is_associate)
+                                <span class="badge badge-primary">Associate</span>
+                            @else
+                                <span class="badge badge-success">Normal</span>
+                            @endif
+                        </td>
                         <td class="table-action">
                             <a href="{{route('admin.package.edit',$package->id)}}"><i class="align-middle" data-feather="edit-2"></i></a>
                         </td>

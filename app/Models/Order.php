@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'product_id','price','address','user_id','status','owner_id','image','payment_option'
+        'product_id','price','address','user_id','status','owner_id','image','payment_option','total_amount'
     ];
     
     public function setImageAttribute($value){

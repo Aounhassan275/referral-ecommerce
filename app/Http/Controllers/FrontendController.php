@@ -140,18 +140,18 @@ class FrontendController extends Controller
         if($request->keyword)
         {
             $products = Product::where('city_id',$city->id)->paginate(12);
-            $brand_ids = Product::where('city_id',$city->id)->get()->pluck('brand_id')->toArray();
-            $brand_ids = array_unique($brand_ids);
-            $brands = Brand::whereIn('id',$brand_ids)->where('name', 'LIKE', '%'.$request->keyword.'%')->orderBy('name','ASC')->paginate(12);;
+            $category_ids = Product::where('city_id',$city->id)->get()->pluck('category_id')->toArray();
+            $category_ids = array_unique($category_ids);
+            $categories = Category::whereIn('id',$category_ids)->where('name', 'LIKE', '%'.$request->keyword.'%')->orderBy('name','ASC')->paginate(12);;
             // $brands_id = Brand::where('name', 'LIKE', '%'.$request->keyword.'%')->get()->pluck('id')->toArray();
             // $products = Product::where('city_id',$city->id)->whereIn('brand_id',$brands_id)->paginate(12);
         }else{
             $products = Product::where('city_id',$city->id)->paginate(12);
-            $brand_ids = Product::where('city_id',$city->id)->get()->pluck('brand_id')->toArray();
-            $brand_ids = array_unique($brand_ids);
-            $brands = Brand::whereIn('id',$brand_ids)->orderBy('name','ASC')->paginate(12);;
+            $category_ids = Product::where('city_id',$city->id)->get()->pluck('category_id')->toArray();
+            $category_ids = array_unique($category_ids);
+            $categories = Category::whereIn('id',$category_ids)->orderBy('name','ASC')->paginate(12);;
         }
-        return view('front.city.show',compact('city','products','brands'));
+        return view('front.city.show',compact('city','products','categories'));
     }
     public function showProductCityDetails($brand_name,$city_name,Request $request)
     {

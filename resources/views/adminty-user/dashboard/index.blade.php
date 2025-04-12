@@ -83,7 +83,7 @@ DASHBOARD
                 class="feather icon-pie-chart bg-c-blue card1-icon"
               ></i>
               <span class="text-c-blue f-w-600"
-                >DIRECT REWARD</span
+                >DIRECT</span
               >
               <h4>PKR {{Auth::user()->directIncome->sum('price')}}</h4>
               <div>
@@ -91,7 +91,7 @@ DASHBOARD
                   <i
                     class="text-c-blue f-16 feather icon-alert-triangle m-r-10"
                   ></i
-                  >Direct Reword on Work</span
+                  >Reword on Work</span
                 >
               </div>
             </div>
@@ -409,7 +409,7 @@ DASHBOARD
               <div class="card-header-left">
                 <h5>STAR RANK</h5>
                 <p class="p-t-10 m-b-0 text-c-yellow">
-                  Extra Company Reword
+                  Extra Reword
                 </p>
               </div>
             </div>
@@ -422,7 +422,7 @@ DASHBOARD
                 <i
                   class="feather icon-arrow-up f-30 text-c-green"
                 ></i>
-                <span class="f-right bg-c-yellow">X 23</span>
+                <span class="f-right bg-c-yellow">0</span>
               </div>
             </div>
           </div>
@@ -438,7 +438,7 @@ DASHBOARD
               <div class="row align-items-center">
                 <div class="col">
                   <label class="label label-success">
-                    35%
+                    60%
                     <i
                       class="m-l-10 feather icon-arrow-down"
                     ></i>
@@ -451,7 +451,7 @@ DASHBOARD
               <div class="progress m-t-15">
                 <div
                   class="progress-bar bg-c-green"
-                  style="width: 35%"
+                  style="width: 60%"
                 ></div>
               </div>
             </div>
@@ -477,7 +477,7 @@ DASHBOARD
               <div class="progress m-t-15">
                 <div
                   class="progress-bar bg-c-lite-green"
-                  style="width: 28%"
+                  style="width: 100%"
                 ></div>
               </div>
             </div>
@@ -503,7 +503,7 @@ DASHBOARD
               <div class="progress m-t-15">
                 <div
                   class="progress-bar bg-c-pink"
-                  style="width: 87%"
+                  style="width: 100%"
                 ></div>
               </div>
             </div>
@@ -518,7 +518,7 @@ DASHBOARD
               <div class="row align-items-center">
                 <div class="col">
                   <label class="label label-warning">
-                    35%
+                    100%
                     <i class="m-l-10 feather icon-arrow-up"></i>
                   </label>
                 </div>
@@ -529,7 +529,7 @@ DASHBOARD
               <div class="progress m-t-15">
                 <div
                   class="progress-bar bg-c-yellow"
-                  style="width: 32%"
+                  style="width: 100%"
                 ></div>
               </div>
             </div>
@@ -542,7 +542,7 @@ DASHBOARD
         <div class="col-xl-3 col-md-6">
           <div class="card text-center text-white bg-c-green">
             <div class="card-block">
-              <h6 class="m-b-0">PURCHASE 1 to 9999</h6>
+              <h6 class="m-b-0">IF BUY 1 to 9999</h6>
               <h4 class="m-t-10 m-b-10">
                 <i class="feather icon-arrow-up m-r-15"></i>PKR {{ App\Models\CompanyAccount::where('name','For Purchase All Account')->first() ? App\Models\CompanyAccount::where('name','For Purchase All Account')->first()->balance / 4 : 0}}
               </h4>
@@ -553,7 +553,7 @@ DASHBOARD
         <div class="col-xl-3 col-md-6">
           <div class="card text-center text-white bg-c-pink">
             <div class="card-block">
-              <h6 class="m-b-0">PURCHASE 10000 to 29999</h6>
+              <h6 class="m-b-0">IF BUY 10000 to 29999</h6>
               <h4 class="m-t-10 m-b-10">
                 <i class="feather icon-arrow-up m-r-15"></i>PKR {{ App\Models\CompanyAccount::where('name','For Purchase All Account')->first() ? App\Models\CompanyAccount::where('name','For Purchase All Account')->first()->balance / 4 : 0}}
               </h4>
@@ -566,7 +566,7 @@ DASHBOARD
             class="card text-center text-white bg-c-lite-green"
           >
             <div class="card-block">
-              <h6 class="m-b-0">PURCHASE 30000 to 59999</h6>
+              <h6 class="m-b-0">IF BUY 30000 to 59999</h6>
               <h4 class="m-t-10 m-b-10">
                 <i class="feather icon-arrow-up m-r-15"></i>PKR {{ App\Models\CompanyAccount::where('name','For Purchase All Account')->first() ? App\Models\CompanyAccount::where('name','For Purchase All Account')->first()->balance / 4 : 0}}
               </h4>
@@ -577,7 +577,7 @@ DASHBOARD
         <div class="col-xl-3 col-md-6">
           <div class="card text-center text-white bg-c-yellow">
             <div class="card-block">
-              <h6 class="m-b-0">PURCHASE 60000 to 99999</h6>
+              <h6 class="m-b-0">IF BUY 60000 to 99999</h6>
               <h4 class="m-t-10 m-b-10">
                 <i class="feather icon-arrow-up m-r-15"></i>PKR {{ App\Models\CompanyAccount::where('name','For Purchase All Account')->first() ? App\Models\CompanyAccount::where('name','For Purchase All Account')->first()->balance / 4 : 0}}
               </h4>
@@ -718,11 +718,10 @@ DASHBOARD
         <div class="col-xl-3 col-md-6">
           <div class="card bg-c-yellow order-card">
             <div class="card-block">
-              <h6>MY STOCK</h6>
-              <h2>PKR 0</h2>
+              <h6>FOR STOCK</h6>
+              <h2>PKR {{Auth::user()->for_stock}}</h2>
               <p class="m-b-0">
-                Purchase from the Company
-                <i class="feather icon-arrow-up m-l-10"></i>
+                Purchase from Company
               </p>
               <i class="card-icon feather icon-filter"></i>
             </div>
@@ -731,13 +730,10 @@ DASHBOARD
         <div class="col-xl-3 col-md-6">
           <div class="card bg-c-blue order-card">
             <div class="card-block">
-              <h6>STOCK R.O.I</h6>
-              <h2>PKR 0</h2>
+              <h6>BUY NOW</h6>
+              <h2>PKR {{Auth::user()->stockBalance()}}</h2>
               <p class="m-b-0">
-                Reward on Purchase in R.O.I
-                <i
-                  class="feather icon-arrow-up m-l-10 m-r-10"
-                ></i>
+                Amount to Purchase
               </p>
               <i class="card-icon feather icon-users"></i>
             </div>
@@ -746,13 +742,10 @@ DASHBOARD
         <div class="col-xl-3 col-md-6">
           <div class="card bg-c-green order-card">
             <div class="card-block">
-              <h6>GET R.O.I</h6>
+              <h6>GET REWARD</h6>
               <h2>PKR 0</h2>
               <p class="m-b-0">
-                Get Total R.O.I
-                <i
-                  class="feather icon-arrow-up m-l-10 m-r-10"
-                ></i>
+                Total Reward
               </p>
               <i class="card-icon feather icon-radio"></i>
             </div>
@@ -761,11 +754,10 @@ DASHBOARD
         <div class="col-xl-3 col-md-6">
           <div class="card bg-c-yellow order-card">
             <div class="card-block">
-              <h6>STOCK REWORD</h6>
-              <h2>PKR 0</h2>
+              <h6>FOR REWORD</h6>
+              <h2>PKR {{Auth::user()->stockPendingForAdmin()}}</h2>
               <p class="m-b-0">
-                EXTRA % ON DELIVERY
-                <i class="feather icon-arrow-up m-l-10"></i>
+                PENDING AMOUNT
               </p>
               <i class="card-icon feather icon-filter"></i>
             </div>
@@ -779,11 +771,11 @@ DASHBOARD
               <div class="row align-items-center">
                 <div class="col-auto">
                   <i
-                    class="feather icon-shopping-cart f-34 text-c-blue social-icon"
+                    class="feather icon-shopping-cart f-34 text-c-white"
                   ></i>
                 </div>
                 <div class="col">
-                  <h6 class="m-b-0">TOTAL PURCHASE</h6>
+                  <h6 class="m-b-0">PURCHASE</h6>
                   <p>PKR {{Auth::user()->fundReceived()}}</p>
                   <p class="m-b-0"></p>
                 </div>
@@ -800,11 +792,11 @@ DASHBOARD
               <div class="row align-items-center">
                 <div class="col-auto">
                   <i
-                    class="feather icon-check-circle f-34 text-c-pink social-icon"
+                    class="feather icon-check-circle f-34 text-c-white"
                   ></i>
                 </div>
                 <div class="col">
-                  <h6 class="m-b-0">TOTAL SALES</h6>
+                  <h6 class="m-b-0">SALES</h6>
                   <p>PKR 0</p>
                   <p class="m-b-0"></p>
                 </div>
@@ -821,11 +813,11 @@ DASHBOARD
               <div class="row align-items-center">
                 <div class="col-auto">
                   <i
-                    class="feather icon-award f-34 text-c-green social-icon"
+                    class="feather icon-award f-34 text-c-white"
                   ></i>
                 </div>
                 <div class="col">
-                  <h6 class="m-b-0">TOTAL TRANSFER</h6>
+                  <h6 class="m-b-0">TRANSFER</h6>
                   <p>PKR {{Auth::user()->fundTransfer()}}</p>
                   <p class="m-b-0"></p>
                 </div>
@@ -842,11 +834,11 @@ DASHBOARD
               <div class="row align-items-center">
                 <div class="col-auto">
                   <i
-                    class="feather icon-download f-34 text-c-blue social-icon"
+                    class="feather icon-download f-34 text-c-white"
                   ></i>
                 </div>
                 <div class="col">
-                  <h6 class="m-b-0">TOTAL WITHDRAWAL</h6>
+                  <h6 class="m-b-0">WITHDRAW</h6>
                   <p>PKR {{Auth::user()->completedWithdraw()}}</p>
                   <p class="m-b-0"></p>
                 </div>
@@ -870,7 +862,7 @@ DASHBOARD
                 </div>
                 <div class="col-auto">
                   <h6 class="text-muted m-b-10">
-                    TOTAL ORDERS
+                    ALL ORDERS
                   </h6>
                   <h2 class="m-b-0">{{Auth::user()->orders->count()}}</h2>
                 </div>
@@ -889,7 +881,7 @@ DASHBOARD
                 </div>
                 <div class="col-auto">
                   <h6 class="text-muted m-b-10">
-                    PENDING ORDERS
+                    PENDING 
                   </h6>
                   <h2 class="m-b-0">{{Auth::user()->orders->where('status','onHold')->count()}}</h2>
                 </div>
@@ -908,7 +900,7 @@ DASHBOARD
                 </div>
                 <div class="col-auto">
                   <h6 class="text-muted m-b-10">
-                    COMPLETE ORDERS
+                    COMPLETE 
                   </h6>
                   <h2 class="m-b-0">{{Auth::user()->orders->where('status','Completed')->count()}}</h2>
                 </div>
@@ -927,7 +919,7 @@ DASHBOARD
                 </div>
                 <div class="col-auto">
                   <h6 class="text-muted m-b-10">
-                    REJECTED ORDERS
+                    REJECTED 
                   </h6>
                   <h2 class="m-b-0">{{Auth::user()->orders->where('status','Rejected')->count()}}</h2>
                 </div>
