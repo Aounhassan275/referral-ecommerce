@@ -64,6 +64,19 @@ class ReferralIncome
         $user->update([
             'for_stock' => $user->for_stock +  $for_stock
         ]);
+        if($refer_by){
+            $direct_for_stock = $package->price / 100 * $package->direct_for_stock;
+            $refer_by->update([
+                'direct_for_stock' => $refer_by->for_stock +  $direct_for_stock
+            ]);
+            Earning::create([
+                'price' => $direct_for_stock,
+                'user_id' => $refer_by->id,
+                'due_to' => $user->id,
+                'type' => 'direct_for_stock'
+            ]);
+
+        }
         return true;
     } 
     public static  function FakeAccount($fake_account,$user)
@@ -409,7 +422,7 @@ class ReferralIncome
             'type' => 'self_renew_income'
         ]);
         $user->update([
-            'community_pool' => $user->community_pool + $self_rebirth,
+            'for_renew' => $user->for_renew + $self_rebirth,
         ]);
         $direct_rebirth = $price / 100 * $package->direct_rebirth;
         info("Direct Renew Amount : $direct_rebirth");
@@ -420,7 +433,7 @@ class ReferralIncome
             'type' => 'direct_renew_income'
         ]);
         $referBy->update([
-            'community_pool' => $referBy->community_pool + $direct_rebirth,
+            'for_renew' => $referBy->for_renew + $direct_rebirth,
         ]);
         $self_associate = $price / 100 * $package->self_associate;
         info("Self Associate Amount : $self_associate");

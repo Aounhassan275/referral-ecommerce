@@ -24,6 +24,9 @@
                     <div class="col-3">
                         <a href="{{url('admin/create_associate_account')}}" class="btn btn-warning" style="margin-top:10px;">Create Associate Account</a>
                     </div>
+                    <div class="col-3">
+                        <a href="{{url('admin/renew_account')}}" class="btn btn-primary" style="margin-top:10px;">Renew Account</a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">

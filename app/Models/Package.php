@@ -86,6 +86,7 @@ class Package extends Model
         'is_associate',
         'is_renew',
         'for_stock',
+        'direct_for_stock',
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveAImage($value,'/package/');

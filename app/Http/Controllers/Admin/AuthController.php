@@ -196,4 +196,37 @@ class AuthController extends Controller
         toastr()->success('Associated User Created Successfully');
         return back();
     }
+    public function renew_account()
+    {
+        $package = Package::where('is_renew',1)->first();
+        if($package){
+            $users = User::where('for_renew','>',$package->price)
+                ->where('status','active')
+                ->whereNotNull('package_id')
+                ->get();
+            foreach($users as $user){
+                DB::beginTransaction();
+                try{
+                    $user->update([
+                        'package_id' => $package->id,
+                        'for_renew' => $user->for_renew -= $package->price,    
+                    ]);     
+                    $status = RenewReferralIncome::referral($user);
+                    if($status == false)
+                    {
+                        DB::rollBack();
+                    } 
+                    DB::commit();
+                }catch (Exception $e)
+                {
+                    DB::rollBack();
+                    toastr()->error($e->getMessage());
+                    return redirect()->back();
+                }
+            }
+        }
+		info("Renew Account CRONJOB END AT " . date("d-M-Y h:i a"));
+        toastr()->success('Renew Account Created Successfully');
+        return back();
+    }
 }

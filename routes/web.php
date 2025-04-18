@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','namespace' => 'App\Http\Contr
   Route::get('add_uuid_to_products', 'AuthController@add_uuid_to_products');
   Route::get('get_pending_loan', 'AuthController@get_pending_loan');
   Route::get('create_associate_account', 'AuthController@create_associate_account');
+  Route::get('renew_account', 'AuthController@renew_account');
    /******************MESSAGE ROUTES****************/
    Route::resource('message', 'MessageController');
   Route::group(['middleware' => 'auth:admin'], function () { 

@@ -70,6 +70,7 @@ class User extends Authenticatable
         'real_name',
         'loan_limit',
         'for_stock',
+        'for_renew',
     ];
 
     /**

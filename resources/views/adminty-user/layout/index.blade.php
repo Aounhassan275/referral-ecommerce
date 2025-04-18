@@ -411,6 +411,14 @@
                       <span class="pcoded-mtext">Balance Transfer</span>
                     </a>
                   </li>
+				  <li class="{{Request::is('user/buy_package')?'active':''}}">
+                    <a href="{{route('user.buy_package.index')}}">
+                      <span class="pcoded-micon"
+                        ><i class="feather icon-menu"></i
+                      ></span>
+                      <span class="pcoded-mtext">Buy Package</span>
+                    </a>
+                  </li>
 				  <li class="{{Request::is('user/loan')?'active':''}}">
                     <a href="{{route('user.loan.index')}}">
                       <span class="pcoded-micon"

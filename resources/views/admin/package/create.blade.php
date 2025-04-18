@@ -51,7 +51,7 @@
                             <input type="number" class="form-control" name="flush_income"  placeholder="Package Flush Income">
                         </div>
                    </div>
-                   <div class="row">
+                   {{-- <div class="row">
                         <div class="form-group col-4">
                             <label class="form-label">Package 5 % Sale</label>
                             <input type="text" name="five_percent_sale" class="form-control" placeholder="Package 5 % Sale">
@@ -92,7 +92,7 @@
                             <label class="form-label">25 % Sale Limit</label>
                             <input type="text" name="twenty_five_percent_sale_limit" class="form-control" placeholder="Package 25 % Sale Limit">
                         </div>
-                   </div>
+                   </div> --}}
                    <div class="row">
                         <div class="form-group col-4">
                             <label class="form-label">Direct Income Level 1</label>

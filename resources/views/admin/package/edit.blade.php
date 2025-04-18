@@ -52,7 +52,7 @@
                             <input type="number" class="form-control" name="flush_income"  placeholder="Package Flush Income" value="{{$package->flush_income}}">
                         </div>
                    </div>
-                   <div class="row">
+                   {{-- <div class="row">
                         <div class="form-group col-4">
                             <label class="form-label">Package 5 % Sale</label>
                             <input type="text" name="five_percent_sale" class="form-control" value="{{$package->five_percent_sale}}" placeholder="Package 5 % Sale">
@@ -93,7 +93,7 @@
                             <label class="form-label">25 % Sale Limit</label>
                             <input type="text" name="twenty_five_percent_sale_limit" class="form-control" value="{{$package->twenty_five_percent_sale_limit}}" placeholder="Package 25 % Sale Limit">
                         </div>
-                   </div>
+                   </div> --}}
                    <div class="row">
                         <div class="form-group col-4">
                             <label class="form-label">Direct Income Level 1</label>
@@ -161,6 +161,10 @@
                         <div class="form-group col-4">
                             <label class="form-label">For Stock</label>
                             <input type="number" class="form-control" name="for_stock"  placeholder="For Stock" value="{{$package->for_stock}}">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Direct For Stock</label>
+                            <input type="number" class="form-control" name="direct_for_stock"  placeholder="For Stock" value="{{$package->direct_for_stock}}">
                         </div>
                    </div>
                    <div class="row">
