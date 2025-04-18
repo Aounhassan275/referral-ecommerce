@@ -283,6 +283,8 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'App\Http\Control
   Route::resource('loan', 'LoanController');  
   /******************STOCK ROUTES****************/
   Route::resource('stock', 'StockController');  
+  /******************BUY PACKAGE ROUTES****************/
+  Route::resource('buy_package', 'BuyPackageController');  
   /******************EVENT ROUTES****************/
   Route::resource('user_special', 'UserSpecialController');  
   Route::resource('user_main_section', 'UserMainSectionController');  
@@ -297,7 +299,7 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'App\Http\Control
 /******************FRONTEND ROUTES****************/
 Route::view('test', 'front.layout.test');
 Route::get('home', 'App\Http\Controllers\FrontendController@home')->name('home');
-Route::get('/', 'App\Http\Controllers\FrontendController@showCountries')->name('new_home');
+Route::get('/', 'App\Http\Controllers\ServiceFrontendController@showCountries')->name('new_home');
 Route::get('categories', 'App\Http\Controllers\FrontendController@showCategory')->name('category.index');
 Route::get('category/{name}', 'App\Http\Controllers\FrontendController@showCategoryDetails')->name('category.show');
 Route::get('brands', 'App\Http\Controllers\FrontendController@showBrands')->name('brand.index');

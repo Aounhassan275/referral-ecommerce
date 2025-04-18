@@ -70,10 +70,10 @@
                         </div>
                         <div class="col-7 search-info-content" aria-hidden="true" tabindex="-1" data-prevent-quick-search-close>
                             <!-- snippet location forms_search -->
-                            <form class="sb-searchpro" action="https://sb-revo.mybigcommerce.com/search.php">
+                            <form class="sb-searchpro" action="products">
                                 <fieldset class="form-fieldset">
                                     <div class="input-group">
-                                        <input class="form-control form-input" data-search-quick name="search_query" id="search_query" data-error-message="Search field cannot be empty." placeholder="Search the store" autocomplete="off">
+                                        <input class="form-control form-input" value="{{@request()->keyword}}" name="keyword" id="keyword" data-error-message="Search field cannot be empty." placeholder="Search the store" autocomplete="off">
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" id="btn-quickSearch" type="submit"><i class="fa fa-search"></i></button>
                                         </div>

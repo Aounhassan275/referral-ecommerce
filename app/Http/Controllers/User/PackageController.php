@@ -28,4 +28,8 @@ class PackageController extends Controller
     {
       return view($this->directory.'.package.history');
     }
+    public function buyPackages()
+    {
+      
+    }
 }
