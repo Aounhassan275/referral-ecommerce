@@ -219,7 +219,7 @@
                                     </li>
                                     @endif
                                     <li class="navUser-item">
-                                        <a class="navUser-action " href="{{url('/')}}" >
+                                        <a class="navUser-action " href="{{url('countries')}}" >
                                             <i class="fa fa-user"></i> Products 
                                         </a>
                                     </li>
@@ -245,6 +245,9 @@
                             <span class="mobileMenu-close fa fa-times"></span>
                             <ul class="navPages-list">
                                 <li class="navPages-item ">
+                                    <a class="navPages-action" href="{{url('/')}}"> Home </a>
+                                </li>
+                                <li class="navPages-item ">
                                     <a class="navPages-action" href="{{url('services')}}"> Services </a>
                                 </li>
                                 <li class="navPages-item ">
@@ -257,7 +260,7 @@
                                     <a class="navPages-action" href="{{url('service_cities')}}"> Cities </a>
                                 </li>
                                 <li class="navPages-item ">
-                                    <a class="navPages-action" href="{{url('our_service')}}"> Service Provider </a>
+                                    <a class="navPages-action" href="{{url('our_service')}}"> Providers </a>
                                 </li>
                             </ul>
                         </nav>

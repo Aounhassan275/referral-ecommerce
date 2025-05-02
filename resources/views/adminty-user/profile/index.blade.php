@@ -10,7 +10,6 @@ UPDATE YOUR OWN PROFILE
 <script src="{{asset('user_asset/global_assets/js/demo_pages/editor_summernote.js')}}"></script>
 @endsection
 @section('contents')
-
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -371,75 +370,7 @@ UPDATE YOUR OWN PROFILE
     </div>
 </div>
 @if (Auth::user()->package)
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header header-elements-inline">
-                <h5 class="card-title">Department</h5>
-                <div class="header-elements">
-                    <div class="list-icons">
-                        <a class="list-icons-item" data-action="collapse"></a>
-                        <a class="list-icons-item" data-action="reload"></a>
-                        <a class="list-icons-item" data-action="remove"></a>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="card-body">
-                
-                @if(App\Models\Special::where('user_id',Auth::user()->id)->count() < 5)
-                <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <button data-toggle="modal" data-target="#create-modal"
-                            class="btn btn-primary float-right">Create Department</button>
-                        
-                    </div>
-                </div>
-                @endif
-                <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Sr#</th>
-                                        <th>Title</th>
-                                        <th>Heading</th>
-                                        <th>Image</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-                                    </tr> 
-                                </thead>
-                                <tbody>
-                                    @foreach (App\Models\Special::where('user_id',Auth::user()->id)->get() as $key => $special)
-                                    <tr> 
-                                        <td>{{$key+1}}</td>
-                                        <td>{{$special->title}}</td>
-                                        <td>{{$special->heading}}</td>
-                                        <td>
-                                            <img src="{{asset($special->image)}}" height="50" width="50" alt="">
-                                        </td>
-                                        <td>{{$special->description}}</td>
-                                        <td>
-                                            <button data-toggle="modal" data-target="#edit_modal"
-                                                description="{{$special->description}}" 
-                                                heading="{{$special->heading}}" 
-                                                id="{{$special->id}}" title="{{$special->title}}" 
-                                                class="edit-btn btn btn-primary">Edit</button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -633,6 +564,75 @@ UPDATE YOUR OWN PROFILE
                                 </tbody>
                             </table>
                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Department</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card-body">
+                
+                @if(App\Models\Special::where('user_id',Auth::user()->id)->count() < 5)
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <button data-toggle="modal" data-target="#create-modal"
+                            class="btn btn-primary float-right">Create Department</button>
+                        
+                    </div>
+                </div>
+                @endif
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sr#</th>
+                                        <th>Title</th>
+                                        <th>Heading</th>
+                                        <th>Image</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    @foreach (App\Models\Special::where('user_id',Auth::user()->id)->get() as $key => $special)
+                                    <tr> 
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$special->title}}</td>
+                                        <td>{{$special->heading}}</td>
+                                        <td>
+                                            <img src="{{asset($special->image)}}" height="50" width="50" alt="">
+                                        </td>
+                                        <td>{{$special->description}}</td>
+                                        <td>
+                                            <button data-toggle="modal" data-target="#edit_modal"
+                                                description="{{$special->description}}" 
+                                                heading="{{$special->heading}}" 
+                                                id="{{$special->id}}" title="{{$special->title}}" 
+                                                class="edit-btn btn btn-primary">Edit</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            
+
                         </div>
                     </div>
                 </div>

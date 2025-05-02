@@ -110,7 +110,7 @@
 								</div>
 							@else 
 								<div class="bar-tab__item">
-									<a class="cart-button cart-button--primary" href="{{url('/')}}">
+									<a class="cart-button cart-button--primary" href="{{url('countries')}}">
 										<i class="fa fa-home bar-icon"></i>
 										<span class="tab-label">Home </span>
 									</a>
@@ -133,7 +133,7 @@
                                     <span class="mobileMenu-close fa fa-times"></span>
                                     <ul class="navPages-list">
                                         <li class="navPages-item navPages-item-page">
-                                            <a class="navPages-action" href="{{url('/')}}"> Home</a>
+                                            <a class="navPages-action" href="{{url('countries')}}"> Home</a>
                                         </li>
                                         <li class="navPages-item ">
                                             <a class="navPages-action" href="{{url('categories')}}"> Category </a>
@@ -258,7 +258,7 @@
                             <span class="mobileMenu-close fa fa-times"></span>
                             <ul class="navPages-list">
                                 <li class="navPages-item navPages-item-page">
-                                    <a class="navPages-action" href="{{url('/')}}"> Home</a>
+                                    <a class="navPages-action" href="{{url('countries')}}"> Home</a>
                                 </li>
                                 <li class="navPages-item ">
                                     <a class="navPages-action" href="{{url('categories')}}"> Category </a>
@@ -287,7 +287,7 @@
                                 <use xlink:href="#icon-headset_mic"></use>
                             </svg>
                             <div class="navbar-phone__inner">
-                                <strong>Call us now : </strong> <span class="phone">{{App\Models\Setting::phone()}}</span>
+                                <strong>Call us now : </strong> <span class="phone">{{App\Models\Setting::phone()}} </span>
                                 <br> <span> Email : </span>
                                 <a href="mailto:{{App\Models\Setting::phone()}}"> {{App\Models\Setting::email()}}</a>
                             </div>

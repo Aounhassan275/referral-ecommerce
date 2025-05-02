@@ -130,6 +130,9 @@
     <!-- ======= Featured Services Section ======= -->
     <section id="featured-services" class="featured-services">
       <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Services</h2>
+        </div>
 
         <div class="row">
           @foreach($userSpecials as $userSpecial)
@@ -152,10 +155,17 @@
       <div class="container" data-aos="zoom-in">
 
         <div class="text-center">
-          <h3>👉 Visit W-Linkup Now!</h3>
-          <p> W-Linkup: Your Ultimate Marketing Platform! 🌟 🚀 Promote Anything, Anytime! Looking for the best way to showcase your brand, product, or service? W-Linkup is here for you!</p>
-          <a class="cta-btn scrollto" href="#appointment">Share Website</a>
-          <a class="cta-btn scrollto" href="#appointment">Join now with us</a>
+          <h3>{{App\Models\Setting::visitTitle()}}</h3>
+          <p>{{App\Models\Setting::visitContent()}}</p>
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-5">
+              <input type="text" style="background-color: #3fbbc0;color:white;" class="form-control text-center" id="link_area"  value="{{route('product.user',str_replace(' ', '_',$user->name))}}"  readonly>
+
+            </div>
+          </div>
+          <button class=" copy-button cta-btn scrollto" type="button" data-clipboard-action="copy" data-clipboard-target="#link_area">Share Website</button>
+          <a class="cta-btn scrollto" href="{{url('user/register',$user->code)}}">Join now with us</a>
         </div>
 
       </div>
@@ -302,6 +312,9 @@
     <!-- ======= Features Section ======= -->
     <section id="features" class="features">
       <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Main Section</h2>
+        </div>
 
         <div class="row">
           <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-right">
@@ -771,7 +784,21 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('adminty-user-assets/js/main.js')}}"></script>
-
+  <script type="text/javascript" src="{{asset('clipboard.js')}}"></script>
+  <script type="text/javascript">
+    var clipboard = new Clipboard('.copy-button');
+          clipboard.on('success', function(e) {
+              copyText.select();
+              var $div2 = $("#coppied");
+              console.log($div2);
+              console.log($div2.is(":visible"));
+              if ($div2.is(":visible")) { return; }
+              $div2.show();
+              setTimeout(function() {
+                  $div2.fadeOut();
+              }, 800);
+          });
+  </script>
 
   <!-- Vendor JS Files for single product-->
    

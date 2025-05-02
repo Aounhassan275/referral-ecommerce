@@ -179,4 +179,10 @@ class Setting extends Model
     public static function dashboard(){
         return (new static)::where('name','Dashboard')->first()->value ?? 'simple';
     }
+    public static function visitContent(){
+        return (new static)::where('name','User Profile Visit Content')->first()->description ?? '👉 Visit W-Linkup Now!';
+    }
+    public static function visitTitle(){
+        return (new static)::where('name','User Profile Visit Title')->first()->description ?? '👉 Visit W-Linkup Now!';
+    }
 }

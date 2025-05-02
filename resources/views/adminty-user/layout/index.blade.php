@@ -152,9 +152,6 @@
                     <i class="feather icon-maximize full-screen"></i>
                   </a>
                 </li>
-                <li>
-                  <span class="badge badge-info">{{Auth::user()->type}}</span>
-                </li>
               </ul>
               <ul class="nav-right">
                 <li class="header-notification">
@@ -192,11 +189,6 @@
                       <li>
                         <a href="{{route('user.user.index')}}">
                           <i class="feather icon-settings"></i> Settings
-                        </a>
-                      </li>
-                      <li>
-                        <a href="{{route('user.user.index')}}">
-                          <i class="feather icon-user"></i> Profile
                         </a>
                       </li>
                       <li>

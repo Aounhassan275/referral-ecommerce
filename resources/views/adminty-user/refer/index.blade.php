@@ -137,9 +137,9 @@ REFERRALS
                     <th>Placement</th>
                     <th>Type</th>
                     <th>Status</th>
-                    <th>Temp Income</th>
+                    {{-- <th>Temp Income</th>
                     <th>Cash Wallet</th>
-                    <th>Community Pool</th>
+                    <th>Community Pool</th> --}}
                     <th>Total Earning</th>
                     <th>Total Referral</th>
                     <th>Active Referral</th>
@@ -170,9 +170,9 @@ REFERRALS
                             @else
                             <span class="badge badge-danger">Pending</span>                                                      
                             @endif</td>
-                        <td>{{$user->total_income}}</td>
+                        {{-- <td>{{$user->total_income}}</td>
                         <td>{{$user->cash_wallet}}</td>
-                        <td>{{$user->community_pool}}</td>
+                        <td>{{$user->community_pool}}</td> --}}
                         <td>
                             {{$user->totalEarning()}}
                         </td>

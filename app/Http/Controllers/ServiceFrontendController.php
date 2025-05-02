@@ -143,7 +143,14 @@ class ServiceFrontendController extends Controller
     public function showServicesDetails($name)
     {
         $service = Service::where('name',str_replace('_', ' ',$name))->first();
-        $types = Type::where('service_id',$service->id)->orderBy('name','ASC')->paginate(12);
+        $types = Type::where('service_id',$service->id)->orderBy('name','ASC')->get();
+        $typeId = [];
+        foreach($types as $type){
+            if($type->users->count() > 0){
+                $typeId[] = $type->id;
+            }
+        }
+        $types = Type::whereIn('id',$typeId)->orderBy('name','ASC')->paginate(30);
         return view('front.services.show',compact('service','types'));
     }
     public function showServiceTypes(Request $request)
