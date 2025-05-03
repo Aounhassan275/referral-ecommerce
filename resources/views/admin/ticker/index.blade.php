@@ -17,7 +17,11 @@
                    @csrf
                    <div class="row">
                        
-                        <div class="form-group col-12">
+                        <div class="form-group col-3">
+                            <label class="form-label">Ticker Color</label>
+                            <input type="color" name="color" class="form-control" required>
+                        </div>
+                        <div class="form-group col-9">
                             <label class="form-label">Ticker Message</label>
                             <textarea name="message" id="" cols="100" rows="2" class="form-control"></textarea>
                         </div>
@@ -40,6 +44,7 @@
             <thead>
                 <tr>
                     <th style="width:auto;">Ticker Message</th>
+                    <th style="width:auto;">Ticker Color</th>
                     <th style="width:auto;">Action</th>
                 </tr>
             </thead>
@@ -47,6 +52,7 @@
                 @foreach (App\Models\Ticker::all() as $key => $ticker)
                 <tr> 
                     <td>{{$ticker->message}}</td>
+                    <td>{{$ticker->color}}</td>
                     <td class="table-action">
                         {{-- <a href="{{url('poll/delete',$package->id)}}"><i class="align-middle" data-feather="trash"></i></a> --}}
                         <form action="{{route('admin.ticker.destroy',$ticker->id)}}" method="POST">

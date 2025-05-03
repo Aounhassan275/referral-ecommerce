@@ -99,7 +99,7 @@
 
          <!-- Slide 1 -->
          @foreach($events as $event)
-         <div class="carousel-item active" style="background-image: url({{asset($event->image)}})">
+         <div class="carousel-item active" style="background-image: url({{asset($event->image)}});height:400px;width:auto;">
            <div class="container">
              <h2>{{$event->title}}</h2>
              <p>{{$event->description}}
@@ -125,6 +125,18 @@
   </section><!-- End Hero -->
   @endif
   <main id="main">
+    <div class="row">
+      <div class="col-md-12">
+        
+        <button type="button" style="width: 100%;" class="btn btn-info ">
+          <marquee>
+            @foreach (App\Models\Ticker::all() As $ticker )
+              <span style="background-color: {{$ticker->color}};">{{$ticker->message}}</span>
+            @endforeach
+          </marquee>
+      </button>
+      </div>
+    </div>
     @if($userSpecials->count() > 0)
 
     <!-- ======= Featured Services Section ======= -->

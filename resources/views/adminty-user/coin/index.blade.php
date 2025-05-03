@@ -42,8 +42,8 @@ COIN MARKET PLACE
     </div>
     <div class="card-block">
         <div class="dt-responsive table-responsive">
-    
-            <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                {!! App\Models\Setting::coinTables() !!}              
+            {{-- <table id="basic-btn" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
                         <th>
@@ -114,7 +114,7 @@ COIN MARKET PLACE
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
+            </table> --}}
         </div>
     </div>
 </div>

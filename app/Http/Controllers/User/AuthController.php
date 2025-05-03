@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 
 class AuthController extends Controller
@@ -98,6 +99,10 @@ class AuthController extends Controller
                     toastr()->error('Username  already exists');
                     return redirect()->back();
                 }
+                if (Str::contains($request->name, '_')) {
+                    toastr()->error('Username is invalid.');
+                    return redirect()->back();
+                } 
                 $new_user =  User::create([
                     'code' => uniqid(),
                     'verification' => uniqid(),

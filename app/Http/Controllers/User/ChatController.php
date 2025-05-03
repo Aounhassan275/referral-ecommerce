@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
 use App\Models\ChatMessage;
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
+    public $directory;
+    public function __construct(){
+        $this->directory = Helper::dashboard();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +24,7 @@ class ChatController extends Controller
      */
     public function index()
     {
-        return view('user.chat.index');
+        return view($this->directory.'.chat.index');
     }
     public function getUserChat()
     {
@@ -33,7 +38,7 @@ class ChatController extends Controller
         $user_ids = $chats->pluck('user_id')->toArray();
         $other_user_id = $chats->pluck('other_user_id')->toArray();
         $user_ids = array_merge($user_ids,$other_user_id);
-        $html = view('user.chat.partials.chat_index', compact('chats','user_ids'))->render();
+        $html = view($this->directory.'.chat.partials.chat_index', compact('chats','user_ids'))->render();
         return response()->json([
             'status' => true,
             'html' => $html,
@@ -49,12 +54,12 @@ class ChatController extends Controller
                 'status' => 'Read'
             ]);
         }
-        return view('user.chat.admin');
+        return view($this->directory.'.chat.admin');
     }
     public function chatWithUser($id)
     {
         $user = User::find($id);
-        return view('user.chat.user',compact('user'));
+        return view($this->directory.'.chat.user',compact('user'));
     }
 
     /**
@@ -107,7 +112,7 @@ class ChatController extends Controller
             ]);
         }
         
-        return view('user.chat.show')->with('chat',$chat);
+        return view($this->directory.'.chat.show')->with('chat',$chat);
     }
 
 

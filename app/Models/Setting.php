@@ -185,4 +185,7 @@ class Setting extends Model
     public static function visitTitle(){
         return (new static)::where('name','User Profile Visit Title')->first()->description ?? '👉 Visit W-Linkup Now!';
     }
+    public static function coinTables(){
+        return (new static)::where( 'name','Coin Table')->first()->description ?? '';
+    }
 }

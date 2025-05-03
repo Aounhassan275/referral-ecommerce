@@ -1,110 +1,381 @@
 @extends('adminty-user.layout.index')
-@section('contents')
-{{-- <div class="card"> --}}
-    {{-- <div class="card-header header-elements-inline">
-        <h5 class="card-title">View Your Chat With User</h5>
-        <div class="header-elements">
-            <div class="list-icons">
-                <button data-toggle="modal"  data-target="#create_modal" class="btn btn-success  float-right complete-btn" type="button">Create Chat</button>
-                <a class="list-icons-item" data-action="collapse"></a>
-                <a class="list-icons-item" data-action="reload"></a>
-                <a class="list-icons-item" data-action="remove"></a>
-            </div>
-        </div>
-    </div> --}}
+@section('styles')
 
-    {{-- <table class="table  datatable-basic datatable-row-basic">
-        <thead>
-            <tr>
-                <th>Sr#</th>
-                <th>User Image</th>
-                <th>User Name</th>
-                <th>User Email</th>
-                <th>Unread Messages</th>
-                <th>Action</th>
-            </tr> 
-        </thead>
-        <tbody>
-            @foreach ($chats as $key => $chat)
-            @if($chat->other_user_id == Auth::user()->id)
-            <tr> 
-                <td>{{$key+1}}</td>
-                <td><img src="{{asset($chat->user->image)}}" style="width:100px;height:auto;"></td>
-                <td>{{$chat->user->name}}</td>
-                <td>{{$chat->user->email}}</td>
-                <td>
-                    <button type="button" class="btn btn-primary btn-sm">{{$chat->messages->where('status','Unread')->count()}}</button>
-                </td>
-                <td>
-                    <a href="{{route('user.chat.show',$chat->id)}}">
-                        <button type="button" class="btn btn-success btn-sm">View</button>
-                    </a> 
-                </td>
-            </tr>
-            @else 
-            <tr> 
-                <td>{{$key+1}}</td>
-                <td><img src="{{asset(@$chat->member->image)}}" style="width:100px;height:auto;"></td>
-                <td>{{$chat->member->name}}</td>
-                <td>{{$chat->member->email}}</td>
-                <td>
-                    <button type="button" class="btn btn-primary btn-sm">{{$chat->messages->where('status','Unread')->count()}}</button>
-                </td>
-                <td>
-                    <a href="{{route('user.chat.show',$chat->id)}}">
-                        <button type="button" class="btn btn-success btn-sm">View</button>
-                    </a> 
-                </td>
-            </tr>
-            @endif
-            @endforeach
-        </tbody>
-    </table> --}}
-{{-- </div> --}}
-    <div id="chat-content">
-        
-    </div>
-    {{-- <div id="create_modal" class="modal fade">
-        <div class="modal-dialog">
-            <form action="{{route('user.chat.store')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title mt-0" id="myModalLabel">Create Chat</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Enter Your Message</label>
-                            <textarea name="message" id="" cols="30" rows="2" required class="form-control"></textarea>
-                        </div>  
-                        <div class="form-group">
-                            <label>Select User</label>
-                        
-                            <select data-placeholder="Enter 'as'" required name="other_user_id" id="other_user_id" class="form-control select-minimum " data-fouc>
-                                <option></option>
-                                <optgroup label="Members">
-                                    @foreach(App\Models\User::all() as $user)
-                                        @if(!in_array($user->id,$user_ids))
-                                        <option value="{{$user->id}}">{{$user->name}}</option>
-                                    @endif
-                                    @endforeach
-                                </optgroup>
-                            </select>
-                        
-                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}"  placeholder="Enter Course Price" class="form-control" required>
-                    
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
+<link rel="stylesheet" type="text/css" href="{{asset('adminty-assets/assets/icon/themify-icons/themify-icons.css')}}">
+
+<link rel="stylesheet" type="text/css" href="{{asset('adminty-assets/assets/icon/icofont/css/icofont.css')}}">
+<!-- feather Awesome -->
+<link rel="stylesheet" type="text/css" href="{{asset('adminty-assets/assets/icon/feather/css/feather.css')}}">
+
+@endsection
+@section('contents')
+<div class="page-wrapper">
+    <div id="main-chat" class="container-fluid">
+        <!-- Page-header start -->
+        <div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="page-header-title">
+                        <div class="d-inline">
+                            <h4>Chat API</h4>
+                            <span>lorem ipsum dolor sit amet, consectetur adipisicing
+                                elit</span>
+                        </div>
                     </div>
                 </div>
-            </form>
+                <div class="col-lg-4">
+                    <div class="page-header-breadcrumb">
+                        <ul class="breadcrumb-title">
+                            <li class="breadcrumb-item"  style="float: left;">
+                                <a href="../index.html"> <i class="feather icon-home"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item"  style="float: left;"><a href="#!">Pages</a>
+                            </li>
+                            <li class="breadcrumb-item"  style="float: left;"><a href="#!">Sample page</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div> --}}
+        <!-- Page-header end -->
+
+
+        <div class="page-body">
+            <div class="row">
+                <div class="chat-box">
+                    <ul class="text-right boxs">
+                        <li class="chat-single-box card-shadow bg-white active"
+                            data-id="1">
+                            <div class="had-container">
+                                <div class="chat-header p-10 bg-gray">
+                                    <div class="user-info d-inline-block f-left">
+                                        <div
+                                            class="box-live-status bg-danger  d-inline-block m-r-10">
+                                        </div>
+                                        <a href="#">Josephin Doe</a>
+                                    </div>
+                                    <div class="box-tools d-inline-block">
+                                        <a href="#" class="mini">
+                                            <i
+                                                class="icofont icofont-minus f-20 m-r-10"></i>
+                                        </a>
+                                        <a class="close" href="#">
+                                            <i class="icofont icofont-close f-20"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="chat-body p-10">
+                                    <div class="message-scrooler">
+                                        <div class="messages">
+                                            <div class="message out no-avatar media">
+                                                <div
+                                                    class="body media-body text-right p-l-50">
+                                                    <div
+                                                        class="content msg-reply f-12 bg-primary d-inline-block">
+                                                        Good morning..</div>
+                                                    <div class="seen"><i
+                                                            class="icon-clock f-12 m-r-5 txt-muted d-inline-block"></i><span>a
+                                                            few seconds ago </span>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="sender media-right friend-box">
+                                                    <a href="javascript:void(0);"
+                                                        title="Me"><img
+                                                            src="{{asset('adminty-assets/assets/images/avatar-1.jpg')}}"
+                                                            class="  img-chat-profile"
+                                                            alt="Me"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-footer b-t-muted">
+                                    <div class="input-group write-msg">
+                                        <input type="text"
+                                            class="form-control input-value"
+                                            placeholder="Type a Message">
+                                        <span class="input-group-btn">
+                                            <button id="paper-btn"
+                                                class="btn btn-primary" type="button" style="padding: 6px 12px;">
+                                                <i
+                                                    class="icofont icofont-paper-plane"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div id="sidebar" class="users p-chat-user">
+                        <div class="had-container">
+                            <div class="card card_main p-fixed users-main ">
+                                <div class="user-box">
+                                    <div class="card-block">
+                                        <div class="right-icon-control">
+                                            <input type="text"
+                                                class="form-control  search-text"
+                                                placeholder="Search Friend">
+                                            <div class="form-icon">
+                                                <i class="icofont icofont-search"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="1"
+                                        data-status="online"
+                                        data-username="Josephin Doe"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Josephin Doe">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/avatar-1.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-success"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Josephin Doe
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="2"
+                                        data-status="online" data-username="Lary Doe"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Lary Doe">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/task/task-u1.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-success"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Lary Doe</div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="3"
+                                        data-status="online" data-username="Alice"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Alice">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/avatar-2.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-success"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Alice</div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="4"
+                                        data-status="online" data-username="Alia"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Alia">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/task/task-u2.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-success"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Alia</div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="5"
+                                        data-status="online" data-username="Suzen"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Suzen">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/task/task-u3.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-success"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Suzen</div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="6"
+                                        data-status="offline"
+                                        data-username="Michael Scofield"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Michael Scofield">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/avatar-3.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-danger"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Michael
+                                                Scofield</div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="7"
+                                        data-status="online" data-username="Irina Shayk"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Irina Shayk">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/avatar-4.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-success"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Irina Shayk
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="8"
+                                        data-status="offline"
+                                        data-username="Sara Tancredi"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Sara Tancredi">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/avatar-5.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-danger"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Sara Tancredi
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="9"
+                                        data-status="online" data-username="Samon"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Samon">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/avatar-1.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-success"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Samon</div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="10"
+                                        data-status="online"
+                                        data-username="Daizy Mendize"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Daizy Mendize">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/task/task-u3.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-success"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Daizy Mendize
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="11"
+                                        data-status="offline"
+                                        data-username="Loren Scofield"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Loren Scofield">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/avatar-3.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-danger"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Loren Scofield
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="12"
+                                        data-status="online" data-username="Shayk"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Shayk">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/avatar-4.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-success"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Shayk</div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="13"
+                                        data-status="offline" data-username="Sara"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Sara">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/task/task-u3.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-danger"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Sara</div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="14"
+                                        data-status="online" data-username="Doe"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Doe">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/avatar-1.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-success"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Doe</div>
+                                        </div>
+                                    </div>
+                                    <div class="media userlist-box" data-id="15"
+                                        data-status="online" data-username="Lary"
+                                        data-toggle="tooltip" data-placement="left"
+                                        title="Lary">
+                                        <a class="media-left" href="#!">
+                                            <img class="media-object  "
+                                                src="{{asset('adminty-assets/assets/images/task/task-u1.jpg')}}"
+                                                alt="Generic placeholder image">
+                                            <div class="live-status bg-success"></div>
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="f-13 chat-header">Lary</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-error">
+            <div class="card text-center">
+                <div class="card-block">
+                    <div class="m-t-10">
+                        <i class="icofont icofont-warning text-white bg-c-yellow"></i>
+                        <h4 class="f-w-600 m-t-25">Not supported</h4>
+                        <p class="text-muted m-b-0">Chat not supported in this device
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="styleSelector">
+        </div>
+    </div>
+</div>
 @endsection
 @section('scripts')
+<script type="text/javascript" src="{{asset('adminty-assets/bower_components/modernizr/feature-detects/css-scrollbars.js')}}"></script>
+<script src="{{asset('adminty-assets/assets/pages/chat/js/mmc-common.js.js')}}"></script>
+<script src="{{asset('adminty-assets/assets/pages/chat/js/mmc-chat.js')}}"></script>
+<script type="text/javascript" src="{{asset('adminty-assets/assets/pages/chat/js/chat.js')}}"></script>
 <script>
     getChats();
     function getChats() {

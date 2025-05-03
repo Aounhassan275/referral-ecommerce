@@ -41,7 +41,14 @@ class FrontendController extends Controller
     public function showCategoryDetails($name)
     {
         $category = Category::where('name',str_replace('_', ' ',$name))->first();
-        $brands = Brand::where('category_id',$category->id)->orderBy('name','ASC')->paginate(12);
+        $brands = Brand::where('category_id',$category->id)->get();
+        $brandId = [];
+        foreach($brands as $brand){
+            if($brand->products->count() > 0){
+                $brandId[] = $brand->id;
+            }
+        }
+        $brands = Brand::whereIn('id',$brandId)->orderBy('created_at','ASC')->paginate(30);
         return view('front.category.show',compact('category','brands'));
     }
     public function home(Request $request)
@@ -216,6 +223,10 @@ class FrontendController extends Controller
         // {
             $related_products = Product::where('show_on_home',1)->orderBy('created_at','DESC')->get();
         // }
+        if(!$product){
+            toastr()->error('Something went wrong.');
+            return redirect()->to(url('/'));
+        }
         if(!$product->view)
         {
             $product->update([
@@ -244,6 +255,10 @@ class FrontendController extends Controller
     public function showProductUserDetails($name)
     {
         $user = User::where('name',str_replace('_', ' ',$name))->first();
+        if(!$user){
+            toastr()->error('Something went wrong.');
+            return redirect()->to(url('/'));
+        }
         $user->update([
            'view' => $user->view+1
         ]);

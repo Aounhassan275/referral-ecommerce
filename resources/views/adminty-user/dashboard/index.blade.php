@@ -30,9 +30,17 @@ DASHBOARD
           <div class="page-header-title">
             <div class="d-inline">
               <h4>{{Auth::user()->type}} Dashboard</h4>
-              <span>Everything you need</span>
             </div>
           </div>
+        </div>
+        <div class="col-lg-12">
+          <button type="button" style="width: 100%;" class="btn btn-info ">
+              <marquee>
+                @foreach (App\Models\Ticker::all() As $ticker )
+                  <span style="background-color: {{$ticker->color}};">{{$ticker->message}}</span>
+                @endforeach
+              </marquee>
+          </button>
         </div>
       </div>
     </div>

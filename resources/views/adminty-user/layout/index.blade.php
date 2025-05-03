@@ -627,8 +627,8 @@
             <div class="pcoded-content">
               <div class="pcoded-inner-content">
                 <!-- Main-body start -->
-                <div class="main-body">
-					@yield('contents')
+                <div class="main-body {{Request::is('user/chat') ? 'chat-bg' : ''}}">
+					          @yield('contents')
                 </div>
               </div>
             </div>

@@ -410,11 +410,13 @@ class UserController extends Controller
         $currencies = [];
         try{
             $client = new Client();
-            $currencies_list = $client->request('GET', 'api.coincap.io/v2/assets');
+            $currencies_list = $client->request('GET', 'https://graphql.coincap.io/');
             $body = json_decode($currencies_list->getBody() , true);
+            dd($body);
             $currencies = array_slice($body, 0, 30, true);
             $currencies = $currencies['data'];
         }catch (\Exception $e) {
+            // dd($e->getMessage());
         }
         return view($this->directory.'.coin.index', compact('currencies'));
     }
