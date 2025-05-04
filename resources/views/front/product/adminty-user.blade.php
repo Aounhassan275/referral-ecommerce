@@ -99,7 +99,7 @@
 
          <!-- Slide 1 -->
          @foreach($events as $event)
-         <div class="carousel-item active" style="background-image: url({{asset($event->image)}});height:400px;width:auto;">
+         <div class="carousel-item active" style="background-image: url({{asset($event->image)}});">
            <div class="container">
              <h2>{{$event->title}}</h2>
              <p>{{$event->description}}
