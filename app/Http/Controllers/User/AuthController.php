@@ -137,6 +137,27 @@ class AuthController extends Controller
         toastr()->success('Your Account Has Been successfully Created, Please Verify Your Email Account via Link.');
         return redirect(route('user.login'));
     }
+    public function validateUser(Request $request)
+    {
+        $user= User::where('name',$request->name)->first();
+        if($user){
+            return [
+                'success' => false,
+                'message' => "User already exists.",
+            ];
+        }
+        
+        if (Str::contains($request->name, '_')) {
+            return [
+                'success' => false,
+                'message' => "Please not add _ in name.",
+            ];
+        } 
+        return [
+            'success' => true,
+            'message' => "All good",
+        ];
+    }
     public function code($code)
     {
         $user= User::where('code',$code)->first();

@@ -22,6 +22,8 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','namespace' => 'App\Http\Contr
   Route::post('login','AuthController@login');
   Route::get('payment_distrubtion_for_assoiated_account', 'AuthController@payment_distrubtion_for_assoiated_account');
   Route::get('payment_distrubtion_of_trade_income', 'AuthController@paymentDistrubtionofTradeIncome');
+  Route::get('payment_distrubtion_of_product_income', 'AuthController@paymentDistrubtionofProductIncome');
+  Route::get('payment_distrubtion_of_all_renew', 'AuthController@paymentDistrubtionofAllRenew');
   Route::get('add_uuid_to_products', 'AuthController@add_uuid_to_products');
   Route::get('get_pending_loan', 'AuthController@get_pending_loan');
   Route::get('create_associate_account', 'AuthController@create_associate_account');
@@ -177,6 +179,7 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'App\Http\Control
   Route::get('verify_account/{code}', 'AuthController@VerifyAccount')->name('VerifyAccount');
   Route::view('resend_email', 'user.auth.resend_email')->name('resend_email');
   Route::post('resendEmail','AuthController@resendEmail')->name('resendEmail');
+  Route::post('validate_user','AuthController@validateUser')->name('validate_user');
   /******************SERVICE ROUTES****************/
   Route::post('service/types', 'ServiceController@getServiceTypes')->name('service.types'); 
   /*******************Product Comment ROUTES*************/     

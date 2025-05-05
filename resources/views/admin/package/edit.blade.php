@@ -159,6 +159,10 @@
                             <input type="number" class="form-control" name="self_loan_limit"  placeholder="Self Loan Limit" value="{{$package->self_loan_limit}}">
                         </div>
                         <div class="form-group col-4">
+                            <label class="form-label">Direct Loan Limit</label>
+                            <input type="number" class="form-control" name="direct_loan_limit"  placeholder="Direct Loan Limit" value="{{$package->direct_loan_limit}}">
+                        </div>
+                        <div class="form-group col-4">
                             <label class="form-label">For Stock</label>
                             <input type="number" class="form-control" name="for_stock"  placeholder="For Stock" value="{{$package->for_stock}}">
                         </div>

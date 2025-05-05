@@ -56,26 +56,17 @@ class ReferralIncome
             'package_id' => $package->id,
             'user_id' => $user->id
         ]);
-        $self_loan_limit = $package->price / 100 * $package->self_loan_limit;
-        $user->update([
-            'loan_limit' => $user->loan_limit +  $self_loan_limit
-        ]);
-        $for_stock = $package->price / 100 * $package->for_stock;
-        $user->update([
-            'for_stock' => $user->for_stock +  $for_stock
-        ]);
+        ReferralIncome::directStockIncome($package->price,$package,$refer_by,$user);
         if($refer_by){
-            $direct_for_stock = $package->price / 100 * $package->direct_for_stock;
-            $refer_by->update([
-                'direct_for_stock' => $refer_by->for_stock +  $direct_for_stock
-            ]);
-            Earning::create([
-                'price' => $direct_for_stock,
-                'user_id' => $refer_by->id,
-                'due_to' => $user->id,
-                'type' => 'direct_for_stock'
-            ]);
-
+            $earnings = Earning::where('status',0)
+                ->where('user_id',$refer_by->id)->get();
+            foreach($earnings as $earning){
+                $refer_by->update([
+                    'cash_wallet' => $refer_by->cash_wallet + $earning->price,
+                    'company_reward' => $refer_by->company_reward + $earning->price,
+                ]);
+                $earning->delete();
+            }
         }
         return true;
     } 
@@ -163,6 +154,60 @@ class ReferralIncome
                 'balance' => $flush_account->balance + $totalDirectIncome,
             ]);
         }
+    }  
+    public static  function directStockIncome($price,$package,$refer_by,$user)
+    {
+        $self_loan_limit = $package->price / 100 * $package->self_loan_limit;
+        if($user->loan_limit > 10000){
+            $flush_account = CompanyAccount::find(1);
+            $flush_account->update([
+                'balance' => $flush_account->balance + $self_loan_limit,
+            ]);
+        }else{
+            $user->update([
+                'loan_limit' => $user->loan_limit +  $self_loan_limit
+            ]);
+        }
+        $for_stock = $package->price / 100 * $package->for_stock;
+        if($user->for_stock > 10000){
+            $flush_account = CompanyAccount::find(1);
+            $flush_account->update([
+                'balance' => $flush_account->balance + $for_stock,
+            ]);
+        }else{
+            $user->update([
+                'for_stock' => $user->for_stock +  $for_stock
+            ]);
+        }
+        $direct_teams = $user->directParentsForDirectIncome();
+        $direct_for_stock = $package->price / 100 * $package->direct_for_stock;
+        $direct_loan_limit = $package->price / 100 * $package->direct_loan_limit;
+        $direct_for_stock_per_person  = $direct_for_stock/5;
+        $direct_loan_limit_per_person  = $direct_loan_limit/5;
+        foreach($direct_teams as  $direct_team)
+        {
+            if($direct_team->for_stock < 10000){
+                $direct_team->update([
+                    'for_stock' => $direct_team->for_stock +  $direct_for_stock_per_person
+                ]);
+            }
+            if($direct_team->loan_limit < 10000){
+                $direct_team->update([
+                    'loan_limit' => $direct_team->loan_limit +  $direct_loan_limit_per_person
+                ]);
+            }
+        }
+        $flush_account = CompanyAccount::find(1);
+        if($direct_loan_limit_per_person > 0 ){
+            $flush_account->update([
+                'balance' => $flush_account->balance + $direct_loan_limit_per_person,
+            ]);
+        }
+        if($direct_loan_limit_per_person > 0 ){
+            $flush_account->update([
+                'balance' => $flush_account->balance + $direct_loan_limit_per_person,
+            ]);
+        }
     } 
     public static  function directTeamIncome($price,$package,$user,$due_to)
     {
@@ -176,16 +221,10 @@ class ReferralIncome
             $referral_account = User::where('referral',$direct_team->id)->first();
             if($referral_account)
             {
-                Earning::create([
-                    'price' => $per_person_amount,
-                    'user_id' => $direct_team->id,
-                    'due_to' => $due_to->id,
-                    'level' => $index+1,
-                    'type' => 'direct_team_income'
-                ]);
                 $direct_team->update([
                     // 'total_income' => $direct_team->total_income + $per_person_amount/2,
-                    'cash_wallet' => $direct_team->cash_wallet + $per_person_amount
+                    'cash_wallet' => $direct_team->cash_wallet + $per_person_amount,
+                    'direct_team_income' => $direct_team->direct_team_income + $per_person_amount
                 ]);
                 info("Direct Team Income Amount Added to $direct_team->name : $per_person_amount"); 
                 $direct_team_income = $direct_team_income - $per_person_amount;
@@ -415,45 +454,21 @@ class ReferralIncome
     {
         $self_rebirth = $price / 100 * $package->self_rebirth;
         info("Self Renew Amount : $self_rebirth");
-        Earning::create([
-            'price' => $self_rebirth,
-            'user_id' => $user->id,
-            'due_to' => $user->id,
-            'type' => 'self_renew_income'
-        ]);
         $user->update([
             'for_renew' => $user->for_renew + $self_rebirth,
         ]);
         $direct_rebirth = $price / 100 * $package->direct_rebirth;
         info("Direct Renew Amount : $direct_rebirth");
-        Earning::create([
-            'price' => $direct_rebirth,
-            'user_id' => $referBy->id,
-            'due_to' => $user->id,
-            'type' => 'direct_renew_income'
-        ]);
         $referBy->update([
             'for_renew' => $referBy->for_renew + $direct_rebirth,
         ]);
         $self_associate = $price / 100 * $package->self_associate;
         info("Self Associate Amount : $self_associate");
-        Earning::create([
-            'price' => $self_associate,
-            'user_id' => $user->id,
-            'due_to' => $user->id,
-            'type' => 'self_associate_income'
-        ]);
         $user->update([
             'community_pool' => $user->community_pool + $self_associate,
         ]);
         $direct_associate = $price / 100 * $package->direct_associate;
         info("Direct Associate Amount : $direct_associate");
-        Earning::create([
-            'price' => $direct_associate,
-            'user_id' => $referBy->id,
-            'due_to' => $user->id,
-            'type' => 'direct_associate_income'
-        ]);
         $referBy->update([
             'community_pool' => $referBy->community_pool + $direct_associate,
         ]);

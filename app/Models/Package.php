@@ -87,6 +87,7 @@ class Package extends Model
         'is_renew',
         'for_stock',
         'direct_for_stock',
+        'direct_loan_limit',
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveAImage($value,'/package/');

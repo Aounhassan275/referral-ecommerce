@@ -47,7 +47,7 @@ class AuthController extends Controller
     public function payment_distrubtion_for_assoiated_account() {
 		info("Payment Distrubtion For Assoiated Account CRONJOB CALLED AT " . date("d-M-Y h:i a"));
         $users = User::where('associated_with','!=',null)
-                ->where('cash_wallet','>',5)
+                ->where('cash_wallet','>',1)
                 ->get();
 		if ($users) {
             $total_users = $users->count();
@@ -58,17 +58,23 @@ class AuthController extends Controller
                 $total_amount = $user->cash_wallet;
                 info("Payment Distrubtion For Assoiated Account   CRONJOB User Total Income : $total_amount");
                 $amount = $total_amount/2;
-                $owner = User::find($user->associated_with);
-                info("Payment Distrubtion For Assoiated Account CRONJOB User Total Income  $amount added to : $owner->name");
-                $owner->update([
-                    'total_income' => $user->total_income + $amount
-                ]);
-                Earning::create([
-                    'price' => $amount,
-                    'user_id' => $owner->id,
-                    'due_to' => $user->id,
-                    'type' => 'associated_income'
-                ]);
+                $company_products_account = CompanyAccount::where('name','Company Products Account')->first();
+                if($company_products_account ){
+                    $company_products_account->update([
+                        'balance' => $company_products_account->balance + $amount,
+                    ]);
+                }
+                // $owner = User::find($user->associated_with);
+                // info("Payment Distrubtion For Assoiated Account CRONJOB User Total Income  $amount added to : $owner->name");
+                // $owner->update([
+                //     'total_income' => $user->total_income + $amount
+                // ]);
+                // Earning::create([
+                //     'price' => $amount,
+                //     'user_id' => $owner->id,
+                //     'due_to' => $user->id,
+                //     'type' => 'associated_income'
+                // ]);
                 $user->update([
                     'cash_wallet' => $user->cash_wallet - $total_amount
                 ]);
@@ -97,31 +103,99 @@ class AuthController extends Controller
         $trade_income= CompanyAccount::where('name','Trade Income')->first();
 		if ($users) {
             $total_users = $users->count();
-            $trade_balance = $trade_income->balance;
-            $amount = round($trade_balance/$total_users,2);
-            info("Payment Distrubtion of Trade Income CRONJOB Total Users : $total_users");
-            foreach($users as $user)
-            {
-                info("Payment Distrubtion of Trade Income CRONJOB User : $user->name");
-                Earning::create([
-                    'price' => $amount,
-                    'user_id' => $user->id,
-                    'type' => 'trade_income'
+            if($trade_income->balance > 0){
+                $trade_balance = $trade_income->balance/10;
+                $amount = round($trade_balance/$total_users,2);
+                info("Payment Distrubtion of Trade Income CRONJOB Total Users : $total_users");
+                foreach($users as $user)
+                {
+                    info("Payment Distrubtion of Trade Income CRONJOB User : $user->name");
+                    $user->update([
+                        'cash_wallet' => $user->cash_wallet + $amount,
+                        'company_reward' => $user->company_reward + $amount,
+                    ]);
+                    info("Payment Distrubtion of Trade Income CRONJOB For User $user->name : Amount $amount Added to flush company Account");  
+                }
+                $trade_income->update([
+                    'balance' => $trade_income->balance -= $trade_balance 
                 ]);
-                
-                $user->update([
-                    'total_income' => $user->total_income + $amount
-                ]);
-                info("Payment Distrubtion of Trade Income CRONJOB For User $user->name : Amount $amount Added to flush company Account");  
+
             }
-            $trade_income->update([
-                'balance' => $trade_income->balance -= $trade_balance 
-            ]);
 		} else {
 			info("Payment Distrubtion of Trade Income CRONJOB: Users not found. ");
 		}
 		info("Payment Distrubtion of Trade Income CRONJOB END AT " . date("d-M-Y h:i a"));
         toastr()->success('Payment Distribution of Trade Income Done Successfully');
+        return back();
+	}
+    public function paymentDistrubtionofProductIncome() {
+		info("Payment Distrubtion of Product Income CRONJOB CALLED AT " . date("d-M-Y h:i a"));
+	
+        $users = User::where('refer_by','!=',null)
+                ->whereNotNull('package_id')
+                ->whereNotIn('type',['fake','rebirth'])
+                ->get();
+        $productAccount = CompanyAccount::where('name','Company Products Account')->first();
+		if ($users) {
+            $total_users = $users->count();
+            if($productAccount->balance > 0){
+                $trade_balance = $productAccount->balance/10;
+                $amount = round($trade_balance/$total_users,2);
+                info("Payment Distrubtion of Product Income CRONJOB Total Users : $total_users");
+                foreach($users as $user)
+                {
+                    info("Payment Distrubtion of Product Income CRONJOB User : $user->name");
+                    $user->update([
+                        'cash_wallet' => $user->cash_wallet + $amount,
+                        'star_rank_income' => $user->star_rank_income + $amount,
+                    ]);
+                    info("Payment Distrubtion of Product Income CRONJOB For User $user->name : Amount $amount Added to flush company Account");  
+                }
+                $productAccount->update([
+                    'balance' => $productAccount->balance -= $trade_balance 
+                ]);
+
+            }
+		} else {
+			info("Payment Distrubtion of Product Income CRONJOB: Users not found. ");
+		}
+		info("Payment Distrubtion of Product Income CRONJOB END AT " . date("d-M-Y h:i a"));
+        toastr()->success('Payment Distribution of Product Income Done Successfully');
+        return back();
+	}
+    public function paymentDistrubtionofAllRenew() {
+		info("Payment Distrubtion of All Renew CRONJOB CALLED AT " . date("d-M-Y h:i a"));
+	
+        $users = User::where('refer_by','!=',null)
+                ->whereNotNull('package_id')
+                ->whereNotIn('type',['fake','rebirth'])
+                ->get();
+        $renew_all_account= CompanyAccount::where('name','Renew All Account')->first();
+        if ($users) {
+            $total_users = $users->count();
+            if($renew_all_account->balance > 0){
+                $trade_balance = $renew_all_account->balance/10;
+                $amount = round($trade_balance/$total_users,2);
+                info("Payment Distrubtion of For Renew CRONJOB Total Users : $total_users");
+                foreach($users as $user)
+                {
+                    info("Payment Distrubtion of Renew CRONJOB User : $user->name");
+                    
+                    $user->update([
+                        'for_renew' => $user->for_renew + $amount
+                    ]);
+                    info("Payment Distrubtion of For Renew CRONJOB For User $user->name : Amount $amount Added to flush company Account");  
+                }
+                $renew_all_account->update([
+                    'balance' => $renew_all_account->balance -= $trade_balance 
+                ]);
+
+            }
+		} else {
+			info("Payment Distrubtion of All Renew CRONJOB: Users not found. ");
+		}
+		info("Payment Distrubtion of Product Income CRONJOB END AT " . date("d-M-Y h:i a"));
+        toastr()->success('Payment Distribution of Product Income Done Successfully');
         return back();
 	}
     

@@ -71,6 +71,10 @@ class User extends Authenticatable
         'loan_limit',
         'for_stock',
         'for_renew',
+        'company_reward',
+        'star_rank_income',
+        'direct_team_income',
+        'purchase_reward',
     ];
 
     /**
@@ -163,6 +167,10 @@ class User extends Authenticatable
     public function tradeIncome()
     {
         return $this->hasMany(Earning::class)->where('type','trade_income');
+    }
+    public function starRankIncome()
+    {
+        return $this->hasMany(Earning::class)->where('type','star_rank_income');
     }
     public function tradeRankReward()
     {

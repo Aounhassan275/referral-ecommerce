@@ -47,7 +47,8 @@
                         User Name
                         <small>Required</small>
                     </label>
-                    <input type="text" required  name="name" class="form-input"  />
+                    <input type="text" required  name="name" id="name" class="form-input"  />
+                    <span id="username-error" style="color:red;"></span>
                 </div>
                 <div class="form-field">
                     <label class="form-label" for="FormField_1_input">
@@ -301,6 +302,24 @@
                     $('#type_id').append('<option disabled>Select Service Tyoe</option>');
                     for (i=0;i<result.length;i++){
                         $('#type_id').append('<option value="'+result[i].id+'">'+result[i].name+'</option>');
+                    }
+                }
+            });
+        });
+        $('#name').on('change', function() {
+            $('#username-error').html('');
+            $.ajax({
+                url: "{{route('user.validate_user')}}",
+                method: 'post',
+                data: {
+                    id: this.value,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(result){
+                    if(result.success  == false){
+                        $('#username-error').html(result.message);
                     }
                 }
             });

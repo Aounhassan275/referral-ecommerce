@@ -59,15 +59,9 @@ class FundTransferHelper
                 $referral_account = User::where('referral',$direct_team->id)->first();
                 if($referral_account)
                 {
-                    Earning::create([
-                        'price' => $per_person_amount,
-                        'user_id' => $direct_team->id,
-                        'due_to' => $due_to->id,
-                        'level' => $index+1,
-                        'type' => 'sale_reward_income'
-                    ]);
                     $direct_team->update([
-                        'cash_wallet' => $direct_team->cash_wallet + $per_person_amount
+                        'cash_wallet' => $direct_team->cash_wallet + $per_person_amount,
+                        'purchase_reward' => $direct_team->purchase_reward + $per_person_amount
                     ]);
                     info("Direct Team Income Amount Added to $direct_team->name : $per_person_amount"); 
                     $reward = $reward - $per_person_amount;

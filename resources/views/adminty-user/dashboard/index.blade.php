@@ -343,7 +343,7 @@ DASHBOARD
                 class="feather icon-users st-icon bg-c-pink txt-lite-color"
               ></i>
               <div class="text-left">
-                <h3 class="d-inline-block">PKR {{Auth::user()->directTeamIncome->sum('price')}}</h3>
+                <h3 class="d-inline-block">PKR {{Auth::user()->direct_team_income}}</h3>
                 <i
                   class="feather icon-arrow-down text-c-pink f-30"
                 ></i>
@@ -366,7 +366,7 @@ DASHBOARD
                 class="feather icon-shopping-cart st-icon bg-c-blue"
               ></i>
               <div class="text-left">
-                <h3 class="d-inline-block">PKR 0</h3>
+                <h3 class="d-inline-block">PKR {{Auth::user()->purchase_reward}}</h3>
                 <i
                   class="feather icon-arrow-up text-c-green f-30"
                 ></i>
@@ -380,7 +380,7 @@ DASHBOARD
               <div class="card-header-left">
                 <h5>COMPANY REWARD</h5>
                 <p class="p-t-10 m-b-0 text-c-green">
-                  Form Company Sales
+                  From Company Sales
                 </p>
               </div>
             </div>
@@ -389,7 +389,7 @@ DASHBOARD
                 class="feather icon-briefcase st-icon bg-c-green"
               ></i>
               <div class="text-left">
-                <h3 class="d-inline-block">PKR 0</h3>
+                <h3 class="d-inline-block">PKR {{Auth::user()->company_reward}}</h3>
                 <i
                   class="feather icon-arrow-up f-30 text-c-green"
                 ></i>
@@ -412,11 +412,11 @@ DASHBOARD
                 class="feather icon-sliders st-icon bg-c-yellow"
               ></i>
               <div class="text-left">
-                <h3 class="d-inline-block">PKR 0</h3>
+                <h3 class="d-inline-block">PKR {{Auth::user()->star_rank_income}}</h3>
                 <i
                   class="feather icon-arrow-up f-30 text-c-green"
                 ></i>
-                <span class="f-right bg-c-yellow">0</span>
+                {{-- <span class="f-right bg-c-yellow">0</span> --}}
               </div>
             </div>
           </div>
