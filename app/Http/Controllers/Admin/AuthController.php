@@ -128,6 +128,68 @@ class AuthController extends Controller
         toastr()->success('Payment Distribution of Trade Income Done Successfully');
         return back();
 	}
+    public function paymentDistrubtionofAllPurchase() {
+		info("Payment Distrubtion of All Purchase CRONJOB CALLED AT " . date("d-M-Y h:i a"));
+        $purchase_account= CompanyAccount::where('name','For Purchase All Account')->first();
+        if($purchase_account->balance > 0){
+            $purchase_balance = $purchase_account->balance/4;
+            $ranges = [
+                [
+                    'from' => 1,
+                    'to' => 9999,
+                ],
+                [
+                    'from' => 10000,
+                    'to' => 29999,
+                ],    
+                [
+                    'from' => 30000,
+                    'to' => 59999,
+                ],    
+                [
+                    'from' => 60000,
+                    'to' => 99999,
+                ],    
+            ];
+            foreach($ranges as $range){
+                $users = User::select('users.id','users.cash_wallet','users.company_reward', DB::raw('SUM(transcations.amount) as total_amount'))
+                    ->join('transcations', 'transcations.sender_id', '=', 'users.id')
+                    ->whereNotNull('users.refer_by')
+                    ->whereNotNull('users.package_id')
+                    ->whereNotIn('users.type', ['fake', 'rebirth'])
+                    ->groupBy('users.id')
+                    ->havingRaw('total_amount BETWEEN ? AND ?', [$range['from'], $range['to']])
+                    ->get();
+                if($users->count() > 0){
+                    $amount = round($purchase_balance/$users->count(),  2);
+                    info("Payment Distrubtion of All Purchase Income CRONJOB Total Users : {{$users->count()}}");
+                    foreach($users as $user)
+                    {
+                        info("Payment Distrubtion of All Purchase Income CRONJOB User : $user->name");
+                        $user->update([
+                            'cash_wallet' => $user->cash_wallet + $amount,
+                            'company_reward' => $user->company_reward + $amount,
+                        ]);
+                        info("Payment Distrubtion of All Purchase Income CRONJOB For User $user->name : Amount $amount Added to All Purchases Company Account");  
+                    }
+                }else{
+                    $flush_account = CompanyAccount::find(1);
+                    $flush_account->update([
+                        'balance' => $flush_account->balance + $purchase_balance,
+                    ]);
+
+                }
+                $purchase_account->update([
+                    'balance' => $purchase_account->balance -= $purchase_balance 
+                ]);
+            }
+            
+
+        }
+		info("Payment Distrubtion of All Purchases Income CRONJOB END AT " . date("d-M-Y h:i a"));
+        toastr()->success('Payment Distribution of All Purchases Income Done Successfully');
+        return back();
+	}
     public function paymentDistrubtionofProductIncome() {
 		info("Payment Distrubtion of Product Income CRONJOB CALLED AT " . date("d-M-Y h:i a"));
 	

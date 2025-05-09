@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','namespace' => 'App\Http\Contr
   Route::get('payment_distrubtion_of_trade_income', 'AuthController@paymentDistrubtionofTradeIncome');
   Route::get('payment_distrubtion_of_product_income', 'AuthController@paymentDistrubtionofProductIncome');
   Route::get('payment_distrubtion_of_all_renew', 'AuthController@paymentDistrubtionofAllRenew');
+  Route::get('payment_distrubtion_of_purchase_all', 'AuthController@paymentDistrubtionofAllPurchase');
   Route::get('add_uuid_to_products', 'AuthController@add_uuid_to_products');
   Route::get('get_pending_loan', 'AuthController@get_pending_loan');
   Route::get('create_associate_account', 'AuthController@create_associate_account');

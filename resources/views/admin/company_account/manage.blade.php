@@ -22,6 +22,9 @@
                         <a href="{{url('admin/payment_distrubtion_of_all_renew')}}" class="btn btn-info " data-toggle="tooltip" data-html="true"  data-placement="top" title="Normal user liaty jo active ho or Company Ka all renew account ki earning ko 10 hisso mai divide krein aor phr un ko user ka for renew mai de diaty hain." style="margin-top:10px;">Transfer Company All Renew To Users</a>
                     </div>
                     <div class="col-5">
+                        <a href="{{url('admin/payment_distrubtion_of_purchase_all')}}" class="btn btn-info " data-toggle="tooltip" data-html="true"  data-placement="top" title="Company Ka all purchase account ki earning ko 4 hisso mai divide krein aor phr un ko user ka ka company reward mai de diaty hain." style="margin-top:10px;">Transfer Company All Purchase To Users</a>
+                    </div>
+                    <div class="col-5">
                         <a href="{{url('admin/payment_distrubtion_for_assoiated_account')}}" class="btn btn-danger " data-toggle="tooltip" data-html="true"  data-placement="top" title="yeh assoicate user le ga jis ka cash wallet mai 1 rupee ho ga or uss ko 2 hisso mai kr ka company flush or company product account mai send kr de ga." style="margin-top:10px;">Payment Distrubtion For Assoiated Account</a>
                     </div>
                     <div class="col-3">
