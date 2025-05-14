@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\Blog;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\City;
@@ -317,5 +318,29 @@ class FrontendController extends Controller
         UserReview::create($request->all());
         toastr()->success('User Review is Created Successfully');
         return redirect()->back();
+    }
+    public function showBlogs(Request $request)
+    {
+        
+        if($request->name)
+        {
+            $blogs = Blog::where('name', 'LIKE', '%'.$request->name.'%')->where('category_id',$request->category_id)->paginate(12);
+        }elseif($request->keyword)
+        {
+            $blogs = Blog::where('name', 'LIKE', '%'.$request->keyword.'%')->paginate(12);
+        }
+        else{
+            $blogs = Blog::latest()->paginate(12);
+        }
+        return view('front.blog.index',compact('blogs'));
+    }
+    public function showBlogDetails($url)
+    {
+        $blog = Blog::where('url',$url)->first();
+        if(!$blog){
+            toastr()->error('Something went wrong.');
+            return redirect()->to(url('/'));
+        }
+        return view('front.blog.show',compact('blog'));
     }
 }

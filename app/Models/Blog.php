@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     protected $fillable = [
-        'name','blog_category_id','user_id','description',
+        'name','blog_category_id','user_id','description','url'
     ];
     public function category()
     {
-        return $this->belongsTo('App\Models\PostCategory','post_category_id');
+        return $this->belongsTo('App\Models\BlogCategory','blog_category_id');
     }
     public function images()
     {

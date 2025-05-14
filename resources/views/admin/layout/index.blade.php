@@ -172,6 +172,18 @@
 							<li class="sidebar-item {{Request::is('admin/post')?'active':''}}"><a class="sidebar-link" href="{{route('admin.post.index')}}">Manage Posts</a></li>
 						</ul>
 					</li>
+					<li class="sidebar-item {{Request::is('admin/blog_category/*') || Request::is('admin/blog*') ?'active':''}}">
+						<a href="{{url('#blogs')}}" data-toggle="collapse" class="sidebar-link collapsed">
+							<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Blog Section</span>
+						</a>
+						<ul id="blogs" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+							<li class="sidebar-item {{Request::is('admin/blog_category')?'active':''}}"><a class="sidebar-link" href="{{route('admin.blog_category.index')}}">Manage Category</a></li>
+							<li class="sidebar-item {{Request::is('admin/blog*')?'active':''}}"><a class="sidebar-link" href="{{route('admin.blog.index')}}">Manage Blog</a></li>
+							{{-- <li class="sidebar-item {{Request::is('admin/post_brand')?'active':''}}"><a class="sidebar-link" href="{{route('admin.post_brand.index')}}">Manage Brand</a></li>
+							<li class="sidebar-item {{Request::is('admin/post/create')?'active':''}}"><a class="sidebar-link" href="{{route('admin.post.create')}}">Create Posts</a></li>
+							<li class="sidebar-item {{Request::is('admin/post')?'active':''}}"><a class="sidebar-link" href="{{route('admin.post.index')}}">Manage Posts</a></li> --}}
+						</ul>
+					</li>
 				</ul>
 
 				<div class="sidebar-bottom d-none d-lg-block">

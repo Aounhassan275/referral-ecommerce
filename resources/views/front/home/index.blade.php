@@ -750,150 +750,33 @@
 						}
 					]
 				}'>
+				@foreach(App\Models\Blog::orderBy('created_at','DESC')->get() as $blog)
 				<div class="productCarousel-slide">
 					<article class="blog-post product-grid">
 						<div class="blog-post-figure">
 							<figure class="blog-thumbnail">
-								<a href="blog/at-vero-eos-et-accusam/index.html">
-									<img data-sizes="auto" class="img-fluid lazyload " src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/stencil/671eab80-1ec6-0137-c53b-0242ac11000a/e/80359d40-88bb-013b-10b2-66c6c8fc1ce5/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/images/stencil/464x320/uploaded_images/9.jpg?t=1517842614" alt="At vero eos et accusam" title="At vero eos et accusam">
+								<a href="{{url('blog/'.$blog->url)}}">
+									<img data-sizes="auto" class="img-fluid lazyload " src="{{asset($blog->images->first()->image)}}" 
+									data-src="{{asset($blog->images->first()->image)}}" alt="At vero eos et accusam" title="At vero eos et accusam">
 								</a>
 							</figure>
 						</div>
 						<div class="blog-header">
 							<h2 class="blog-title">
-								<a href="blog/at-vero-eos-et-accusam/index.html">At vero eos et accusam</a>
+								<a href="{{url('blog/'.$blog->url)}}">{{$blog->name}}</a>
 							</h2>
 							<div class="blog-meta">
-								<span class="blog-author"><i class="fa fa-user"></i>bigecommerce </span>
-								<span class="blog-date"><i class="fa fa-clock-o"></i> 5th Feb 2018 </span>
+								<span class="blog-author"><i class="fa fa-user"></i>Admin </span>
+								<span class="blog-date"><i class="fa fa-clock-o"></i> {{$blog->created_at->format('d M,Y')}} </span>
 							</div>
 						</div>
 						<div class="blog-post-body">
 							<div class="clear"></div>
-							<a href="blog/at-vero-eos-et-accusam/index.html" class="btn--readmore"> <i class="fa fa-caret-right"></i> Read More</a>
+							<a href="{{url('blog/'.$blog->url)}}" class="btn--readmore"> <i class="fa fa-caret-right"></i> Read More</a>
 						</div>
 					</article>
 				</div>
-				<div class="productCarousel-slide">
-					<article class="blog-post product-grid">
-						<div class="blog-post-figure">
-							<figure class="blog-thumbnail">
-								<a href="blog/mauros-dan-cosmo-iriure-dolor/index.html">
-									<img data-sizes="auto" class="img-fluid lazyload " src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/stencil/671eab80-1ec6-0137-c53b-0242ac11000a/e/80359d40-88bb-013b-10b2-66c6c8fc1ce5/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/images/stencil/464x320/uploaded_images/8.jpg?t=1517842522" alt="Mauros dan cosmo iriure dolor" title="Mauros dan cosmo iriure dolor">
-								</a>
-							</figure>
-						</div>
-						<div class="blog-header">
-							<h2 class="blog-title">
-								<a href="blog/mauros-dan-cosmo-iriure-dolor/index.html">Mauros dan cosmo iriure dolor</a>
-							</h2>
-							<div class="blog-meta">
-								<span class="blog-author"><i class="fa fa-user"></i>bigecommerce </span>
-								<span class="blog-date"><i class="fa fa-clock-o"></i> 5th Feb 2018 </span>
-							</div>
-						</div>
-						<div class="blog-post-body">
-							<div class="clear"></div>
-							<a href="blog/mauros-dan-cosmo-iriure-dolor/index.html" class="btn--readmore"> <i class="fa fa-caret-right"></i> Read More</a>
-						</div>
-					</article>
-				</div>
-				<div class="productCarousel-slide">
-					<article class="blog-post product-grid">
-						<div class="blog-post-figure">
-							<figure class="blog-thumbnail">
-								<a href="blog/duis-autem-vel-eum-iriure-dolor-ac001c/index.html">
-									<img data-sizes="auto" class="img-fluid lazyload " src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/stencil/671eab80-1ec6-0137-c53b-0242ac11000a/e/80359d40-88bb-013b-10b2-66c6c8fc1ce5/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/images/stencil/464x320/uploaded_images/6.jpg?t=1517842344" alt="Duis autem vel eum iriure dolor" title="Duis autem vel eum iriure dolor">
-								</a>
-							</figure>
-						</div>
-						<div class="blog-header">
-							<h2 class="blog-title">
-								<a href="blog/duis-autem-vel-eum-iriure-dolor-ac001c/index.html">Duis autem vel eum iriure dolor</a>
-							</h2>
-							<div class="blog-meta">
-								<span class="blog-author"><i class="fa fa-user"></i>bigecommerce </span>
-								<span class="blog-date"><i class="fa fa-clock-o"></i> 5th Feb 2018 </span>
-							</div>
-						</div>
-						<div class="blog-post-body">
-							<div class="clear"></div>
-							<a href="blog/duis-autem-vel-eum-iriure-dolor-ac001c/index.html" class="btn--readmore"> <i class="fa fa-caret-right"></i> Read More</a>
-						</div>
-					</article>
-				</div>
-				<div class="productCarousel-slide">
-					<article class="blog-post product-grid">
-						<div class="blog-post-figure">
-							<figure class="blog-thumbnail">
-								<a href="blog/consetetur-sadipscing-elitr-52d34d/index.html">
-									<img data-sizes="auto" class="img-fluid lazyload " src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/stencil/671eab80-1ec6-0137-c53b-0242ac11000a/e/80359d40-88bb-013b-10b2-66c6c8fc1ce5/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/images/stencil/464x320/uploaded_images/7.jpg?t=1517842387" alt="Consetetur sadipscing elitr" title="Consetetur sadipscing elitr">
-								</a>
-							</figure>
-						</div>
-						<div class="blog-header">
-							<h2 class="blog-title">
-								<a href="blog/consetetur-sadipscing-elitr-52d34d/index.html">Consetetur sadipscing elitr</a>
-							</h2>
-							<div class="blog-meta">
-								<span class="blog-author"><i class="fa fa-user"></i>bigecommerce </span>
-								<span class="blog-date"><i class="fa fa-clock-o"></i> 5th Feb 2018 </span>
-							</div>
-						</div>
-						<div class="blog-post-body">
-							<div class="clear"></div>
-							<a href="blog/consetetur-sadipscing-elitr-52d34d/index.html" class="btn--readmore"> <i class="fa fa-caret-right"></i> Read More</a>
-						</div>
-					</article>
-				</div>
-				<div class="productCarousel-slide">
-					<article class="blog-post product-grid">
-						<div class="blog-post-figure">
-							<figure class="blog-thumbnail">
-								<a href="blog/stet-clita-kasd-gubergren/index.html">
-									<img data-sizes="auto" class="img-fluid lazyload " src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/stencil/671eab80-1ec6-0137-c53b-0242ac11000a/e/80359d40-88bb-013b-10b2-66c6c8fc1ce5/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/images/stencil/464x320/uploaded_images/5.jpg?t=1517842332" alt="Stet clita kasd gubergren" title="Stet clita kasd gubergren">
-								</a>
-							</figure>
-						</div>
-						<div class="blog-header">
-							<h2 class="blog-title">
-								<a href="blog/stet-clita-kasd-gubergren/index.html">Stet clita kasd gubergren</a>
-							</h2>
-							<div class="blog-meta">
-								<span class="blog-author"><i class="fa fa-user"></i>bigecommerce </span>
-								<span class="blog-date"><i class="fa fa-clock-o"></i> 16th Sep 2017 </span>
-							</div>
-						</div>
-						<div class="blog-post-body">
-							<div class="clear"></div>
-							<a href="blog/stet-clita-kasd-gubergren/index.html" class="btn--readmore"> <i class="fa fa-caret-right"></i> Read More</a>
-						</div>
-					</article>
-				</div>
-				<div class="productCarousel-slide">
-					<article class="blog-post product-grid">
-						<div class="blog-post-figure">
-							<figure class="blog-thumbnail">
-								<a href="blog/duis-autem-vel-eum-iriure/index.html">
-									<img data-sizes="auto" class="img-fluid lazyload " src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/stencil/671eab80-1ec6-0137-c53b-0242ac11000a/e/80359d40-88bb-013b-10b2-66c6c8fc1ce5/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-3zqjz60dg3/images/stencil/464x320/uploaded_images/4.jpg?t=1517842320" alt="Duis autem vel eum iriure" title="Duis autem vel eum iriure">
-								</a>
-							</figure>
-						</div>
-						<div class="blog-header">
-							<h2 class="blog-title">
-								<a href="blog/duis-autem-vel-eum-iriure/index.html">Duis autem vel eum iriure</a>
-							</h2>
-							<div class="blog-meta">
-								<span class="blog-author"><i class="fa fa-user"></i>bigecommerce </span>
-								<span class="blog-date"><i class="fa fa-clock-o"></i> 16th Jun 2017 </span>
-							</div>
-						</div>
-						<div class="blog-post-body">
-							<div class="clear"></div>
-							<a href="blog/duis-autem-vel-eum-iriure/index.html" class="btn--readmore"> <i class="fa fa-caret-right"></i> Read More</a>
-						</div>
-					</article>
-				</div>
+				@endforeach
 			</div>
 		</div>
 	</div>

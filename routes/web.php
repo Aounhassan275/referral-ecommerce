@@ -160,6 +160,9 @@ Route::view('withdraw/on_hold', 'admin.withdraw.hold')->name('withdraw.holds');
   Route::resource('note', 'NoteController'); 
   /******************Blog Categroy ROUTES****************/
   Route::resource('blog_category', 'BlogCategoryController'); 
+  Route::resource('blog', 'BlogController'); 
+  Route::resource('blog_tag', 'BlogTagController'); 
+  Route::resource('blog_image', 'BlogImageController'); 
   Route::resource('payment_policy', 'PaymentPolicyController'); 
 });
 });
@@ -359,6 +362,8 @@ Route::view('withdraw', 'front.withdraw.index');
 Route::view('terms_and_condition', 'front.term.index'); 
 Route::view('privacy_policy', 'front.privacy_policy.index'); 
 // Route::view('forget_password', 'user.auth.forget'); 
+Route::get('blogs', 'App\Http\Controllers\FrontendController@showBlogs')->name('blog.index');
+Route::get('blog/{url}', 'App\Http\Controllers\FrontendController@showBlogDetails')->name('blog.show');
 
 /******************FUNCTIONALITY ROUTES****************/
 Route::get('/cd', function() {
