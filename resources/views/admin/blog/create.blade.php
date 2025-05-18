@@ -42,7 +42,7 @@
                         
                         <div class="form-group col-12">
                             <label class="form-label">Blog Description</label>
-                            <textarea name="description" class="form-control" required id="" rows="2"></textarea>
+                            <textarea name="description" data-provide="markdown" required rows="14"></textarea>
                         </div>
                    </div>
                     <div class="text-right">

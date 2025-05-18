@@ -38,7 +38,8 @@
                    <div class="row">
                         <div class="form-group col-12">
                             <label class="form-label">Blog Description</label>
-                            <textarea name="description" class="form-control" required id="" rows="2">{{$blog->description}}</textarea>
+                            <textarea name="description" data-provide="markdown" rows="14">{{$blog->description}}</textarea>
+                            {{-- <textarea name="description" class="form-control" required id="" rows="2">{{$blog->description}}</textarea> --}}
                         </div>
                    </div>
                     <div class="text-right">
