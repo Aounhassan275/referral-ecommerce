@@ -270,6 +270,7 @@ class UserController extends Controller
             ]);
         }
         $request->merge(['hide_profile' => $request->hide_profile?1:0]);
+        $request->merge(['is_appointment' => $request->is_appointment?1:0]);
         $user->update($request->except('password'));
         toastr()->success('Your Informations Updated successfully');
         return redirect()->back();
@@ -419,5 +420,12 @@ class UserController extends Controller
             // dd($e->getMessage());
         }
         return view($this->directory.'.coin.index', compact('currencies'));
+    }
+    public function updateSpeciality(Request $request)
+    {
+        $user = Auth::user();
+        $user->update($request->all());
+        toastr()->success('Specaility Description Updated successfully');
+        return redirect()->back();
     }
 }

@@ -223,6 +223,7 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'App\Http\Control
      /******************Withdraw  ROUTES****************/
      Route::resource('withdraw', 'WithdrawController');  
      /******************USER PROFILE  ROUTES****************/
+     Route::post('update_speciality', 'UserController@updateSpeciality')->name('update_speciality');  
      Route::resource('user', 'UserController');  
      /******************Earning ROUTES****************/
      Route::get('earning/trade_income', 'EarningController@trade_income')->name('earning.trade_income');
@@ -297,6 +298,10 @@ Route::group(['prefix' => 'user', 'as'=>'user.','namespace' => 'App\Http\Control
   Route::resource('user_special', 'UserSpecialController');  
   Route::resource('user_main_section', 'UserMainSectionController');  
   Route::resource('user_faq', 'UserFaqController');  
+  Route::resource('speciality', 'SpecialityController');  
+  
+  // Appointment
+    Route::resource('appointment', 'AppointmentController');  
 });
 
 
@@ -327,6 +332,7 @@ Route::post('check_refferral_code', 'App\Http\Controllers\FrontendController@che
 Route::post('search_user', 'App\Http\Controllers\FrontendController@search_user')->name('search_user');
 Route::post('search_brand', 'App\Http\Controllers\FrontendController@search_brand')->name('search_brand');
 Route::post('store_user_review', 'App\Http\Controllers\FrontendController@storeUserReview')->name('store_user_review');
+Route::post('store_appointment', 'App\Http\Controllers\FrontendController@storeUserAppointment')->name('store_appointment');
 //Service Provider Routes
 Route::get('our_service', 'App\Http\Controllers\ServiceFrontendController@showService')->name('service.index');
 Route::get('our_service/{id}', 'App\Http\Controllers\ServiceFrontendController@showServiceDetails')->name('service.show');

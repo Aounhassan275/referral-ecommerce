@@ -419,6 +419,14 @@
                       <span class="pcoded-mtext">Loan</span>
                     </a>
                   </li>
+				  <li class="{{Request::is('user/appointment')?'active':''}}">
+                    <a href="{{route('user.appointment.index')}}">
+                      <span class="pcoded-micon"
+                        ><i class="feather icon-menu"></i
+                      ></span>
+                      <span class="pcoded-mtext">Appointment</span>
+                    </a>
+                  </li>
 				  <li class="{{Request::is('user/stock')?'active':''}}">
                     <a href="{{route('user.stock.index')}}">
                       <span class="pcoded-micon"

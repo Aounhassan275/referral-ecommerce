@@ -449,247 +449,133 @@
 
 
     <!-- ======= Services Section ======= -->
+    @if($specialities->count() > 0)
     <section id="services" class="services services">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Services</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>Speciality</h2>
+          <p>{{$user->speciality_description}}</p>
         </div>
 
         <div class="row">
+          @foreach($specialities as $speciality)
           <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon"><i class="fas fa-heartbeat"></i></div>
-            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+            <div class="icon"><img src="{{asset($speciality->image)}}" alt=""></div>
+            <h4 class="title"><a href="#">{{$speciality->name}}</a></h4>
+            <p class="description">{{$speciality->description}}</p>
           </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon"><i class="fas fa-pills"></i></div>
-            <h4 class="title"><a href="">Dolor Sitema</a></h4>
-            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon"><i class="fas fa-hospital-user"></i></div>
-            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon"><i class="fas fa-dna"></i></div>
-            <h4 class="title"><a href="">Magni Dolores</a></h4>
-            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon"><i class="fas fa-wheelchair"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon"><i class="fas fa-notes-medical"></i></div>
-            <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
-          </div>
+          @endforeach
         </div>
 
       </div>
     </section><!-- End Services Section -->
-
+    @endif
     <!-- ======= Appointment Section ======= -->
-    <section id="appointment" class="appointment section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Make an Appointment</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <form action="forms/appointment.php" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
-          <div class="row">
-            <div class="col-md-4 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-            </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-            </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 form-group mt-3">
-              <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" required>
-            </div>
-            <div class="col-md-4 form-group mt-3">
-              <select name="department" id="department" class="form-select">
-                <option value="">Select Department</option>
-                <option value="Department 1">Department 1</option>
-                <option value="Department 2">Department 2</option>
-                <option value="Department 3">Department 3</option>
-              </select>
-            </div>
-            <div class="col-md-4 form-group mt-3">
-              <select name="doctor" id="doctor" class="form-select">
-                <option value="">Select Doctor</option>
-                <option value="Doctor 1">Doctor 1</option>
-                <option value="Doctor 2">Doctor 2</option>
-                <option value="Doctor 3">Doctor 3</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
-          </div>
-          <div class="my-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-          </div>
-          <div class="text-center"><button type="submit">Make an Appointment</button></div>
-        </form>
-
-      </div>
-    </section><!-- End Appointment Section -->
-
+    
     @if($specials->count() > 0)
-    <!-- ======= Departments Section ======= -->
-    <section id="departments" class="departments">
-      <div class="container" data-aos="fade-up">
+      @if($user->is_appointment)
+        <section id="appointment" class="appointment section-bg">
+          <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Departments</h2>
-          <p>We Have Special For You.</p>
-        </div>
+            <div class="section-title">
+              <h2>Make an Appointment</h2>
+              <p>{{$user->appointment_description}}</p>
+            </div>
 
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-3">
-            <ul class="nav nav-tabs flex-column">
-              @foreach($specials as $key => $special)
-              <li class="nav-item">
-                <a
-                  class="nav-link {{$key == 0 ? 'active show' : ''}}"
-                  data-bs-toggle="tab"
-                  href="#special-{{$key}}"
-                  >{{$special->title}}</a
-                >
-              </li>
-              @endforeach
-            </ul>
-          </div>
-          <div class="col-lg-9 mt-4 mt-lg-0">
-            <div class="tab-content">
-              @foreach($specials as $specialKey => $specialObject)
-              <div class="tab-pane {{$specialKey == 0 ? 'active show': ''}}" id="special-{{$specialKey}}">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>{{$specialObject->heading}}</h3>
-                    <p>
-                      {{$specialObject->description}}
-                    </p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img
-                      src="{{asset($specialObject->image)}}"
-                      alt=""
-                      class="img-fluid"
-                    />
-                  </div>
+            <form action="{{route('store_appointment')}}" method="post" role="form" class="" data-aos="fade-up" data-aos-delay="100">
+              @csrf
+              <div class="row">
+                <input type="hidden" name="user_id" value="{{$user->id}}">
+                <div class="col-md-4 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-4 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+                <div class="col-md-4 form-group mt-3 mt-md-0">
+                  <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" required>
                 </div>
               </div>
-              @endforeach
+              <div class="row">
+                <div class="col-md-4 form-group mt-3">
+                  <input type="date" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" required>
+                </div>
+                <div class="col-md-4 form-group mt-3">
+                  <select name="department_id" id="department" class="form-select">
+                    <option value="">Select Department</option>
+                    @foreach($specials as $special)
+                    <option value="{{$special->id}}">{{$special->title}}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+              </div>
+              <div class="text-center mt-3"><button type="submit" class="btn btn-primary">Make an Appointment</button></div>
+            </form>
+
+          </div>
+        </section><!-- End Appointment Section -->
+      @endif
+      <!-- ======= Departments Section ======= -->
+      <section id="departments" class="departments">
+        <div class="container" data-aos="fade-up">
+
+          <div class="section-title">
+            <h2>Departments</h2>
+            <p>We Have Special For You.</p>
+          </div>
+
+          <div class="row" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-3">
+              <ul class="nav nav-tabs flex-column">
+                @foreach($specials as $key => $special)
+                <li class="nav-item">
+                  <a
+                    class="nav-link {{$key == 0 ? 'active show' : ''}}"
+                    data-bs-toggle="tab"
+                    href="#special-{{$key}}"
+                    >{{$special->title}}</a
+                  >
+                </li>
+                @endforeach
+              </ul>
+            </div>
+            <div class="col-lg-9 mt-4 mt-lg-0">
+              <div class="tab-content">
+                @foreach($specials as $specialKey => $specialObject)
+                <div class="tab-pane {{$specialKey == 0 ? 'active show': ''}}" id="special-{{$specialKey}}">
+                  <div class="row">
+                    <div class="col-lg-8 details order-2 order-lg-1">
+                      <h3>{{$specialObject->heading}}</h3>
+                      <p>
+                        {{$specialObject->description}}
+                      </p>
+                    </div>
+                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                      <img
+                        src="{{asset($specialObject->image)}}"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+                </div>
+                @endforeach
+              </div>
             </div>
           </div>
-        </div>
 
-      </div>
-    </section><!-- End Departments Section -->
+        </div>
+      </section><!-- End Departments Section -->
     @endif
 
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Testimonials</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{asset('adminty-user-assets/img/testimonials/testimonials-1.jpg')}}" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{asset('adminty-user-assets/img/testimonials/testimonials-2.jpg')}}" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{asset('adminty-user-assets/img/testimonials/testimonials-3.jpg')}}" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{asset('adminty-user-assets/img/testimonials/testimonials-4.jpg')}}" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{asset('adminty-user-assets/img/testimonials/testimonials-5.jpg')}}" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Testimonials Section -->
 
     <!-- ======= Doctors Section ======= -->
-    <section id="doctors" class="doctors section-bg">
+    {{-- <section id="doctors" class="doctors section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -774,36 +660,36 @@
         </div>
 
       </div>
-    </section><!-- End Doctors Section -->
+    </section><!-- End Doctors Section --> --}}
 
     <!-- ======= Gallery Section ======= -->
+    @if($allProducts->count() > 0)
     <section id="gallery" class="gallery">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Gallery</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>Company Products</h2>
+          {{-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> --}}
         </div>
 
         <div class="gallery-slider swiper">
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets/img/gallery/gallery-1.jpg')}}"><img src="{{asset('adminty-user-assets/img/gallery/gallery-1.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets/img/gallery/gallery-2.jpg')}}"><img src="{{asset('adminty-user-assets/img/gallery/gallery-2.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets/img/gallery/gallery-3.jpg')}}"><img src="{{asset('adminty-user-assets/img/gallery/gallery-3.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets/img/gallery/gallery-4.jpg')}}"><img src="{{asset('adminty-user-assets/img/gallery/gallery-4.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets/img/gallery/gallery-5.jpg')}}"><img src="{{asset('adminty-user-assets/img/gallery/gallery-5.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets/img/gallery/gallery-6.jpg')}}"><img src="{{asset('adminty-user-assets/img/gallery/gallery-6.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets/img/gallery/gallery-7.jpg')}}"><img src="{{asset('adminty-user-assets/img/gallery/gallery-7.jpg')}}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="{{asset('adminty-user-assets/img/gallery/gallery-8.jpg')}}"><img src="{{asset('adminty-user-assets/img/gallery/gallery-8.jpg')}}" class="img-fluid" alt=""></a></div>
+            @foreach($allProducts as $allProduct)
+            <div class="swiper-slide">
+              <a class="gallery-lightbox" href="{{route('product.show',$allProduct->uuid)}}">
+                <img src="{{asset($allProduct->images->first()->image)}}" class="img-fluid" alt="">
+              </a>
+            </div>
+            @endforeach
           </div>
           <div class="swiper-pagination"></div>
         </div>
 
       </div>
     </section><!-- End Gallery Section -->
-
+    @endif
     <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
+    {{-- <section id="pricing" class="pricing">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -885,7 +771,7 @@
         </div>
 
       </div>
-    </section><!-- End Pricing Section -->
+    </section><!-- End Pricing Section --> --}}
 
      <!-- ======= Menu Section ======= -->
     <section id="menu" class="menu">
@@ -1180,8 +1066,17 @@
       </div>
 
       <div>
-        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
-      </div>
+        @php
+            $address = urlencode($user->business_address);
+            $src = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAOskesXH1m6112vteXkScm3iC0JO5ktII&q={$address}";
+        @endphp
+        <iframe
+            style="border:0; width: 100%; height: 350px;"
+            src="{{ $src }}"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+    </div>
 
       <div class="container">
 
@@ -1194,21 +1089,28 @@
                 <div class="info-box">
                   <i class="bx bx-map"></i>
                   <h3>Our Address</h3>
-                  <p>A108 Adam Street, New York, NY 535022</p>
+                  <p>{{$user->business_address}}</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box mt-4">
                   <i class="bx bx-envelope"></i>
                   <h3>Email Us</h3>
-                  <p>info@example.com<br>contact@example.com</p>
+                  <p>{{$user->reservation_email}}</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box mt-4">
                   <i class="bx bx-phone-call"></i>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                  <p>{{$user->reservation_phone}}</p>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="info-box mt-4">
+                  <i class="bx bx-time"></i>
+                  <h3>Opening & Closing</h3>
+                  <p>{{$user->opening_hour}}</p>
                 </div>
               </div>
             </div>
@@ -1216,34 +1118,67 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required="">
+            @if (Auth::guard('user')->check())
+                        <h3>Add Review</h3>
+              <form action="{{route('store_user_review')}}" method="post" role="form" class="">
+                @csrf
+                <input type="hidden" name="reviewer_id" value="{{request()->session()->get('user_id')}}">
+                <input type="hidden" name="user_id" value="{{$user->id}}">
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" value="{{request()->session()->get('name')}}" readonly required="">
+                  </div>
+                  <div class="col-md-6  form-group">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required="">
+                  </div>
                 </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required="">
+                <div class="form-group mt-3">
+                  <textarea class="form-control" name="message" rows="7" placeholder="Message" required=""></textarea>
                 </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required="">
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="7" placeholder="Message" required=""></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
+                <div class="text-center  mt-3"><button class="btn btn-primary" type="submit">Send Message</button></div>
+              </form>
+            @endif
           </div>
 
         </div>
 
       </div>
     </section><!-- End Contact Section -->
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Testimonials</h2>
+          {{-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> --}}
+        </div>
+
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+            @foreach($user->userReviews as $review)
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  {{$review->message}}
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                  @if($review->reviewer)
+                    <img src="{{asset($review->reviewer->image)}}" class="testimonial-img" alt="">
+                    <h3>{{$review->reviewer->name}}</h3>
+                  @else
+                    <img src="{{asset('adminty-user-assets/img/testimonials/testimonials-1.jpg')}}" class="testimonial-img" alt="">
+                  @endif
+                <h4>{{$review->subject}}</h4>
+              </div>
+            </div><!-- End testimonial item -->
+            @endforeach
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
 
   </main><!-- End #main -->
 
@@ -1252,45 +1187,36 @@
     <div class="footer-top">
       <div class="container">
         <div class="row">
-
-          <div class="col-lg-4 col-md-6">
-            <div class="footer-info">
-              <h3>My Social Links</h3>
-              <div class="social-links mt-3">
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              <a href="#" class="youtube"><i class="bi bi-youtube"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="tiktok"><i class="bi bi-tiktok"></i></a>
-              <a href="#" class="snack video"><i class="bi bi-camera-reels"></i></a>  
+            <div class="col-lg-12 col-md-12 text-center">
+              <div class="footer-info">
+                <h3>My Social Links</h3>
+                <div class="social-links mt-3">
+                  @if($user->facebook)
+                <a href="{{$user->facebook}}" class="facebook"><i class="bi bi-facebook"></i></a>
+                @endif
+                @if($user->whatsapp)
+                <a href="https://api.whatsapp.com/send?phone={{@$user->whatsapp}}" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+                @endif
+                @if($user->twitter)
+                <a href="{{$user->twitter}}" class="twitter"><i class="bi bi-twitter"></i></a>
+                @endif
+                @if($user->linkedin)
+                <a href="{{$user->linkedin}}" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                @endif
+                @if($user->youtube)
+                <a href="{{$user->youtube}}" class="youtube"><i class="bi bi-youtube"></i></a>
+                @endif
+                @if($user->instagram)
+                <a href="{{$user->instagram}}" class="instagram"><i class="bi bi-instagram"></i></a>
+                @endif
+                @if($user->tiktok)
+                <a href="{{$user->tiktok}}" class="tiktok"><i class="bi bi-tiktok"></i></a>
+                @endif
+                @if($user->snack_video)
+                <a href="{{$user->snack_video}}" class="snack video"><i class="bi bi-camera-reels"></i></a>  
+                  @endif
               </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h3>Wlinkup</h3>
-              <p>
-                Sargodha <br>
-                Punjab, Pakistan
-              </p>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Reservations</h4>
-            <p>
-              <strong>Phone:</strong> +9 2300 00400 08<br>
-              <strong>Email:</strong> wlinkup.com@gmail.com
-            </p>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-newsletter">
-              <h4>Opening Hours</h4>
-              <p>
-                <strong>Mon-Sat: 11AM</strong> - 20PM<br>
-                Sunday: Closed
-              </p>
+              </div>
             </div>
           </div>
         </div>
@@ -1298,8 +1224,8 @@
     </div>
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>wlinkup</span></strong>. All Rights Reserved
-        Designed by <a href="https://buyebazar.com/">buyebazar</a>
+        &copy; Copyright <strong><span>{{App\Models\Setting::siteName()}}</span></strong>. All Rights Reserved
+        Designed by <a href="{{url('/')}}">{{App\Models\Setting::siteName()}}</a>
       </div>
     </div>
 
@@ -1319,7 +1245,21 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('adminty-user-assets/js/main.js')}}"></script>
-
+  <script type="text/javascript" src="{{asset('clipboard.js')}}"></script>
+  <script type="text/javascript">
+    var clipboard = new Clipboard('.copy-button');
+          clipboard.on('success', function(e) {
+              copyText.select();
+              var $div2 = $("#coppied");
+              console.log($div2);
+              console.log($div2.is(":visible"));
+              if ($div2.is(":visible")) { return; }
+              $div2.show();
+              setTimeout(function() {
+                  $div2.fadeOut();
+              }, 800);
+          });
+  </script>
 </body>
 
 </html>

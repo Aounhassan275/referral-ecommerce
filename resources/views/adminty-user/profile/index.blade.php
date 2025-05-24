@@ -356,6 +356,13 @@ UPDATE YOUR OWN PROFILE
                         <div class="form-group col-md-12">
                             <label><input  @if(Auth::user()->hide_profile) checked="" @endif  type="checkbox" name="hide_profile" > Hide Profile On Website</label>
                         </div>
+                        <div class="form-group col-md-12">
+                            <label><input  @if(Auth::user()->is_appointment) checked="" @endif  type="checkbox" name="is_appointment" > Show Appointment On Website</label>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Appointment Description</label>
+                            <textarea class="form-control summernote"   name="appointment_description">{{Auth::user()->appointment_description}}</textarea>
+                        </div>
                    </div>
                     
                     <div class="text-right">
@@ -701,10 +708,80 @@ UPDATE YOUR OWN PROFILE
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Speciality</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card-body">
+                
+                @if(App\Models\Speciality::where('user_id',Auth::user()->id)->count() < 6)
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <button data-toggle="modal" data-target="#create-speciality-modal"
+                            class="btn btn-primary float-right">Create Speciality</button>
+                        <button data-toggle="modal" data-target="#update-speciality-modal" style="margin-right:10px;"
+                            class="btn btn-success float-right">Update Speciality Description</button>
+                        
+                    </div>
+                </div>
+                @endif
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sr#</th>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    @foreach (App\Models\Speciality::where('user_id',Auth::user()->id)->get() as $key => $speciality)
+                                    <tr> 
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$speciality->name}}</td>
+                                        <td>
+                                            <img src="{{asset($speciality->image)}}" height="50" width="50" alt="">
+                                        </td>
+                                        <td>{{$speciality->description}}</td>
+                                        <td>
+                                            <button data-toggle="modal" data-target="#edit-speciality-modal"
+                                                description="{{$speciality->description}}" 
+                                                name="{{$speciality->name}}" 
+                                                id="{{$speciality->id}}" 
+                                                class="edit-speciality-btn btn btn-primary">Edit</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endif
 @include('adminty-user.profile.partials.specials-modals')
 @include('adminty-user.profile.partials.event-modals')
 @include('adminty-user.profile.partials.user-special-modals')
+@include('adminty-user.profile.partials.user-speciality-modals')
 @include('adminty-user.profile.partials.user-main-section-modals')
 @include('adminty-user.profile.partials.user-faq-section-modals')
 @endsection
@@ -792,6 +869,14 @@ UPDATE YOUR OWN PROFILE
             $('#heading').val(heading);
             $('#description').html(description);
             $('#updateForm').attr('action','{{route('user.special.update','')}}' +'/'+id);
+        });
+        $('.edit-speciality-btn').click(function(){
+            let id = $(this).attr('id');
+            let description = $(this).attr('description');
+            let name = $(this).attr('name');
+            $('#speciality_name').val(name);
+            $('#speciality_description').html(description);
+            $('#updateFormForSpeciality').attr('action','{{route('user.speciality.update','')}}' +'/'+id);
         });
         
         $('.edit-event-btn').click(function(){

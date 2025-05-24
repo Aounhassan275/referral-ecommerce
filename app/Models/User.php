@@ -75,6 +75,9 @@ class User extends Authenticatable
         'star_rank_income',
         'direct_team_income',
         'purchase_reward',
+        'speciality_description',
+        'is_appointment',
+        'appointment_description',
     ];
 
     /**

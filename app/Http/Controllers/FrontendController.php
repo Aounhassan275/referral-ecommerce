@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\Appointment;
 use App\Models\Blog;
 use App\Models\Brand;
 use App\Models\Category;
@@ -15,6 +16,7 @@ use App\Models\Product;
 use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Special;
+use App\Models\Speciality;
 use App\Models\Type;
 use App\Models\User;
 use App\Models\UserFaq;
@@ -270,11 +272,12 @@ class FrontendController extends Controller
         $singleProduct = Product::where('user_id',$user->id)->orderBy('created_at','DESC')->first();
         $events = Event::where('user_id',$user->id)->orderBy('created_at','DESC')->get()->take(3);
         $specials = Special::where('user_id',$user->id)->get()->take(5);
+        $specialities = Speciality::where('user_id',$user->id)->get()->take(6);
         $userSpecials = UserSpecial::where('user_id',$user->id)->get()->take(4);
         $userMainSections = UserMainSection::where('user_id',$user->id)->get()->take(4);
         $userFaqs = UserFaq::where('user_id',$user->id)->get()->take(6);
         if(Helper::dashboard() == 'adminty-user'){
-            return view('front.product.adminty-user',compact('user','brands','products','events','userSpecials','specials','userMainSections','singleProduct','allProducts','userFaqs'));
+            return view('front.product.adminty-user',compact('user','brands','products','events','userSpecials','specials','userMainSections','singleProduct','allProducts','userFaqs','specialities'));
         }else{
             return view('front.product.user',compact('user','brands','products'));
         }
@@ -342,5 +345,11 @@ class FrontendController extends Controller
             return redirect()->to(url('/'));
         }
         return view('front.blog.show',compact('blog'));
+    }
+    public function storeUserAppointment(Request $request)
+    {
+        Appointment::create($request->all());
+        toastr()->success('Appointment is Created Successfully');
+        return redirect()->back();
     }
 }
