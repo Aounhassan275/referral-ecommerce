@@ -17,6 +17,10 @@ class Category extends Model
     {
         return $this->hasMany(Brand::class);
     }
+    public function totalBrands()
+    {
+        return Brand::where('category_id',$this->id)->whereHas('products')->count();
+    }
     public function products()
     {
         return $this->hasMany(Product::class);

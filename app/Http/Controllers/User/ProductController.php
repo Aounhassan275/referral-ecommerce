@@ -81,7 +81,26 @@ class ProductController extends Controller
                         toastr()->error('Insufficent amount in Cash Wallet!');
                         return redirect()->back();
                     }
-                }   
+                }else if($user->checkLimitForProducts() == true){
+                    $amount = $request->price + Setting::productFee();
+                    if($user->cash_wallet >= $amount)
+                    {
+                        $user->update([
+                            'cash_wallet' => $user->cash_wallet - $amount,
+                        ]);
+                        $company_account= CompanyAccount::find(1);
+                        $company_account->update([
+                            'balance' => $company_account->balance + $amount,
+                        ]);
+                    }else{
+                        toastr()->error('Insufficent amount in Cash Wallet!');
+                        return redirect()->back();
+                    }
+                }else{
+                    
+                        toastr()->error('Something Went Wrong!');
+                        return redirect()->back();
+                }
             }else{
                 if(Setting::enablepurchase() == 1)
                 {
@@ -202,7 +221,26 @@ class ProductController extends Controller
                     toastr()->error('Insufficent amount in Cash Wallet!');
                     return redirect()->back();
                 }
-            }   
+            } else if($user->checkLimitForProducts() == true){
+                    $amount = $product->price + Setting::productFee();
+                    if($user->cash_wallet >= $amount)
+                    {
+                        $user->update([
+                            'cash_wallet' => $user->cash_wallet - $amount,
+                        ]);
+                        $company_account= CompanyAccount::find(1);
+                        $company_account->update([
+                            'balance' => $company_account->balance + $amount,
+                        ]);
+                    }else{
+                        toastr()->error('Insufficent amount in Cash Wallet!');
+                        return redirect()->back();
+                    }
+                }else{
+                    
+                        toastr()->error('Something Went Wrong!');
+                        return redirect()->back();
+                }  
         }else{
             if(Setting::enablepurchase() == 1)
             {

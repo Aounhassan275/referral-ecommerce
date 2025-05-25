@@ -325,6 +325,7 @@ Route::get('country/{name}', 'App\Http\Controllers\FrontendController@showCountr
 Route::get('products', 'App\Http\Controllers\FrontendController@showProducts')->name('product.index');
 Route::get('product/{uuid}', 'App\Http\Controllers\FrontendController@showProductDetails')->name('product.show');
 Route::get('product_user/{name}', 'App\Http\Controllers\FrontendController@showProductUserDetails')->name('product.user');
+Route::get('get_product_detail/{id}', 'App\Http\Controllers\FrontendController@getProductDetail')->name('product.detail');
 Route::get('product_like/{id}', 'App\Http\Controllers\FrontendController@showProductLike')->name('product.like');
 Route::post('product/brands', 'App\Http\Controllers\FrontendController@getProductBrands')->name('product.brands');
 Route::get('product_dislike/{id}', 'App\Http\Controllers\FrontendController@showProductDisLike')->name('product.dislike');

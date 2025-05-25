@@ -45,7 +45,7 @@
 							<a href="{{route('services.show',str_replace(' ', '_',$service->name))}}">{!! substr( $service->name, 0, 15) !!}</a>
 						</h4>
 						<div class="price-section price-section--withoutTax ">
-							<span data-product-price-without-tax class="price price--withoutTax">(<span style="color:green;"><i class="fa fa-eye"></i>{{$service->types->count()}}</span>)</span>
+							<span data-product-price-without-tax class="price price--withoutTax">(<span style="color:green;"><i class="fa fa-eye"></i>{{$service->typeWithUsers()}}</span>)</span>
 						</div>
 						<div class="description"> {!! substr( $service->name, 0, 15) !!}... </div>
 						<div class="product-colors" data-product-id="130"></div>

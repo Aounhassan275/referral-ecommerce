@@ -9,6 +9,7 @@ use App\Models\Service;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServiceFrontendController extends Controller
 {
@@ -108,24 +109,26 @@ class ServiceFrontendController extends Controller
     {
         if($request->keyword)
         {
-            $countries = Country::where('name', 'LIKE', '%'.$request->keyword.'%')->paginate(12);
+            $countries = Country::where('name', 'LIKE', '%'.$request->keyword.'%')
+                ->paginate(12);
         }
         else{
-            
-            $countries = Country::select('countries.*')
-                        ->join('users', 'countries.id', 'users.country_id')
-                        ->distinct()
-                        ->paginate(12);
+            $countries = Country::whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('users')
+                    ->whereColumn('users.country_id', 'countries.id');
+            })->paginate(12);
         }
         return view('front.service_country.index',compact('countries'));
     }
     public function showCountryDetails($name)
     {
         $country = Country::where('name',str_replace('_', ' ',$name))->first();
-        $cities = City::select('cities.*')
-            ->join('users', 'cities.id', 'users.city_id')
-            ->where('cities.country_id',$country->id)
-            ->distinct()
+        $cities = City::select('cities.*')->whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('users')
+                    ->whereColumn('users.city_id', 'cities.id');
+            })->where('cities.country_id',$country->id)
             ->paginate(12);
         return view('front.service_country.show',compact('country','cities'));
     }
@@ -143,14 +146,10 @@ class ServiceFrontendController extends Controller
     public function showServicesDetails($name)
     {
         $service = Service::where('name',str_replace('_', ' ',$name))->first();
-        $types = Type::where('service_id',$service->id)->orderBy('name','ASC')->get();
-        $typeId = [];
-        foreach($types as $type){
-            if($type->users->count() > 0){
-                $typeId[] = $type->id;
-            }
-        }
-        $types = Type::whereIn('id',$typeId)->orderBy('name','ASC')->paginate(30);
+        $types = Type::where('service_id', $service->id)
+                    ->whereHas('users') // ensures type has at least 1 user
+                    ->orderBy('name', 'ASC')
+                    ->paginate(30);
         return view('front.services.show',compact('service','types'));
     }
     public function showServiceTypes(Request $request)

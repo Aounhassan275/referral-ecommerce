@@ -54,6 +54,34 @@ class Setting extends Model
         else 
             return 'revo_template/s-3zqjz60dg3/content/site/banner/home1/2.jpg';
     }
+    public static function productSideImage(){
+        $image = (new static)::where('name','Home Product Side Image')->first();
+        if($image)
+            return $image->image;
+        else 
+            return 'revo_template/s-3zqjz60dg3/content/site/banner/home1/6.jpg';
+    }
+    public static function serviceSideImage(){
+        $image = (new static)::where('name','Home Service Side Image')->first();
+        if($image)
+            return $image->image;
+        else 
+            return 'revo_template/s-3zqjz60dg3/content/site/banner/home1/7.jpg';
+    }
+    public static function postSideImage(){
+        $image = (new static)::where('name','Home Post Side Image')->first();
+        if($image)
+            return $image->image;
+        else 
+            return 'revo_template/s-3zqjz60dg3/content/site/banner/home1/8.jpg';
+    }
+    public static function homeBannerImage(){
+        $image = (new static)::where('name','Home Banner Image')->first();
+        if($image)
+            return $image->image;
+        else 
+            return 'revo_template/s-3zqjz60dg3/content/site/banner/home2/4.jpg';
+    }
     public static function sliderTwoImage(){
         $image = (new static)::where('name','Slider 2')->first();
         if($image)

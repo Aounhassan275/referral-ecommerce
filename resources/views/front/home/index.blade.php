@@ -308,7 +308,7 @@
 				<div class="ltabs-items-image">
 					<div class="banners">
 						<div class="banner-figure">
-							<a href="#" title="Fashion"><img class="img-fluid" src="{{asset('revo_template/s-3zqjz60dg3/content/site/banner/home1/6.jpg')}}" alt="Fashion" /></a>
+							<a href="#" title="Fashion"><img class="img-fluid" src="{{asset(App\Models\Setting::productSideImage())}}" alt="Fashion" /></a>
 						</div>
 					</div>
 				</div>
@@ -414,7 +414,7 @@
 				<div class="ltabs-items-image">
 					<div class="banners">
 						<div class="banner-figure">
-							<a href="#" title="Electronics"><img class="img-fluid" src="{{asset('revo_template/s-3zqjz60dg3/content/site/banner/home1/7.jpg')}}" alt="Electronics" /></a>
+							<a href="#" title="Electronics"><img class="img-fluid" src="{{asset(App\Models\Setting::serviceSideImage())}}" alt="Electronics" /></a>
 						</div>
 					</div>
 				</div>
@@ -438,7 +438,7 @@
 				<div class="ltabs-items-image">
 					<div class="banners">
 						<div class="banner-figure">
-							<a href="#" title="Sports"><img class="img-fluid" src="{{asset('revo_template/s-3zqjz60dg3/content/site/banner/home1/8.jpg')}}" alt="Sports" /></a>
+							<a href="#" title="Sports"><img class="img-fluid" src="{{asset(App\Models\Setting::postSideImage())}}" alt="Sports" /></a>
 						</div>
 					</div>
 				</div>
@@ -492,7 +492,7 @@
 		<div class="block-content clearfix ">
 			<div class="banners">
 				<div class="banner-figure">
-					<a href="#"><img class="img-fluid" src="{{asset('revo_template/s-3zqjz60dg3/content/site/banner/home2/4.jpg')}}" alt=" " /></a>
+					<a href="#"><img class="img-fluid" src="{{asset(App\Models\Setting::homeBannerImage())}}" alt=" " /></a>
 				</div>
 			</div>
 		</div>

@@ -44,14 +44,10 @@ class FrontendController extends Controller
     public function showCategoryDetails($name)
     {
         $category = Category::where('name',str_replace('_', ' ',$name))->first();
-        $brands = Brand::where('category_id',$category->id)->get();
-        $brandId = [];
-        foreach($brands as $brand){
-            if($brand->products->count() > 0){
-                $brandId[] = $brand->id;
-            }
-        }
-        $brands = Brand::whereIn('id',$brandId)->orderBy('created_at','ASC')->paginate(30);
+        $brands = Brand::where('category_id', $category->id)
+                    ->whereHas('products') // ensures type has at least 1 user
+                    ->orderBy('created_at', 'ASC')
+                    ->paginate(30);
         return view('front.category.show',compact('category','brands'));
     }
     public function home(Request $request)
@@ -184,21 +180,24 @@ class FrontendController extends Controller
         }
         else{
             
-            $countries = Country::select('countries.*')
-                        ->join('products', 'countries.id', 'products.country_id')
-                        ->distinct()
-                        ->paginate(12);
+            $countries = Country::whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('products')
+                    ->whereColumn('products.country_id', 'countries.id');
+            })->paginate(12);
         }
         return view('front.country.index',compact('countries'));
     }
     public function showCountryDetails($name)
     {
         $country = Country::where('name',str_replace('_', ' ',$name))->first();
-        $cities = City::select('cities.*')
-            ->join('products', 'cities.id', 'products.city_id')
-            ->where('cities.country_id',$country->id)
-            ->distinct()
+        $cities = City::select('cities.*')->whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('products')
+                    ->whereColumn('products.city_id', 'cities.id');
+            })->where('cities.country_id',$country->id)
             ->paginate(12);
+
         $products = Product::where('country_id',$country->id)->paginate(12);
         return view('front.country.show',compact('country','products','cities'));
     }
@@ -245,6 +244,15 @@ class FrontendController extends Controller
             $imagehtml .= '{src: "{{asset('.$image->image.')}}" },';
         }
         return view('front.product.show',compact('product','related_products','imagehtml'));
+    }
+    public function getProductDetail($id)
+    {
+        $singleProduct = Product::find($id);
+        $html = view('front.product.partials.product-details',compact('singleProduct'))->render();
+        return  [
+            'success' => true,
+            'html' => $html,
+        ];
     }
     public function getProductBrands(Request $request)
     {

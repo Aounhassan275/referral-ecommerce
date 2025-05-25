@@ -18,6 +18,12 @@ class Service extends Model
     {
         return $this->hasMany(Type::class,'service_id');
     }
+    public function typeWithUsers()
+    {
+        return Type::where('service_id', $this->id)
+                    ->whereHas('users') // ensures type has at least 1 user
+                    ->count();
+    }
     public function users()
     {
         return $this->hasMany(User::class);

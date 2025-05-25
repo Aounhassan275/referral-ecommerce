@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Medicio Bootstrap Template - Index</title>
+  <title>Profile | {{App\Models\Setting::siteName()}}</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('adminty-user-assets/img/favicon.png')}}" rel="icon">
+  <link href="{{asset('user_asset/'.App\Models\Setting::favicon().'.ico')}}" rel="icon">
   <link href="{{asset('adminty-user-assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -33,16 +33,16 @@
 <body>
 
   <!-- ======= Top Bar ======= -->
-  <div id="topbar" class="d-flex align-items-center top">
+  {{-- <div id="topbar" class="d-flex align-items-center top">
     <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
       <div class="align-items-center d-none d-md-flex">
-        <i class="bi bi-clock"></i> Monday - Saturday, 8AM to 10PM
+        <i class="bi bi-clock"></i> {{$user->opening_hour}}
       </div>
       <div class="d-flex align-items-center">
-        <i class="bi bi-phone"></i> Call us now +1 5589 55488 55
+        <i class="bi bi-phone"></i> Call us now {{$user->reservation_phone}}
       </div>
     </div>
-  </div>
+  </div> --}}
 
   <!-- ======= Header ======= -->
   <header id="header" class="fade-up">
@@ -805,7 +805,7 @@
             <div class="row gy-5">
               @foreach(App\Models\Product::where('user_id',$user->id)->where('brand_id',$productBrand->id)->get() as $product)
               <div class="col-lg-4 menu-item">
-                <a href="{{route('product.show',$product->uuid)}}" class="glightbox">
+                <a href="javascript::void();" onClick="getProductDetail('{{$product->id}}')" class="glightbox">
                   <img src="{{asset($product->images->first()->image)}}" class="menu-img img-fluid" alt=""></a>
                 <h4>{{$product->name}}</h4>
                 <p class="ingredients">
@@ -845,184 +845,188 @@
         </div>
        
         <!-- Open Content -->
-  @if($singleProduct)
-        <section class="bg-light">
-            <div class="container pb-5">
-              <div class="section-header text-center" >
-                <h2>Our Products </h2>
-                <p>Check Our <span>Single Product</span></p>
-              </div>
-                <div class="row">
-                  
-                    <div class="col-lg-5 mt-5">
-                        <div class="card mb-3">
-                            <img class="card-img img-fluid" src="{{asset($singleProduct->images->first()->image)}}" alt="Card image cap" id="product-detail">
-                        </div>
+        <div id="singleProductDetail">
+          @if($singleProduct)
+                <section class="bg-light">
+                    <div class="container pb-5">
+                      <div class="section-header text-center" >
+                        <h2>Our Products </h2>
+                        <p>Check Our <span>Single Product</span></p>
+                      </div>
                         <div class="row">
-                            <!--Start Controls-->
-                            <div class="col-1 align-self-center">
-                                <a href="#multi-item-example" role="button" data-bs-slide="prev">
-                                    <i class="text-dark fas fa-chevron-left"></i>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </div>
-                            <!--End Controls-->
-                            <!--Start Carousel Wrapper-->
-                            <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
-                                <!--Start Slides-->
-                                <div class="carousel-inner product-links-wap" role="listbox">
-
-                                    <!--First slide-->
-                                    <div class="carousel-item active">
-                                        <div class="row">
-                                          @foreach($singleProduct->images->take(3) as $productImage)
-                                            <div class="col-4">
-                                                <a href="#">
-                                                    <img class="card-img img-fluid" src="{{asset($productImage->image)}}" alt="Product Image 1">
-                                                </a>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <!--/.First slide-->
-
-                                    <!--Second slide-->
-                                    @if(count($singleProduct->images->skip(3)->take(3)) > 0)
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                          @foreach($singleProduct->images->skip(3)->take(3) as $nextProductImage)
-                                            <div class="col-4">
-                                                <a href="#">
-                                                    <img class="card-img img-fluid" src="{{asset($nextProductImage->image)}}" alt="Product Image 4">
-                                                </a>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    @endif
-                                    <!--/.Second slide-->
-
-                                    <!--Third slide-->
-                                    @if(count($singleProduct->images->skip(6)->take(3)) > 0)
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                          @foreach($singleProduct->images->skip(6)->take(3) as $nextProductImage)
-                                            <div class="col-4">
-                                                <a href="#">
-                                                    <img class="card-img img-fluid" src="{{asset($nextProductImage->image)}}" alt="Product Image 7">
-                                                </a>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    @endif
-                                    <!--/.Third slide-->
+                          
+                            <div class="col-lg-5 mt-5">
+                                <div class="card mb-3">
+                                    <img class="card-img img-fluid" src="{{asset($singleProduct->images->first()->image)}}" alt="Card image cap" id="product-detail">
                                 </div>
-                                <!--End Slides-->
+                                <div class="row">
+                                    <!--Start Controls-->
+                                    <div class="col-1 align-self-center">
+                                        <a href="#multi-item-example" role="button" data-bs-slide="prev">
+                                            <i class="text-dark fas fa-chevron-left"></i>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </div>
+                                    <!--End Controls-->
+                                    <!--Start Carousel Wrapper-->
+                                    <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
+                                        <!--Start Slides-->
+                                        <div class="carousel-inner product-links-wap" role="listbox">
+
+                                            <!--First slide-->
+                                            <div class="carousel-item active">
+                                                <div class="row">
+                                                  @foreach($singleProduct->images->take(3) as $productImage)
+                                                    <div class="col-4">
+                                                        <a href="#">
+                                                            <img class="card-img img-fluid" src="{{asset($productImage->image)}}" alt="Product Image 1">
+                                                        </a>
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <!--/.First slide-->
+
+                                            <!--Second slide-->
+                                            @if(count($singleProduct->images->skip(3)->take(3)) > 0)
+                                            <div class="carousel-item">
+                                                <div class="row">
+                                                  @foreach($singleProduct->images->skip(3)->take(3) as $nextProductImage)
+                                                    <div class="col-4">
+                                                        <a href="#">
+                                                            <img class="card-img img-fluid" src="{{asset($nextProductImage->image)}}" alt="Product Image 4">
+                                                        </a>
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            @endif
+                                            <!--/.Second slide-->
+
+                                            <!--Third slide-->
+                                            @if(count($singleProduct->images->skip(6)->take(3)) > 0)
+                                            <div class="carousel-item">
+                                                <div class="row">
+                                                  @foreach($singleProduct->images->skip(6)->take(3) as $nextProductImage)
+                                                    <div class="col-4">
+                                                        <a href="#">
+                                                            <img class="card-img img-fluid" src="{{asset($nextProductImage->image)}}" alt="Product Image 7">
+                                                        </a>
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            @endif
+                                            <!--/.Third slide-->
+                                        </div>
+                                        <!--End Slides-->
+                                    </div>
+                                    <!--End Carousel Wrapper-->
+                                    <!--Start Controls-->
+                                    <div class="col-1 align-self-center">
+                                        <a href="#multi-item-example" role="button" data-bs-slide="next">
+                                            <i class="text-dark fas fa-chevron-right"></i>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                    <!--End Controls-->
+                                </div>
                             </div>
-                            <!--End Carousel Wrapper-->
-                            <!--Start Controls-->
-                            <div class="col-1 align-self-center">
-                                <a href="#multi-item-example" role="button" data-bs-slide="next">
-                                    <i class="text-dark fas fa-chevron-right"></i>
-                                    <span class="sr-only">Next</span>
-                                </a>
+                            <!-- col end -->
+                            <div class="col-lg-7 mt-5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a  target="_blank" href="{{route('product.show',$singleProduct->uuid)}}">
+                                          <h1 class="h2">{{$singleProduct->name}}</h1>
+                                        </a>
+                                        <p class="h3 py-2">{{App\Models\Setting::currency()}} {{$singleProduct->price}}</p>
+                                        <!-- table start -->
+                                        <table>
+                                          <tr>
+                                            <td>Category:</td>
+                                            <th scope="row">{{@$singleProduct->category->name}}</th>
+                                          </tr>
+                                          <tr>
+                                            <td>Brand:</td>
+                                            <th scope="row">{{@$singleProduct->brand->name}}</th>
+                                          </tr>
+                                          <tr>
+                                            <td>Country:</td>
+                                            <th scope="row">{{@$singleProduct->country->name}}</th>
+                                          </tr>
+                                          <tr>
+                                            <td>City:</td>
+                                            <th scope="row">{{@$singleProduct->city->name}}</th>
+                                          </tr>
+                                          <tr>
+                                            <td>View:</td>
+                                            <th scope="row">{{@$singleProduct->view}}</th>
+                                          </tr>
+                                          <tr>
+                                            <td>Product of:</td>
+                                            <th scope="row">{{@$singleProduct->user->name}}</th>
+                                          </tr>
+                                          <tr>
+                                            <td>Stock:</td>
+                                            <th scope="row">{{@$singleProduct->stock}}</th>
+                                          </tr>
+                                          <tr>
+                                            <td>Address:</td>
+                                            <th scope="row">{{@$singleProduct->user->address}}</th>
+                                          </tr>
+                                          <tr>
+                                            <td>Phone:</td>
+                                            <th scope="row">{{@$singleProduct->user->phone}}</th>
+                                          </tr>
+                                          <tr>
+                                            <td>Like:</td>
+                                            <th scope="row">{{$singleProduct->like}}</th>
+                                          </tr>
+                                          <tr>
+                                            <td>dislike:</td>
+                                            <th scope="row">{{$singleProduct->dislike}}</th>
+                                          </tr>
+                                        
+                                        </table>
+                                        <p class="py-2">
+                                        </p>
+                                        <div class="section-header text-center" >
+                                          <h5>Description:</h5>
+                                        </div>
+                                        <p>{!! $singleProduct->description !!}</p>
+                                                                  
+                                        <div class="row pb-3">
+                                            <div class="col d-grid">
+                                              <form action="{{route('product.like',$singleProduct->id)}}" method="GET">
+                                                @csrf
+                                                <button class="btn btn-success" >Like ({{$singleProduct->like}})</button>
+                                              </form>
+                                            </div>
+                                            <div class="col d-grid">
+
+                                              <form action="{{route('product.dislike',$singleProduct->id)}}" method="GET">
+                                                @csrf
+                                                <button class="btn btn-danger" >Disike ({{$singleProduct->dislike}})</button>
+                                              </form>                              
+                                            </div>
+                                        </div>
+                                        <div class="row pb-3">
+                                          @if($singleProduct->stock > 0 && App\Models\Setting::enablepurchase() == 1)
+                                            <div class="col d-grid">
+                                                <a href="{{route('user.product.order',$singleProduct->id)}}" class="btn btn-success btn-lg" name="submit" value="buy">Buy</a>
+                                            </div>
+                                            @endif
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
-                            <!--End Controls-->
                         </div>
                     </div>
-                    <!-- col end -->
-                    <div class="col-lg-7 mt-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <h1 class="h2">{{$singleProduct->name}}</h1>
-                                <p class="h3 py-2">{{App\Models\Setting::currency()}} {{$product->price}}</p>
-                                <!-- table start -->
-                                <table>
-                                  <tr>
-                                    <td>Category:</td>
-                                    <th scope="row">{{@$singleProduct->category->name}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>Brand:</td>
-                                    <th scope="row">{{@$singleProduct->brand->name}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>Country:</td>
-                                    <th scope="row">{{@$singleProduct->country->name}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>City:</td>
-                                    <th scope="row">{{@$singleProduct->city->name}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>View:</td>
-                                    <th scope="row">{{@$singleProduct->view}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>Product of:</td>
-                                    <th scope="row">{{@$singleProduct->user->name}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>Stock:</td>
-                                    <th scope="row">{{@$singleProduct->stock}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>Address:</td>
-                                    <th scope="row">{{@$singleProduct->user->address}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>Phone:</td>
-                                    <th scope="row">{{@$singleProduct->user->phone}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>Like:</td>
-                                    <th scope="row">{{$singleProduct->like}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>dislike:</td>
-                                    <th scope="row">{{$singleProduct->dislike}}</th>
-                                  </tr>
-                                
-                                </table>
-                                <p class="py-2">
-                                </p>
-                                <div class="section-header text-center" >
-                                  <h5>Description:</h5>
-                                </div>
-                                <p>{!! $singleProduct->description !!}</p>
-                                                          
-                                <div class="row pb-3">
-                                    <div class="col d-grid">
-                                      <form action="{{route('product.like',$singleProduct->id)}}" method="GET">
-                                        @csrf
-                                        <button class="btn btn-success" >Like ({{$singleProduct->like}})</button>
-                                      </form>
-                                    </div>
-                                    <div class="col d-grid">
-
-                                      <form action="{{route('product.dislike',$singleProduct->id)}}" method="GET">
-                                        @csrf
-                                        <button class="btn btn-danger" >Disike ({{$singleProduct->dislike}})</button>
-                                      </form>                              
-                                    </div>
-                                </div>
-                                <div class="row pb-3">
-                                  @if($product->stock > 0 && App\Models\Setting::enablepurchase() == 1)
-                                    <div class="col d-grid">
-                                        <a href="{{route('user.product.order',$product->id)}}" class="btn btn-success btn-lg" name="submit" value="buy">Buy</a>
-                                    </div>
-                                    @endif
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Close Content -->
-  @endif
+                </section>
+                <!-- Close Content -->
+          @endif
+        </div>
 
     </section>
    
@@ -1242,7 +1246,10 @@
   <script src="{{asset('adminty-user-assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
   <script src="{{asset('adminty-user-assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
   <script src="{{asset('adminty-user-assets/vendor/php-email-form/validate.js')}}"></script>
-
+    <script
+      type="text/javascript"
+      src="{{asset('adminty-assets/bower_components/jquery/dist/jquery.min.js')}}"
+    ></script>
   <!-- Template Main JS File -->
   <script src="{{asset('adminty-user-assets/js/main.js')}}"></script>
   <script type="text/javascript" src="{{asset('clipboard.js')}}"></script>
@@ -1259,6 +1266,22 @@
                   $div2.fadeOut();
               }, 800);
           });
+  </script>
+  <script>
+    function getProductDetail(product_id){
+       $.ajax({
+          url: '{{url("get_product_detail")}}/'+product_id,
+          type: 'GET',
+      })
+      .done(function (response) {
+        $('#singleProductDetail').html(response.html);
+      })
+      .fail(function (response) {
+      })
+      .always(function () {
+          console.log("complete");
+      });
+    }
   </script>
 </body>
 

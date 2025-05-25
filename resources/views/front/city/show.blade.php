@@ -48,7 +48,7 @@
 							 <a href="{{route('category.show',str_replace(' ', '_',$category->name))}}">{{$category->name}}</a>
 						 </h4>
 						 <div class="price-section price-section--withoutTax ">
-							 <span data-product-price-without-tax class="price price--withoutTax">({{$category->brands->count()}})</span>
+							 <span data-product-price-without-tax class="price price--withoutTax">({{$category->totalBrands()}})</span>
 						 </div>
 						 <div class="button-group">
 							 <div class="action-item addToCart">
