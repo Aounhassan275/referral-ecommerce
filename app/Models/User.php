@@ -78,6 +78,8 @@ class User extends Authenticatable
         'speciality_description',
         'is_appointment',
         'appointment_description',
+        'health_limit',
+        'purchase_limit',
     ];
 
     /**
@@ -759,7 +761,17 @@ class User extends Authenticatable
     }
     public function stockBalance()
     {
-        return $this->for_stock + $this->stockDeposit() - $this->stockOrders();
+        return $this->for_stock - $this->stockOrders();
+
+    }
+    public function healthBalance()
+    {
+        return $this->health_limit - $this->healthOrders();
+
+    }
+    public function purchaseBalance()
+    {
+        return $this->purchase_limit - $this->purchaseOrders();
 
     }
     public function stockDeposit()
@@ -768,7 +780,15 @@ class User extends Authenticatable
     }
     public function stockOrders()
     {
-        return  $this->orders->where('payment_option','Pay From Stock')->sum('total_amount');
+        return  $this->orders->where('payment_option','Pay From Stock')->sum('extra_amount');
+    }
+    public function healthOrders()
+    {
+        return  $this->orders->where('payment_option','Pay From Health')->sum('extra_amount');
+    }
+    public function purchaseOrders()
+    {
+        return  $this->orders->where('payment_option','Pay From Purchase')->sum('extra_amount');
     }
     public function stockPaidToAdmin()
     {

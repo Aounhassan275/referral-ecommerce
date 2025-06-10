@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\CompanyAccount;
 use App\Models\Earning;
 use App\Models\Package;
+use App\Models\Setting;
 use App\Models\User;
 
 class RenewReferralIncome
@@ -92,9 +93,9 @@ class RenewReferralIncome
     } 
     public static  function directStockIncome($price,$package,$refer_by,$user)
     {
+        $flush_account = CompanyAccount::find(1);
         $self_loan_limit = $package->price / 100 * $package->self_loan_limit;
-        if($user->loan_limit > 10000){
-            $flush_account = CompanyAccount::find(1);
+        if($user->loan_limit > Setting::loanLimit()){
             $flush_account->update([
                 'balance' => $flush_account->balance + $self_loan_limit,
             ]);
@@ -104,8 +105,7 @@ class RenewReferralIncome
             ]);
         }
         $for_stock = $package->price / 100 * $package->for_stock;
-        if($user->for_stock > 10000){
-            $flush_account = CompanyAccount::find(1);
+        if($user->for_stock > Setting::stockLimit()){
             $flush_account->update([
                 'balance' => $flush_account->balance + $for_stock,
             ]);
@@ -121,26 +121,77 @@ class RenewReferralIncome
         $direct_loan_limit_per_person  = $direct_loan_limit/5;
         foreach($direct_teams as  $direct_team)
         {
-            if($direct_team->for_stock < 10000){
+            if($direct_team->for_stock < Setting::stockLimit()){
                 $direct_team->update([
                     'for_stock' => $direct_team->for_stock +  $direct_for_stock_per_person
                 ]);
+                $direct_for_stock = $direct_for_stock - $direct_for_stock_per_person;
             }
-            if($direct_team->loan_limit < 10000){
+            if($direct_team->loan_limit < Setting::loanLimit()){
                 $direct_team->update([
                     'loan_limit' => $direct_team->loan_limit +  $direct_loan_limit_per_person
                 ]);
+                $direct_loan_limit = $direct_loan_limit - $direct_loan_limit_per_person;
             }
         }
-        $flush_account = CompanyAccount::find(1);
-        if($direct_loan_limit_per_person > 0 ){
+        if($direct_loan_limit > 0 ){
             $flush_account->update([
-                'balance' => $flush_account->balance + $direct_loan_limit_per_person,
+                'balance' => $flush_account->balance + $direct_loan_limit,
             ]);
         }
-        if($direct_loan_limit_per_person > 0 ){
+        if($direct_for_stock > 0 ){
             $flush_account->update([
-                'balance' => $flush_account->balance + $direct_loan_limit_per_person,
+                'balance' => $flush_account->balance + $direct_for_stock,
+            ]);
+        }
+        $health_limit = $package->price / 100 * $package->health_limit;
+        if($user->health_limit > Setting::healthLimit()){
+            $flush_account->update([
+                'balance' => $flush_account->balance + $health_limit,
+            ]);
+        } else {
+            $user->update([
+                'health_limit' => $user->health_limit +  $health_limit
+            ]);
+        }
+        $purchase_limit = $package->price / 100 * $package->purchase_limit;
+        if($user->purchase_limit > Setting::purchaseLimit()){
+            $flush_account->update([
+                'balance' => $flush_account->balance + $purchase_limit,
+            ]);
+        }else{
+            $user->update([
+                'purchase_limit' => $user->purchase_limit +  $purchase_limit
+            ]);
+        }
+        $direct_teams = $user->directParentsForDirectIncome();
+        $direct_health_limit = $package->price / 100 * $package->direct_health_limit;
+        $direct_purchase_limit = $package->price / 100 * $package->direct_purchase_limit;
+        $direct_health_limit_per_person  = $direct_health_limit/5;
+        $direct_purchase_limit_per_person  = $direct_purchase_limit/5;
+        foreach($direct_teams as  $direct_team)
+        {
+            if($direct_team->health_limit < Setting::healthLimit()){
+                $direct_team->update([
+                    'health_limit' => $direct_team->health_limit +  $direct_health_limit_per_person
+                ]);
+                $direct_health_limit = $direct_health_limit - $direct_health_limit_per_person;
+            }
+            if($direct_team->purchase_limit < Setting::purchaseLimit()){
+                $direct_team->update([
+                    'purchase_limit' => $direct_team->purchase_limit +  $direct_purchase_limit_per_person
+                ]);
+                $direct_purchase_limit = $direct_purchase_limit - $direct_purchase_limit_per_person;
+            }
+        }
+        if($direct_purchase_limit > 0 ){
+            $flush_account->update([
+                'balance' => $flush_account->balance + $direct_purchase_limit,
+            ]);
+        }
+        if($direct_health_limit > 0 ){
+            $flush_account->update([
+                'balance' => $flush_account->balance + $direct_health_limit,
             ]);
         }
     } 

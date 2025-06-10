@@ -88,6 +88,10 @@ class Package extends Model
         'for_stock',
         'direct_for_stock',
         'direct_loan_limit',
+        'health_limit',
+        'direct_health_limit',
+        'purchase_limit',
+        'direct_purchase_limit',
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveAImage($value,'/package/');

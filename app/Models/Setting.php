@@ -216,4 +216,16 @@ class Setting extends Model
     public static function coinTables(){
         return (new static)::where( 'name','Coin Table')->first()->description ?? '';
     }
+    public static function loanLimit(){
+        return (new static)::where('name','Loan Limit')->first()->value ?? 10000;
+    }
+    public static function stockLimit(){
+        return (new static)::where('name','Stock Limit')->first()->value ?? 10000;
+    }
+    public static function healthLimit(){
+        return (new static)::where('name','Health Limit')->first()->value ?? 10000;
+    }
+    public static function purchaseLimit(){
+        return (new static)::where('name','Purchase Limit')->first()->value ?? 10000;
+    }
 }

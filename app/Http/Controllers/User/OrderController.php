@@ -63,17 +63,74 @@ class OrderController extends Controller
             Auth::user()->update([
                 'cash_wallet' => Auth::user()->cash_wallet -= $totalDeduction
             ]);
-        }elseif($request->payment_option == "Pay From Stock")
+        }
+        elseif($request->payment_option == "Pay From Stock")
         {
             if($totalDeduction > Auth::user()->stockBalance())
-            {            
-                toastr()->error('You dont have enough amount in For Stock Purchase to purchase this Product!');
-                return redirect()->back();
+            {        
+                $remainingDeductionAmount = $totalDeduction - Auth::user()->stockBalance();    
+                if($remainingDeductionAmount > Auth::user()->cash_wallet){
+                    toastr()->error('You dont have enough amount in For Stock/Cash Wallet to purchase this Product!');
+                    return redirect()->back();
+                }else{
+                    Auth::user()->update([
+                        'cash_wallet' => Auth::user()->cash_wallet -= $remainingDeductionAmount
+                    ]);
+                    $request->merge([
+                        'extra_amount' => Auth::user()->stockBalance()
+                    ]);
+                }
+            }else{
+                $request->merge([
+                    'extra_amount' => $totalDeduction
+                ]);
             }
-            Auth::user()->update([
-                'cash_wallet' => Auth::user()->cash_wallet -= $totalDeduction
-            ]);
-        }else{
+        }
+        elseif($request->payment_option == "Pay From Health")
+        {
+            if($totalDeduction > Auth::user()->healthBalance())
+            {        
+                $remainingDeductionAmount = $totalDeduction - Auth::user()->healthBalance();    
+                if($remainingDeductionAmount > Auth::user()->cash_wallet){
+                    toastr()->error('You dont have enough amount in For Health/Cash Wallet to purchase this Product!');
+                    return redirect()->back();
+                }else{
+                    Auth::user()->update([
+                        'cash_wallet' => Auth::user()->cash_wallet -= $remainingDeductionAmount
+                    ]);
+                    $request->merge([
+                        'extra_amount' => Auth::user()->healthBalance()
+                    ]);
+                }
+            }else{
+                $request->merge([
+                    'extra_amount' => $totalDeduction
+                ]);
+            }
+        }
+        elseif($request->payment_option == "Pay From Purchase")
+        {
+            if($totalDeduction > Auth::user()->purchaseBalance())
+            {        
+                $remainingDeductionAmount = $totalDeduction - Auth::user()->purchaseBalance();    
+                if($remainingDeductionAmount > Auth::user()->cash_wallet){
+                    toastr()->error('You dont have enough amount in For Purchase/Cash Wallet to purchase this Product!');
+                    return redirect()->back();
+                }else{
+                    Auth::user()->update([
+                        'cash_wallet' => Auth::user()->cash_wallet -= $remainingDeductionAmount
+                    ]);
+                    $request->merge([
+                        'extra_amount' => Auth::user()->purchaseBalance()
+                    ]);
+                }
+            }else{
+                $request->merge([
+                    'extra_amount' => $totalDeduction
+                ]);
+            }
+        }
+        else{
             if($totalDeduction > Auth::user()->cash_wallet)
             {            
                 toastr()->error('You dont have enough amount in Cash Wallet to purchase this Product!');

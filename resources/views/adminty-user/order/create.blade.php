@@ -53,7 +53,15 @@
                             <br>
                             <label for=""><input type="radio" name="payment_option" checked value="Pay on System"> Pay on System</label>
                             <label for=""><input type="radio" name="payment_option" value="Deal Byself"> Deal Byself</label>
-                            <label for=""><input type="radio" name="payment_option" value="Pay From Stock"> Pay From Stock</label>
+                            @if(Auth::user()->stockBalance() > 0)
+                                <label for=""><input type="radio" name="payment_option" value="Pay From Stock"> Pay From Stock</label>
+                            @endif
+                            @if(Auth::user()->healthBalance() > 0)
+                                <label for=""><input type="radio" name="payment_option" value="Pay From Health"> Pay From Health</label>
+                            @endif
+                            @if(Auth::user()->purchaseBalance() > 0)
+                                <label for=""><input type="radio" name="payment_option" value="Pay From Purchase"> Pay From Purchase</label>
+                            @endif
                         </div>
                    </div>
                     <div class="text-right">

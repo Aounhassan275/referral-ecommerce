@@ -258,7 +258,7 @@ DASHBOARD
         </div>
         <!-- user card  end -->
         <!-- subscribe start -->
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" style="display:none;">
           <div class="card">
             <div class="card-block text-center">
               <i
@@ -272,6 +272,22 @@ DASHBOARD
               <button class="btn btn-primary btn-sm btn-round">
                 Till 1st
               </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6" >
+          <div class="card">
+            <div class="card-block text-center">
+              <i
+                class="feather icon-airplay text-c-lite-green d-block f-40"
+              ></i>
+              <h6 class="m-t-20">
+                <span class="text-c-lite-green">{{Auth::user()->products->count()}}</span>
+              </h6>
+              <p class="m-b-20">Total Products</p>
+              <a href="{{route('user.product.index')}}" class="btn btn-primary btn-sm btn-round">
+                View Product
+              </a>
             </div>
           </div>
         </div>
@@ -423,7 +439,7 @@ DASHBOARD
         </div>
         <!-- widget-statstic end -->
         <!-- statustic with progressbar  start -->
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div class="card statustic-progress-card">
             <div class="card-header">
               <h5>STARTER 5000/</h5>
@@ -451,7 +467,7 @@ DASHBOARD
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div class="card statustic-progress-card">
             <div class="card-header">
               <h5>SELLER 10000/</h5>
@@ -477,7 +493,7 @@ DASHBOARD
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div class="card statustic-progress-card">
             <div class="card-header">
               <h5>BRAND 30000/</h5>
@@ -503,7 +519,7 @@ DASHBOARD
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div class="card statustic-progress-card">
             <div class="card-header">
               <h5>PRODUCTS</h5>
@@ -533,7 +549,7 @@ DASHBOARD
 
         <!-- user start -->
         <!-- If Purchase start -->
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div class="card text-center text-white bg-c-green">
             <div class="card-block">
               <h6 class="m-b-0">IF BUY 1 to 9999</h6>
@@ -544,7 +560,7 @@ DASHBOARD
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div class="card text-center text-white bg-c-pink">
             <div class="card-block">
               <h6 class="m-b-0">IF BUY 10000 to 29999</h6>
@@ -555,7 +571,7 @@ DASHBOARD
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div
             class="card text-center text-white bg-c-lite-green"
           >
@@ -568,7 +584,7 @@ DASHBOARD
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div class="card text-center text-white bg-c-yellow">
             <div class="card-block">
               <h6 class="m-b-0">IF BUY 60000 to 99999</h6>
@@ -581,7 +597,7 @@ DASHBOARD
         </div>
         <!-- If Purchase end -->
         <!-- Buyer and Seller statustic start -->
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div class="card statustic-card">
             <div class="card-header">
               <h5>DRAW 1</h5>
@@ -601,7 +617,7 @@ DASHBOARD
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div class="card statustic-card">
             <div class="card-header">
               <h5>DRAW 2</h5>
@@ -621,7 +637,7 @@ DASHBOARD
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div class="card statustic-card">
             <div class="card-header">
               <h5>DRAW 3</h5>
@@ -641,7 +657,7 @@ DASHBOARD
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6" hidden>
           <div class="card statustic-card">
             <div class="card-header">
               <h5>DRAW 4</h5>
@@ -690,7 +706,7 @@ DASHBOARD
           >
             <div class="card-block-small text-center">
               <h2>PKR {{Auth::user()->loanPaid()}}</h2>
-              <h6>PAYED LOAN</h6>
+              <h6>PAID LOAN</h6>
               <i class="feather icon-award"></i>
             </div>
           </div>
@@ -712,11 +728,11 @@ DASHBOARD
         <div class="col-xl-3 col-md-6">
           <div class="card bg-c-yellow order-card">
             <div class="card-block">
-              <h6>FOR STOCK</h6>
-              <h2>PKR {{Auth::user()->for_stock}}</h2>
-              <p class="m-b-0">
+              <h6>STOCK LIMIT</h6>
+              <h2>PKR {{App\Models\Setting::stockLimit()}}</h2>
+              {{-- <p class="m-b-0">
                 Purchase from Company
-              </p>
+              </p> --}}
               <i class="card-icon feather icon-filter"></i>
             </div>
           </div>
@@ -724,11 +740,12 @@ DASHBOARD
         <div class="col-xl-3 col-md-6">
           <div class="card bg-c-blue order-card">
             <div class="card-block">
-              <h6>BUY NOW</h6>
-              <h2>PKR {{Auth::user()->stockBalance()}}</h2>
-              <p class="m-b-0">
+              <h6>STOCK BALANCE</h6>
+              {{-- <h2>PKR {{Auth::user()->stockBalance()}}</h2> --}}
+              <h2>PKR {{Auth::user()->for_stock}}</h2>
+              {{-- <p class="m-b-0">
                 Amount to Purchase
-              </p>
+              </p> --}}
               <i class="card-icon feather icon-users"></i>
             </div>
           </div>
@@ -736,11 +753,11 @@ DASHBOARD
         <div class="col-xl-3 col-md-6">
           <div class="card bg-c-green order-card">
             <div class="card-block">
-              <h6>GET REWARD</h6>
-              <h2>PKR 0</h2>
-              <p class="m-b-0">
+              <h6>PAID BALANCE</h6>
+              <h2>PKR {{Auth::user()->stockOrders()}}</h2>
+              {{-- <p class="m-b-0">
                 Total Reward
-              </p>
+              </p> --}}
               <i class="card-icon feather icon-radio"></i>
             </div>
           </div>
@@ -748,16 +765,125 @@ DASHBOARD
         <div class="col-xl-3 col-md-6">
           <div class="card bg-c-yellow order-card">
             <div class="card-block">
-              <h6>FOR REWORD</h6>
-              <h2>PKR {{Auth::user()->stockPendingForAdmin()}}</h2>
-              <p class="m-b-0">
+              <h6>PENDING BALANCE</h6>
+              <h2>PKR {{Auth::user()->stockBalance()}}</h2>
+              {{-- <p class="m-b-0">
                 PENDING AMOUNT
-              </p>
+              </p> --}}
               <i class="card-icon feather icon-filter"></i>
             </div>
           </div>
         </div>
         <!-- order  end -->
+        <!-- For Health start -->
+        <div class="col-xl-3 col-md-6">
+          <div class="card text-center text-white bg-c-green">
+            <div class="card-block">
+              <h6 class="m-b-0">HEALTH LIMIT</h6>
+              <h4 class="m-t-10 m-b-10">
+                <i class="feather icon-arrow-up m-r-15"></i>PKR {{App\Models\Setting::healthLimit()}}
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6" >
+          <div class="card text-center text-white bg-c-pink">
+            <div class="card-block">
+              <h6 class="m-b-0">HEALTH BALANCE</h6>
+              <h4 class="m-t-10 m-b-10">
+                <i class="feather icon-arrow-up m-r-15"></i>PKR {{Auth::user()->health_limit}}
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div
+            class="card text-center text-white bg-c-lite-green"
+          >
+            <div class="card-block">
+              <h6 class="m-b-0">PAID BALANCE</h6>
+              <h4 class="m-t-10 m-b-10">
+                <i class="feather icon-arrow-up m-r-15"></i>PKR {{ Auth::user()->healthOrders()}}
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card text-center text-white bg-c-yellow">
+            <div class="card-block">
+              <h6 class="m-b-0">PENDING BALANCE</h6>
+              <h4 class="m-t-10 m-b-10">
+                <i class="feather icon-arrow-up m-r-15"></i>PKR {{ Auth::user()->healthBalance()}}
+              </h4>
+            </div>
+          </div>
+        </div>
+        <!-- For Health end -->
+        <!-- For Purchase start -->
+        <div class="col-xl-3 col-md-6">
+          <div class="card statustic-card">
+            <div class="card-header">
+              <h5>PURCHASE LIMIT</h5>
+            </div>
+            <div class="card-block text-center">
+              <span class="d-block text-c-blue f-20">PKR {{App\Models\Setting::purchaseLimit()}}</span>
+              <div class="progress">
+                <div
+                  class="progress-bar bg-c-blue"
+                  style="width: 100%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card statustic-card">
+            <div class="card-header">
+              <h5>PURCHASE BALANCE</h5>
+            </div>
+            <div class="card-block text-center">
+              <span class="d-block text-c-green f-20">PKR {{  Auth::user()->purchase_limit}}</span>
+              <div class="progress">
+                <div
+                  class="progress-bar bg-c-green"
+                  style="width: 100%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card statustic-card">
+            <div class="card-header">
+              <h5>PAID BALANCE</h5>
+            </div>
+            <div class="card-block text-center">
+              <span class="d-block text-c-pink f-20">PKR {{ Auth::user()->purchaseOrders() }}</span>
+              <div class="progress">
+                <div
+                  class="progress-bar bg-c-pink"
+                  style="width: 100%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card statustic-card">
+            <div class="card-header">
+              <h5>PENDING BALANCE</h5>
+            </div>
+            <div class="card-block text-center">
+              <span class="d-block text-c-yellow f-20">PKR {{ Auth::user()->purchaseBalance() }}</span>
+              <div class="progress">
+                <div
+                  class="progress-bar bg-c-yellow"
+                  style="width: 100%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- social download  start -->
         <div class="col-xl-3 col-md-6">
           <div class="card social-card bg-simple-c-blue">
