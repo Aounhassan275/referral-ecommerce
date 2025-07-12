@@ -146,12 +146,12 @@
                             <input type="number" class="form-control" name="self_rebirth"  placeholder="Self Renew" value="">
                         </div>
                         <div class="form-group col-4">
-                            <label class="form-label">Self Associate</label>
-                            <input type="number" class="form-control" name="self_associate"  placeholder="Self Associate" value="">
-                        </div>
-                        <div class="form-group col-4">
                             <label class="form-label">Direct Renew</label>
                             <input type="number" class="form-control" name="direct_rebirth"  placeholder="Direct Renew" value="">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Self Associate</label>
+                            <input type="number" class="form-control" name="self_associate"  placeholder="Self Associate" value="">
                         </div>
                         <div class="form-group col-4">
                             <label class="form-label">Direct Associate</label>

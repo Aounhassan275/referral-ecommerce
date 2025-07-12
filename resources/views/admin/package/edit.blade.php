@@ -151,8 +151,16 @@
                             <input type="number" class="form-control" name="self_rebirth"  placeholder="Self Renew" value="{{$package->self_rebirth}}">
                         </div>
                         <div class="form-group col-4">
+                            <label class="form-label">Direct Renew</label>
+                            <input type="number" class="form-control" name="direct_rebirth"  placeholder="Direct Renew" value="{{$package->direct_rebirth}}">
+                        </div>
+                        <div class="form-group col-4">
                             <label class="form-label">Self Associate</label>
                             <input type="number" class="form-control" name="self_associate"  placeholder="Self Associate" value="{{$package->self_associate}}">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Direct Associate</label>
+                            <input type="number" class="form-control" name="direct_associate"  placeholder="Direct Associate" value="{{$package->direct_associate}}">
                         </div>
                         <div class="form-group col-4">
                             <label class="form-label">Self Loan Limit</label>
@@ -185,16 +193,6 @@
                         <div class="form-group col-4">
                             <label class="form-label">Direct For Purchase</label>
                             <input type="number" class="form-control" name="direct_purchase_limit"  placeholder="Direct Purchase Limit" value="{{$package->direct_purchase_limit}}">
-                        </div>
-                   </div>
-                   <div class="row">
-                        <div class="form-group col-6">
-                            <label class="form-label">Direct Renew</label>
-                            <input type="number" class="form-control" name="direct_rebirth"  placeholder="Direct Renew" value="{{$package->direct_rebirth}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <label class="form-label">Direct Associate</label>
-                            <input type="number" class="form-control" name="direct_associate"  placeholder="Direct Associate" value="{{$package->direct_associate}}">
                         </div>
                    </div>
                    <hr>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,6 +15,11 @@ class DashboardController extends Controller
     }
     public function index()
     {
-        return view($this->directory.'.dashboard.index');
+        // if(Setting::dashboard() == '1')
+        // {
+            return view($this->directory.'.dashboard.index_new');
+        // }else{
+        //     return view($this->directory.'.dashboard.index');
+        // }
     }
 }

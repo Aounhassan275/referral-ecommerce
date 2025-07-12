@@ -535,6 +535,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+    public function ownerOrders()
+    {
+        return $this->hasMany(Order::class,'owner_id');
+    }
     public function images()
     {
         return $this->hasMany(UserImages::class);
@@ -790,6 +794,10 @@ class User extends Authenticatable
     {
         return  $this->orders->where('payment_option','Pay From Purchase')->sum('extra_amount');
     }
+    public function ifPurchaseOrders()
+    {
+        return  $this->orders->where('payment_option','Pay on System')->sum('extra_amount');
+    }
     public function stockPaidToAdmin()
     {
         return Stock::where('user_id',$this->id)->where('status',0)->sum('amount');
@@ -797,5 +805,9 @@ class User extends Authenticatable
     public function stockPendingForAdmin()
     {
         return $this->for_stock - $this->stockPaidToAdmin();
+    }
+    public function ifPurchaseAmount(){
+        $amount = $this->allUplineIncomeReminaindAmount() + $this->purchase_reward + $this->company_reward + $this->star_rank_income;
+        return $amount - $this->ifPurchaseOrders();
     }
 }
