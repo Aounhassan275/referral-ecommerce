@@ -15,11 +15,11 @@ class DashboardController extends Controller
     }
     public function index()
     {
-        // if(Setting::dashboard() == '1')
-        // {
+        if(Setting::dashboard() == '1')
+        {
             return view($this->directory.'.dashboard.index_new');
-        // }else{
-        //     return view($this->directory.'.dashboard.index');
-        // }
+        }else{
+            return view($this->directory.'.dashboard.index');
+        }
     }
 }

@@ -411,6 +411,7 @@
                       <span class="pcoded-mtext">Buy Package</span>
                     </a>
                   </li>
+          @if(App\Models\Setting::enableLoan())
 				  <li class="{{Request::is('user/loan')?'active':''}}">
                     <a href="{{route('user.loan.index')}}">
                       <span class="pcoded-micon"
@@ -419,6 +420,7 @@
                       <span class="pcoded-mtext">Loan</span>
                     </a>
                   </li>
+                  @endif
 				  <li class="{{Request::is('user/appointment')?'active':''}}">
                     <a href="{{route('user.appointment.index')}}">
                       <span class="pcoded-micon"

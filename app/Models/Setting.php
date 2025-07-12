@@ -228,4 +228,7 @@ class Setting extends Model
     public static function purchaseLimit(){
         return (new static)::where('name','Purchase Limit')->first()->value ?? 10000;
     }
+    public static function enableLoan(){
+        return (new static)::where('name','Loan Section')->first()->value ?? 0;
+    }
 }

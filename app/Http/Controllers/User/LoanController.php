@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Loan;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,8 +19,13 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $loans = Loan::where('user_id',Auth::user()->id)->orderBy('created_at','DESC')->get();
-        return view('adminty-user.loan.index',compact('loans'));
+        if(Setting::enableLoan()){
+            $loans = Loan::where('user_id',Auth::user()->id)->orderBy('created_at','DESC')->get();
+            return view('adminty-user.loan.index',compact('loans'));
+        }else{
+            toastr()->warning('Loan Section is not enabled.');
+            return redirect()->back();
+        }
     }
 
     /**

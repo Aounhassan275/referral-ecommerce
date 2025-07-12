@@ -52,7 +52,7 @@
                             <label class="form-label">Payment Option <span style="color:red;"><small>(Order Fee will must deducted.)</small></span></label>
                             <br>
                             <label for=""><input type="radio" name="payment_option" checked value="Pay on System"> Pay on System</label>
-                            <label for=""><input type="radio" name="payment_option" value="Deal Byself"> Deal Byself</label>
+                            {{-- <label for=""><input type="radio" name="payment_option" value="Deal Byself"> Deal Byself</label> --}}
                             {{-- @if(Auth::user()->stockBalance() > 0)
                                 <label for=""><input type="radio" name="payment_option" value="Pay From Stock"> Pay From Stock</label>
                             @endif
