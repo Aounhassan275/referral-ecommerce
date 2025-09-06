@@ -231,4 +231,7 @@ class Setting extends Model
     public static function enableLoan(){
         return (new static)::where('name','Loan Section')->first()->value ?? 0;
     }
+    public static function monthlyTarget(){
+        return (new static)::where('name','Monthly Target')->first()->value ?? 0;
+    }
 }

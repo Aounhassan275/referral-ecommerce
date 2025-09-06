@@ -80,6 +80,7 @@ class User extends Authenticatable
         'appointment_description',
         'health_limit',
         'purchase_limit',
+        'salary_reward',
     ];
 
     /**

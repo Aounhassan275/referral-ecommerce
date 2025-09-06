@@ -92,6 +92,8 @@ class Package extends Model
         'direct_health_limit',
         'purchase_limit',
         'direct_purchase_limit',
+        'self_salary',
+        'direct_salary',
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveAImage($value,'/package/');

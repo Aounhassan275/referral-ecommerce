@@ -146,15 +146,23 @@
                         
                    </div>
                    <div class="row">
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             <label class="form-label">Self Renew</label>
                             <input type="number" class="form-control" name="self_rebirth"  placeholder="Self Renew" value="{{$package->self_rebirth}}">
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             <label class="form-label">Direct Renew</label>
                             <input type="number" class="form-control" name="direct_rebirth"  placeholder="Direct Renew" value="{{$package->direct_rebirth}}">
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
+                            <label class="form-label">Self Salary</label>
+                            <input type="number" class="form-control" name="self_salary"  placeholder="Self Salary" value="{{$package->self_salary}}">
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Direct Salary</label>
+                            <input type="number" class="form-control" name="direct_salary"  placeholder="Direct Salary" value="{{$package->direct_salary}}">
+                        </div>
+                        {{-- <div class="form-group col-4">
                             <label class="form-label">Self Associate</label>
                             <input type="number" class="form-control" name="self_associate"  placeholder="Self Associate" value="{{$package->self_associate}}">
                         </div>
@@ -169,8 +177,8 @@
                         <div class="form-group col-4">
                             <label class="form-label">Direct Loan Limit</label>
                             <input type="number" class="form-control" name="direct_loan_limit"  placeholder="Direct Loan Limit" value="{{$package->direct_loan_limit}}">
-                        </div>
-                        <div class="form-group col-4">
+                        </div> --}}
+                        {{-- <div class="form-group col-4">
                             <label class="form-label">For Stock</label>
                             <input type="number" class="form-control" name="for_stock"  placeholder="For Stock" value="{{$package->for_stock}}">
                         </div>
@@ -193,7 +201,7 @@
                         <div class="form-group col-4">
                             <label class="form-label">Direct For Purchase</label>
                             <input type="number" class="form-control" name="direct_purchase_limit"  placeholder="Direct Purchase Limit" value="{{$package->direct_purchase_limit}}">
-                        </div>
+                        </div> --}}
                    </div>
                    <hr>
                    <div class="row">
@@ -262,15 +270,15 @@
                             <label class="form-label">Employee Account Income</label>
                             <input type="text" name="company_employee_account_income" class="form-control" value="{{$package->company_employee_account_income}}" placeholder="Employee Account Income">
                         </div>
-                        <div class="form-group col-3">
+                        {{-- <div class="form-group col-3">
                             <label class="form-label">Renew Income</label>
                             <input type="text" name="company_renew_income" class="form-control" value="{{$package->company_renew_income}}" placeholder="Renew Income">
-                        </div>
+                        </div> --}}
                         <div class="form-group col-3">
                             <label class="form-label">Renew All Accounts</label>
                             <input type="text" name="renew_all_accounts" class="form-control" value="{{$package->renew_all_accounts}}" placeholder="Renew All Accounts">
                         </div>
-                        <div class="form-group col-3">
+                        {{-- <div class="form-group col-3">
                             <label class="form-label">All Associate</label>
                             <input type="text" name="all_assoicate" class="form-control" value="{{$package->all_assoicate}}" placeholder="All Assoicates">
                         </div>
@@ -285,15 +293,15 @@
                         <div class="form-group col-3">
                             <label class="form-label">For Purchase All</label>
                             <input type="text" name="for_purchase_all" class="form-control" value="{{$package->for_purchase_all}}" placeholder="For Purchase All">
-                        </div>
-                        <div class="form-group col-3">
+                        </div> --}}
+                        {{-- <div class="form-group col-3">
                             <label class="form-label">Monthly Draw</label>
                             <input type="text" name="monthly_draw" class="form-control" value="{{$package->monthly_draw}}" placeholder="Monthly Draw">
-                        </div>
-                        <div class="form-group col-3">
+                        </div> --}}
+                        {{-- <div class="form-group col-3">
                             <label class="form-label">Company Products</label>
                             <input type="text" name="company_products" class="form-control" value="{{$package->company_products}}" placeholder="Company Products">
-                        </div>
+                        </div> --}}
                    </div>
                    <hr>
                    {{-- <div class="row">

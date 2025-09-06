@@ -18,7 +18,7 @@ PACKAGE SUBSRIPTION
                         @endif
                     </div>
                     <h6 class="font-weight-semibold mb-0">{{$package->name}}</h6>
-                    <h6 class="font-weight-semibold mb-0">{{App\Models\Setting::currency()}}  {{$package->price}} /-</h6>
+                    <h6 class="font-weight-semibold mb-0">{{App\Models\Setting::currency()}}  {{$package->distribution}} /-</h6>
                     @if($package->fake_price > 0)
                     <span class="d-block opacity-75"><del>{{App\Models\Setting::currency()}} {{$package->fake_price}} /-</del></span>
                     @endif

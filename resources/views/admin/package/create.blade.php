@@ -149,14 +149,14 @@
                             <label class="form-label">Direct Renew</label>
                             <input type="number" class="form-control" name="direct_rebirth"  placeholder="Direct Renew" value="">
                         </div>
-                        <div class="form-group col-4">
+                        {{-- <div class="form-group col-4">
                             <label class="form-label">Self Associate</label>
                             <input type="number" class="form-control" name="self_associate"  placeholder="Self Associate" value="">
                         </div>
                         <div class="form-group col-4">
                             <label class="form-label">Direct Associate</label>
                             <input type="number" class="form-control" name="direct_associate"  placeholder="Direct Associate" value="">
-                        </div>
+                        </div> --}}
                    </div>
                    <hr>
                    <div class="row">
@@ -225,15 +225,15 @@
                             <label class="form-label">Employee Account Income</label>
                             <input type="text" name="company_employee_account_income" class="form-control"  placeholder="Employee Account Income">
                         </div>
-                        <div class="form-group col-3">
+                        {{-- <div class="form-group col-3">
                             <label class="form-label">Renew Income</label>
                             <input type="text" name="company_renew_income" class="form-control"  placeholder="Renew Income">
-                        </div>
+                        </div> --}}
                         <div class="form-group col-3">
                             <label class="form-label">Renew All Accounts</label>
                             <input type="text" name="renew_all_accounts" class="form-control" placeholder="Renew All Accounts">
                         </div>
-                        <div class="form-group col-3">
+                        {{-- <div class="form-group col-3">
                             <label class="form-label">All Associate</label>
                             <input type="text" name="all_assoicate" class="form-control" placeholder="All Assoicates">
                         </div>
@@ -248,15 +248,15 @@
                         <div class="form-group col-3">
                             <label class="form-label">For Purchase All</label>
                             <input type="text" name="for_purchase_all" class="form-control" placeholder="For Purchase All">
-                        </div>
-                        <div class="form-group col-3">
+                        </div> --}}
+                        {{-- <div class="form-group col-3">
                             <label class="form-label">Monthly Draw</label>
                             <input type="text" name="monthly_draw" class="form-control" placeholder="Monthly Draw">
-                        </div>
-                        <div class="form-group col-3">
+                        </div> --}}
+                        {{-- <div class="form-group col-3">
                             <label class="form-label">Company Products</label>
                             <input type="text" name="company_products" class="form-control" placeholder="Company Products">
-                        </div>
+                        </div> --}}
                    </div>
                    <hr>
                    {{-- <div class="row">

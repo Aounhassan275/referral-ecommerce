@@ -297,6 +297,10 @@
                                     <input type="text" class="form-control" name="for_renew"  value="{{$user->for_renew}}" >
                                 </div> 
                                 <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Salary Reward</label>
+                                    <input type="text" class="form-control" name="salary_reward"  value="{{$user->salary_reward}}" >
+                                </div> 
+                                <div class="form-group col-md-4">
                                     <label for="inputEmail4">User Type</label>
                                     <select name="type" class="form-control select2" required>
                                         <option selected disabled>Select</option>

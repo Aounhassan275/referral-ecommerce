@@ -22,31 +22,31 @@ class FundTransferHelper
             'balance' => $trade_income->balance += $sale_reward_for_trade
         ]);
 
-        $company_products = $fund_fee/100*$paymentPolicy->company_products;
-        $company_products_account = CompanyAccount::where('name','Company Products Account')->first();
-        if($company_products_account && $company_products > 0){
-            $company_products_account->update([
-                'balance' => $company_products_account->balance + $company_products,
-            ]);
-        }
+        // $company_products = $fund_fee/100*$paymentPolicy->company_products;
+        // $company_products_account = CompanyAccount::where('name','Company Products Account')->first();
+        // if($company_products_account && $company_products > 0){
+        //     $company_products_account->update([
+        //         'balance' => $company_products_account->balance + $company_products,
+        //     ]);
+        // }
 
-        $for_purchase_all_income = $fund_fee / 100 * $paymentPolicy->purchase_reward;
-        info("Total For Purchase All Income Amount : $for_purchase_all_income");
-        $ffor_purchase_all_account= CompanyAccount::where('name','For Purchase All Account')->first();
-        if($ffor_purchase_all_account && $for_purchase_all_income > 0){
-            $ffor_purchase_all_account->update([
-                'balance' => $ffor_purchase_all_account->balance + $for_purchase_all_income,
-            ]);
-        }
+        // $for_purchase_all_income = $fund_fee / 100 * $paymentPolicy->purchase_reward;
+        // info("Total For Purchase All Income Amount : $for_purchase_all_income");
+        // $ffor_purchase_all_account= CompanyAccount::where('name','For Purchase All Account')->first();
+        // if($ffor_purchase_all_account && $for_purchase_all_income > 0){
+        //     $ffor_purchase_all_account->update([
+        //         'balance' => $ffor_purchase_all_account->balance + $for_purchase_all_income,
+        //     ]);
+        // }
         
-        $monthly_draw_income = $fund_fee / 100 * $paymentPolicy->draw_monthly;
-        info("Total Monthly Draw Income Amount : $monthly_draw_income");
-        $monthly_draw_account= CompanyAccount::where('name','Monthly Draw Account')->first();
-        if($monthly_draw_account && $monthly_draw_income > 0){
-            $monthly_draw_account->update([
-                'balance' => $monthly_draw_account->balance + $monthly_draw_income,
-            ]);
-        }
+        // $monthly_draw_income = $fund_fee / 100 * $paymentPolicy->draw_monthly;
+        // info("Total Monthly Draw Income Amount : $monthly_draw_income");
+        // $monthly_draw_account= CompanyAccount::where('name','Monthly Draw Account')->first();
+        // if($monthly_draw_account && $monthly_draw_income > 0){
+        //     $monthly_draw_account->update([
+        //         'balance' => $monthly_draw_account->balance + $monthly_draw_income,
+        //     ]);
+        // }
         return true;
     }
     public static  function directTeamIncome($reward,$user,$due_to)

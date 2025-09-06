@@ -56,7 +56,7 @@ class ReferralIncome
             'package_id' => $package->id,
             'user_id' => $user->id
         ]);
-        ReferralIncome::directStockIncome($package->price,$package,$refer_by,$user);
+        // ReferralIncome::directStockIncome($package->price,$package,$refer_by,$user);
         if($refer_by){
             $earnings = Earning::where('status',0)
                 ->where('user_id',$refer_by->id)->get();
@@ -132,21 +132,17 @@ class ReferralIncome
                 $direct_income = $price / 100 * $package->direct_income_5;
                 info("Direct Income Level 5 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
             } 
-            // $referral_account = User::where('referral',$direct_team->id)->first();
-            // if($referral_account)
-            // {
-                Earning::create([
-                    'price' => $direct_income,
-                    'user_id' => $direct_team->id,
-                    'due_to' => $due_to->id,
-                    'level' => $index+1,
-                    'type' => 'direct_income'
-                ]);
-                $direct_team->update([
-                    'cash_wallet' => $direct_team->cash_wallet + $direct_income
-                ]);
-                $totalDirectIncome = $totalDirectIncome - $direct_income;
-            // }
+            Earning::create([
+                'price' => $direct_income,
+                'user_id' => $direct_team->id,
+                'due_to' => $due_to->id,
+                'level' => $index+1,
+                'type' => 'direct_income'
+            ]);
+            $direct_team->update([
+                'cash_wallet' => $direct_team->cash_wallet + $direct_income
+            ]);
+            $totalDirectIncome = $totalDirectIncome - $direct_income;
         }
         if($totalDirectIncome > 0 ){
             $flush_account = CompanyAccount::find(1);
@@ -157,107 +153,107 @@ class ReferralIncome
     }  
     public static  function directStockIncome($price,$package,$refer_by,$user)
     {
-        $flush_account = CompanyAccount::find(1);
-        $self_loan_limit = $package->price / 100 * $package->self_loan_limit;
-        if($user->loan_limit > Setting::loanLimit()){
-            $flush_account->update([
-                'balance' => $flush_account->balance + $self_loan_limit,
-            ]);
-        }else{
-            $user->update([
-                'loan_limit' => $user->loan_limit +  $self_loan_limit
-            ]);
-        }
-        $for_stock = $package->price / 100 * $package->for_stock;
-        if($user->loan_limit > Setting::stockLimit()){
-            $flush_account->update([
-                'balance' => $flush_account->balance + $for_stock,
-            ]);
-        }else{
-            $user->update([
-                'for_stock' => $user->for_stock +  $for_stock
-            ]);
-        }
-        $direct_teams = $user->directParentsForDirectIncome();
-        $direct_for_stock = $package->price / 100 * $package->direct_for_stock;
-        $direct_loan_limit = $package->price / 100 * $package->direct_loan_limit;
-        $direct_for_stock_per_person  = $direct_for_stock/5;
-        $direct_loan_limit_per_person  = $direct_loan_limit/5;
-        foreach($direct_teams as  $direct_team)
-        {
-            if($direct_team->for_stock < Setting::stockLimit()){
-                $direct_team->update([
-                    'for_stock' => $direct_team->for_stock +  $direct_for_stock_per_person
-                ]);
-                $direct_for_stock = $direct_for_stock - $direct_for_stock_per_person;
-            }
-            if($direct_team->loan_limit < Setting::loanLimit()){
-                $direct_team->update([
-                    'loan_limit' => $direct_team->loan_limit +  $direct_loan_limit_per_person
-                ]);
-                $direct_loan_limit = $direct_loan_limit - $direct_loan_limit_per_person;
-            }
-        }
-        if($direct_loan_limit > 0 ){
-            $flush_account->update([
-                'balance' => $flush_account->balance + $direct_loan_limit,
-            ]);
-        }
-        if($direct_for_stock > 0 ){
-            $flush_account->update([
-                'balance' => $flush_account->balance + $direct_for_stock,
-            ]);
-        }
-        $health_limit = $package->price / 100 * $package->health_limit;
-        if($user->health_limit > Setting::healthLimit()){
-            $flush_account->update([
-                'balance' => $flush_account->balance + $health_limit,
-            ]);
-        } else {
-            $user->update([
-                'health_limit' => $user->health_limit +  $health_limit
-            ]);
-        }
-        $purchase_limit = $package->price / 100 * $package->purchase_limit;
-        if($user->purchase_limit > Setting::purchaseLimit()){
-            $flush_account->update([
-                'balance' => $flush_account->balance + $purchase_limit,
-            ]);
-        }else{
-            $user->update([
-                'purchase_limit' => $user->purchase_limit +  $purchase_limit
-            ]);
-        }
-        $direct_teams = $user->directParentsForDirectIncome();
-        $direct_health_limit = $package->price / 100 * $package->direct_health_limit;
-        $direct_purchase_limit = $package->price / 100 * $package->direct_purchase_limit;
-        $direct_health_limit_per_person  = $direct_health_limit/5;
-        $direct_purchase_limit_per_person  = $direct_purchase_limit/5;
-        foreach($direct_teams as  $direct_team)
-        {
-            if($direct_team->health_limit < Setting::healthLimit()){
-                $direct_team->update([
-                    'health_limit' => $direct_team->health_limit +  $direct_health_limit_per_person
-                ]);
-                $direct_health_limit = $direct_health_limit - $direct_health_limit_per_person;
-            }
-            if($direct_team->purchase_limit < Setting::purchaseLimit()){
-                $direct_team->update([
-                    'purchase_limit' => $direct_team->purchase_limit +  $direct_purchase_limit_per_person
-                ]);
-                $direct_purchase_limit = $direct_purchase_limit - $direct_purchase_limit_per_person;
-            }
-        }
-        if($direct_purchase_limit > 0 ){
-            $flush_account->update([
-                'balance' => $flush_account->balance + $direct_purchase_limit,
-            ]);
-        }
-        if($direct_health_limit > 0 ){
-            $flush_account->update([
-                'balance' => $flush_account->balance + $direct_health_limit,
-            ]);
-        }
+        // $flush_account = CompanyAccount::find(1);
+        // $self_loan_limit = $package->price / 100 * $package->self_loan_limit;
+        // if($user->loan_limit > Setting::loanLimit()){
+        //     $flush_account->update([
+        //         'balance' => $flush_account->balance + $self_loan_limit,
+        //     ]);
+        // }else{
+        //     $user->update([
+        //         'loan_limit' => $user->loan_limit +  $self_loan_limit
+        //     ]);
+        // }
+        // $for_stock = $package->price / 100 * $package->for_stock;
+        // if($user->loan_limit > Setting::stockLimit()){
+        //     $flush_account->update([
+        //         'balance' => $flush_account->balance + $for_stock,
+        //     ]);
+        // }else{
+        //     $user->update([
+        //         'for_stock' => $user->for_stock +  $for_stock
+        //     ]);
+        // }
+        // $direct_teams = $user->directParentsForDirectIncome();
+        // $direct_for_stock = $package->price / 100 * $package->direct_for_stock;
+        // $direct_loan_limit = $package->price / 100 * $package->direct_loan_limit;
+        // $direct_for_stock_per_person  = $direct_for_stock/5;
+        // $direct_loan_limit_per_person  = $direct_loan_limit/5;
+        // foreach($direct_teams as  $direct_team)
+        // {
+        //     if($direct_team->for_stock < Setting::stockLimit()){
+        //         $direct_team->update([
+        //             'for_stock' => $direct_team->for_stock +  $direct_for_stock_per_person
+        //         ]);
+        //         $direct_for_stock = $direct_for_stock - $direct_for_stock_per_person;
+        //     }
+        //     if($direct_team->loan_limit < Setting::loanLimit()){
+        //         $direct_team->update([
+        //             'loan_limit' => $direct_team->loan_limit +  $direct_loan_limit_per_person
+        //         ]);
+        //         $direct_loan_limit = $direct_loan_limit - $direct_loan_limit_per_person;
+        //     }
+        // }
+        // if($direct_loan_limit > 0 ){
+        //     $flush_account->update([
+        //         'balance' => $flush_account->balance + $direct_loan_limit,
+        //     ]);
+        // }
+        // if($direct_for_stock > 0 ){
+        //     $flush_account->update([
+        //         'balance' => $flush_account->balance + $direct_for_stock,
+        //     ]);
+        // }
+        // $health_limit = $package->price / 100 * $package->health_limit;
+        // if($user->health_limit > Setting::healthLimit()){
+        //     $flush_account->update([
+        //         'balance' => $flush_account->balance + $health_limit,
+        //     ]);
+        // } else {
+        //     $user->update([
+        //         'health_limit' => $user->health_limit +  $health_limit
+        //     ]);
+        // }
+        // $purchase_limit = $package->price / 100 * $package->purchase_limit;
+        // if($user->purchase_limit > Setting::purchaseLimit()){
+        //     $flush_account->update([
+        //         'balance' => $flush_account->balance + $purchase_limit,
+        //     ]);
+        // }else{
+        //     $user->update([
+        //         'purchase_limit' => $user->purchase_limit +  $purchase_limit
+        //     ]);
+        // }
+        // $direct_teams = $user->directParentsForDirectIncome();
+        // $direct_health_limit = $package->price / 100 * $package->direct_health_limit;
+        // $direct_purchase_limit = $package->price / 100 * $package->direct_purchase_limit;
+        // $direct_health_limit_per_person  = $direct_health_limit/5;
+        // $direct_purchase_limit_per_person  = $direct_purchase_limit/5;
+        // foreach($direct_teams as  $direct_team)
+        // {
+        //     if($direct_team->health_limit < Setting::healthLimit()){
+        //         $direct_team->update([
+        //             'health_limit' => $direct_team->health_limit +  $direct_health_limit_per_person
+        //         ]);
+        //         $direct_health_limit = $direct_health_limit - $direct_health_limit_per_person;
+        //     }
+        //     if($direct_team->purchase_limit < Setting::purchaseLimit()){
+        //         $direct_team->update([
+        //             'purchase_limit' => $direct_team->purchase_limit +  $direct_purchase_limit_per_person
+        //         ]);
+        //         $direct_purchase_limit = $direct_purchase_limit - $direct_purchase_limit_per_person;
+        //     }
+        // }
+        // if($direct_purchase_limit > 0 ){
+        //     $flush_account->update([
+        //         'balance' => $flush_account->balance + $direct_purchase_limit,
+        //     ]);
+        // }
+        // if($direct_health_limit > 0 ){
+        //     $flush_account->update([
+        //         'balance' => $flush_account->balance + $direct_health_limit,
+        //     ]);
+        // }
     } 
     public static  function directTeamIncome($price,$package,$user,$due_to)
     {
@@ -512,16 +508,26 @@ class ReferralIncome
         $referBy->update([
             'for_renew' => $referBy->for_renew + $direct_rebirth,
         ]);
-        $self_associate = $price / 100 * $package->self_associate;
-        info("Self Associate Amount : $self_associate");
+        $self_salary = $price / 100 * $package->self_salary;
+        info("Self Salary Amount : $self_salary");
         $user->update([
-            'community_pool' => $user->community_pool + $self_associate,
+            'salary_reward' => $user->salary_reward + $self_salary,
         ]);
-        $direct_associate = $price / 100 * $package->direct_associate;
-        info("Direct Associate Amount : $direct_associate");
+        $direct_salary = $price / 100 * $package->direct_salary;
+        info("Direct Salary Amount : $direct_salary");
         $referBy->update([
-            'community_pool' => $referBy->community_pool + $direct_associate,
+            'salary_reward' => $referBy->salary_reward + $direct_salary,
         ]);
+        // $self_associate = $price / 100 * $package->self_associate;
+        // info("Self Associate Amount : $self_associate");
+        // $user->update([
+        //     'community_pool' => $user->community_pool + $self_associate,
+        // ]);
+        // $direct_associate = $price / 100 * $package->direct_associate;
+        // info("Direct Associate Amount : $direct_associate");
+        // $referBy->update([
+        //     'community_pool' => $referBy->community_pool + $direct_associate,
+        // ]);
        
     } 
     public static function CompanyIncome($price,$package,$type)
@@ -557,14 +563,14 @@ class ReferralIncome
             ]);
         }
 
-        $company_renew_income = $price / 100 * $package->company_renew_income;
-        info("Total Company Renew Account Income Amount : $company_renew_income");
-        $renew_account= CompanyAccount::where('name','Renew Account')->first();
-        if($renew_account && $company_renew_income > 0){
-            $renew_account->update([
-                'balance' => $renew_account->balance + $company_renew_income,
-            ]);
-        }
+        // $company_renew_income = $price / 100 * $package->company_renew_income;
+        // info("Total Company Renew Account Income Amount : $company_renew_income");
+        // $renew_account= CompanyAccount::where('name','Renew Account')->first();
+        // if($renew_account && $company_renew_income > 0){
+        //     $renew_account->update([
+        //         'balance' => $renew_account->balance + $company_renew_income,
+        //     ]);
+        // }
         $renew_all_account_income = $price / 100 * $package->renew_all_accounts;
         info("Total Renew All Accounts Income Amount : $renew_all_account_income");
         $renew_all_account= CompanyAccount::where('name','Renew All Account')->first();
@@ -573,55 +579,55 @@ class ReferralIncome
                 'balance' => $renew_all_account->balance + $renew_all_account_income,
             ]);
         }
-        $all_assoicate_income = $price / 100 * $package->all_assoicate;
-        info("Total All Assoicate Income Amount : $all_assoicate_income");
-        $all_assoicate_account= CompanyAccount::where('name','All Assoicate Account')->first();
-        if($all_assoicate_account && $all_assoicate_income > 0){
-            $all_assoicate_account->update([
-                'balance' => $all_assoicate_account->balance + $all_assoicate_income,
-            ]);
-        }
-        $company_assoicate_income = $price / 100 * $package->company_assoicate;
-        info("Total Company Assoicate Income Amount : $all_assoicate_income");
-        $company_assoicate_account= CompanyAccount::where('name','Company Assoicate Account')->first();
-        if($company_assoicate_account && $company_assoicate_income > 0){
-            $company_assoicate_account->update([
-                'balance' => $company_assoicate_account->balance + $company_assoicate_income,
-            ]);
-        }
-        $for_medicine_income = $price / 100 * $package->for_medicine;
-        info("Total For Medicine Income Amount : $for_medicine_income");
-        $for_medicine_account= CompanyAccount::where('name','For Medicine Account')->first();
-        if($for_medicine_account && $for_medicine_income > 0){
-            $for_medicine_account->update([
-                'balance' => $for_medicine_account->balance + $for_medicine_income,
-            ]);
-        }
-        $for_purchase_all_income = $price / 100 * $package->for_purchase_all;
-        info("Total For Purchase All Income Amount : $for_purchase_all_income");
-        $ffor_purchase_all_account= CompanyAccount::where('name','For Purchase All Account')->first();
-        if($ffor_purchase_all_account && $for_purchase_all_income > 0){
-            $ffor_purchase_all_account->update([
-                'balance' => $ffor_purchase_all_account->balance + $for_purchase_all_income,
-            ]);
-        }
-        $monthly_draw_income = $price / 100 * $package->monthly_draw;
-        info("Total Monthly Draw Income Amount : $monthly_draw_income");
-        $monthly_draw_account= CompanyAccount::where('name','Monthly Draw Account')->first();
-        if($monthly_draw_account && $monthly_draw_income > 0){
-            $monthly_draw_account->update([
-                'balance' => $monthly_draw_account->balance + $monthly_draw_income,
-            ]);
-        }
-        $company_products_income = $price / 100 * $package->company_products;
-        info("Total Company Products Income Amount : $company_products_income");
-        $company_products_account = CompanyAccount::where('name','Company Products Account')->first();
-        if($company_products_account && $company_products_income > 0){
-            $company_products_account->update([
-                'balance' => $company_products_account->balance + $company_products_income,
-            ]);
-        }
-        info("Company Income Amount : $company_income added to Company Account");
+        // $all_assoicate_income = $price / 100 * $package->all_assoicate;
+        // info("Total All Assoicate Income Amount : $all_assoicate_income");
+        // $all_assoicate_account= CompanyAccount::where('name','All Assoicate Account')->first();
+        // if($all_assoicate_account && $all_assoicate_income > 0){
+        //     $all_assoicate_account->update([
+        //         'balance' => $all_assoicate_account->balance + $all_assoicate_income,
+        //     ]);
+        // }
+        // $company_assoicate_income = $price / 100 * $package->company_assoicate;
+        // info("Total Company Assoicate Income Amount : $all_assoicate_income");
+        // $company_assoicate_account= CompanyAccount::where('name','Company Assoicate Account')->first();
+        // if($company_assoicate_account && $company_assoicate_income > 0){
+        //     $company_assoicate_account->update([
+        //         'balance' => $company_assoicate_account->balance + $company_assoicate_income,
+        //     ]);
+        // }
+        // $for_medicine_income = $price / 100 * $package->for_medicine;
+        // info("Total For Medicine Income Amount : $for_medicine_income");
+        // $for_medicine_account= CompanyAccount::where('name','For Medicine Account')->first();
+        // if($for_medicine_account && $for_medicine_income > 0){
+        //     $for_medicine_account->update([
+        //         'balance' => $for_medicine_account->balance + $for_medicine_income,
+        //     ]);
+        // }
+        // $for_purchase_all_income = $price / 100 * $package->for_purchase_all;
+        // info("Total For Purchase All Income Amount : $for_purchase_all_income");
+        // $ffor_purchase_all_account= CompanyAccount::where('name','For Purchase All Account')->first();
+        // if($ffor_purchase_all_account && $for_purchase_all_income > 0){
+        //     $ffor_purchase_all_account->update([
+        //         'balance' => $ffor_purchase_all_account->balance + $for_purchase_all_income,
+        //     ]);
+        // }
+        // $monthly_draw_income = $price / 100 * $package->monthly_draw;
+        // info("Total Monthly Draw Income Amount : $monthly_draw_income");
+        // $monthly_draw_account= CompanyAccount::where('name','Monthly Draw Account')->first();
+        // if($monthly_draw_account && $monthly_draw_income > 0){
+        //     $monthly_draw_account->update([
+        //         'balance' => $monthly_draw_account->balance + $monthly_draw_income,
+        //     ]);
+        // }
+        // $company_products_income = $price / 100 * $package->company_products;
+        // info("Total Company Products Income Amount : $company_products_income");
+        // $company_products_account = CompanyAccount::where('name','Company Products Account')->first();
+        // if($company_products_account && $company_products_income > 0){
+        //     $company_products_account->update([
+        //         'balance' => $company_products_account->balance + $company_products_income,
+        //     ]);
+        // }
+        // info("Company Income Amount : $company_income added to Company Account");
 
     } 
     public static function CommunityPoolIncome($user,$price)

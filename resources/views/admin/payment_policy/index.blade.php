@@ -26,9 +26,9 @@
                         <th style="width:auto;">Sender 20 Team Level</th>
                         <th style="width:auto;">Receiver 20 Team Level</th>
                         <th style="width:auto;">Company Trade Income</th>
-                        <th style="width:auto;">Company Products</th>
+                        {{-- <th style="width:auto;">Company Products</th> --}}
                         <th style="width:auto;">Purchase Reward</th>
-                        <th style="width:auto;">Draw Monthly</th>
+                        {{-- <th style="width:auto;">Draw Monthly</th> --}}
                         <th style="width:auto;">Action</th>
                         <th style="width:auto;">Action</th>
                     </tr>
@@ -41,9 +41,9 @@
                         <td>{{$payment_policy->sender_twenty_team_level}}</td>
                         <td>{{$payment_policy->receiver_twenty_team_level}}</td>
                         <td>{{$payment_policy->company_trade_income}}</td>
-                        <td>{{$payment_policy->company_products}}</td>
-                        <td>{{$payment_policy->purchase_reward}}</td>
-                        <td>{{$payment_policy->draw_monthly}}</td>
+                        {{-- <td>{{$payment_policy->company_products}}</td> --}}
+                        {{-- <td>{{$payment_policy->purchase_reward}}</td> --}}
+                        {{-- <td>{{$payment_policy->draw_monthly}}</td> --}}
                         <td class="table-action">
                             <a href="{{route('admin.payment_policy.edit',$payment_policy->id)}}"><i class="align-middle" data-feather="edit-2"></i></a>
                         </td>

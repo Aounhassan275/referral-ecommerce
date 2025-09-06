@@ -38,18 +38,18 @@
                             <label class="form-label">Company Trade Income</label>
                             <input type="text" name="company_trade_income" class="form-control" required placeholder="Company Trade Income">
                         </div>
-                        <div class="form-group col-3">
+                        {{-- <div class="form-group col-3">
                             <label class="form-label">Company Products</label>
                             <input type="text" name="company_products" class="form-control" required placeholder="Company Products">
-                        </div>
-                        <div class="form-group col-3">
+                        </div> --}}
+                        {{-- <div class="form-group col-3">
                             <label class="form-label">Purchase Reward</label>
                             <input type="text" name="purchase_reward" class="form-control" required placeholder="Purchase Reward">
-                        </div>
-                        <div class="form-group col-3">
+                        </div> --}}
+                        {{-- <div class="form-group col-3">
                             <label class="form-label">Draw Monthly</label>
                             <input type="text" name="draw_monthly" class="form-control" required placeholder="Draw Monthly">
-                        </div>
+                        </div> --}}
                    </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Submit</button>

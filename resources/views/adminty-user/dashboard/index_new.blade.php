@@ -119,15 +119,15 @@ DASHBOARD
                 class="feather icon-upload-cloud bg-c-yellow card1-icon"
               ></i>
               <span class="text-c-yellow f-w-600"
-                ></span
+                >FOR SALARY</span
               >
-              <h4>PKR </h4>
+              <h4>PKR {{Auth::user()->salary_reward}}</h4>
               <div>
                 <span class="f-left m-t-10 text-muted">
                   <i
                     class="text-c-yellow f-16 feather icon-credit-card m-r-10"
                   ></i
-                  >
+                  > On Month Target : {{App\Models\Setting::monthlyTarget()}}
                 </span>
               </div>
             </div>
