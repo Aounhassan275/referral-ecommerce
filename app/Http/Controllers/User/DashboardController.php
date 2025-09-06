@@ -22,7 +22,6 @@ class DashboardController extends Controller
         //         'name' => 'atifalikhan123'
         //     ]);
         // }
-        dd(Auth::user()->directParentsForDirectIncome()); 
         if(Setting::dashboard() == '1')
         {
             return view($this->directory.'.dashboard.index_new');
