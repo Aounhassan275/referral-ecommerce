@@ -127,7 +127,7 @@ DASHBOARD
                   <i
                     class="text-c-yellow f-16 feather icon-credit-card m-r-10"
                   ></i
-                  > On Month Target : {{App\Models\Setting::monthlyTarget()}}
+                  > On Target : {{Auth::user()->getReferralsInlast30Days()}}/{{App\Models\Setting::monthlyTarget()}}
                 </span>
               </div>
             </div>

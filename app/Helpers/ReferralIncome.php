@@ -67,6 +67,12 @@ class ReferralIncome
                 ]);
                 $earning->delete();
             }
+            if($refer_by->getReferralsInlast30Days() >= Setting::monthlyTarget()){
+                $refer_by->update([
+                    'cash_wallet' => $refer_by->cash_wallet + $refer_by->salary_reward,
+                    'salary_reward' => 0,
+                ]);
+            }
         }
         if($package->flush_income > 0 ){
             $flush_account = CompanyAccount::find(1);
@@ -138,13 +144,13 @@ class ReferralIncome
                 $direct_income = $price / 100 * $package->direct_income_5;
                 info("Direct Income Level 5 adding $direct_income $direct_team->cash_wallet to $direct_team->name");    
             } 
-            Earning::create([
-                'price' => $direct_income,
-                'user_id' => $direct_team->id,
-                'due_to' => $due_to->id,
-                'level' => $index+1,
-                'type' => 'direct_income'
-            ]);
+            // Earning::create([
+            //     'price' => $direct_income,
+            //     'user_id' => $direct_team->id,
+            //     'due_to' => $due_to->id,
+            //     'level' => $index+1,
+            //     'type' => 'direct_income'
+            // ]);
             
             $direct_team->update([
                 'cash_wallet' => $direct_team->cash_wallet + $direct_income
