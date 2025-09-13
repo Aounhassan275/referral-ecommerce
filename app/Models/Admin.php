@@ -54,7 +54,7 @@ class Admin extends Authenticatable
         $amount = 0;
         foreach($packages as $package)
         {
-            $amount = $amount + ($package->package ? $package->package->price : 0);
+            $amount = $amount + ($package->package ? $package->package->distribution : 0);
         }
         return $amount;
     }

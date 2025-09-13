@@ -17,7 +17,7 @@
 	<!-- <link href="{{asset('css/modern.css')}}" rel="stylesheet"> -->
 	<script src="{{asset('js/settings.js')}}"></script>
 
-	<!-- max="{{Auth::user()->balance>Auth::user()->package->price*0.8?Auth::user()->package->price*0.8:Auth::user()->balance}}" -->
+	<!-- max="{{Auth::user()->balance>Auth::user()->package->distribution*0.8?Auth::user()->package->distribution*0.8:Auth::user()->balance}}" -->
 	<!-- You can remove this after picking a style -->
 	<style>
 		body {

@@ -145,6 +145,7 @@ class ReferralIncome
                 'level' => $index+1,
                 'type' => 'direct_income'
             ]);
+            
             $direct_team->update([
                 'cash_wallet' => $direct_team->cash_wallet + $direct_income
             ]);

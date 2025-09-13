@@ -51,7 +51,7 @@
                         </td>
                         @if ($user->package)
                         <td>{{$user->package->name}}</td>    
-                        <td>{{$user->package->price}}</td>    
+                        <td>{{$user->package->distribution}}</td>    
                         <td>{{$user->a_date->format('d M,Y')}}</td>
                         @else
                         <td></td>

@@ -37,7 +37,7 @@ Buy Packages For User
                                 <option>Select Package</option>
                                 <optgroup label="Package">
                                     @foreach (App\Models\Package::where('is_renew',0)->where('is_associate',0)->get() as $key => $package)
-                                    <option value="{{$package->id}}">{{$package->name}} (PKR {{$package->price}})</option>
+                                    <option value="{{$package->id}}">{{$package->name}} (PKR {{$package->distribution}})</option>
                                     @endforeach
                                 </optgroup>
                             </select>
@@ -78,7 +78,7 @@ Buy Packages For User
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$history->package->name}}</td>
-                                    <td>{{$history->package->price}}</td>
+                                    <td>{{$history->package->distribution}}</td>
                                     <td>{{$history->user->name}}</td>
                                     <td>{{$history->created_at->format('d M,Y')}}</td>
                                 </tr>

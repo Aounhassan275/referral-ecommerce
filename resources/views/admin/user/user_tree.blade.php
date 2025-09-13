@@ -54,7 +54,7 @@
         <div class="card flex-fill">
             <div class="card-header">
                 
-                <span class="badge badge-primary float-right">${{@$left->package->price}}</span>
+                <span class="badge badge-primary float-right">${{@$left->package->distribution}}</span>
                 @if(@$left)
                 <a href="{{route('admin.user.show_tree',@$left->id)}}"> 
                     <h5 class="card-title mb-0">{{@$left->name}}</h5>
@@ -91,7 +91,7 @@
         <div class="card flex-fill">
             <div class="card-header">
                 
-                <span class="badge badge-primary float-right">${{@$right->package->price}}</span>
+                <span class="badge badge-primary float-right">${{@$right->package->distribution}}</span>
                 @if(@$right)
                 <a href="{{route('admin.user.show_tree',$user->right_refferal)}}"> <h5 class="card-title mb-0">{{@$right->name}}</h5></a>
                 @endif

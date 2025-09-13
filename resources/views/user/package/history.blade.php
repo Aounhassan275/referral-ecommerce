@@ -33,7 +33,7 @@ VIEW PACKAGE HISTORY
                 <tr>
                     <td>{{$key+1}}</td>
                     <td>{{$history->package->name}}</td>
-                    <td>{{$history->package->price}}</td>
+                    <td>{{$history->package->distribution}}</td>
                     <td>{{$history->package->max_limit}}</td>
                     <td>{{$history->package->min_limit}}</td>
                     <td>{{$history->created_at->format('d M,Y')}}</td>

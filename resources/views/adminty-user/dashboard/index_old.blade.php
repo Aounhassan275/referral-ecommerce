@@ -265,7 +265,7 @@ DASHBOARD
                 <div class="media-body">
                     <h3 class="mb-0">
                         @if(Auth::user()->package)
-                        {{App\Models\Setting::currency()}} {{Auth::user()->package->price + Auth::user()->investment_amount}}
+                        {{App\Models\Setting::currency()}} {{Auth::user()->package->distribution + Auth::user()->investment_amount}}
                         @endif
                     </h3>
                     <span class="text-uppercase font-size-xs">Package Price</span>

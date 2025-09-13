@@ -57,7 +57,7 @@ SELECT PACKAGE PAYMENT
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Amount To Pay:</label>
-                            <input type="number" class="form-control" name="amount" value="{{$package->price}}" readonly>
+                            <input type="number" class="form-control" name="amount" value="{{$package->distribution}}" readonly>
                         </div> 
                         <div class="form-group col-md-6">
                             <label >Trancation id# <span>*</span></label>

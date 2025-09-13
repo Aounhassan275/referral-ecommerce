@@ -273,7 +273,7 @@ class User extends Authenticatable
         $amount = 0;
         foreach($total_referrals as $referral)
         {
-            $amount = $referral->package->price + $amount;
+            $amount = $referral->package->distribution + $amount;
         }
         return $amount;
     }
@@ -283,7 +283,7 @@ class User extends Authenticatable
         $amount = 0;
         foreach($total_referrals as $referral)
         {
-            $amount = $referral->package->price + $amount;
+            $amount = $referral->package->distribution + $amount;
         }
         return $amount;
     }
@@ -493,7 +493,7 @@ class User extends Authenticatable
             $parent = User::where('id',$parent->refer_by)->first();
             if($parent)
             {
-                if($parent->package->price >= 50)
+                if($parent->package->distribution >= 50)
                 {
                     return $parent;
                 }

@@ -24,7 +24,7 @@ PACKAGE SUBSRIPTION
                     @endif
                     
                     <div class="list-icons list-icons-extended mt-3">
-                        @if(Auth::user()->cash_wallet >= $package->price)
+                        @if(Auth::user()->cash_wallet >= $package->distribution)
                             <a href="{{route('user.package.direct_deposit',$package->id)}}" onclick="$('.btn').text('Please Wait!!!').attr('disabled',true)" class="btn bg-teal-400 btn-lg text-uppercase font-size-sm font-weight-semibold">Active</a>  
                         @else 
                             <a href="{{route('user.deposit.index')}}" class="btn bg-teal-400 btn-lg text-uppercase font-size-sm font-weight-semibold">Charge Account</a>  
@@ -47,10 +47,10 @@ PACKAGE SUBSRIPTION
                     @endif
                 </div>
                 <h6 class="font-weight-semibold mb-0">{{$package->name}}</h6>
-                <span class="d-block opacity-75">{{App\Models\Setting::currency()}} <del>{{$package->fake_price}}</del> {{$package->price}} /-</span>
+                <span class="d-block opacity-75">{{App\Models\Setting::currency()}} <del>{{$package->fake_price}}</del> {{$package->distribution}} /-</span>
                 
                 <div class="list-icons list-icons-extended mt-3">
-                    @if(Auth::user()->cash_wallet >= $package->price)
+                    @if(Auth::user()->cash_wallet >= $package->distribution)
                         <a href="{{route('user.package.direct_deposit',$package->id)}}" onclick="$('.btn').text('Please Wait!!!').attr('disabled',true)" class="btn bg-teal-400 btn-lg text-uppercase font-size-sm font-weight-semibold">Active</a>  
                     @else 
                         <a href="{{route('user.deposit.index')}}" class="btn bg-teal-400 btn-lg text-uppercase font-size-sm font-weight-semibold">Charge Account</a>  
