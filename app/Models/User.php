@@ -808,7 +808,7 @@ class User extends Authenticatable
         return $this->for_stock - $this->stockPaidToAdmin();
     }
     public function ifPurchaseAmount(){
-        $amount = $this->allUplineIncomeReminaindAmount() + $this->purchase_reward + $this->company_reward + $this->star_rank_income;
+        $amount = $this->allUplineIncomeReminaindAmount() + $this->purchase_reward + $this->company_reward;
         return $amount - $this->ifPurchaseOrders();
     }
 }

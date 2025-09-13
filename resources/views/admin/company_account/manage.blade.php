@@ -15,24 +15,24 @@
                     <div class="col-4">
                         <a href="{{url('admin/payment_distrubtion_of_trade_income')}}" class="btn btn-info " data-toggle="tooltip" data-html="true"  data-placement="top" title="Normal user liaty jo active ho or Company Ka Trade Income account ki earning ko 10 hisso mai divide krein aor phr un ko user ka cash wallet mai de diaty hain aor yeh dashboard mai company reward ka title mai show ho gayi." style="margin-top:10px;">Transfer Trade Income To Users</a>
                     </div>
-                    <div class="col-5">
+                    {{-- <div class="col-5">
                         <a href="{{url('admin/payment_distrubtion_of_product_income')}}" class="btn btn-info " data-toggle="tooltip" data-html="true"  data-placement="top" title="Normal user liaty jo active ho or Company Ka Product Income account ki earning ko 10 hisso mai divide krein aor phr un ko user ka cash wallet mai de diaty hain aor yeh dashboard mai star rank ka title mai show ho gayi." style="margin-top:10px;">Transfer Company Product Income To Users</a>
-                    </div>
+                    </div> --}}
                     <div class="col-5">
                         <a href="{{url('admin/payment_distrubtion_of_all_renew')}}" class="btn btn-info " data-toggle="tooltip" data-html="true"  data-placement="top" title="Normal user liaty jo active ho or Company Ka all renew account ki earning ko 10 hisso mai divide krein aor phr un ko user ka for renew mai de diaty hain." style="margin-top:10px;">Transfer Company All Renew To Users</a>
                     </div>
-                    <div class="col-5">
+                    {{-- <div class="col-5">
                         <a href="{{url('admin/payment_distrubtion_of_purchase_all')}}" class="btn btn-info " data-toggle="tooltip" data-html="true"  data-placement="top" title="Company Ka all purchase account ki earning ko 4 hisso mai divide krein aor phr un ko user ka ka company reward mai de diaty hain." style="margin-top:10px;">Transfer Company All Purchase To Users</a>
-                    </div>
-                    <div class="col-5">
+                    </div> --}}
+                    {{-- <div class="col-5">
                         <a href="{{url('admin/payment_distrubtion_for_assoiated_account')}}" class="btn btn-danger " data-toggle="tooltip" data-html="true"  data-placement="top" title="yeh assoicate user le ga jis ka cash wallet mai 1 rupee ho ga or uss ko 2 hisso mai kr ka company flush or company product account mai send kr de ga." style="margin-top:10px;">Payment Distrubtion For Assoiated Account</a>
-                    </div>
-                    <div class="col-3">
+                    </div> --}}
+                    {{-- <div class="col-3">
                         <a href="{{url('admin/get_pending_loan')}}" class="btn btn-success" style="margin-top:10px;">Get Pending Loan</a>
-                    </div>
-                    <div class="col-3">
+                    </div> --}}
+                    {{-- <div class="col-3">
                         <a href="{{url('admin/create_associate_account')}}" class="btn btn-warning" style="margin-top:10px;">Create Associate Account</a>
-                    </div>
+                    </div> --}}
                     <div class="col-3">
                         <a href="{{url('admin/renew_account')}}" class="btn btn-primary" style="margin-top:10px;">Renew Account</a>
                     </div>
