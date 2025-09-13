@@ -67,7 +67,7 @@ class BuyPackageController extends Controller
         }
         $user= User::find($request->user_id);
         $package= Package::find($request->package_id);
-        if($payee->cash_wallet >= $package->price)
+        if($payee->cash_wallet >= $package->distribution)
         {
             DB::beginTransaction();
             try{
@@ -77,7 +77,7 @@ class BuyPackageController extends Controller
                     'package_id' => $package->id,
                 ]);     
                 $payee->update([
-                  'cash_wallet' => $payee->cash_wallet -= $package->price,    
+                  'cash_wallet' => $payee->cash_wallet -= $package->distribution,    
                 ]);     
                 $status = ReferralIncome::referral($user);
                 if($status == false)

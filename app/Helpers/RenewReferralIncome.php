@@ -38,6 +38,13 @@ class RenewReferralIncome
         ReferralIncome::rebirthAndAsscoaiteIncome($total_amount,$package,$refer_by,$user);
         ReferralIncome::CompanyIncome($total_amount,$package,$type = 'Arrival');
         // ReferralIncome::directStockIncome($package->price,$package,$refer_by,$user);
+        
+        if($package->flush_income > 0 ){
+            $flush_account = CompanyAccount::find(1);
+            $flush_account->update([
+                'balance' => $flush_account->balance + $package->flush_income,
+            ]);
+        }
         return true;
     } 
     public static  function directIncome($price,$package,$user,$due_to)

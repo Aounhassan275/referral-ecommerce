@@ -92,7 +92,7 @@ class DepositController extends Controller
     {
         $user= User::find(Auth::user()->id);
         $package= Package::find($id);
-        if($user->cash_wallet >= $package->price)
+        if($user->cash_wallet >= $package->distribution)
         {
             DB::beginTransaction();
             try{
@@ -100,9 +100,9 @@ class DepositController extends Controller
                     'status' => 'active',
                     'a_date' => Carbon::today(),
                     'package_id' => $package->id,
-                    'cash_wallet' => $user->cash_wallet -= $package->price,    
+                    'cash_wallet' => $user->cash_wallet -= $package->distribution,    
                 ]);       
-                if($package->price > 5)
+                if($package->distribution > 5)
                 {
                     $status = ReferralIncome::referral($user);
                     if($status == false)

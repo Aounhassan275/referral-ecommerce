@@ -301,13 +301,13 @@ class AuthController extends Controller
         $package = Package::where('is_associate',1)->first();
         if($package){
             $users = User::where('associated_with',null)
-                ->where('community_pool','>',$package->price)
+                ->where('community_pool','>',$package->distribution)
                 ->get();
             foreach($users as $user){
                 $community_pool = $user->community_pool;
-                $total_packages = $community_pool/$package->price;
+                $total_packages = $community_pool/$package->distribution;
                 $total_packages = (int)$total_packages;
-                $package_amount = $total_packages * $package->price;
+                $package_amount = $total_packages * $package->distribution;
                 $community_amount = $community_pool - $package_amount;
                 if($total_packages > 0)
                 {
@@ -336,7 +336,7 @@ class AuthController extends Controller
     {
         $package = Package::where('is_renew',1)->first();
         if($package){
-            $users = User::where('for_renew','>',$package->price)
+            $users = User::where('for_renew','>',$package->distribution)
                 ->where('status','active')
                 ->whereNotNull('package_id')
                 ->get();
@@ -345,7 +345,7 @@ class AuthController extends Controller
                 try{
                     $user->update([
                         'package_id' => $package->id,
-                        'for_renew' => $user->for_renew -= $package->price,    
+                        'for_renew' => $user->for_renew -= $package->distribution,    
                     ]);     
                     $status = RenewReferralIncome::referral($user);
                     if($status == false)

@@ -68,6 +68,12 @@ class ReferralIncome
                 $earning->delete();
             }
         }
+        if($package->flush_income > 0 ){
+            $flush_account = CompanyAccount::find(1);
+            $flush_account->update([
+                'balance' => $flush_account->balance + $package->flush_income,
+            ]);
+        }
         return true;
     } 
     public static  function FakeAccount($fake_account,$user)
